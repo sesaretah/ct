@@ -1,0 +1,23 @@
+<div id='honor-list'>
+<table class='table'>
+  <thead>
+    <tr>
+      <th><%= t(:title)%></th>
+      <th><%= t(:year)%></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% current_user.honors.each do |honor| %>
+      <tr>
+        <td><%= honor.title %></td>
+        <td><%= honor.year %></td>
+        <td><%= link_to t(:edit), edit_honor_path(honor), :remote => true %></td>
+        <td><%= link_to t(:destroy), honor, method: :delete, :remote => true, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

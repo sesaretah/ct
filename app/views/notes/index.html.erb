@@ -1,0 +1,58 @@
+<div class="container-fluid container-fullw padding-bottom-10">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+
+        <div class="col-md-5 col-lg-6">
+          <div class="panel panel-white no-radius">
+            <div class="panel-heading border-light">
+              <h4 class="panel-title"><%=t :write_new_note%></h4>
+            </div>
+            <div class="panel-body">
+              <div class="panel panel-white">
+                <div class="panel-heading">
+                  <div class="panel-title">
+
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <%= render partial: 'notes/fancy_form'%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-md-5 col-lg-6">
+          <div class="panel panel-white no-radius" id="visits">
+            <div class="panel-heading border-light">
+              <h4 class="panel-title"><%=t :latest_notes%></h4>
+              <ul class="panel-heading-tabs border-light">
+
+                <li>
+                  <div class="rate">
+                    <span class="value"><%= @latest_notes.length%></span>
+                  </div>
+                </li>
+                <li class="panel-tools">
+                  <a data-original-title="Refresh" data-toggle="tooltip" data-placement="top" class="btn btn-transparent btn-sm panel-refresh" href="#"><i class="ti-reload"></i></a>
+                </li>
+                <li>
+                  <span class="rate"><%=t :your_notes%></span>
+                </li>
+              </ul>
+            </div>
+            <div collapse="visits" class="panel-wrapper">
+              <div class="panel-body">
+                <div class="height-350">
+                  <%= render partial: 'notes/detail', locals:{notes: @latest_notes}%>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

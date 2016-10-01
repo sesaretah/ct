@@ -1,0 +1,48 @@
+<div class="col-md-7">
+  <%= form_for @research do |f| %>
+  <fieldset>
+    <legend>
+      <%= t(:research_history)%>
+    </legend>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary pull-left">
+        <%= t(:submit)%> <i class="fa fa-arrow-circle-left"></i>
+      </button>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label><%= f.label :name %></label>
+          <%= f.text_field :name, class: "form-control"  %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <label><%= f.label :pub_year %></label>
+          <%= f.text_field :pub_year, class: "form-control"  %>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label><%= f.label :pub_type %></label>
+          <%= f.text_field :pub_type, class: "form-control"  %>
+        </div>
+      </div>
+
+      <div class="col-md-7">
+        <div class="form-group">
+          <label><%= f.label :pub_name %></label>
+          <%= f.text_field :pub_name, class: "form-control"  %>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="form-group">
+          <label><%= f.label :pub_authors %></label>
+          <%= f.text_field :pub_authors , class: "form-control"%>
+        </div>
+      </div>
+    </div>
+    <hr>
+  </fieldset>
+  <% end %>
+</div>

@@ -1,0 +1,29 @@
+<div id='research-list'>
+<table class='table'>
+  <thead>
+    <tr>
+      <th><%= t(:name_of_pub)%></th>
+      <th><%= t(:pub_year)%></th>
+      <th><%= t(:pub_type)%></th>
+      <th><%= t(:pub_name)%></th>
+      <th><%= t(:pub_authors)%></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% current_user.researches.each do |research| %>
+      <tr>
+        <td><%= research.name %></td>
+        <td><%= research.pub_year %></td>
+        <td><%= research.pub_type %></td>
+        <td><%= research.pub_name %></td>
+        <td><%= research.pub_authors %></td>
+        <td><%= link_to t(:edit), edit_research_path(research), :remote => true %></td>
+        <td><%= link_to t(:destroy), research, method: :delete, :remote => true, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

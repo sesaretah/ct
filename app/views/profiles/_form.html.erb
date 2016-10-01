@@ -1,0 +1,118 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <% if @profile.blank?%>
+        <% @profile = Profile.new%>
+        <h1 class="mainTitle"><%= t(:new_person)%></h1>
+        <%else%>
+        <h1 class="mainTitle"><%= t(:edit_person)%></h1>
+        <%end%>
+        <span class="mainDescription"><%= t(:please_personnel_data)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"><%= t(:personal_information)%></span></h5>
+        <div class="panel panel-white">
+          <div class="panel-body">
+
+            <%= form_for(@profile) do |f| %>
+            <% if @profile.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+              <ul>
+                <% @profile.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+            <% end %>
+
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :name %>
+                <%= f.text_field :name , :class => "form-control"%>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :surename %><br>
+                <%= f.text_field :surename, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :fathername %><br>
+                <%= f.text_field :fathername, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <label><%= f.label :birthdate %></label>
+                <br/>
+                <% if @profile.id == nil%>
+                <% @now = JalaliDate.to_jalali(Time.now)%>
+                <%else%>
+                <% @now = JalaliDate.to_jalali(@profile.birthdate)%>
+                <%end%>
+                <%=t :day%><%= select_tag  "ja_birth_dd", options_for_select(1..31, @now.day) %>/
+                <%=t :month%><%= select_tag "ja_birth_mm", options_for_select(1..12, @now.month) %>/
+                <%=t :year%><%= select_year(@now.year, {:start_year => 1300, :end_year => 1370}, {:name =>"ja_birth_yyyy"}) %>
+                <% f.date_select :birthdate ,:class => "col-xs-10 col-sm-5"%>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :sex %><br>
+                <%= f.select( :sex, sexs, {}, {:class => "form-control"})  %>
+                <% f.text_field :surename, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :ssn %><br>
+                <%= f.text_field :ssn, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :phonenumber %><br>
+                <%= f.text_field :phonenumber, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :mobilenumber %><br>
+                <%= f.text_field :mobilenumber, :class => "form-control" %>
+              </div>
+            </div>
+
+
+            <div class="row top30">
+              <div class="form-group col-xs-1 pull-left">
+                <%= content_tag :button, :type => :submit, :class => "btn btn-o btn-primary" do %>
+                <i class="icon-ok bigger-110"></i>
+                <%=t :submit%>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

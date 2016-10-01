@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @research.name %>
+</p>
+
+<p>
+  <strong>Pub year:</strong>
+  <%= @research.pub_year %>
+</p>
+
+<p>
+  <strong>Pub type:</strong>
+  <%= @research.pub_type %>
+</p>
+
+<p>
+  <strong>Pub name:</strong>
+  <%= @research.pub_name %>
+</p>
+
+<p>
+  <strong>Pub authors:</strong>
+  <%= @research.pub_authors %>
+</p>
+
+<%= link_to 'Edit', edit_research_path(@research) %> |
+<%= link_to 'Back', researches_path %>

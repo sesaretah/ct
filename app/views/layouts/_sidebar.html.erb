@@ -1,0 +1,154 @@
+<div class="sidebar app-aside" id="sidebar">
+  <div class="sidebar-container perfect-scrollbar">
+    <nav>
+      <!-- start: SEARCH FORM -->
+      <div class="search-form">
+        <a class="s-open" href="#">
+          <i class="ti-search"></i>
+        </a>
+        <%= form_tag '/advanced_search',:method => :get,:remote => :true, :class => "navbar-form" do%>
+        <div class="form-group">
+          <%= text_field_tag :q, '' , {:class=>"form-control", :id => "nav-search-input", :placeholder => "#{t(:search)}"}%>
+
+          <button class="btn search-button" type="submit">
+            <i class="ti-search"></i>
+          </button>
+        </div>
+        <%end%>
+        <!--  <form class="navbar-form" role="search">
+        <a class="s-remove" href="#" target=".navbar-form">
+        <i class="ti-close"></i>
+      </a>
+      <div class="form-group">
+
+      <input type="text" class="form-control" placeholder="<%= t(:search)%>">
+      <button class="btn search-button" type="submit">
+      <i class="ti-search"></i>
+    </button>
+  </div>
+</form>-->
+</div>
+<!-- end: SEARCH FORM -->
+<!-- start: MAIN NAVIGATION MENU -->
+<div class="navbar-title">
+  <span><%= t(:main_menu)%></span>
+</div>
+<ul class="main-navigation-menu">
+  <li>
+    <a href="/notes">
+      <div class="item-content">
+        <div class="item-media">
+          <i class=" ti-pencil-alt"></i>
+        </div>
+        <div class="item-inner">
+          <span class="title"><%= t(:notes)%></span>
+        </div>
+      </div>
+    </a>
+  </li>
+
+  <li>
+    <a href="/channels">
+      <div class="item-content">
+        <div class="item-media">
+          <i class=" ti-announcement"></i>
+        </div>
+        <div class="item-inner">
+          <span class="title"><%= t(:channels)%></span>
+        </div>
+      </div>
+    </a>
+  </li>
+
+  <li>
+    <a href="/groups">
+      <div class="item-content">
+        <div class="item-media">
+          <i class=" ti-face-smile"></i>
+        </div>
+        <div class="item-inner">
+          <span class="title"><%= t(:groups)%></span>
+        </div>
+      </div>
+    </a>
+  </li>
+
+  <li>
+    <a href="/events">
+      <div class="item-content">
+        <div class="item-media">
+          <i class="ti-alarm-clock"></i>
+        </div>
+        <div class="item-inner">
+          <span class="title"><%= t(:events)%></span>
+        </div>
+      </div>
+    </a>
+  </li>
+
+
+
+
+
+
+  <li>
+    <a href="/profiles">
+      <div class="item-content">
+        <div class="item-media">
+          <i class="fa fa-user"></i>
+        </div>
+        <div class="item-inner">
+          <span class="title"><%= t(:pepole)%></span>
+        </div>
+      </div>
+    </a>
+  </li>
+  <li>
+    <a href="/messages">
+      <div class="item-content">
+        <div class="item-media">
+          <i class="fa fa-envelope-o"></i>
+        </div>
+        <div class="item-inner">
+          <span class="title"><%= t(:messages)%></span>
+        </div>
+      </div>
+    </a>
+  </li>
+  <li class="">
+								<a href="javascript:void(0)">
+									<div class="item-content">
+										<div class="item-media">
+											<i class="ti-settings"></i>
+										</div>
+										<div class="item-inner">
+											<span class="title"><%= t(:settings)%></span><i class="icon-arrow"></i>
+										</div>
+									</div>
+								</a>
+								<ul class="sub-menu" style="display: none;">
+									<li>
+										<a href="/roles">
+											<span><%= t(:roles)%></span>
+										</a>
+									</li>
+                  <li>
+                    <a href="/artypes">
+                      <span><%= t(:artypes)%></span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/setypes">
+                      <span><%= t(:setypes)%></span>
+                    </a>
+                  </li>
+
+
+								</ul>
+							</li>
+
+
+</ul>
+</nav>
+</div>
+</div>

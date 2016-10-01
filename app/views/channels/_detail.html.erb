@@ -1,0 +1,36 @@
+<div id='channel-detail'>
+  <ul class="messages-list relative top-0">
+    <li class="messages-item padding-5">
+      <%= link_to 'channels/view_content/'+ channel.id.to_s,:remote => true  do%>
+      <%= image_tag channel.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+      <span class="messages-item-from"><%= channel.name%></span>
+      <div class="messages-item-time">
+        <span class="text">
+          <%= link_to edit_channel_path(channel) do%>
+          <%=t :edit%>
+          <%end%>
+        </span>
+      </div>
+      <span class="messages-item-subject"></span>
+      <span class="messages-item-content"><%= truncate(channel.description, :length => 20)%></span>
+      <div class="messages-item-time" style="margin-top:17px"></div>
+      <%end%>
+    </li>
+  </ul>
+  <% if params[:page].blank?%>
+    <% @total_pages =  Comment.where(commentable_class: 'Channel', commentable_id: channel.id).count / 3 + 1%>
+  <%else%>
+    <% @total_pages = params[:page]%>
+  <%end%>
+  <% @comments = Comment.where(commentable_class: 'Channel', commentable_id: channel.id).paginate(:page => params[:page], :per_page => 3, :page => @total_pages) %>
+  <%= render partial: 'channels/channel_comments', locals: {comments: @comments, channel: channel}%>
+  <div class="col-md-12 footpost" >
+    <div class="messages-search">
+      <%= form_for Comment.new,:remote => :true do |f|%>
+      <%= f.text_field :content, :class => "form-control underline", :placeholder => "#{t(:make_a_post)}"%>
+      <%= f.hidden_field :commentable_class, :value => 'Channel'%>
+      <%= f.hidden_field :commentable_id, :value => channel.id%>
+      <%end%>
+    </div>
+  </div>
+</div>

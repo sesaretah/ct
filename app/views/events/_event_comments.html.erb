@@ -1,0 +1,23 @@
+<div id='event-comments'>
+  <div class="margin-top-5" style='font-size: 10px;'>
+  <%=t :number_of_comments%>:(<%= Comment.where(commentable_class: 'Event', commentable_id: event.id).count %>)
+</div>
+  <ul class="messages-list relative top-0 margin-top-5 margin-right-30 bg-light-grey" style="width:auto;">
+    <% for comment in comments%>
+    <li class="messages-item padding-10 bg-light-grey" style="border-bottom:none;margin-bottom: 14px !important;">
+      <%= image_tag comment.user.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+      <span class="messages-item-from"><% comment.content%></span>
+      <div class="messages-item-time">
+        <span class="text">
+        </span>
+      </div>
+      <span class="messages-item-subject"></span>
+      <span class="messages-item-content"><%= truncate(comment.content, :length => 20)%></span>
+      <div class="messages-item-time" style="margin-top:17px"></div>
+    </li>
+    <%end%>
+  </ul>
+  <div id="page_links">
+    <%= paginate comments, :params => { :controller => "events", :action => "view_content", :id => event.id } %>
+</div>
+</div>

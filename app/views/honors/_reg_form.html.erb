@@ -1,0 +1,47 @@
+<%
+@honors = []
+4.times do
+  @honors << Honor.new
+end
+%>
+<div class="col-md-7">
+  <%= form_tag honors_path do %>
+  <fieldset>
+    <legend>
+      <%= t(:honors)%>
+    </legend>
+    <% @honors.each do |honor| %>
+    <%= fields_for 'honors[]', honor do |f| %>
+    <div class="row">
+      <div class="col-md-10">
+        <div class="form-group">
+          <%= f.label :title %><br>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <%= f.label :year %><br>
+          <%= f.text_field :year, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <% end %>
+    <div class="row top30">
+      <div class="form-group col-xs-3 pull-left">
+        <%= content_tag :button, :type => :submit,id: 'subbtn', :class => "btn btn-o btn-primary " do %>
+        <i class="icon-ok bigger-110"></i>
+        <%=t :submit%>
+        <% end %>
+        <%= link_to '/registeration_steps?step=5' do%>
+        <button  class="btn btn-o btn-success " , style: 'margin-left:2px;'>
+          <%= t(:next)%>
+        </button>
+        <%end%>
+      </div>
+    </div>
+  </fieldset>
+  <%= hidden_field_tag 'caller', 'reg'%>
+  <% end %>
+</div>

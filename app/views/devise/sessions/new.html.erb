@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="main-login col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-4 col-md-offset-4">
+    <div class="logo margin-top-30">
+      <img src="/assets/logo.png" alt="Clip-Two"/>
+    </div>
+    <!-- start: LOGIN BOX -->
+    <div class="box-login">
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name), class: "form-login") do |f| %>
+        <fieldset>
+          <legend>
+            <%= t(:sign_in_to_your_account)%>
+          </legend>
+          <p>
+            <%= t(:please_enter_your_name_and_password_to_log_in)%>
+          </p>
+          <div class="form-group">
+            <span class="input-icon">
+              <%= f.email_field :email, autofocus: true,  class: "form-control", placeholder: t(:email) %>
+              <i class="fa fa-envelope"></i>
+            </span>
+          </div>
+
+          <div class="form-group form-actions">
+            <span class="input-icon">
+              <%= f.password_field :password, autocomplete: "off" , class: "form-control"%>
+              <i class="fa fa-lock"></i>
+            </span>
+          </div>
+
+
+            <% if devise_mapping.rememberable? -%>
+            <div class="form-actions">
+              <div class="checkbox clip-check check-primary">
+
+                <%= f.check_box :remember_me %>
+                <% f.label :remember_me %>
+                <label for="remember">
+                  <%= t(:keep_me_signed_in)%>
+                </label>
+              </div>
+
+              <% end -%>
+
+              <button type="submit" class="btn btn-primary pull-left">
+                <%= t(:login)%> <i class="fa fa-arrow-circle-left"></i>
+              </button>
+            </div>
+            <div class="new-account">
+              <%= t(:dont_have_an_account_yet_?) %>
+              <a href="/users/sign_up">
+                <%= t(:create_an_account)%>
+              </a>
+            </div>
+          </fieldset>
+
+          <% end %>
+
+          <% render "devise/shared/links" %>
+          <!-- start: COPYRIGHT -->
+          <div class="copyright">
+          </div>
+          <!-- end: COPYRIGHT -->
+        </div>
+        <!-- end: LOGIN BOX -->
+      </div>
+    </div>

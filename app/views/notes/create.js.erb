@@ -1,0 +1,2 @@
+$("#notes").replaceWith("<%= escape_javascript(render(:partial => 'notes/detail', locals: {notes: @latest_notes })) %>");
+$("#fancy-form").replaceWith("<%= escape_javascript(render(:partial => 'notes/fancy_form')) %>");

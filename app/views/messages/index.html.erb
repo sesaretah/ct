@@ -1,0 +1,65 @@
+<div class="wrap-messages">
+	<div id="inbox" class="inbox">
+		<!-- start: EMAIL OPTIONS -->
+		<div class="col email-options perfect-scrollbar">
+			<div class="padding-15">
+				<%= render partial: 'messages/compose_modal'%>
+				<button class="btn btn-primary btn-block margin-bottom-30"  data-toggle="modal" data-target="#compose-modal">
+					<%=t :compose%>
+				</button>
+				<ul class="main-options padding-15">
+					<li>
+						<a href="#">
+
+							<span class="title"><i class="ti-import"></i>  <%=t :inbox%></span>
+
+						</a>
+					</li>
+					<li>
+					<!--
+						<a href="#">
+							<span class="title"><i class="ti-upload"></i> <%t :sent%></span>
+						</a> -->
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- end: EMAIL OPTIONS -->
+		<!-- start: EMAIL LIST -->
+		<div class="col email-list">
+			<div class="wrap-list">
+				<div class="wrap-options">
+
+					<div class="messages-search">
+						<form>
+							<input type="text" placeholder="<%=t :search_messages %>" class="form-control underline">
+						</form>
+					</div>
+				</div>
+				<ul class="messages-list perfect-scrollbar">
+					<% for message in @messages%>
+					<% @sender_profile = message.sender.profile%>
+					<li class="messages-item">
+						<%= link_to 'messages/view_content/'+ message.id.to_s,:remote => true  do%>
+							<span class="messages-item-star" title="Mark as starred"><i class="fa fa-star"></i></span>
+							<%= image_tag @sender_profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+								<span class="messages-item-from"><%= @sender_profile.name%> <%= @sender_profile.surename%></span>
+							<div class="messages-item-time">
+								<span class="text">
+									<%= JalaliDate.to_jalali(message.created_at).strftime("%d/%m/%Y")%></span>
+							</div>
+							<span class="messages-item-subject"><%= truncate(message.title, :length => 10)%></span>
+							<span class="messages-item-content"><%= truncate(message.content, :length => 40)%></span>
+							<div class="messages-item-time" style="margin-top:17px"><i class="fa fa-level-up"></i></div>
+						<%end%>
+					</li>
+					<%end%>
+
+				</ul>
+			</div>
+		</div>
+		<div id='msg-content'>
+
+		</div>
+		</div>
+	</div>

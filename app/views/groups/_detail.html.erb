@@ -1,0 +1,36 @@
+<div id='group-detail'>
+  <ul class="messages-list relative top-0">
+    <li class="messages-item padding-5">
+      <%= link_to 'groups/view_content/'+ group.id.to_s,:remote => true  do%>
+      <%= image_tag group.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+      <span class="messages-item-from"><%= group.name%></span>
+      <div class="messages-item-time">
+        <span class="text">
+          <%= link_to edit_group_path(group) do%>
+          <%=t :edit%>
+          <%end%>
+        </span>
+      </div>
+      <span class="messages-item-subject"></span>
+      <span class="messages-item-content"><%= truncate(group.description, :length => 20)%></span>
+      <div class="messages-item-time" style="margin-top:17px"></div>
+      <%end%>
+    </li>
+  </ul>
+  <% if params[:page].blank?%>
+    <% @total_pages =  Comment.where(commentable_class: 'Group', commentable_id: group.id).count / 3 + 1%>
+  <%else%>
+    <% @total_pages = params[:page]%>
+  <%end%>
+  <% @comments = Comment.where(commentable_class: 'Group', commentable_id: group.id).paginate(:page => params[:page], :per_page => 3, :page => @total_pages) %>
+  <%= render partial: 'groups/group_comments', locals: {comments: @comments, group: group}%>
+  <div class="col-md-12 footpost" >
+    <div class="messages-search">
+      <%= form_for Comment.new,:remote => :true do |f|%>
+      <%= f.text_field :content, :class => "form-control underline", :placeholder => "#{t(:make_a_post)}"%>
+      <%= f.hidden_field :commentable_class, :value => 'Group'%>
+      <%= f.hidden_field :commentable_id, :value => group.id%>
+      <%end%>
+    </div>
+  </div>
+</div>

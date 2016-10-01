@@ -1,0 +1,575 @@
+fa:
+  date:
+    abbr_day_names:
+    - ی
+    - د
+    - س
+    - چ
+    - پ
+    - ج
+    - ش
+    abbr_month_names:
+    -
+    - ژانویه
+    - فوریه
+    - مارس
+    - آوریل
+    - مه
+    - ژوئن
+    - ژوئیه
+    - اوت
+    - سپتامبر
+    - اکتبر
+    - نوامبر
+    - دسامبر
+    day_names:
+    - یکشنبه
+    - دوشنبه
+    - سه‌شنبه
+    - چهارشنبه
+    - پنج‌شنبه
+    - جمعه
+    - شنبه
+    formats:
+      default: ! '%Y/%m/%d'
+      long: ! '%e %B %Y'
+      short: ! '%m/%d'
+    month_names:
+    -
+    - ژانویه
+    - فوریه
+    - مارس
+    - آوریل
+    - مه
+    - ژوئن
+    - ژوئیه
+    - اوت
+    - سپتامبر
+    - اکتبر
+    - نوامبر
+    - دسامبر
+    order:
+    - :day
+    - :month
+    - :year
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: حدود یک ساعت
+        other: حدود %{count} ساعت
+      about_x_months:
+        one: حدود یک ماه
+        other: حدود %{count} ماه
+      about_x_years:
+        one: حدود یک سال
+        other: حدود %{count} سال
+      almost_x_years:
+        one: حدود یک سال
+        other: حدود %{count} سال
+      half_a_minute: نیم دقیقه
+      less_than_x_minutes:
+        one: کمتر از یک دقیقه
+        other: کمتر از %{count} دقیقه
+      less_than_x_seconds:
+        one: یک ثانیه
+        other: کمتر  از %{count} ثانیه
+      over_x_years:
+        one: بیش از یک سال
+        other: بیش از %{count} سال
+      x_days:
+        one: یک روز
+        other: ! '%{count} روز'
+      x_minutes:
+        one: یک دقیقه
+        other: ! '%{count} دقیقه'
+      x_months:
+        one: یک ماه
+        other: ! '%{count} ماه'
+      x_seconds:
+        one: یک ثانیه
+        other: ! '%{count} ثانیه'
+    prompts:
+      day: روز
+      hour: ساعت
+      minute: دقیقه
+      month: ماه
+      second: ثانیه
+      year: سال
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: باید پذیرفته شود
+      blank: نباید خالی باشد
+      confirmation: با تایید نمی‌خواند
+      empty: نمی‌تواند خالی باشد
+      equal_to: باید برابر %{count} باشد
+      even: باید زوج باشد
+      exclusion: رزرو است
+      greater_than: باید بزرگتر از %{count} باشد
+      greater_than_or_equal_to: باید بزرگتر یا برابر %{count} باشد
+      inclusion: در لیست موجود نیست
+      invalid: نامعتبر است
+      less_than: باید کمتر از %{count} باشد
+      less_than_or_equal_to: باید کمتر یا برابر %{count} باشد
+      not_a_number: عدد نیست
+      not_an_integer: عدد صحیح نیست
+      odd: باید فرد باشد
+      record_invalid: رکورد نامعتبر است %{errors}
+      taken: پیشتر گرفته شده
+      too_long: بلند است (حداکثر %{count} کاراکتر)
+      too_short: کوتاه است (حداقل %{count} کاراکتر)
+      wrong_length: نااندازه است (باید %{count} کاراکتر باشد)
+    template:
+      body: ! 'موارد زیر مشکل داشت:'
+      header:
+        one: 1 خطا جلوی ذخیره این %{model} را گرفت
+        other: ! '%{count} خطا جلوی ذخیره این %{model} را گرفت'
+  helpers:
+    select:
+      prompt: لطفا انتخاب کنید
+    submit:
+      create: ! 'ایجاد %{model}'
+      submit: ! 'ذخیره‌ی %{model}'
+      update: ! 'بروز رسانی %{model}'
+  number:
+    currency:
+      format:
+        delimiter: ٬
+        format: ! '%n %u'
+        precision: 0
+        separator: ٫
+        significant: false
+        strip_insignificant_zeros: false
+        unit: ﷼
+    format:
+      delimiter: ٬
+      precision: 2
+      separator: ٫
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: میلیارد
+          million: میلیون
+          quadrillion: کادریلیون
+          thousand: هزار
+          trillion: تریلیون
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: بایت
+            other: بایت
+          gb: گیگابایت
+          kb: کیلوبایت
+          mb: مگابایت
+          tb: ترابایت
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ! ' و '
+      two_words_connector: ! ' و '
+      words_connector: ! '، '
+  time:
+    am: قبل از ظهر
+    formats:
+      default: ! '%A، %e %B %Y، ساعت %H:%M:%S (%Z)'
+      long: ! '%e %B %Y، ساعت %H:%M'
+      short: ! '%e %B، ساعت %H:%M'
+    pm: بعد از ظهر
+  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  activemodel:
+    errors:
+      <<: *errors
+  activerecord:
+    models:
+        user: 'کاربر'
+    errors:
+      <<: *errors
+    attributes:
+        profile:
+            nickname: "اسم مستعار"
+            name: "نام"
+            surename: "نام خانوادگی"
+            birthdate: 'تاریخ تولد'
+            sex: 'جنسیت'
+            nickname: "اسم مستعار"
+            fathername: 'نام پدر'
+            ssn: 'کد ملی'
+            phonenumber:  'شماره تلفن'
+            mobilenumber: 'شماره همراه'
+        education:
+            name: 'نام موسسه'
+            grade: 'مقطع'
+            city: 'شهر'
+            country: 'کشور'
+            field: 'رشته'
+            start_year: 'سال شروع'
+            end_year: 'سال پایان'
+            gpa: 'معدل'
+            title: 'عنوان پایان نامه (در صورت وجود)'
+            thesis_gpa: 'نمره پایان نامه'
+        research:
+            name: 'عنوان'
+            pub_type: 'نوع انتشار'
+            pub_name: 'نام منتشر کننده'
+            pub_authors: 'مولفین'
+            pub_year: 'سال انتشار'
+        channel:
+            name: 'نام کانال'
+            description: 'توضیحات'
+        group:
+            name: 'نام گروه'
+            description: 'توضیحات'
+        honor:
+            title: 'عنوان'
+            year: 'سال'
+        tag:
+            title: 'عنوان'
+        user:
+            email: 'ایمیل'
+            login: 'نام کاربر'
+            password: 'رمز عبور'
+            password_confirmation: 'تکرار رمز عبور'
+            remember_me: 'مرا به خاطر بسپار'
+        message:
+          recipient_id: 'گیرنده'
+          sender_id: 'فرستنده'
+          content: 'متن'
+          title: 'موضوع'
+        event:
+          name: 'نام رخداد'
+          description: 'توضیحات'
+          event_date: 'تاریخ رخداد'
+          start_time: 'ساعت شروع'
+          end_time: 'ساعت پایان'
+        setting:
+            user_privacy_status: 'نوع پروفایل'
+            user_serachable_status: 'قابلیت جستجوی پروفایل'
+  will_paginate:
+    page_gap: "&hellip;"
+    previous_label: "قبلی"
+    next_label: "بعدی"
+  gpa: 'معدل'
+  start_year: 'سال شروع'
+  end_year: 'سال پایان'
+  your_notes: 'نوشتارهای شما'
+  latest_notes: 'آخرین نوشتارها'
+  make_a_post: 'پست بگذارید...'
+  goto_channels: 'مراجعه به کانال'
+  number_of_comments: 'تعداد نظرات'
+  post_your_comment: 'نظر بدهید...'
+  my_profile: 'پروفایل من'
+  next: 'بعدی'
+  goto_events: 'مراجعه به رخداد'
+  change_event_avatar: 'تغییر عکس رخداد'
+  new_event: 'رخداد جدید'
+  please_enter_new_event_data: 'اطلاعات رخداد جدید را وارد کنید'
+  change_group_avatar: 'تغییر تصویر گروه'
+  new_group: 'گروه جدید'
+  please_enter_new_group_data: 'اطلاعات گروه جدید را وارد کنید'
+  please_upload_new_avatar: 'لطفا تصویر جدید انتخاب کنید'
+  change_channel_avatar: 'تغییر تصویر کانال'
+  please_enter_new_channel_data: 'اطلاعات کانال جدید را وارد کنید'
+  new_channel: 'کانال جدید'
+  events_you_joined: 'رخدادهای شما'
+  popular_events: 'رخدادهای محبوب'
+  events_you_manage: 'مرتبط با شما'
+  add_new_event: 'افزودن رخداد جدید'
+  groups_you_joined: 'گروههای شما'
+  popular_groups: 'گروههای محبوب'
+  groups_you_manage: 'مرتبط با شما'
+  add_new_group: 'افزودن گروه جدید'
+  add_new_channel: 'افزودن کانال جدید'
+  channels_you_manage: 'مرتبط با شما'
+  popular_channels: 'کانال های محبوب'
+  channels_you_joined: 'کانال های شما'
+  events: 'رخداد‌ها'
+  groups: 'گروه‌ها'
+  channels: 'کانال‌ها'
+  new_notes: 'نوشتارهای جدید دیگران'
+  write_new_note: 'نوشتاری جدید بنویسید'
+  notes: 'نوشتارها'
+  delete: 'پاک کردن'
+  to: 'به'
+  search_messages: 'جستجو در پیام‌ها ...'
+  compose: 'نوشتن'
+  enter_new_tag: 'زمینه فعالیت جدید'
+  edit_tag: 'ویرایش زمینه فعالیت'
+  title: 'عنوان'
+  enter_new_honor: 'افزودن به لیست افتخارات'
+  edit_honor: 'ویرایش افتخارات'
+  enter_new_research: 'سوابق پژوهشی جدید'
+  edit_research: 'ویرایش سوابق پژوهشی'
+  name_of_pub: 'عنوان'
+  pub_type: 'نوع انتشار'
+  pub_name: 'نام منتشر کننده'
+  pub_authors: 'مولفین'
+  pub_year: 'سال انتشار'
+  enter_new_education: 'سوابق آموزشی جدید'
+  edit_education: 'ویرایش سوابق آموزشی'
+  grade: 'مقطع'
+  field: 'رشته'
+  city: 'شهر'
+  country: 'کشور'
+  primary: 'ابتدایی'
+  middle: 'راهنمایی'
+  high: 'دبیرستان'
+  bs: 'کارشناسی'
+  ms: 'کارشناسی ارشد'
+  phd: 'دکتری'
+  postdoc: 'فوق دکتری'
+  registeration_wizard: 'مراحل ثبت نام'
+  enter_your_research_history: 'لطفا اطلاعات سوابق پژوهشی خود را وارد کنید'
+  enter_your_education_history: 'لطفا اطلاعات سوابق آموزشی خود را وارد کنید'
+  enter_your_tags: 'لطفا زمینه های فعالیت خود را وارد کنید'
+  enter_your_honors: 'لطفا افتخاراتی که تا کنون کسب کرده اید را لیست کنید'
+  please_fill_in_the_following_data: 'لطفا اطلاعات هر مرحله را با دقت وارد کنید'
+  enter_your_personal_information: 'اطلاعات شخصی خود را وارد کنید'
+  step_1_content: 'محل نوشتن متن مربوط به اطلاعات شخصی'
+  step_1_sub_content: 'محل نوشتن متن زیرین مربوط به اطلاعات شخصی'
+  search_results: 'نتایج جستجو'
+  attendants: 'حاضرین در این جلسه'
+  present: 'حاضرین'
+  list_of_setypes: 'لیست انواع جلسات'
+  please_enter_new_setype: 'نوع جلسه ی جدید ایجاد کنید'
+  new_setype: 'نوع جلسات جدید'
+  list_of_artypes: 'لیست رده‌بندی ها'
+  new_artype: 'رده‌بندی جدید'
+  please_enter_new_artype: 'رده‌بندی جدید را وارد کنید'
+  artypes: 'تعریف رده‌بندی'
+  setypes: 'تعریف نوع جلسات'
+  settings: 'تنظیمات'
+  edit_person: 'ویرایش اطلاعات فرد'
+  list_of_pepole: 'لیست افراد'
+  last_role: 'آخرین سمت'
+  edit_role_for_profile: 'ویرایش سمت برای'
+  enter_new_role_for_profile: 'ثبت سمت جدید برای'
+  role: 'سمت'
+  start_date: 'تاریخ شروع'
+  end_date: 'تاریخ پایان'
+  role_name: 'عنوان'
+  new_role: 'سمت جدید'
+  please_enter_new_role: 'اطلاعات سمت جدید را وارد کنید'
+  roles: 'سمت‌ها'
+  list_of_roles: 'لیست سمت‌ها'
+  positions: 'سمت‌ها'
+  name: "نام"
+  full_name: 'نام کامل'
+  surename: "نام خانوادگی"
+  birthdate: 'تاریخ تولد'
+  sex: 'جنسیت'
+  fathername: 'نام پدر'
+  ssn: 'کد ملی'
+  phonenumber:  'شماره تلفن'
+  mobilenumber: 'شماره همراه'
+  pepole: 'افراد'
+  new_person: 'فرد جدید'
+  please_personnel_data: 'لطفا اطلاعات شخص مورد نظر را وارد کنید'
+  profiles: 'پروفایل‌ها'
+  list_of_profiles: 'لیست پروفایل‌ها'
+  setype: 'نوع جلسه'
+  view: 'نمایش'
+  general_policies: 'سیاست‌های کلی'
+  confilicts: 'اختلافی'
+  enquiries: 'استفساریه'
+  problems: 'معضلات'
+  constitutions: 'قانون اساسی'
+  regulations: 'آیین نامه‌های داخلی'
+  change_photo: 'تغییر عکس'
+  recent_activities: 'فعالیت‌های اخیر'
+  login: 'ورود'
+  sign_in_to_your_account: 'وارد شوید'
+  please_enter_your_name_and_password_to_log_in: 'لطفا ایمیل و رمز عبور خود را وارد کنید.'
+  keep_me_signed_in: 'مرا به خاطر بسپار'
+  dont_have_an_account_yet_?: 'آیا هنوز عضو نشده اید؟'
+  create_an_account: 'عضویت'
+  email: 'ایمیل'
+  more: 'بیشتر'
+  password: 'رمز عبور'
+  password_again: 'رمز عبور مجدد'
+  already_have_an_account_?: 'آیا قبلا ثبت نام کرده اید؟'
+  enter_your_personal_details_below: 'مشخصات خود را وارد کنید'
+  personal_information: 'اطلاعات شخصی'
+  first_name: 'نام'
+  enter_your_first_name: 'نام خود را وارد کنید'
+  last_name: 'نام خانوادگی'
+  enter_your_last_name: 'نام خانوادگی خود را وارد کنید'
+  gender: 'جنسیت'
+  education_history: 'سوابق آموزشی'
+  research_history: 'سوابق پژوهشی'
+  honors: 'افتخارات'
+  experties: 'زمینه های فعالیت'
+  education_history: 'سوابق آموزشی'
+  login: 'ورود'
+  close: 'بستن'
+  video: 'ویدیو'
+  document: 'فایل '
+  main_menu: 'منوی اصلی'
+  voice: 'صوت'
+  article_type: 'نوع جلسه'
+  article_date: 'تاریخ جلسه'
+  session_number: 'شماره جلسه'
+  article_content:  'متن صورتجلسه'
+  new_article: 'صورتجلسه'
+  articles: 'صورتجلسات'
+  please_complete_the_following_form_for_article: 'لطفا فرم زیر را برای صورتجلسه مورد نظر تکمیل کنید.'
+  article_list: 'لیست صورتجلسه ها'
+  show: 'نمایش'
+  destroy: 'پاک کردن'
+  new: 'جدید'
+  home: 'خانه'
+  submit: 'ثبت'
+  please_enter_your_profile_data: 'لطفا اطلاعات پروفایل خود را وارد نمایید'
+  profile: 'پروفایل'
+  followers: 'دنبال کنندگان'
+  followees: 'دنبال شوندگان'
+  activities: 'فعالیت ها'
+  about_me: 'درباره من'
+  add_as_a_friend: 'دنبال کن!'
+  remove_as_a_friend: 'دنبال نکن'
+  friend_added: 'شما اکنون دنبال کننده این کاربر هستید'
+  friend_removed: 'شما دیگر دنبال کننده این  کاربر نیستید'
+  list_of_users_followed_by_this_user: 'لیست افرادی که این کاربر آن ها را دنبال می کند'
+  list_of_followers_of_this_user: 'لیست کسانی که این کاربر را دنبال می کنند'
+  send_a_message: 'پیام خصوصی'
+  send_private_message: 'ارسال پیام خصوصی'
+  send: 'ارسال'
+  message_sent: 'پیام با موفقیت ارسال شد'
+  skills_and_intresets: 'زمینه های تخصص'
+  avatar: 'عکس پروفایل'
+  settings: 'تنظیمات'
+  for_edit_click_pen_tab: 'برای ویرایش بر روی آیکون زیر کلیک کنید'
+  submit_suggestion: 'ثبت افکار'
+  select_crop_area: 'قسمت مورد نظر را انتخاب کنید'
+  uploading: 'در حال بار گذاری ...'
+  updated: 'بروزرسانی انجام شد.'
+  edit: 'ویرایش'
+  current_value: 'مقدار فعلی'
+  skill_subject: 'موضوع زمینه تخصصی'
+  skill_level: 'سطح مهارت'
+  subject: 'موضوع'
+  operations: 'عملیات'
+  add_new_skill: 'افزودن زمینه تخصصی جدید'
+  back: 'بازگشت'
+  sign_up: 'ثبت نام'
+  welcome: 'خوش آمدید'
+  logout: 'خروج'
+  organization: 'موسسه آموزشی'
+  settings: 'تنظیمات'
+  sign_in: 'ورود'
+  registeration: 'روند ثبت نام'
+  compelete_profile: 'تکمیل پروفایل'
+  ulpoad_avatar: 'بارگذاری عکس'
+  enter_your_sign_up_data: 'اطلاعات ثبت نام را وارد کنید'
+  enter_your_skills: 'زمینه های مورد علاقه خود را وارد کنید'
+  skills: 'زمینه های تخصصی'
+  choose_file: 'انتخاب فایل'
+  confirm_and_proceed: 'تایید و ادامه'
+  finish: 'پایان'
+  comments: 'نظرات'
+  has_commented_on_your_suggesion: 'ابراز نظر کرد بر روی پیشنهاد'
+  has_favourited_on_your_suggesion: 'ابراز علاقه کرده به'
+  suggestion: 'افکار'
+  notifications: 'آگاهسازی'
+  favourited_user_list: 'کاربرانی که ابراز علاقه کرده اند'
+  search: 'جستجو...'
+  feed_on: 'بر روی'
+  forgot_your_password_?: 'رمز عبور خود را فراموش کرده اید؟'
+  send_me_reset_password_instructions: 'روش بازیابی رمز را برایم ارسال کن'
+  see_all_notifications: 'مشاهده همه آگاهسازی ها'
+  replay_to_this_message: 'پاسخ به این پیام'
+  inbox: 'پیام های دریافتی'
+  unread_messages: 'پیام خوانده نشده'
+  messages: 'پیام های خصوصی'
+  see_all_messages: 'مشاهده همه پیام ها'
+  sent: 'پیام های ارسالی'
+  i_suggest_that: 'افکار خود را به اشتراک بگذارید'
+  open: 'باز'
+  closed: 'بسته'
+  searchable: 'قابل جستجو'
+  nonsearchable: 'غیر قابل جستجو'
+  this_profile_is_locked: 'این کاربر اطلاعات پروفایل خود را بسته است.'
+  frindship_notify: 'آگاهسازی تعاملات'
+  just_followed_you: 'شما را دنبال می کند'
+  just_requested_to_follow_you: 'درخواست دنبال کردن'
+  see_all_friendships: 'مشاهده همه'
+  suggestions: 'افکار'
+  people: 'افراد'
+  latest_suggestion: 'افکار اخیر'
+  day: 'روز'
+  month: 'ماه'
+  year: 'سال'
+  male: 'مرد'
+  female: 'زن'
+  privacy: 'حریم خصوصی'
+
+  devise:
+    confirmations:
+      confirmed: حسابتان با موفقیت تایید شد. هم اکنون وارد شدید.
+      send_instructions: ظرف چند دقیقه آینده ایمیلی حاوی راهنمای تایید حسابتان دریافت خواهید کرد.
+      send_paranoid_instructions: اگر ایمیل شما قبلا در سیستم ثبت شده باشد، تا چند دقیقه‌ی دیگر یک ایمیل حاوی توضیحات چگونگی فعال‌سازی حساب‌تان دریافت می‌کنید.
+    failure:
+      already_authenticated: وارد سیستم هستید.
+      inactive: حساب شما هنوز فعال نشده است.
+      invalid: ایمیل یا رمز عبور غیر معتبر.
+      last_attempt: شما تنها یک فرصت دیگر دارید قبل از این‎که حسابتان غیرفعال شود.
+      locked: حسابتان قفل شده است.
+      not_found_in_database: ایمیل یا رمزعبور نامعتبر.
+      timeout: نشست شما منقضی شده است. برای ادامه دوباره وارد شوید.
+      unauthenticated: پیش از ادامه باید وارد شوید یا ثبت نام کنید.
+      unconfirmed: باید حسابتان را قبل از ادامه تایید کنید.
+    mailer:
+      confirmation_instructions:
+        subject: راهنمای تایید
+      reset_password_instructions:
+        subject: راهنمای بازنشانی رمز عبور
+      unlock_instructions:
+        subject: راهنمای باز کردن
+    omniauth_callbacks:
+      failure: امکان استفاده از مجوز %{kind} نبود زیرا "%{reason}".
+      success: با موفقیت مجوز استفاده از  %{kind} دریافت شد.
+    passwords:
+      no_token: شما نمی‌توانید بدون استفاده از یک لینک بازنشانی رمز به این صفحه دسترسی پیدا کنید. اگر از طریق یک ایمیل بازنشانی رمز عبور به این صفحه رسیده‌اید، مطمئن شوید که از کل URL فرستاده شده استفاده کرده‌اید.
+      send_instructions: ظرف چند دقیقه آینده ایمیلی حاوی راهنمای بازگرداندن رمز عبورتان دریافت خواهید کرد.
+      send_paranoid_instructions: اگر ایمیل شما قبلا در سیستم ثبت شده باشد، تا چند دقیقه‌ی دیگر یک لینک بازنشانی رمز عبور دریافت می‌کنید.
+      updated: رمز عبورتان با موفقیت تغییر کرد. اکنون وارد شدید.
+      updated_not_active: رمز عبور با موفقیت تغییر یافت.
+    registrations:
+      destroyed: بدرود! حسابتان لغو شد. به امید دیدار دوباره.
+      signed_up: خوش آمدید! با موفقیت ثبت نام کردید.
+      signed_up_but_inactive: شما با موفقیت ثبت نام شده اید؛ ولی هنوز نمی‌توانید وارد شوید چون حساب‌تان هنوز فعال نشده.
+      signed_up_but_locked: شما با موفقیت ثبت نام شده اید؛ ولی هنوز نمی‌توانید وارد شوید چون حساب‌تان قفل شده.
+      signed_up_but_unconfirmed: یک ایمیل حاوی لینک تایید حساب برای شما فرستاده شده. لطفا برای فعال کردن حساب‌تان آن لینک را باز کنید.
+      update_needs_confirmation: حساب شما با موفقیت به روز شد، اما شما باید ایمیل جدیدتان را را تایید کنید. لطفا ایمیل‌تان را چک کنید و روی لینک تایید حساب کاربری کلیک کنید تا ایمیل جدیدتان تایید شود.
+      updated: به روز رسانی حسابتان با موفقیت انجام شد.
+    sessions:
+      signed_in: ورود موفق.
+      signed_out: خروج موفق.
+    unlocks:
+      send_instructions: ایمیلی حاوی راهنمای باز کردن حسابتان در چند دقیقه آینده به شما ارسال خواهد شد.
+      send_paranoid_instructions: اگر حساب شما وجود داشته باشد، تا چند دقیقه‌ی دیگر یک ایمیل حاوی توضیحات نحوه‌ی باز کردن قفل حساب‌تان برای شما ارسال می‌شود.
+      unlocked: حسابتان با موفقیت باز شد. اکنون وارد شدید.
+  errors:
+    messages:
+      already_confirmed: قبلا تایید شده است
+      confirmation_period_expired: باید در مدت %{period} تایید می‌شد، لطفا یکی دیگر درخواست نمایید
+      expired: منقضی شده. لطفا یکی دیگر درخواست کنید.
+      not_found: یافت نشد
+      not_locked: قفل نشده است
+      not_saved:
+        one: '۱ خطا جلوی ذخیره %{resource} را گرفت:'
+        other: '%{count} خطا جلوی ذخیره این %{resource} را گرفت:'

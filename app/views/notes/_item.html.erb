@@ -1,0 +1,14 @@
+<li class="messages-item padding-5">
+  <%= image_tag note.user.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+  <span class="messages-item-from"><%= note.user.profile.name%> <%= note.user.profile.surename%></span>
+  <div class="messages-item-time">
+    <span class="text">
+      <%= link_to note_path(note) do%>
+        <%=t :view%>
+      <%end%>
+    </span>
+  </div>
+  <span class="messages-item-subject"></span>
+  <span class="messages-item-content"><%= truncate(note.content, :length => 20)%></span>
+  <div class="messages-item-time" style="margin-top:17px"></div>
+</li>

@@ -1,0 +1,37 @@
+<div id= 'list'>
+  <div class="col-sm-12">
+    <div class="panel panel-white no-radius load1">
+      <div class="panel-heading border-light">
+        <h4 class="panel-title">Squared <span class="text-bold">Panel</span></h4>
+        <div class="panel-tools">
+          <a data-original-title="Refresh" data-toggle="tooltip" data-placement="top" class="btn btn-transparent btn-sm panel-refresh" href="#"><i class="ti-reload"></i></a>
+        </div>
+      </div>
+      <div class="panel-body">
+        <table class="table no-margin">
+          <thead>
+          </thead>
+          <tbody>
+            <% profiles.each do |profile| %>
+            <tr>
+              <td class="center">
+                <%= image_tag profile.avatar(:thumb), :class => "img-circle"%></td>
+                <td><span class="text-small block text-light"><%= t(:last_role)%>: <%= profile.positions.last.role.name%></span><span><%= profile.name %> <%= profile.surename %></span></td>
+                <td class="center">
+                  <div class="cl-effect-13">
+                    <%= link_to t(:show), profile %>
+                  </div>
+                </td>
+                <td class="center">
+                  <div class="cl-effect-13">
+                    <%= link_to t(:edit), edit_profile_path(profile.id) %>
+                  </div>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

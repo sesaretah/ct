@@ -1,0 +1,42 @@
+<ul>
+  <li>
+    <a href="" <%if params[:step] == '1'%> class='selected'<%end%>>
+      <div class="stepNumber">
+        1
+      </div>
+      <span class="stepDesc"><small> <%= t(:personal_information)%> </small></span>
+    </a>
+  </li>
+  <li>
+    <a href=""  <%if params[:step] == '2'%> class='selected'<%end%>>
+      <div class="stepNumber">
+        2
+      </div>
+      <span class="stepDesc"> <small><%= t(:education_history)%></small></span>
+    </a>
+  </li>
+  <li>
+    <a href=""  <%if params[:step] == '3'%> class='selected'<%end%>>
+      <div class="stepNumber">
+        3
+      </div>
+      <span class="stepDesc"> <small><%= t(:research_history)%></small> </span>
+    </a>
+  </li>
+  <li>
+    <a href=""  <%if params[:step] == '4'%> class='selected'<%end%>>
+      <div class="stepNumber">
+        4
+      </div>
+      <span class="stepDesc"> <small><%= t(:honors)%> </small> </span>
+    </a>
+  </li>
+  <li>
+    <a href=""  <%if params[:step] == '5'%> class='selected'<%end%>>
+      <div class="stepNumber">
+        5
+      </div>
+      <span class="stepDesc"> <small><%= t(:experties)%> </small> </span>
+    </a>
+  </li>
+</ul>

@@ -1,0 +1,43 @@
+<div id='compose-modal' class="modal fade "  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel"><%= t(:compose)%></h4>
+      </div>
+      <div class="modal-body centered-text">
+        <% @message =  Message.new%>
+        <%= form_for(@message) do |f| %>
+
+        <div class="row">
+          <div class="form-group col-xs-12">
+            <%= f.label :recipient_id, :class => 'pull-right' %>
+            <%= f.number_field :recipient_id , :class => "form-control" %>
+          </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-12">
+            <%= f.label :title, :class => 'pull-right' %>
+            <%= f.text_field :title , :class => "form-control" %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-12">
+            <%= f.label :content, :class => 'pull-right' %>
+            <%= f.text_area :content, {:class=> "form-control autosize area-animated", 'data-autosize-on' => "true", style: "overflow: hidden; resize: horizontal; word-wrap: break-word;" } %>
+          </div>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <%= content_tag :button, :type => :submit, :class => "btn btn-o btn-success" do %>
+        <i class="icon-ok bigger-110"></i>
+        <%=t :send%>
+        <% end %>
+        <button type="button" class="btn btn-primary btn-o" data-dismiss="modal">
+          <%= t(:close)%>
+        </button>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

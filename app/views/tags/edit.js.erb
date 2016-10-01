@@ -1,0 +1,1 @@
+$("#tag-form").replaceWith("<%= escape_javascript(render(:partial => 'tags/form', locals: {tag: @tag,profile: @profile })) %>");

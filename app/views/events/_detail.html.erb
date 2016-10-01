@@ -1,0 +1,36 @@
+<div id='event-detail'>
+  <ul class="messages-list relative top-0">
+    <li class="messages-item padding-5">
+      <%= link_to 'events/view_content/'+ event.id.to_s,:remote => true  do%>
+      <%= image_tag event.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+      <span class="messages-item-from"><%= event.name%></span>
+      <div class="messages-item-time">
+        <span class="text">
+          <%= link_to edit_event_path(event) do%>
+          <%=t :edit%>
+          <%end%>
+        </span>
+      </div>
+      <span class="messages-item-subject"></span>
+      <span class="messages-item-content"><%= truncate(event.description, :length => 20)%></span>
+      <div class="messages-item-time" style="margin-top:17px"></div>
+      <%end%>
+    </li>
+  </ul>
+  <% if params[:page].blank?%>
+    <% @total_pages =  Comment.where(commentable_class: 'Event', commentable_id: event.id).count / 3 + 1%>
+  <%else%>
+    <% @total_pages = params[:page]%>
+  <%end%>
+  <% @comments = Comment.where(commentable_class: 'Event', commentable_id: event.id).paginate(:page => params[:page], :per_page => 3, :page => @total_pages) %>
+  <%= render partial: 'events/event_comments', locals: {comments: @comments, event: event}%>
+  <div class="col-md-12 footpost" >
+    <div class="messages-search">
+      <%= form_for Comment.new,:remote => :true do |f|%>
+      <%= f.text_field :content, :class => "form-control underline", :placeholder => "#{t(:post_your_comment)}"%>
+      <%= f.hidden_field :commentable_class, :value => 'Event'%>
+      <%= f.hidden_field :commentable_id, :value => event.id%>
+      <%end%>
+    </div>
+  </div>
+</div>

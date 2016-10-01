@@ -1,0 +1,41 @@
+<div id='honor-form'>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <% if honor.id == nil%>
+        <h5 class="over-title"> <span class="text-bold"><%= t(:enter_new_honor)%></span></h5>
+        <%else%>
+        <h5 class="over-title"> <span class="text-bold"><%= t(:edit_honor)%></span></h5>
+
+        <%end%>
+        <div class="panel panel-white">
+          <div class="panel-body">
+            <% @honor = honor%>
+            <%= form_for @honor , :remote => true do |f| %>
+            
+            <div class="row">
+              <div class="col-md-10">
+                <div class="form-group">
+                  <%= f.label :title %><br>
+                  <%= f.text_field :title, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <%= f.label :year %><br>
+                  <%= f.text_field :year, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary pull-left">
+                <%= t(:submit)%> <i class="fa fa-arrow-circle-left"></i>
+              </button>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

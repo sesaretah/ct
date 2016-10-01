@@ -1,0 +1,9 @@
+<% if @comment.commentable_class == 'Event'%>
+$("#event-detail").replaceWith("<%= escape_javascript(render(:partial => 'events/detail', locals: {event: @item })) %>");
+<%end%>
+<% if @comment.commentable_class == 'Group'%>
+$("#group-detail").replaceWith("<%= escape_javascript(render(:partial => 'groups/detail', locals: {group: @item })) %>");
+<%end%>
+<% if @comment.commentable_class == 'Channel'%>
+$("#channel-detail").replaceWith("<%= escape_javascript(render(:partial => 'channels/detail', locals: {channel: @item })) %>");
+<%end%>

@@ -1,0 +1,116 @@
+<div class="col-md-7">
+  <% if current_user.profile.blank?%>
+  <% @profile = Profile.new%>
+  <% else %>
+  <% @profile = current_user.profile%>
+  <%end%>
+  <%= form_for(@profile) do |f| %>
+  <fieldset>
+    <legend>
+      <%= t(:profile)%>
+    </legend>
+    <% if @profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+        <% @profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :name %> *
+          <%= f.text_field :name , id: 'name', :class => "form-control"%>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group ">
+          <%= f.label :surename %><br>
+          <%= f.text_field :surename, :class => "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group ">
+          <%= f.label :fathername %><br>
+          <%= f.text_field :fathername, :class => "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label><%= f.label :birthdate %></label>
+          <br/>
+          <% if @profile.id == nil%>
+          <% @now = JalaliDate.to_jalali(Time.now)%>
+          <%else%>
+          <% @now = JalaliDate.to_jalali(@profile.birthdate)%>
+          <%end%>
+          <%=t :day%><%= select_tag  "ja_birth_dd", options_for_select(1..31, @now.day) %>/
+          <%=t :month%><%= select_tag "ja_birth_mm", options_for_select(1..12, @now.month) %>/
+          <%=t :year%><%= select_year(@now.year, {:start_year => 1300, :end_year => 1370}, {:name =>"ja_birth_yyyy"}) %>
+          <% f.date_select :birthdate ,:class => "col-xs-10 col-sm-5"%>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :sex %><br>
+          <%= f.select( :sex, sexs, {}, {:class => "form-control"})  %>
+          <% f.text_field :surename, :class => "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :ssn %><br>
+          <%= f.text_field :ssn, :class => "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :phonenumber %><br>
+          <%= f.text_field :phonenumber, :class => "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :mobilenumber %><br>
+          <%= f.text_field :mobilenumber, :class => "form-control" %>
+        </div>
+      </div>
+    </div>
+   <%= hidden_field_tag 'caller', 'reg' %>
+
+    <div class="row top30">
+      <div class="form-group col-xs-3 pull-left">
+        <%= content_tag :button, :type => :submit,id: 'subbtn', :class => "btn btn-o btn-primary " do %>
+        <i class="icon-ok bigger-110"></i>
+        <%=t :submit%>
+        <% end %>
+      </div>
+    </div>
+  </fieldset>
+  <% end %>
+</div>
+<script>
+$(document).ready(function(){
+    $('#subbtn').attr('disabled',true);
+    $('#nextbtn').attr('disabled',true);
+    $('#name').keyup(function(){
+        if($(this).val().length !=0)
+            $('#subbtn').attr('disabled', false);
+            $('#nextbtn').attr('disabled', false);
+        else
+            $('#subbtn').attr('disabled',true);
+            $('#nextbtn').attr('disabled',true);
+    })
+});
+</script>

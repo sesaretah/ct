@@ -1,0 +1,21 @@
+<div id='tag-list'>
+<table class='table'>
+  <thead>
+    <tr>
+      <th><%= t(:title)%></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% current_user.tags.each do |tag| %>
+      <tr>
+        <td><%= tag.title %></td>
+        <td><%= link_to t(:edit), edit_tag_path(tag), :remote => true %></td>
+        <td><%= link_to t(:destroy), tag, method: :delete, :remote => true, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

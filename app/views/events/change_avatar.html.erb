@@ -1,0 +1,101 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:change_event_avatar)%></h1>
+        <span class="mainDescription"><%= t(:please_upload_new_avatar)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"></span></h5>
+        <div class="panel panel-white">
+          <div class="panel-body">
+            <div class="col-md-3">
+              <%= render :partial => 'crop'%>
+            </div>
+            <div class="col-md-6">
+              <div class="col-sm-12">
+                <div class="row">
+                  <button id='edit' type="button" class="btn btn-wide btn-o btn-info">
+                    <%= t(:change_photo)%>
+                  </button>
+                </div>
+                <br />
+                <div class="row">
+                  <%= link_to events_path do%>
+                  <button type="button" class="btn btn-wide btn-o btn-warning">
+                    <%= t(:goto_events)%>
+                  </button>
+                  <%end%>
+                </div>
+
+              </div>
+            </div>
+            <%= form_for @event, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+            <%= f.file_field :avatar, :style =>"visibility:hidden;" %>
+
+            <%end%>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render :partial => "crop_modal"%>
+</div>
+<script type="text/javascript">
+$('#edit').click(function() {
+  $('input[type=file]').click();
+});
+$(function () {
+  $('#fileupload').fileupload({
+    dataType: 'json',
+    add: function (e, data) {
+      data.submit();
+    },
+    done: function (e, data) {
+      var ratio = parseInt(data.result.original_width) / parseInt(data.result.large_width);
+      $("#ratio").val(ratio);
+      $('#cropimage').replaceWith("<div id='cropimage'><img id='cropbox' src="+data.result.url+"/></div>");
+      jQuery(function($){
+        $("#cropmodal").appendTo("body").modal('show');
+      });
+      jQuery(function($){
+        var jcrop_api;
+        $('#cropbox').Jcrop({
+          onChange: update_crop,
+          onSelect: update_crop,
+          setSelect: [0, 0, 500, 500],
+          aspectRatio: 1
+
+        },function(){
+          jcrop_api = this;
+          jcrop_api.enable();
+        });
+      });
+    }
+  });
+});
+function update_crop(coords) {
+  var ratio = $("#ratio").val();
+  $("#crop_x").val(Math.round(coords.x * parseInt(ratio)));
+  $("#crop_y").val(Math.round(coords.y * parseInt(ratio)));
+  $("#crop_w").val(Math.round(coords.w * parseInt(ratio)));
+  $("#crop_h").val(Math.round(coords.h * parseInt(ratio)));
+}
+
+
+</script>

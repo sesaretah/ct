@@ -1,0 +1,7 @@
+<div id='notes'>
+  <ul class="messages-list relative top-0">
+  <% for n in notes%>
+  <%= render partial: 'notes/item', locals: {note: n}%>
+  <%end%>
+</ul>
+</div>

@@ -1,0 +1,33 @@
+<div id='edulist'>
+<table class='table'>
+  <thead>
+    <tr>
+      <th><%= t(:name)%></th>
+      <th><%= t(:grade)%></th>
+      <th><%= t(:field)%></th>
+      <th><%= t(:start_year)%></th>
+      <th><%= t(:end_year)%></th>
+      <th><%= t(:city)%></th>
+      <th><%= t(:country)%></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% current_user.educations.each do |education| %>
+      <tr>
+        <td><%= education.name %></td>
+        <td><%= education.grade %></td>
+        <td><%= education.field %></td>
+        <td><%= education.start_year %></td>
+        <td><%= education.end_year %></td>
+        <td><%= education.city %></td>
+        <td><%= education.country %></td>
+        <td><%= link_to t(:edit), edit_education_path(education), :remote => true %></td>
+        <td><%= link_to t(:destroy), education, method: :delete, :remote => true, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

@@ -1,0 +1,2 @@
+$("#research-list").replaceWith("<%= escape_javascript(render(:partial => 'researches/list', locals: {researches: current_user.researches })) %>");
+$("#research-form").replaceWith("<%= escape_javascript(render(:partial => 'researches/form', locals: {research: Research.new,profile: @profile })) %>");

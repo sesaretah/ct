@@ -1,0 +1,32 @@
+<div id= 'list'>
+  <div class="col-md-12 ">
+    <table class="table no-margin">
+      <thead>
+      </thead>
+      <tbody>
+        <% profiles.each do |profile| %>
+        <tr>
+          <td class="center">
+            <%= image_tag profile.avatar(:thumb), :class => "img-circle"%></td>
+            <td>
+
+              <span class="text-small block text-light">x</span>
+
+              <span><%= profile.name %> <%= profile.surename %></span>
+            </td>
+            <td class="center">
+              <div class="cl-effect-13">
+                <%= link_to t(:show), profile %>
+              </div>
+            </td>
+            <td class="center">
+              <div class="cl-effect-13">
+                <%= link_to t(:edit), edit_profile_path(profile.id) %>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

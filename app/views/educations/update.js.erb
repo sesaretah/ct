@@ -1,0 +1,2 @@
+$("#edulist").replaceWith("<%= escape_javascript(render(:partial => 'educations/list', locals: {educations: current_user.educations })) %>");
+$("#education-form").replaceWith("<%= escape_javascript(render(:partial => 'educations/form', locals: {education: Education.new,profile: @profile })) %>");

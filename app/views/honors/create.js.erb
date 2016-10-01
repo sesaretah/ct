@@ -1,0 +1,2 @@
+$("#honor-list").replaceWith("<%= escape_javascript(render(:partial => 'honors/list', locals: {honors: current_user.honors })) %>");
+$("#honor-form").replaceWith("<%= escape_javascript(render(:partial => 'honors/form', locals: {honor: Honor.new,profile: @profile })) %>");

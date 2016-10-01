@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Honors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Year</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @honors.each do |honor| %>
+      <tr>
+        <td><%= honor.title %></td>
+        <td><%= honor.year %></td>
+        <td><%= link_to 'Show', honor %></td>
+        <td><%= link_to 'Edit', edit_honor_path(honor) %></td>
+        <td><%= link_to 'Destroy', honor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Honor', new_honor_path %>

@@ -1,0 +1,37 @@
+<div id='msg-content'>
+<div class="email-reader perfect-scrollbar">
+  <div>
+    <div class="message-actions">
+      <ul class="actions no-margin no-padding block pull-right">
+
+          <li class="no-padding">
+            <a href="#">
+              <%=t :delete %>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="message-header">
+        	<% @sender_profile = message.sender.profile%>
+        <%= image_tag @sender_profile.avatar(:thumb), :class => "messages-item-avatar"%>
+        <div class="message-time">
+          <%= JalaliDate.to_jalali(message.created_at).strftime("%d/%m/%Y")%>
+        </div>
+
+        <div class="message-from">
+          <%= @sender_profile.name%> <%= @sender_profile.surename%>
+        </div>
+        <div class="message-to">
+          <% @recipient_profile = message.recipient.profile%>
+          <%=t :to%> <%= @recipient_profile.name%> <%= @recipient_profile.surename%>
+        </div>
+      </div>
+      <div class="message-subject">
+        <%= message.title%>
+      </div>
+      <div class="message-content">
+        <%= message.content%>
+      </div>
+    </div>
+  </div>
+</div>

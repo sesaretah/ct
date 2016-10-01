@@ -1,0 +1,34 @@
+<%
+@tags = []
+5.times do
+  @tags << Tag.new
+end
+%>
+<div class="col-md-7">
+  <%= form_tag tags_path do %>
+  <fieldset>
+    <legend>
+      <%= t(:experties)%>
+    </legend>
+    <% @tags.each do |tag| %>
+    <%= fields_for 'tags[]', tag do |f| %>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label><%= f.label :title %></label>
+          <%= f.text_field :title, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <% end %>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary pull-left">
+        <%= t(:submit)%> <i class="fa fa-arrow-circle-left"></i>
+      </button>
+    </div>
+  </fieldset>
+  <%= hidden_field_tag 'caller', 'reg'%>
+  <% end %>
+</div>

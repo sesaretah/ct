@@ -1,0 +1,17 @@
+<div id='fancy-form'>
+<%= form_for Note.new, remote: true do |f|%>
+<div class="form-group">
+  <div class="note-editor">
+    <%= f.text_area :content, class: "form-control"%>
+  </div>
+</div>
+<div class="row top10">
+  <div class="form-group col-xs-2 pull-left">
+    <%= content_tag :button, :type => :submit, :class => "btn btn-o btn-primary" do %>
+    <i class="icon-ok bigger-110"></i>
+    <%=t :submit%>
+    <% end %>
+  </div>
+</div>
+<%end%>
+</div>
