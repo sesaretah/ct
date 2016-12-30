@@ -1,0 +1,156 @@
+<div id='profile-detail'>
+  <div class="col-md-9 padding-right-0 padding-left-0">
+    <div class="tabbable">
+      <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue" id="myTab4">
+        <li class="active">
+          <a data-toggle="tab" href="#panel_overview">
+            <%= t(:profile)%>
+          </a>
+        </li>
+        <li >
+          <a data-toggle="tab" href="#education">
+            <%= t(:education_history)%>
+          </a>
+        </li>
+        <li >
+          <a data-toggle="tab" href="#research">
+            <%= t(:research_history)%>
+          </a>
+        </li>
+        <li >
+          <a data-toggle="tab" href="#honor">
+            <%= t(:honors)%>
+          </a>
+        </li>
+        <li >
+          <a data-toggle="tab" href="#tag">
+            <%= t(:experties)%>
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div id="panel_overview" class="tab-pane fade in active">
+          <div class="row">
+            <div class="col-sm-5 col-md-4">
+              <div class="user-left">
+                <div class="center">
+                  <h4><%= @profile.name%> <%= @profile.surename%></h4>
+
+                  <%= render :partial => 'crop'%>
+                  <% if @profile.user.id == current_user.id%>
+                  <div class="col-sm-12">
+                    <button id='edit' type="button" class="btn btn-wide btn-o btn-info">
+                      <%= t(:change_photo)%>
+                    </button>
+                  </div>
+
+                  <div class="col-sm-12" style="margin-top:10px;">
+                    <%= link_to edit_profile_path(@profile.id) do %>
+                    <button id='edit' type="button" class="btn btn-wide btn-o btn-warning">
+                      <%= t(:edit_person)%>
+                    </button>
+                    <%end%>
+                  </div>
+                  <%= form_for @profile, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
+                  <%= f.file_field :avatar, :style =>"visibility:hidden;" %>
+
+                  <%end%>
+                  <%end%>
+                  <hr>
+
+                </div>
+                <table class="table table-condensed">
+                  <thead>
+                    <tr>
+                      <th colspan="3"><%= t(:personal_information)%></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%= t(:full_name)%></td>
+                      <td><%= @profile.name%> <%= @profile.surename%></td>
+                    </tr>
+                    <tr>
+                      <td><%= t(:fathername)%></td>
+                      <td><%= @profile.fathername%></td>
+                    </tr>
+                    <tr>
+                      <td><%= t(:sex)%></td>
+                      <td><%= @profile.sex%></td>
+                    </tr>
+                    <tr>
+                      <td><%= t(:birthdate)%></td>
+                      <td><span>	<% @jalali = JalaliDate.to_jalali(@profile.birthdate)%>
+                        <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%></span></td>
+                      </tr>
+                      <tr>
+                        <td><%= t(:ssn)%></td>
+                        <td><%= @profile.ssn%></td>
+                      </tr>
+                      <tr>
+                        <td><%= t(:phonenumber)%></td>
+                        <td><%= @profile.phonenumber%></td>
+                      </tr>
+                      <tr>
+                        <td><%= t(:mobilenumber)%></td>
+                        <td><%= @profile.mobilenumber%></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="col-sm-7 col-md-8">
+
+                <div class="panel panel-white" id="activities">
+                  <div class="panel-heading border-light">
+                    <h4 class="panel-title text-primary"><%= t(:recent_activities)%></h4>
+                    <paneltool class="panel-tools" tool-collapse="tool-collapse" tool-refresh="load1" tool-dismiss="tool-dismiss"></paneltool>
+                  </div>
+                  <div collapse="activities" ng-init="activities=false" class="panel-wrapper">
+                    <div class="panel-body">
+                      <ul class="timeline-xs margin-top-15 margin-bottom-15">
+                        <li class="timeline-item success">
+                          <div class="margin-right-15">
+                            <div class="text-muted text-small">
+
+                            </div>
+                            <p>
+                              <a class="text-info" href>
+                                <%= @profile.name%> <%= @profile.surename%>
+                              </a>
+                              برای اولین بار وارد سیستم شد.
+                            </p>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="education" class="tab-pane fade">
+            <% @education = Education.new%>
+            <%= render partial: 'educations/list', locals: {user: @profile.user}%>
+            <%= render partial: 'educations/form', locals: {education: @education}%>
+          </div>
+          <div id="research" class="tab-pane fade">
+            <% @research = Research.new%>
+            <%= render partial: 'researches/list', locals: {user: @profile.user}%>
+            <%= render partial: 'researches/form', locals: {research: @research}%>
+          </div>
+          <div id="honor" class="tab-pane fade">
+            <% @honor = Honor.new%>
+            <%= render partial: 'honors/list', locals: {user: @profile.user}%>
+            <%= render partial: 'honors/form', locals: {honor: @honor}%>
+          </div>
+          <div id="tag" class="tab-pane fade">
+            <% @tag = Tag.new%>
+            <%= render partial: 'tags/list', locals: {user: @profile.user}%>
+            <%= render partial: 'tags/form', locals: {tag: @tag}%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -22,14 +22,26 @@
         <h5 class="over-title"> <span class="text-bold"></span></h5>
         <div class="panel panel-white">
           <div class="panel-body">
-
-
+              <div class="col-md-3">
             <%= render :partial => 'crop'%>
+          </div>
+          <div class="col-md-6">
             <div class="col-sm-12">
-              <button id='edit' type="button" class="btn btn-wide btn-o btn-info">
-                <%= t(:change_photo)%>
-              </button>
+              <div class="row">
+                <button id='edit' type="button" class="btn btn-wide btn-o btn-info">
+                  <%= t(:change_photo)%>
+                </button>
+              </div>
+              <br />
+              <div class="row">
+                <%= link_to groups_path(group_id: params[:id]) do%>
+                <button type="button" class="btn btn-wide btn-o btn-warning">
+                  <%= t(:goto_groups)%>
+                </button>
+                <%end%>
+              </div>
             </div>
+          </div>
             <%= form_for @group, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
             <%= f.file_field :avatar, :style =>"visibility:hidden;" %>
 

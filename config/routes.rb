@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  resources :seekings
+
+  resources :blogs
+
+  resources :involvements
+
+  resources :participations
+
+  resources :groupings
+
   resources :comments
 
   resources :events
@@ -31,21 +41,43 @@ Rails.application.routes.draw do
   match "/channels/crop/:id" => "channels#crop", :via => :get
   match "/channels/upload_avatar/:id" => "channels#upload_avatar", :via => :get
   match "/channels/view_content/:id" => "channels#view_content", :via => :get
+  match "/channels/join/:id" => "channels#join", :via => :get
 
 
   match "/groups/change_avatar/:id" => "groups#change_avatar", :via => :get
   match "/groups/crop/:id" => "groups#crop", :via => :get
   match "/groups/upload_avatar/:id" => "groups#upload_avatar", :via => :get
   match "/groups/view_content/:id" => "groups#view_content", :via => :get
+  match "/groups/search/:id" => "groups#search", :via => :get
 
   match "/events/change_avatar/:id" => "events#change_avatar", :via => :get
   match "/events/crop/:id" => "events#crop", :via => :get
   match "/events/upload_avatar/:id" => "events#upload_avatar", :via => :get
   match "/events/view_content/:id" => "events#view_content", :via => :get
+  match "/events/search/:id" => "events#search", :via => :get
 
   match "/messages/view_content/:id" => "messages#view_content", :via => :get
 
+  match "/profiles/search/:id" => "profiles#advanced_search", :via => :get
+  match "/groupings/add_to_group/:id" => "groupings#add_to_group", :via => :get
+  match "/groupings/change_stat/:id" => "groupings#change_stat", :via => :get
 
+  match "/comments/xedit/:id" => "comments#xedit", :via => :get
+
+  match "/participations/add_to_event/:id" => "participations#add_to_event", :via => :get
+
+  match "/involvements/add_to_channel/:id" => "involvements#add_to_channel", :via => :get
+
+  match "/blogs/view_content/:id" => "blogs#view_content", :via => :get
+  match "/blogs/join/:id" => "blogs#join", :via => :get
+  match "/blogs/search/:id" => "blogs#search", :via => :get
+
+  match "/notes/view_content/:id" => "notes#view_content", :via => :get
+
+  match "/profiles/view_content/:id" => "profiles#view_content", :via => :get
+  match "/profiles/profile_search/:id" => "profiles#search", :via => :get
+
+  post 'upload' => 'upload#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

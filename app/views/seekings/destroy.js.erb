@@ -1,0 +1,1 @@
+$("#blog-detail").replaceWith("<%= escape_javascript(render(:partial => 'blogs/detail', locals: {blog: @blog, page:@page })) %>");

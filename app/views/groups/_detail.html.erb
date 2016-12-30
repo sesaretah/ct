@@ -1,36 +1,61 @@
+<% grouping = Grouping.where(group_id: group.id, user_id: current_user.id).first%>
 <div id='group-detail'>
   <ul class="messages-list relative top-0">
     <li class="messages-item padding-5">
       <%= link_to 'groups/view_content/'+ group.id.to_s,:remote => true  do%>
       <%= image_tag group.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
       <span class="messages-item-from"><%= group.name%></span>
+      <%end%>
       <div class="messages-item-time">
         <span class="text">
-          <%= link_to edit_group_path(group) do%>
-          <%=t :edit%>
-          <%end%>
+          <table class="table">
+            <tr>
+              <% if grouping.blank?%>
+              <td>
+                <%= link_to "groupings/add_to_group/1?group_id=#{group.id}", :method => :get, :remote => true, data: {confirm: "Are you sure?"} ,'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:join_group) do %>
+                <i class="fa fa-plus-square-o"></i>
+                <%end%>
+              </td>
+              <%end%>
+              <% if !grouping.blank? && grouping.role == 3%>
+              <td><i class="fa fa-eye"></i> <%=t :your_request_is_under_process%> </td>
+              <%end%>
+              <% if !grouping.blank? && grouping.role != 3%>
+              <td>  <span data-toggle="modal" data-target="#addprofile"  data-placement="right" data-toggle= "tooltip" title= "<%=t :add_user_to_group%>"> <i class="fa fa-user-plus"></i></span> </td>
+              <td>
+                <%= link_to grouping_path(grouping.id), :method => :delete, :remote => true, data: {confirm: "Are you sure?"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:leave_group)  do %>
+                <i class="fa fa-sign-out"></i>
+                <%end%>
+              </td>
+              <%end%>
+              <% if admin?(grouping)%>
+              <td> <%= link_to edit_group_path(group), 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:edit) do%>
+                <i class="fa fa-edit"></i>
+                <%end%>
+              </td>
+              <td>
+                <%= link_to group_path(group), :method => :delete, :remote => true, data: {confirm: "Are you sure?"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:delete)  do %>
+                <i class="fa fa-trash-o"></i>
+                <%end%>
+              </td>
+              <%end%>
+            </tr>
+          </table>
         </span>
       </div>
       <span class="messages-item-subject"></span>
       <span class="messages-item-content"><%= truncate(group.description, :length => 20)%></span>
       <div class="messages-item-time" style="margin-top:17px"></div>
-      <%end%>
     </li>
   </ul>
-  <% if params[:page].blank?%>
-    <% @total_pages =  Comment.where(commentable_class: 'Group', commentable_id: group.id).count / 3 + 1%>
-  <%else%>
-    <% @total_pages = params[:page]%>
-  <%end%>
-  <% @comments = Comment.where(commentable_class: 'Group', commentable_id: group.id).paginate(:page => params[:page], :per_page => 3, :page => @total_pages) %>
+  <% if public?(group) || !grouping.blank? && grouping.role != 3%>
+  <% @comments = Comment.where(commentable_type: 'Group', commentable_id: group.id).last(page*4)%>
   <%= render partial: 'groups/group_comments', locals: {comments: @comments, group: group}%>
-  <div class="col-md-12 footpost" >
-    <div class="messages-search">
-      <%= form_for Comment.new,:remote => :true do |f|%>
-      <%= f.text_field :content, :class => "form-control underline", :placeholder => "#{t(:make_a_post)}"%>
-      <%= f.hidden_field :commentable_class, :value => 'Group'%>
-      <%= f.hidden_field :commentable_id, :value => group.id%>
-      <%end%>
-    </div>
-  </div>
+  <%end%>
 </div>
+<%= render partial: 'groups/add_user', locals: {group: group}%>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();
+});
+</script>

@@ -131,22 +131,22 @@
               </div>
               <div id="education" class="tab-pane fade">
                 <% @education = Education.new%>
-                <%= render partial: 'educations/list'%>
+                <%= render partial: 'educations/list', locals: {user: @profile.user}%>
                 <%= render partial: 'educations/form', locals: {education: @education}%>
               </div>
               <div id="research" class="tab-pane fade">
                 <% @research = Research.new%>
-                <%= render partial: 'researches/list'%>
+                <%= render partial: 'researches/list', locals: {user: @profile.user}%>
                 <%= render partial: 'researches/form', locals: {research: @research}%>
               </div>
               <div id="honor" class="tab-pane fade">
                 <% @honor = Honor.new%>
-                <%= render partial: 'honors/list'%>
+                <%= render partial: 'honors/list', locals: {user: @profile.user}%>
                 <%= render partial: 'honors/form', locals: {honor: @honor}%>
               </div>
               <div id="tag" class="tab-pane fade">
                 <% @tag = Tag.new%>
-                <%= render partial: 'tags/list'%>
+                <%= render partial: 'tags/list', locals: {user: @profile.user}%>
                 <%= render partial: 'tags/form', locals: {tag: @tag}%>
               </div>
             </div>

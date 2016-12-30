@@ -11,27 +11,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161001190644) do
+ActiveRecord::Schema.define(version: 20161230133328) do
+
+  create_table "blogs", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.integer  "user_id",     limit: 4
+    t.integer  "p_type",      limit: 4
+    t.integer  "g_type",      limit: 4
+    t.integer  "i_type",      limit: 4
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.text     "description", limit: 65535
+    t.boolean  "delta",       limit: 1,     default: true, null: false
+  end
 
   create_table "channels", force: :cascade do |t|
     t.string   "name",                limit: 255
     t.text     "description",         limit: 65535
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.string   "avatar_file_name",    limit: 255
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
     t.integer  "user_id",             limit: 4
+    t.boolean  "delta",               limit: 1,     default: true, null: false
+    t.integer  "g_type",              limit: 4
+    t.integer  "p_type",              limit: 4
+    t.integer  "i_type",              limit: 4
   end
 
   create_table "comments", force: :cascade do |t|
-    t.text     "content",           limit: 65535
-    t.integer  "user_id",           limit: 4
-    t.string   "commentable_class", limit: 255
-    t.integer  "commentable_id",    limit: 4
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.text     "content",          limit: 65535
+    t.integer  "user_id",          limit: 4
+    t.string   "commentable_type", limit: 255
+    t.integer  "commentable_id",   limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "educations", force: :cascade do |t|
@@ -56,25 +72,42 @@ ActiveRecord::Schema.define(version: 20161001190644) do
     t.date     "event_date"
     t.time     "start_time"
     t.time     "end_time"
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.string   "avatar_file_name",    limit: 255
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
     t.integer  "user_id",             limit: 4
+    t.integer  "p_type",              limit: 4
+    t.string   "location",            limit: 255
+    t.integer  "g_type",              limit: 4
+    t.boolean  "delta",               limit: 1,     default: true, null: false
+    t.integer  "i_type",              limit: 4
+  end
+
+  create_table "groupings", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "group_id",   limit: 4
+    t.integer  "adder_id",   limit: 4
+    t.integer  "role",       limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "groups", force: :cascade do |t|
     t.string   "name",                limit: 255
     t.text     "description",         limit: 65535
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.string   "avatar_file_name",    limit: 255
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
     t.integer  "user_id",             limit: 4
+    t.integer  "p_type",              limit: 4
+    t.boolean  "delta",               limit: 1,     default: true, null: false
+    t.integer  "i_type",              limit: 4
   end
 
   create_table "honors", force: :cascade do |t|
@@ -83,6 +116,15 @@ ActiveRecord::Schema.define(version: 20161001190644) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "user_id",    limit: 4
+  end
+
+  create_table "involvements", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "channel_id", limit: 4
+    t.integer  "adder_id",   limit: 4
+    t.integer  "role",       limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -100,6 +142,17 @@ ActiveRecord::Schema.define(version: 20161001190644) do
     t.integer  "user_id",    limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.string   "title",      limit: 255
+    t.integer  "blog_id",    limit: 4
+  end
+
+  create_table "participations", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "event_id",   limit: 4
+    t.integer  "adder_id",   limit: 4
+    t.integer  "role",       limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -108,8 +161,8 @@ ActiveRecord::Schema.define(version: 20161001190644) do
     t.date     "birthdate"
     t.string   "sex",                 limit: 255
     t.integer  "user_id",             limit: 4
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.string   "avatar_file_name",    limit: 255
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
@@ -118,6 +171,7 @@ ActiveRecord::Schema.define(version: 20161001190644) do
     t.string   "ssn",                 limit: 255
     t.string   "phonenumber",         limit: 255
     t.string   "mobilenumber",        limit: 255
+    t.boolean  "delta",               limit: 1,   default: true, null: false
   end
 
   create_table "researches", force: :cascade do |t|
@@ -131,11 +185,28 @@ ActiveRecord::Schema.define(version: 20161001190644) do
     t.integer  "user_id",     limit: 4
   end
 
+  create_table "seekings", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "blog_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "role",       limit: 4
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "user_id",    limit: 4
+  end
+
+  create_table "uploads", force: :cascade do |t|
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
   end
 
   create_table "users", force: :cascade do |t|

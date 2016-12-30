@@ -1,8 +1,21 @@
 class ChannelsController < ApplicationController
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
 
+  def join
+    @channel = Channel.find(params[:id])
+    @involvement = Involvement.create(user_id: current_user.id, channel_id: @channel.id, role: 3)
+    if params[:page].blank?
+      @page = 1
+    end
+  end
+
   def view_content
     @channel = Channel.find(params[:id])
+    if params[:page].blank?
+      @page = 1
+    else
+      @page = params[:page].to_i
+    end
   end
 
   def upload_avatar
@@ -25,6 +38,7 @@ class ChannelsController < ApplicationController
   # GET /channels.json
   def index
     @channels = Channel.all
+    @channel = Channel.find_by_id(params[:channel_id])
   end
 
   # GET /channels/1
@@ -83,6 +97,7 @@ class ChannelsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to channels_url, notice: 'Channel was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
@@ -94,6 +109,6 @@ class ChannelsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def channel_params
-      params.require(:channel).permit(:name, :description, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller)
+      params.require(:channel).permit(:name, :description, :p_type, :g_type, :i_type ,:avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller)
     end
 end

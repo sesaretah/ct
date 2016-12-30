@@ -1,0 +1,20 @@
+<div id='cm' class="panel-footer">
+  <% if c.class.name != 'Channel'%>
+  <%= form_for Comment.new,:remote => :true do |f|%>
+  <%= f.text_field :content, :class => "form-control underline", :placeholder => "#{t(:post_your_comment)}", maxlength: "140"%>
+  <%= f.hidden_field :commentable_type, :value => c.class.name%>
+  <%= f.hidden_field :commentable_id, :value => c.id%>
+  <%= hidden_field_tag :page, page%>
+  <%end%>
+  <%else%>
+  <% involvement = Involvement.where(channel_id: c.id, user_id: current_user.id).first%>
+  <% if admin?(involvement) %>
+  <%= form_for Comment.new,:remote => :true do |f|%>
+  <%= f.text_field :content, :class => "form-control underline", :placeholder => "#{t(:post_your_comment)}", maxlength: "140"%>
+  <%= f.hidden_field :commentable_type, :value => c.class.name%>
+  <%= f.hidden_field :commentable_id, :value => c.id%>
+  <%= hidden_field_tag :page, page%>
+  <%end%>
+  <%end%>
+  <%end%>
+</div>

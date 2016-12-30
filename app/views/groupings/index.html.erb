@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Groupings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Group</th>
+      <th>Adder</th>
+      <th>Role</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @groupings.each do |grouping| %>
+      <tr>
+        <td><%= grouping.user_id %></td>
+        <td><%= grouping.group_id %></td>
+        <td><%= grouping.adder_id %></td>
+        <td><%= grouping.role %></td>
+        <td><%= link_to 'Show', grouping %></td>
+        <td><%= link_to 'Edit', edit_grouping_path(grouping) %></td>
+        <td><%= link_to 'Destroy', grouping, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Grouping', new_grouping_path %>

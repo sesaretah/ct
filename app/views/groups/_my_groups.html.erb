@@ -1,0 +1,14 @@
+<div  id='my-groups'>
+<ul class="list-group">
+  <%= link_to new_group_path do%>
+  <li class="list-group-item">
+    <i class="fa fa-plus"></i> <%=t :add_new_group%>
+  </li>
+  <%end%>
+</ul>
+<ul class="messages-list relative top-0">
+  <% for g in current_user.groups%>
+  <%= render partial: 'groups/item', locals: {group: g}%>
+  <%end%>
+</ul>
+</div>

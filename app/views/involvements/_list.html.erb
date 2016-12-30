@@ -1,0 +1,17 @@
+<div id='ch-list'>
+<% for involvement in channel.involvements%>
+<% if involvement.role != 3 %>
+<span class='label label-success'>
+<%else%>
+<span class='label label-warning'>
+  <%= link_to "involvements/change_stat/#{involvement.id}", :method => :get, :remote => true do %>
+  <i class='fa fa-check-circle-o' style="color:white"></i>
+  <%end%>
+<%end%>
+  <%= link_to involvement_path(involvement), :method => :delete, :remote => true do %>
+  <i class='fa fa-trash-o' style="color:white"></i>
+  <%end%>
+  <%= involvement.user.profile.name%> <%= involvement.user.profile.surename%>
+</span>
+<%end%>
+</div>

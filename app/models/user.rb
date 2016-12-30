@@ -15,4 +15,15 @@ class User < ActiveRecord::Base
   has_many :channels
   has_many :comments
   has_many :notes
+  has_many :groupings
+  has_many :groups, :through => :groupings
+
+  has_many :participations
+  has_many :events, :through => :participations
+
+  has_many :involvements
+  has_many :channels, :through => :involvements
+  #has_one :blog
+  has_many :seekings
+  has_many :blogs, :through => :seekings
 end

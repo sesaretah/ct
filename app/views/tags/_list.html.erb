@@ -9,7 +9,7 @@
 
   <tbody>
 
-    <% current_user.tags.each do |tag| %>
+    <% user.tags.each do |tag| %>
       <tr>
         <td><%= tag.title %></td>
         <td><%= link_to t(:edit), edit_tag_path(tag), :remote => true %></td>

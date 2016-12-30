@@ -1,0 +1,7 @@
+<div id='search-results'>
+  <ul class="messages-list relative top-0">
+    <% for p in profiles%>
+    <%= render partial: 'profiles/item', locals: {profile: p}%>
+    <%end%>
+  </ul>
+</div>

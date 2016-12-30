@@ -5,8 +5,8 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="myModalLabel"><%=t :select_crop_area%></h4>
       </div>
-      <div class="modal-body centering center">
-        <div id='cropimage' class="centering"></div>
+      <div class="modal-body">
+        <div id='cropimage'></div>
       </div>
       <div class="modal-footer">
 		<%= form_for @channel, :remote => true do |f| %>

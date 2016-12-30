@@ -1,9 +1,20 @@
-<% if @comment.commentable_class == 'Event'%>
-$("#event-detail").replaceWith("<%= escape_javascript(render(:partial => 'events/detail', locals: {event: @item })) %>");
+<% if @comment.commentable_type == 'Event'%>
+$("#event-detail").replaceWith("<%= escape_javascript(render(:partial => 'events/detail', locals: {event: @item, page:@page })) %>");
+$("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @item, page:@page })) %>");
+
 <%end%>
-<% if @comment.commentable_class == 'Group'%>
-$("#group-detail").replaceWith("<%= escape_javascript(render(:partial => 'groups/detail', locals: {group: @item })) %>");
+<% if @comment.commentable_type == 'Group'%>
+$("#group-detail").replaceWith("<%= escape_javascript(render(:partial => 'groups/detail', locals: {group: @item, page:@page })) %>");
+$("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @item , page:@page})) %>");
+
 <%end%>
-<% if @comment.commentable_class == 'Channel'%>
-$("#channel-detail").replaceWith("<%= escape_javascript(render(:partial => 'channels/detail', locals: {channel: @item })) %>");
+<% if @comment.commentable_type == 'Channel'%>
+$("#channel-detail").replaceWith("<%= escape_javascript(render(:partial => 'channels/detail', locals: {channel: @item, page:@page })) %>");
+$("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @item , page:@page})) %>");
+<%end%>
+
+<% if @comment.commentable_type == 'Note'%>
+$("#note-comments").replaceWith("<%= escape_javascript(render(:partial => 'notes/note_comments', locals: {note: @item, page:@page })) %>");
+$("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @item , page:@page})) %>");
+
 <%end%>

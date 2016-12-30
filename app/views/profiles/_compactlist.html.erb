@@ -1,32 +1,45 @@
 <div id= 'list'>
-  <div class="col-md-12 ">
-
+  <ul class="messages-list relative top-0">
     <% profiles.each do |profile| %>
-    <div class="col-md-4 ">
-      <table class="table no-margin">
-        <thead>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="center">
-              <%= image_tag profile.avatar(:thumb), :class => "img-circle"%>
-            </td>
-            <td>
-              <% if !profile.positions.blank?%>
-              <span class="text-small block text-light"><%= t(:last_role)%>: <%= profile.positions.last.role.name%></span>
-              <%end%>
-              <span><%= profile.name %> <%= profile.surename %></span>
-            </td>
-            <td class="center">
-              <%= link_to "/attendances/add_attendance/1?profile_id=#{profile.id}&article_id=#{article_id}", :method => :get, :remote => true do %>
-                <i class='fa fa-plus-square'></i>
-              <%end%>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <% end %>
 
-  </div>
+    <li class="messages-item padding-5">
+
+      <%= image_tag profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+      <span class="messages-item-from"><%= profile.name %> <%= profile.surename %></span>
+      <div class="messages-item-time">
+        <span class="text">
+          <% if item.class.name == 'Group'%>
+            <% if profile.user.groupings.find_by_group_id(item.id).blank?%>
+              <%= link_to "/groupings/add_to_group/1?user_id=#{profile.user.id}&group_id=#{item.id}&adder_id=#{current_user.id}", :method => :get, :remote => true do %>
+                <i class='fa fa-plus-square'></i>
+                <%end%>
+            <%end%>
+          <%end%>
+
+          <% if item.class.name == 'Event'%>
+            <% if profile.user.participations.find_by_event_id(item.id).blank?%>
+              <%= link_to "/participations/add_to_event/1?user_id=#{profile.user.id}&event_id=#{item.id}&adder_id=#{current_user.id}", :method => :get, :remote => true do %>
+                <i class='fa fa-plus-square'></i>
+                <%end%>
+            <%end%>
+          <%end%>
+
+          <% if item.class.name == 'Channel'%>
+            <% if profile.user.involvements.find_by_channel_id(item.id).blank?%>
+              <%= link_to "/involvements/add_to_channel/1?user_id=#{profile.user.id}&channel_id=#{item.id}&adder_id=#{current_user.id}", :method => :get, :remote => true do %>
+                <i class='fa fa-plus-square'></i>
+                <%end%>
+            <%end%>
+          <%end%>
+        </span>
+      </div>
+      <span class="messages-item-subject"></span>
+      <span class="messages-item-content"></span>
+      <div class="messages-item-time" style="margin-top:17px"></div>
+    </li>
+
+
+
+    <% end %>
+  </ul>
 </div>

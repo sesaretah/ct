@@ -1,0 +1,15 @@
+<% admin = Seeking.where(blog_id: blog.id, role: 1).first.user%>
+<li class="messages-item padding-5">
+  <%= link_to 'blogs/view_content/'+ blog.id.to_s,:remote => true  do%>
+  <%= image_tag admin.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+  <span class="messages-item-from"><%= blog.title%></span>
+  <div class="messages-item-time">
+    <span class="text">
+
+    </span>
+  </div>
+  <span class="messages-item-subject"></span>
+  <span class="messages-item-content"><%= truncate(blog.description, :length => 20)%></span>
+  <div class="messages-item-time" style="margin-top:17px"></div>
+  <%end%>
+</li>

@@ -1,23 +1,46 @@
 <div id='event-comments'>
   <div class="margin-top-5" style='font-size: 10px;'>
-  <%=t :number_of_comments%>:(<%= Comment.where(commentable_class: 'Event', commentable_id: event.id).count %>)
-</div>
-  <ul class="messages-list relative top-0 margin-top-5 margin-right-30 bg-light-grey" style="width:auto;">
+    <%=t :number_of_posts%>: (<%= @count = Comment.where(commentable_type: 'Event', commentable_id: event.id).count %>)
+  </div>
+  <% @page = @page + 1%>
+  <% if @count > 4%>
+  <div class="span12 text-center">  <%= link_to 'events/view_content/'+ event.id.to_s+'?page='+@page.to_s,:remote => true  do%><i class="fa fa-history"></i> <%=t :pervious_posts%> <%end%></div>
+  <%end%>
+  <div class="timeline-centered">
     <% for comment in comments%>
-    <li class="messages-item padding-10 bg-light-grey" style="border-bottom:none;margin-bottom: 14px !important;">
-      <%= image_tag comment.user.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
-      <span class="messages-item-from"><% comment.content%></span>
-      <div class="messages-item-time">
-        <span class="text">
-        </span>
+    <article class="timeline-entry">
+      <div class="timeline-entry-inner">
+        <div class="timeline-icon">
+          <%= image_tag comment.user.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+        </div>
+        <div class="timeline-label">
+          <h2><%= link_to comment.user.profile do%><%= comment.user.profile.name%> <%= comment.user.profile.surename%><%end%></h2>
+          <% if current_user.id == comment.user.id%>
+          <a class='xedit-text' href="#" id="cm<%=comment.id%>" data-type="text" data-pk="1" data-url="/comments/xedit/<%= comment.id%>" data-title="Enter username">
+            <%= comment.content%>
+          </a>
+          <script>
+          $.fn.editable.defaults.mode = 'inline';
+          $.fn.editable.defaults.ajaxOptions = {type: "GET"};
+          $(document).ready(function() {
+            $("#cm<%=comment.id%>").editable({
+
+            });
+          });
+          </script>
+          <%else%>
+          <p><%= comment.content%></p>
+          <%end%>
+
+          <div class='trash'>
+            <%= link_to 'comments/'+ comment.id.to_s + '?page='+@page.to_s, :method => :delete, :remote => true, data: {confirm: "Are you sure?"}  do %>
+            <i class="fa fa-trash-o"></i>
+            <%end%>
+          </div>
+
+        </div>
       </div>
-      <span class="messages-item-subject"></span>
-      <span class="messages-item-content"><%= truncate(comment.content, :length => 20)%></span>
-      <div class="messages-item-time" style="margin-top:17px"></div>
-    </li>
+    </article>
     <%end%>
-  </ul>
-  <div id="page_links">
-    <%= paginate comments, :params => { :controller => "events", :action => "view_content", :id => event.id } %>
-</div>
+  </div>
 </div>

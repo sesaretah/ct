@@ -1,0 +1,17 @@
+<div id='gr-list'>
+<% for grouping in group.groupings%>
+<% if grouping.role != 3 %>
+<span class='label label-success'>
+<%else%>
+<span class='label label-warning'>
+  <%= link_to "groupings/change_stat/#{grouping.id}", :method => :get, :remote => true do %>
+  <i class='fa fa-check-circle-o' style="color:white"></i>
+  <%end%>
+<%end%>
+  <%= link_to grouping_path(grouping), :method => :delete, :remote => true do %>
+  <i class='fa fa-trash-o' style="color:white"></i>
+  <%end%>
+  <%= grouping.user.profile.name%> <%= grouping.user.profile.surename%>
+</span>
+<%end%>
+</div>

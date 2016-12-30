@@ -35,7 +35,7 @@
                 </div>
                 <br />
                 <div class="row">
-                  <%= link_to channels_path do%>
+                  <%= link_to "/channels?channel_id=#{params[:id]}" do%>
                   <button type="button" class="btn btn-wide btn-o btn-warning">
                     <%= t(:goto_channels)%>
                   </button>

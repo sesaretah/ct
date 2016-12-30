@@ -1,0 +1,17 @@
+<div id='pr-list'>
+<% for participation in event.participations%>
+<% if participation.role != 3 %>
+<span class='label label-success'>
+<%else%>
+<span class='label label-warning'>
+  <%= link_to "participations/change_stat/#{participation.id}", :method => :get, :remote => true do %>
+  <i class='fa fa-check-circle-o' style="color:white"></i>
+  <%end%>
+<%end%>
+  <%= link_to participation_path(participation), :method => :delete, :remote => true do %>
+  <i class='fa fa-trash-o' style="color:white"></i>
+  <%end%>
+  <%= participation.user.profile.name%> <%= participation.user.profile.surename%>
+</span>
+<%end%>
+</div>

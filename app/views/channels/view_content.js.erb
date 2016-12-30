@@ -1,1 +1,2 @@
-$("#channel-detail").replaceWith("<%= escape_javascript(render(:partial => 'channels/detail', locals: {channel: @channel })) %>");
+$("#channel-detail").replaceWith("<%= escape_javascript(render(:partial => 'channels/detail', locals: {channel: @channel, page:@page })) %>");
+$("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @channel, page:@page })) %>");

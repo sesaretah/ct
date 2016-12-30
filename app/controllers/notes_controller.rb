@@ -1,6 +1,15 @@
 class NotesController < ApplicationController
   before_action :set_note, only: [:show, :edit, :update, :destroy]
 
+
+  def view_content
+    @note = Note.find(params[:id])
+    if params[:page].blank?
+      @page = 1
+    else
+      @page = params[:page].to_i
+    end
+  end
   # GET /notes
   # GET /notes.json
   def index
@@ -11,15 +20,20 @@ class NotesController < ApplicationController
   # GET /notes/1
   # GET /notes/1.json
   def show
+    @blog = @note.blog
   end
 
   # GET /notes/new
   def new
     @note = Note.new
+    @blog = Seeking.where(user_id: current_user.id, role: 1).first.blog
+    render layout: false
   end
 
   # GET /notes/1/edit
   def edit
+    @blog = Seeking.where(user_id: current_user.id, role: 1).first.blog
+    render layout: false
   end
 
   # POST /notes
@@ -27,7 +41,9 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
     @note.user_id = current_user.id
-    @latest_notes = Note.all
+    @blog = Seeking.where(user_id: current_user.id, role: 1).first.blog
+    @note.blog_id = @blog.id
+    #@latest_notes = Note.all
 
     respond_to do |format|
       if @note.save
@@ -73,6 +89,6 @@ class NotesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def note_params
-      params.require(:note).permit(:content, :user_id)
+      params.require(:note).permit(:content, :user_id, :title)
     end
 end

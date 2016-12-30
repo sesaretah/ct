@@ -1,5 +1,5 @@
-<% if @caller == 'addprofile'%>
-$("#list").replaceWith("<%= escape_javascript(render(:partial => 'profiles/compactlist', locals: {profiles: @profiles, article_id: @article_id})) %>");
+<% if @caller == 'addtogroup'%>
+$("#list").replaceWith("<%= escape_javascript(render(:partial => 'profiles/compactlist', locals: {profiles: @profiles, item: @item})) %>");
 <%else%>
 $("#list").replaceWith("<%= escape_javascript(render(:partial => 'profiles/list', locals: {profiles: @profiles})) %>");
 <%end%>

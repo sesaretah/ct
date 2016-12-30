@@ -42,6 +42,11 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
+gem 'bootstrap-sass'     # required
+gem 'font-awesome-rails' # required
+gem 'simple_form'
+gem 'summernote-rails', '0.7.1.0'
+gem 'codemirror-rails'
 gem 'devise'
 gem "paperclip", "~> 5.0.0"
 gem 'mysql2',          '~> 0.3.18', :platform => :ruby
@@ -50,3 +55,4 @@ gem "jquery-fileupload-rails"
 gem 'jquery-ui-rails'
 gem 'will_paginate', '~> 3.1.0'
 gem 'will_paginate-bootstrap'
+gem 'time_difference'

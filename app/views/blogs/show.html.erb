@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @blog.title %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @blog.user_id %>
+</p>
+
+<p>
+  <strong>P type:</strong>
+  <%= @blog.p_type %>
+</p>
+
+<p>
+  <strong>G type:</strong>
+  <%= @blog.g_type %>
+</p>
+
+<p>
+  <strong>I type:</strong>
+  <%= @blog.i_type %>
+</p>
+
+<%= link_to 'Edit', edit_blog_path(@blog) %> |
+<%= link_to 'Back', blogs_path %>

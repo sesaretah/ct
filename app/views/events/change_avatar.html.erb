@@ -34,7 +34,7 @@
                 </div>
                 <br />
                 <div class="row">
-                  <%= link_to events_path do%>
+                  <%= link_to events_path(event_id: params[:id]) do%>
                   <button type="button" class="btn btn-wide btn-o btn-warning">
                     <%= t(:goto_events)%>
                   </button>

@@ -1,1 +1,2 @@
-$("#group-detail").replaceWith("<%= escape_javascript(render(:partial => 'groups/detail', locals: {group: @group })) %>");
+$("#group-detail").replaceWith("<%= escape_javascript(render(:partial => 'groups/detail', locals: {group: @group, page:@page })) %>");
+$("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @group, page:@page })) %>");

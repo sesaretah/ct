@@ -3489,7 +3489,7 @@ a.text-light:hover {
   border-bottom-width: 1px;
   border-bottom-style: solid;
   padding: 15px;
-  min-height: 50px;
+  min-height: 46px;
 }
 .panel-heading .panel-heading-tabs {
   list-style: none;
@@ -4508,6 +4508,7 @@ a.text-light:hover {
 .label {
   font-size: 85% !important;
   padding: 0.4em 0.6em !important;
+  margin: 2px;
 }
 
 .label-inverse, .badge-inverse {
@@ -10345,6 +10346,7 @@ td.small-width {
   border-bottom: 1px solid #c8c7cc;
   padding: 5px 15px 5px 25px;
   position: relative;
+  min-height: 56px;
 }
 .messages-list .messages-item:hover {
   background-color: white;
@@ -11371,7 +11373,7 @@ td.small-width {
 }
 
 .footpost {
-  position:absolute;
+  position:relative;
   bottom:0px;
   margin-right:0px;
   padding-right: 0px;

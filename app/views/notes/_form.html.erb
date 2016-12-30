@@ -1,25 +1,83 @@
-<%= form_for(@note) do |f| %>
-  <% if @note.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+	<link rel="stylesheet" href="/assets/smnote.css"/>
+	<style>
+	@font-face{font-family:'koodak';src:url('/assets/BKoodakBold.eot'),url('/assets/BKoodakBold.woff'),url('/assets/BKoodakBold.ttf');}
 
-      <ul>
-      <% @note.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+	body,
+	input,
+	button,
+	select,
+	span,
+	tr,
+	td,
+	table,
+	textarea,
+	legend fieldset,
+	p, h3,h4, .text-bold, .mainTitle, .mainDescription,
+	.navbar-search .search-query {
+		-webkit-transform: translateZ(0.00001px);
+		font-family: 'koodak' ;
+	}
+	</style>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<div class='wrap-content container' id='container'>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row" >
+      <div class="col-md-12">
+
+        <div class="row margin-top-30">
+
+          <div class="col-md-12">
+            <div class="panel panel-white">
+              <div class="panel-heading">
+								<div class="well" style="direction:rtl">
+									<span><%=t :write_new_note_to_your_blog %> <b><%= @blog.title%></b></span>
+								</div>
+
+              </div>
+              <div class="panel-body">
+                <%= form_for(@note) do |f| %>
+                  <% if @note.errors.any? %>
+                    <div id="error_explanation">
+                      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this grouping from being saved:</h2>
+
+                      <ul>
+                      <% @note.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+
+									<div class="row" style="direction:rtl">
+								    <div class="form-group col-xs-12">
+								    <%= f.label :title %><br>
+								    <%= f.text_field :title, :class => "form-control" %>
+								  </div>
+								  </div>
+
+                  <div class="field">
+										<span class= 'margin-bottom-10 pull-right'><%= f.label :content %></span><br><br>
+                    <%= f.text_area :content %>
+                  </div>
+
+									  <div class="row top30">
+									    <div class="form-group col-xs-1 pull-left">
+									      <%= content_tag :button, :type => :submit, :class => "btn btn-o btn-primary" do %>
+									      <i class="icon-ok bigger-110"></i>
+									      <%=t :submit%>
+									      <% end %>
+									    </div>
+									  </div>
+                <% end %>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
+  </div>
+</div>
+<script>
 
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</script>

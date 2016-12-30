@@ -1,37 +1,43 @@
-<div class="container-fluid container-fullw padding-bottom-10">
-  <div class="row">
-    <div class="col-sm-12">
-          <div class="panel panel-white no-radius">
-            <div class="panel-heading border-light">
-              <h4 class="panel-title"><%=t :write_new_note%></h4>
+<div class="wrap-content container padding-right-0" id="container">
+  <div class="container-fluid container-fullw" style="border-bottom: none;">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="panel panel-white no-radius">
+          <div class="panel-heading border-light">
+            <div class="row">
+              <div class="col-sm-9"><h4 class="panel-title"><%= @note.title%></h4></div>
+              <div class="col-sm-2">
+                <span><%=t :wrote_in_blog_named %> <%=link_to "/blogs?blog_id=#{@note.blog.id}" do%><%= @note.blog.title%><%end%></span>
+              </div>
+              <div class="col-sm-1">
+                <%= link_to edit_note_path(@note), 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:edit) do%>
+                <i class="fa fa-edit"></i>
+                <%end%>
+                <%= link_to "/blogs?blog_id=#{@blog.id}", 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:back) do%>
+                <i class="fa fa-mail-reply"></i>
+                <%end%>
+              </div>
             </div>
-            <div class="panel-body">
-              <div class="panel panel-white">
-                <div class="panel-heading">
-                  <div class="panel-title">
-                    <p id="notice"><%= notice %></p>
-
-                    <p>
-                      <strong>Content:</strong>
-                      <%= @note.content %>
-                    </p>
-
-                    <p>
-                      <strong>User:</strong>
-                      <%= @note.user_id %>
-                    </p>
-
-                    <%= link_to 'Edit', edit_note_path(@note) %> |
-                    <%= link_to 'Back', notes_path %>
-                  </div>
-                </div>
-                <div class="panel-body">
-                  <%= render partial: 'notes/fancy_form'%>
+          </div>
+          <div class="panel-body">
+            <div class="panel panel-white">
+              <div class="panel-heading">
+                <div class="panel-title">
+                  <p>
+                    <%=raw @note.content %>
+                  </p>
                 </div>
               </div>
             </div>
           </div>
+          <div class="panel-body">
+            <% page = 1%>
+
+            <%= render partial: 'notes/note_comments', locals: { note: @note, page: page}%>
+            <%= render partial: 'comments/remote_form', locals: {c: @note, page: page } %>
+          </div>
         </div>
       </div>
+    </div>
   </div>
 </div>

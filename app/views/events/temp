@@ -1,0 +1,46 @@
+<% participation = Participation.where(event_id: event.id, user_id: current_user.id).first%>
+<div id='event-detail' >
+  <ul class="messages-list relative top-0">
+    <li class="messages-item padding-5">
+      <%= link_to 'events/view_content/'+ event.id.to_s,:remote => true  do%>
+      <%= image_tag event.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+      <span class="messages-item-subject"><%= event.name%></span>
+      <div class="messages-item-time">
+        <div class="clock your-clock" style='margin-left:5px;'></div>
+
+        <span class="text">
+          <% link_to edit_event_path(event) do%>
+          <%=t :edit%>
+          <%end%>
+        </span>
+      </div>
+      <span class="messages-item-from">
+        <%=t :start_time%> <%= JalaliDate.to_jalali(event.event_date).day%>/ <%= JalaliDate.to_jalali(event.event_date).month%>/ <%= JalaliDate.to_jalali(event.event_date).year%>
+        <%=t :start_time_ex%> <%= event.start_time.min%>:<%= event.start_time.sec%>: <%= event.start_time.hour%>
+        <br/>
+        <%=t :end_time%> <%= JalaliDate.to_jalali(event.event_date).day%>/ <%= JalaliDate.to_jalali(event.event_date).month%>/ <%= JalaliDate.to_jalali(event.event_date).year%>
+        <%=t :start_time_ex%><%= event.end_time.min%>:<%= event.end_time.sec%>: <%= event.end_time.hour%>
+      </span>
+      <span class="messages-item-content"><%= truncate(event.description, :length => 100)%></span>
+      <div class="messages-item-time" style="margin-top:17px"></div>
+      <%end%>
+    </li>
+  </ul>
+  <% @comments = Comment.where(commentable_type: 'Event', commentable_id: event.id).last(page*3)%>
+  <%= render partial: 'events/event_comments', locals: {comments: @comments, event: event}%>
+
+</div>
+<script type="text/javascript">
+var clock;
+
+$(document).ready(function() {
+  var currentDate = new Date();
+  var futureDate  = new Date(<%= event.event_date.year%>, <%= event.event_date.month%>, <%= event.event_date.day%>, <%= event.start_time.hour%>, <%= event.start_time.min%>, <%= event.start_time.sec%>);
+  var diff = futureDate.getTime() / 1000 - currentDate.getTime() / 1000;
+  clock = $('.clock').FlipClock(diff, {
+    language: 'ar',
+    clockFace: 'DailyCounter',
+    countdown: true
+  });
+});
+</script>

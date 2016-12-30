@@ -1,0 +1,14 @@
+<div  id='my-events'>
+<ul class="list-group">
+  <%= link_to new_event_path do%>
+  <li class="list-group-item">
+    <i class="fa fa-plus"></i> <%=t :add_new_event%>
+  </li>
+  <%end%>
+</ul>
+<ul class="messages-list relative top-0">
+  <% for e in current_user.events%>
+  <%= render partial: 'events/item', locals: {event: e}%>
+  <%end%>
+</ul>
+</div>

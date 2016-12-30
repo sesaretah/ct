@@ -1,0 +1,29 @@
+<% admin = Seeking.where(blog_id: blog.id, role: 1).first.user%>
+
+<div class="col-sm-12 margin-top-10">
+  <div class="row padding-5">
+    <% for note in blog.notes%>
+    <div class="alert alert-info">
+      <span><%= note.title%></span>...
+      <span style="color:grey"><%= truncate(note.content, :length => 20)%></span>
+
+      <span class="pull-left">
+        <%= link_to note_path(note.id) do %>
+        <i class="fa fa-binoculars"></i>
+        <%end%>
+        <% if admin.id == current_user.id%>
+        <%= link_to edit_note_path(note.id) do %>
+        <i class="fa fa-edit"></i>
+        <%end%>
+        <%end%>
+
+      </span>
+      <span class="pull-left">
+        <span style="margin-left:5px; color:grey; font-size:10px;">	<% @jalali = JalaliDate.to_jalali(note.created_at)%>
+          <%=note.created_at.hour%>:<%=note.created_at.min%>   <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%> </span>
+          <%= %>
+        </span>
+      </div>
+      <%end%>
+    </div>
+  </div>

@@ -1,0 +1,110 @@
+<div class="wrap-content container padding-right-0" id="container">
+<div class="col-md-12 padding-right-0 padding-left-0" >
+  <div class=" col-md-4 padding-right-0 padding-left-0 " >
+    <div class="tabbable padding-right-0 padding-left-0 ">
+      <ul id="myTab1" class="nav nav-tabs">
+        <li class="">
+          <a href="#myTab1_example1" data-toggle="tab" aria-expanded="false">
+            <i class="fa fa-clock-o"></i>
+            <%t :blogs_you_seek%>
+          </a>
+        </li>
+        <li class="active">
+          <a href="#myTab1_example2" data-toggle="tab" aria-expanded="false">
+            <i class="fa fa-trophy"></i>
+            <%t :popular_blogs%>
+          </a>
+        </li>
+        <li class="">
+          <a href="#myTab1_example3" data-toggle="tab" aria-expanded="true">
+            <i class="fa fa-plug"></i>
+            <%t :channels_you_manage%>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#myTab1_example4" data-toggle="tab" aria-expanded="true">
+            <i class="fa fa-search"></i>
+            <%t :channels_you_manage%>
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane fade" id="myTab1_example1">
+          <ul class="list-group">
+            <% if current_user.seekings.where(role: 1).blank?%>
+              <%=t :you_dont_have_blog_do_you_want_to_start_one_?%>
+              <%= link_to new_blog_path do%>
+                <%=t :start%>
+              <%end%>
+            <%else%>
+            <%= link_to new_note_path do%>
+            <li class="list-group-item">
+              <i class="fa fa-plus"></i> <%=t :add_new_note_to_your_blog%>
+            </li>
+            <%end%>
+            <%end%>
+          </ul>
+          <ul class="messages-list relative top-0">
+            <% for s in current_user.seekings%>
+            <%= render partial: 'blogs/item', locals: {blog: s.blog}%>
+            <%end%>
+          </ul>
+
+
+        </div>
+        <div class="tab-pane fade active in" id="myTab1_example2">
+          <ul class="messages-list relative top-0">
+            <% for b in Blog.all%>
+            <%= render partial: 'blogs/item', locals: {blog: b}%>
+            <%end%>
+          </ul>
+        </div>
+        <div class="tab-pane fade " id="myTab1_example3">
+
+        </div>
+
+        <div class="tab-pane fade " id="myTab1_example4">
+          <div>
+            <%= form_tag '/blogs/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
+            <div class="form-group">
+              <%= text_field_tag :q, '' , {:class=>"form-control", :id => "nav-search-input", :placeholder => "#{t(:search)}"}%>
+
+              <button class="btn search-button" type="submit">
+                <i class="ti-search"></i>
+              </button>
+
+            </div>
+            <%end%>
+          </div>
+          <div id='search-results'></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-7 padding-right-0 padding-left-0" >
+    <div class="panel panel-white no-radius" id="visits">
+      <div class="panel-heading border-light">
+        <h4 class="panel-title"></h4>
+        <ul class="panel-heading-tabs border-light">
+          <li class="panel-tools">
+            <a data-original-title="Refresh" data-toggle="tooltip" data-placement="top" class="btn btn-transparent btn-sm panel-refresh" href="#"><i class="ti-reload"></i></a>
+          </li>
+        </ul>
+      </div>
+      <div class="panel-body">
+        <div class="panel-scroll height-350 ps-container ps-active-y">
+            <div id='blog-detail'>
+              <% if !@blog.blank?%>
+              <% @page = 1%>
+              <%= render(:partial => 'blogs/detail', locals: {blog: @blog, page:@page }) %>
+              <%end%>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

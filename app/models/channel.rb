@@ -4,6 +4,17 @@ class Channel < ActiveRecord::Base
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :ratio, :caller
   after_update :reprocess_avatar, :if => :cropping?
 
+  has_many :involvements, dependent: :destroy
+  has_many :users, :through => :involvements, dependent: :destroy
+  has_many :comments, :as => :commentable, :dependent => :destroy
+
+  after_create :set_admin
+
+  def set_admin
+    @involvement = {user_id: self.user_id, channel_id: self.id, role: 1}
+    Involvement.create(@involvement)
+  end
+
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
   end

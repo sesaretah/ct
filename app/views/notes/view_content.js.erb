@@ -1,0 +1,2 @@
+$("#note-comments").replaceWith("<%= escape_javascript(render(:partial => 'notes/note_comments', locals: {note: @note, page:@page })) %>");
+$("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @note, page:@page })) %>");

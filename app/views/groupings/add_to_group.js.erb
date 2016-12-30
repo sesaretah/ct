@@ -1,0 +1,3 @@
+$("#gr-list").replaceWith("<%= escape_javascript(render(:partial => 'groupings/list',locals: {group: @group})) %>");
+$("#my-groups").replaceWith("<%= escape_javascript(render(:partial => 'groups/my_groups')) %>");
+$("#group-detail").replaceWith("<%= escape_javascript(render(:partial => 'groups/detail', locals: {group: @group, page:@page })) %>");

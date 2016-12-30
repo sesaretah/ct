@@ -1,5 +1,30 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+
+  def search
+    @profiles = Profile.search params[:q], :star => true
+    @excerpter = ThinkingSphinx::Excerpter.new 'profile_core', params[:q]   , {
+    :before_match    => '<span class="bg-warning">',
+    :after_match     => '</span>',
+    :chunk_separator => ' &#8230; ' # ellipsis
+  }
+  end
+
+  def view_content
+    @profile = Profile.find(params[:id])
+  end
+
+  def advanced_search
+    @profiles = Profile.search params[:q], :star => true
+    @caller = params[:caller]
+    @item = params[:class].classify.constantize.find(params[:class_id])
+    @excerpter = ThinkingSphinx::Excerpter.new 'profile_core', params[:q]   , {
+    :before_match    => '<span class="bg-warning">',
+    :after_match     => '</span>',
+    :chunk_separator => ' &#8230; ' # ellipsis
+  }
+  end
+
   def upload_avatar
     @profile = Profile.find(params[:id])
   end

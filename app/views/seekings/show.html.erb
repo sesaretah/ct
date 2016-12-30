@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @seeking.user_id %>
+</p>
+
+<p>
+  <strong>Blog:</strong>
+  <%= @seeking.blog_id %>
+</p>
+
+<%= link_to 'Edit', edit_seeking_path(@seeking) %> |
+<%= link_to 'Back', seekings_path %>

@@ -1,0 +1,7 @@
+<div id='search-results'>
+  <ul class="messages-list relative top-0">
+    <% for g in groups%>
+    <%= render partial: 'groups/item', locals: {group: g}%>
+    <%end%>
+  </ul>
+</div>

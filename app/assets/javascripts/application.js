@@ -14,5 +14,10 @@
 //= require jquery_ujs
 //= require jquery-fileupload/basic
 //= require jquery.ui.all
-//= require turbolinks
+//= require bootstrap
+//= require codemirror
+//= require codemirror/modes/ruby
+//= require summernote
+//= require summernote/locales/ko-KR
+// require turbolinks
 //= require_tree .

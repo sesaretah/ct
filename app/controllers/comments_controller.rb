@@ -1,6 +1,13 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
+  def xedit
+    @comment = Comment.find(params[:id])
+    if @comment.user_id == current_user.id
+      @comment.content = params[:value]
+      @comment.save
+    end
+  end
   # GET /comments
   # GET /comments.json
   def index
@@ -26,7 +33,8 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
-    @item =  @comment.commentable_class.classify.constantize.find(@comment.commentable_id)
+    @page = params[:page].to_i
+    @item =  @comment.commentable_type.classify.constantize.find(@comment.commentable_id)
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
@@ -56,10 +64,13 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    @commntable = @comment.commentable_type.classify.constantize.find(@comment.commentable_id)
+    @page = params[:page].to_i
     @comment.destroy
     respond_to do |format|
       format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
@@ -71,6 +82,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:content, :user_id, :commentable_class, :commentable_id)
+      params.require(:comment).permit(:content, :user_id, :commentable_type, :commentable_id)
     end
 end
