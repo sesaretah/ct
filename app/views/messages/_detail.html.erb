@@ -1,0 +1,41 @@
+<div id='message-detail' >
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="col-sm-3">
+        <div class="pull-right">
+          <%= image_tag user.profile.avatar(:thumb), :class => " messages-item-avatar bordered border-primary"%>
+        </div>
+      </div>
+      <div class="col-sm-9" style='margin-bottom:15px;'>
+        <div class="row">
+          <%= message.title%>
+        </div>
+        <div class="row">
+          <%= message.created_at%>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-sm-6 padding-5  style='margin-left:0px;'">
+
+      <div class="row padding-5 pull-left" style='margin-left:40px;'>
+        <table class="table" style="margin-bottom: 0px; color:#007AFF;">
+          <tr>
+            <td style="color: #007AFF !important;">
+              <span data-toggle="modal" data-target="#addprofile"  data-placement="right" data-toggle= "tooltip" title= "<%=t :add_user_to_group%>">
+                <i class="fa fa-user-plus"></i>
+              </span>
+            </td>
+          
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+  <hr style='margin-top:0px; margin-bottom:0px;' />
+  <% @comments = Comment.where(commentable_type: 'Channel', commentable_id: channel.id).last(page*3)%>
+  <%= render partial: 'channels/channel_comments', locals: {comments: @comments, channel: channel}%>
+
+</div>
+<%= render partial: 'channels/add_user', locals: {channel: channel}%>

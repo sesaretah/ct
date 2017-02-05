@@ -1,8 +1,22 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
+  def search
+    @messages = Message.search params[:q], :star => true
+    @excerpter = ThinkingSphinx::Excerpter.new 'message_core', params[:q]   , {
+    :before_match    => '<span class="bg-warning">',
+    :after_match     => '</span>',
+    :chunk_separator => ' &#8230; ' # ellipsis
+  }
+  end
+
   def view_content
     @message = Message.find(params[:id])
+    if params[:page].blank?
+      @page = 1
+    else
+      @page = params[:page].to_i
+    end
   end
   # GET /messages
   # GET /messages.json

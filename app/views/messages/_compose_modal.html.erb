@@ -5,8 +5,8 @@
         <h4 class="modal-title" id="myModalLabel"><%= t(:compose)%></h4>
       </div>
       <div class="modal-body centered-text">
-        <% @message =  Message.new%>
-        <%= form_for(@message) do |f| %>
+        <% @m =  Message.new%>
+        <%= form_for(@m) do |f| %>
 
         <div class="row">
           <div class="form-group col-xs-12">

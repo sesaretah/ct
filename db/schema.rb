@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161230133328) do
+ActiveRecord::Schema.define(version: 20170127201710) do
+
+  create_table "answers", force: :cascade do |t|
+    t.text     "content",     limit: 65535
+    t.integer  "user_id",     limit: 4
+    t.integer  "question_id", limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "rank_value",  limit: 4
+  end
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "task_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "blogs", force: :cascade do |t|
     t.string   "title",       limit: 255
@@ -155,6 +171,14 @@ ActiveRecord::Schema.define(version: 20161230133328) do
     t.datetime "updated_at",           null: false
   end
 
+  create_table "partnerships", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "project_id", limit: 4
+    t.integer  "role",       limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "profiles", force: :cascade do |t|
     t.string   "name",                limit: 255
     t.string   "surename",            limit: 255
@@ -172,6 +196,23 @@ ActiveRecord::Schema.define(version: 20161230133328) do
     t.string   "phonenumber",         limit: 255
     t.string   "mobilenumber",        limit: 255
     t.boolean  "delta",               limit: 1,   default: true, null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.text     "aims",       limit: 65535
+    t.integer  "owner",      limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.text     "content",    limit: 65535
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "rank_value", limit: 4
   end
 
   create_table "researches", force: :cascade do |t|
@@ -195,9 +236,21 @@ ActiveRecord::Schema.define(version: 20161230133328) do
 
   create_table "tags", force: :cascade do |t|
     t.string   "title",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.integer  "user_id",    limit: 4
+    t.boolean  "delta",      limit: 1,   default: true, null: false
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.text     "description", limit: 65535
+    t.date     "start_date"
+    t.date     "due_date"
+    t.integer  "status",      limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "project_id",  limit: 4
   end
 
   create_table "uploads", force: :cascade do |t|
@@ -226,5 +279,14 @@ ActiveRecord::Schema.define(version: 20161230133328) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "user_id",       limit: 4
+    t.string   "voteable_type", limit: 255
+    t.integer  "voteable_id",   limit: 4
+    t.integer  "amount",        limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
 
 end

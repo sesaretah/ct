@@ -1,0 +1,7 @@
+<div  id='my-questions'>
+<ul class="messages-list relative top-0">
+  <% for q in current_user.questions%>
+  <%= render partial: 'questions/item', locals: {question: q}%>
+  <%end%>
+</ul>
+</div>

@@ -1,0 +1,82 @@
+<div id='question-detail'>
+  <div class="row">
+    <div class="col-md-2">
+      <%= render partial: 'votes/votes_block', locals:{c:question}%>
+    </div>
+    <div class="col-md-10">
+      <div class="row">
+        <div class="col-md-1">
+          <%= image_tag question.user.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+        </div>
+        <div class="col-md-10">
+          <span class="margin-right-5"><i class="fa fa-question-circle" style="color: #007AFF !important;vertical-align: middle;"></i> <b><%= question.title%></b></span>
+        </div>
+        <div class="col-md-1">
+          <%= link_to 'questions/'+ question.id.to_s, :method => :delete, data: {confirm: "Are you sure?"}  do %>
+            <i class="fa fa-trash-o" style="color: #007AFF !important;"></i>
+          <%end%>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <span class="margin-right-20"><small><%= question.content%></small></span>
+      </div>
+      <hr class="margin-bottom-5"/>
+      <%= render partial: 'comments/comments_block', locals:{c:question, page: 1}%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <%= question.answers.count%> <%=t :answers%>
+    </div>
+    <div class="col-md-6"></div>
+    <div class="col-md-4 padding-left-0">
+				|<%= link_to "/questions?question_id=#{question.id}&sort=rank_value" do%> <i class="fa fa-sort-amount-asc"></i> <%=t :based_on_vote%> <%end%>
+        | <%= link_to "/questions?question_id=#{question.id}&sort=created_at" do%><i class="fa fa-sort-amount-asc"></i> <%=t :based_on_time%><%end%> |
+
+    </div>
+</div>
+  <hr class="margin-top-5"/>
+  <%if  params[:sort]%>
+    <%@sort = "#{params[:sort]} DESC"%>
+  <%else%>
+    <%@sort = 'rank_value DESC'%>
+  <%end%>
+  <% for a in question.answers.order(@sort)%>
+  <%= render partial: 'answers/answer_block', locals:{answer:a, page: 1}%>
+  <%end%>
+  <div id='answer' >
+    <%= render partial: 'answers/remote_form', locals:{question:question, page: 1}%>
+  </div>
+</div>
+<style>
+.ui-helper-hidden-accessible { position: absolute; left:-999em; }
+</style>
+<script>
+
+</script>
+<div class="rtl">
+    <input type="text"  id="tokenfield" value="" placeholder="" tabindex="-1" >
+</div>
+
+<script>
+$('#tokenfield').tokenfield({
+  autocomplete: {
+    source: function( request, response ) {
+        $.ajax({
+          url: "/tags/remoteq/1",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+          success: function( data ) {
+            response( data );
+          }
+        });
+      },
+      minLength: 3,
+      delay: 30
+  },
+  showAutocompleteOnFocus: false
+})
+</script>

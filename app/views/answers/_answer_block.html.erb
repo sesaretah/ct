@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-2">
+      <%= render partial: 'votes/votes_block', locals:{c:answer}%>
+  </div>
+  <div class="col-md-10">
+    <div class="row">
+    <div class="col-md-1">
+      <%= image_tag answer.user.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+    </div>
+    <div class="col-md-10">
+      <span class="margin-right-5"><small><%= answer.content%></small></span>
+    </div>
+    <div class="col-md-1">
+      <%= link_to 'answers/'+ answer.id.to_s, :method => :delete, data: {confirm: "Are you sure?"}  do %>
+        <i class="fa fa-trash-o" style="color: #007AFF !important;"></i>
+      <%end%>
+    </div>
+    </div>
+    <hr class="margin-bottom-5"/>
+    <%= render partial: 'comments/comments_block', locals:{c:answer, page: 1}%>
+  </div>
+</div>
+<hr />

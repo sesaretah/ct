@@ -6,6 +6,27 @@ module ApplicationHelper
     ]
     return @options
   end
+
+  def rstatus(s)
+    @options = [t(:running),t(:scheduled),t(:stoped),t(:ended), t(:waiting)]
+    return @options[s-1]
+  end
+
+  def erstatus(s)
+    @options = ['running','scheduled','stoped','ended', 'waiting']
+    return @options[s-1]
+  end
+
+  def status
+    @options = [
+      [t(:running), 1],
+      [t(:scheduled) , 2],
+      [t(:stoped) , 3],
+      [t(:ended) , 4],
+      [t(:waiting) , 5]
+    ]
+    return @options
+  end
   def ptypes
     @options = [
       [t(:private), 1],

@@ -1,65 +1,87 @@
-<div class="wrap-messages">
-	<div id="inbox" class="inbox">
-		<!-- start: EMAIL OPTIONS -->
-		<div class="col email-options perfect-scrollbar">
-			<div class="padding-15">
-				<%= render partial: 'messages/compose_modal'%>
-				<button class="btn btn-primary btn-block margin-bottom-30"  data-toggle="modal" data-target="#compose-modal">
-					<%=t :compose%>
-				</button>
-				<ul class="main-options padding-15">
-					<li>
-						<a href="#">
-
-							<span class="title"><i class="ti-import"></i>  <%=t :inbox%></span>
-
-						</a>
-					</li>
-					<li>
-					<!--
-						<a href="#">
-							<span class="title"><i class="ti-upload"></i> <%t :sent%></span>
-						</a> -->
-					</li>
+<div class="wrap-content container padding-right-0" id="container">
+  <div class="col-md-12 padding-right-0 padding-left-0" >
+    <div class=" col-md-4 padding-right-0 padding-left-0 " >
+      <div class="tabbable padding-right-0 padding-left-0 ">
+        <ul id="myTab1" class="nav nav-tabs">
+          <li class="">
+            <a href="#myTab1_example1" data-toggle="tab" aria-expanded="false">
+              <i class="fa fa-inbox"></i>
+            </a>
+          </li>
+          <li class="active">
+            <a href="#myTab1_example2" data-toggle="tab" aria-expanded="false">
+              <i class="fa fa-envelope-o"></i>
+            </a>
+          </li>
+          <li class="">
+            <a href="#myTab1_example3" data-toggle="tab" aria-expanded="true">
+              <i class="fa fa-search"></i>
+            </a>
+          </li>
 				</ul>
-			</div>
-		</div>
-		<!-- end: EMAIL OPTIONS -->
-		<!-- start: EMAIL LIST -->
-		<div class="col email-list">
-			<div class="wrap-list">
-				<div class="wrap-options">
+          <div class="tab-content">
+            <div class="tab-pane fade" id="myTab1_example1">
+							<%= render partial: 'messages/compose_modal'%>
+              <%=t :received_messages%>
+              <hr />
+							<ul class="list-group">
+								<%= link_to '', 'data-toggle' => "modal",  'data-target'=>"#compose-modal" do%>
+								<li class="list-group-item">
+									<i class="fa fa-plus"></i> <%=t :compose%>
+								</li>
+								<%end%>
+							</ul>
+              <%= render partial: 'messages/inbox'%>
+            </div>
 
-					<div class="messages-search">
-						<form>
-							<input type="text" placeholder="<%=t :search_messages %>" class="form-control underline">
-						</form>
-					</div>
-				</div>
-				<ul class="messages-list perfect-scrollbar">
-					<% for message in @messages%>
-					<% @sender_profile = message.sender.profile%>
-					<li class="messages-item">
-						<%= link_to 'messages/view_content/'+ message.id.to_s,:remote => true  do%>
-							<span class="messages-item-star" title="Mark as starred"><i class="fa fa-star"></i></span>
-							<%= image_tag @sender_profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
-								<span class="messages-item-from"><%= @sender_profile.name%> <%= @sender_profile.surename%></span>
-							<div class="messages-item-time">
-								<span class="text">
-									<%= JalaliDate.to_jalali(message.created_at).strftime("%d/%m/%Y")%></span>
-							</div>
-							<span class="messages-item-subject"><%= truncate(message.title, :length => 10)%></span>
-							<span class="messages-item-content"><%= truncate(message.content, :length => 40)%></span>
-							<div class="messages-item-time" style="margin-top:17px"><i class="fa fa-level-up"></i></div>
-						<%end%>
-					</li>
-					<%end%>
+            <div class="tab-pane fade active in" id="myTab1_example2">
+              <%=t :sent_messages%>
+              <hr />
 
-				</ul>
-			</div>
-		</div>
-		<div id='msg-content'>
+              <ul class="messages-list relative top-0">
+              </ul>
+            </div>
 
-		</div>
-		</div>
-	</div>
+            <div class="tab-pane fade " id="myTab1_example3">
+              <div>
+                <%= form_tag '/messages/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
+                <div class="form-group">
+                  <%= text_field_tag :q, '' , {:class=>"form-control", :id => "nav-search-input", :placeholder => "#{t(:search)}"}%>
+
+                  <button class="btn search-button" type="submit">
+                    <i class="ti-search"></i>
+                  </button>
+
+                </div>
+                <%end%>
+              </div>
+              <div id='search-results'></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-7 padding-right-0 padding-left-0" >
+        <div class="panel panel-white no-radius" id="visits">
+          <div class="panel-heading border-light">
+            <h4 class="panel-title"></h4>
+            <ul class="panel-heading-tabs border-light">
+              <li class="panel-tools">
+                <a data-original-title="Refresh" data-toggle="tooltip" data-placement="top" class="btn btn-transparent btn-sm panel-refresh" href="#"><i class="ti-reload"></i></a>
+              </li>
+            </ul>
+          </div>
+          <div class="panel-body">
+            <div class="panel-scroll height-350 ps-container ps-active-y">
+              <div id='message-detail'>
+                <% if !@message.blank?%>
+                <% @page = 1%>
+                <%= render(:partial => 'messages/detail', locals: {message: @message, page:@page }) %>
+                <%end%>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

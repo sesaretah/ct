@@ -1,0 +1,24 @@
+<% @user_vote = Vote.where(user_id: current_user.id, voteable_type: c.class.name, voteable_id: c.id).first%>
+<% if !@user_vote.blank?%>
+<% if @user_vote.amount == 1%>
+    <% @up = 'upvote-on'%>
+    <% @down = 'downvote-enabled'%>
+  <%else%>
+    <% @up = 'upvote-enabled'%>
+    <% @down = 'downvote-on'%>
+  <%end%>
+<%else%>
+  <% @up = 'upvote-enabled'%>
+  <% @down = 'downvote-enabled'%>
+<%end%>
+<div class="upvote upvote-superuser">
+  <%= link_to "votes/vote_up/1?voteable_id=#{c.id}&voteable_type=#{c.class.name}", id: "up-#{c.class.name}-#{c.id}",remote: true, class: "upvote #{@up}" do %>
+  <%end%>
+  <% @count = 0%>
+  <% for v in  Vote.where(voteable_type: c.class.name, voteable_id: c.id)%>
+    <% @count = @count + v.amount %>
+  <%end%>
+  <span id='count-<%= c.class.name%>-<%= c.id%>' class="count"><%= @count%></span>
+  <%= link_to "votes/vote_down/1?voteable_id=#{c.id}&voteable_type=#{c.class.name}", id: "down-#{c.class.name}-#{c.id}",remote: true, class: "downvote #{@down}" do %>
+  <%end%>
+</div>

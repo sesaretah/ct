@@ -6,7 +6,6 @@ $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_
 <% if @comment.commentable_type == 'Group'%>
 $("#group-detail").replaceWith("<%= escape_javascript(render(:partial => 'groups/detail', locals: {group: @item, page:@page })) %>");
 $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @item , page:@page})) %>");
-
 <%end%>
 <% if @comment.commentable_type == 'Channel'%>
 $("#channel-detail").replaceWith("<%= escape_javascript(render(:partial => 'channels/detail', locals: {channel: @item, page:@page })) %>");
@@ -16,5 +15,12 @@ $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_
 <% if @comment.commentable_type == 'Note'%>
 $("#note-comments").replaceWith("<%= escape_javascript(render(:partial => 'notes/note_comments', locals: {note: @item, page:@page })) %>");
 $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @item , page:@page})) %>");
+<%end%>
 
+<% if @comment.commentable_type == 'Question'%>
+$("#comments-block-<%= @item.class.name%>-<%=  @item.id%>").replaceWith("<%= escape_javascript(render(:partial => 'comments/comments_block', locals: {c: @item, page:@page })) %>");
+<%end%>
+
+<% if @comment.commentable_type == 'Answer'%>
+$("#comments-block-<%= @item.class.name%>-<%=  @item.id%>").replaceWith("<%= escape_javascript(render(:partial => 'comments/comments_block', locals: {c: @item, page:@page })) %>");
 <%end%>

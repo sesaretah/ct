@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @partnership.user_id %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @partnership.project_id %>
+</p>
+
+<p>
+  <strong>Role:</strong>
+  <%= @partnership.role %>
+</p>
+
+<%= link_to 'Edit', edit_partnership_path(@partnership) %> |
+<%= link_to 'Back', partnerships_path %>

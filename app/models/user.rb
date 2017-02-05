@@ -26,4 +26,12 @@ class User < ActiveRecord::Base
   #has_one :blog
   has_many :seekings
   has_many :blogs, :through => :seekings
+
+  has_many :partnerships
+  has_many :projects, :through => :partnerships
+
+  has_many :assignments
+  has_many :tasks, :through => :assignments
+
+  has_many :questions
 end

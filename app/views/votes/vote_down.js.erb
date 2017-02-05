@@ -1,0 +1,5 @@
+$("#down-<%= @item.class.name%>-<%= @item.id%>").toggleClass('downvote-enabled downvote-on');
+<% if !@already_voted.blank?%>
+$("#up-<%= @item.class.name%>-<%= @item.id%>").toggleClass('upvote-on upvote-enabled');
+<%end%>
+$("#count-<%= @item.class.name%>-<%= @item.id%>").replaceWith("<span id='count-<%= @item.class.name%>-<%= @item.id%>' class='count'><%= @count%></span>");

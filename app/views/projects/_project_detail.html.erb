@@ -1,0 +1,126 @@
+<div id='profile-detail'>
+  <div class="col-md-9 padding-right-0 padding-left-0">
+    <div class="tabbable">
+      <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue" id="myTab4">
+        <li class="active">
+          <a data-toggle="tab" href="#projects">
+            <%= t(:projects)%>
+          </a>
+        </li>
+        <li >
+          <a data-toggle="tab" href="#timeline">
+            <%= t(:timeline)%>
+          </a>
+        </li>
+        <li >
+          <a data-toggle="tab" href="#tasks">
+            <%= t(:tasks)%>
+          </a>
+        </li>
+        <li >
+          <a data-toggle="tab" href="#partners">
+            <%= t(:partners)%>
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div id="projects" class="tab-pane fade in active">
+          <div class="row">
+            <div class="col-sm-5 col-md-4">
+              <div class="user-left">
+                <div class="center">
+                  <h4><%= @project.name%></h4>
+
+                  <div class="col-sm-12" style="margin-top:10px;">
+                    <%= link_to edit_project_path(@project.id) do %>
+                    <button id='edit' type="button" class="btn btn-wide btn-o btn-warning">
+                      <%= t(:edit_project)%>
+                    </button>
+                    <%end%>
+                  </div>
+                  <hr>
+
+                </div>
+                <br />
+                <%= project.aims%>
+                </div>
+              </div>
+              <div class="col-sm-7 col-md-8">
+
+                <div class="panel panel-white" id="activities">
+                  <div class="panel-heading border-light">
+                    <h4 class="panel-title text-primary"><%= t(:projects_gantt_chart)%></h4>
+                    <paneltool class="panel-tools" tool-collapse="tool-collapse" tool-refresh="load1" tool-dismiss="tool-dismiss"></paneltool>
+                  </div>
+                  <div collapse="activities" ng-init="activities=false" class="panel-wrapper">
+                    <div class="panel-body">
+                        <div class="row">
+                          <div class="col-md-12" id="chart" style='direction:ltr; height:250px;' ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="timeline" class="tab-pane fade">
+
+          </div>
+          <div id="tasks" class="tab-pane fade">
+            <% @task = Task.new%>
+            <%= render partial: 'tasks/list', locals: {project: @project}%>
+            <%= render partial: 'tasks/form', locals: {task: @task, project: @project}%>
+
+          </div>
+          <div id="partners" class="tab-pane fade">
+              <%= render partial: 'projects/add_user', locals: {project: @project}%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <link rel="stylesheet" href="/assets/gantt.css"/>
+  <script src="/assets/d3.v3.min.js"></script>
+  <script src="/assets/gantt-chart-d3.js"></script>
+  <script>
+  <%temp = ''%>
+  <% for t in project.tasks%>
+  <%temp = temp + '{'+"'startDate':new Date('"+ t.start_date.to_datetime.to_formatted_s(:rfc822)+"'),'endDate':new Date('" +t.due_date.to_datetime.to_formatted_s(:rfc822)+"'),'taskName':'"+t.name+"','status':'"+erstatus(t.status)+"'}"%>
+  <% if t != project.tasks.last%>
+  <%temp = temp + ","%>
+  <%end%>
+  <%end%>
+
+  var tasks = [<%= raw temp%>];
+
+  var taskStatus = {
+      "running" : "running",
+      "scheduled" : "scheduled",
+      "stoped" : "stoped",
+      "ended" : "ended",
+      "waiting" : "waiting"
+  };
+  <% @tasknames = []%>
+
+  <% for task in project.tasks%>
+  <% @tasknames << task.name%>
+  <%end%>
+  var taskNames = <%= raw @tasknames.flatten%>
+
+  tasks.sort(function(a, b) {
+      return a.endDate - b.endDate;
+  });
+  var maxDate = tasks[tasks.length - 1].endDate;
+  tasks.sort(function(a, b) {
+      return a.startDate - b.startDate;
+  });
+  var minDate = tasks[0].startDate;
+
+  var format = "%d";
+
+  var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
+  gantt(tasks);
+  </script>

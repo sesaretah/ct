@@ -1,0 +1,57 @@
+<div id='tasklist'>
+<table class='table'>
+  <thead>
+    <tr>
+      <th><%= t(:name)%></th>
+      <th><%= t(:description)%></th>
+      <th><%= t(:start_date)%></th>
+      <th><%= t(:due_date)%></th>
+      <th><%= t(:status)%></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% project.tasks.each do |t| %>
+      <tr>
+        <td><%= t.name %></td>
+        <td><%= t.description %></td>
+        <td>
+          <span>	<% @start_date = JalaliDate.to_jalali(t.start_date)%>
+            <%= @start_date.year%>/<%= @start_date.month%>/<%= @start_date.day%></span>
+          <% t.start_date %></td>
+        <td>
+          <% @due_date = JalaliDate.to_jalali(t.due_date)%>
+            <%= @due_date.year%>/<%= @due_date.month%>/<%= @due_date.day%></span>
+          <% t.due_date %>
+
+        </td>
+        <td>
+          <% case t.status%>
+            <%when 1%>
+              <span class="label label-success"> <%= rstatus(t.status) %></span>
+            <%when 2%>
+              <span class="label label-info"> <%= rstatus(t.status) %></span>
+            <%when 3%>
+              <span class="label label-warning"> <%= rstatus(t.status) %></span>
+            <%when 4%>
+              <span class="label label-danger"> <%= rstatus(t.status) %></span>
+            <%when 5%>
+              <span class="label label-inverse"> <%= rstatus(t.status) %></span>
+            <%end%>
+          </td>
+        <td>
+          <%= link_to edit_task_path(t), :remote => true do %>
+            <i class="fa fa-edit" style=" vertical-align: middle;"></i>
+          <%end%>
+
+          <%= link_to t, method: :delete, :remote => true, data: { confirm: 'Are you sure?' } do%>
+            <i class="fa fa-trash-o" style=" vertical-align: middle;"></i>
+          <%end%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

@@ -1,0 +1,5 @@
+<ul class="messages-list relative top-0">
+  <% for m in current_user.received_messages%>
+  <%= render partial: 'messages/item', locals: {message: m, user: m.sender}%>
+  <%end%>
+</ul>

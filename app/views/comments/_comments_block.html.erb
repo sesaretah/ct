@@ -1,0 +1,37 @@
+<div id='comments-block-<%= c.class.name%>-<%= c.id%>'>
+  <div class="col-md-1 padding-right-0 padding-left-0">
+    <small><i class="fa fa-comment" style="color: #007AFF !important;"></i> (<%= c.comments.count%>)</small>
+  </div>
+  <div class="col-md-10 padding-right-0">
+    <% for i in c.comments%>
+    <div class="row">
+      <div class="col-md-1 padding-left-0">
+        <%= image_tag i.user.profile.avatar(:tiny), :class => "messages-item-avatar bordered border-primary"%>
+      </div>
+      <div class="col-md-10 padding-right-0 padding-left-0">
+        <span class="margin-right-5" style='color:#8E9AA2'><small><%= i.content%></small></span>
+      </div>
+      <div class="col-md-1">
+        <%= link_to 'comments/'+ i.id.to_s + '?page='+@page.to_s, :method => :delete, :remote => true, data: {confirm: "Are you sure?"}  do %>
+          <i class="fa fa-trash-o" style="color: #007AFF !important;"></i>
+        <%end%>
+      </div>
+    </div>
+    <% if i.id != c.comments.last.id%>
+    <hr class="margin-bottom-5 margin-top-5" style="border-top: dotted 1px #e5e6e8;"/>
+    <%end%>
+    <%end%>
+    <div id='cm-<%= c.class.name%>-<%= c.id%>'>
+      <small><i id='cm-icon-<%= c.class.name%>-<%= c.id%>' class="fa fa-plus-square-o" style="color: #a1c1f4 !important; vertical-align: middle;"></i> <span style="color: #a1c1f4 !important;"><%=t :whats_your_comment%></span> </small>
+    </div>
+    <div id='cm-form-<%= c.class.name%>-<%= c.id%>' class="row hide">
+      <%= render partial: 'comments/remote_form', locals:{c:c, page: 1}%>
+    </div>
+    <script>
+    $( "#cm-<%= c.class.name%>-<%= c.id%>" ).click(function() {
+      $( "#cm-form-<%= c.class.name%>-<%= c.id%>" ).toggleClass('hide show');
+      $( "#cm-icon-<%= c.class.name%>-<%= c.id%>" ).toggleClass('fa-plus-square-o fa-minus-square-o');
+    });
+    </script>
+  </div>
+</div>

@@ -1,1 +1,1 @@
-$("#msg-content").replaceWith("<%= escape_javascript(render(:partial => 'messages/content', locals: {message: @message})) %>");
+$("#message-detail").replaceWith("<%= escape_javascript(render(:partial => 'messages/content', locals: {message: @message, page:@page})) %>");

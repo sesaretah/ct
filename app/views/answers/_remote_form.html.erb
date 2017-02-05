@@ -1,0 +1,7 @@
+<div id='answer' class="panel-footer border-light">
+  <%= form_for Answer.new,:remote => :true do |f|%>
+  <%= f.text_field :content, :class => "form-control underline", :placeholder => "#{t(:post_your_answer)}", maxlength: "400"%>
+  <%= f.hidden_field :question_id, :value => question.id%>
+  <%= hidden_field_tag :page, page%>
+  <%end%>
+</div>

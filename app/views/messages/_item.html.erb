@@ -1,0 +1,13 @@
+<li class="messages-item padding-5">
+  <%= link_to 'messages/view_content/'+ message.id.to_s,:remote => true  do%>
+  <%= image_tag user.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+  <span class="messages-item-from"><%= message.title%></span>
+  <div class="messages-item-time">
+    <span class="text">
+    </span>
+  </div>
+  <span class="messages-item-subject"></span>
+  <span class="messages-item-content"><%= truncate(message.content, :length => 20)%></span>
+  <div class="messages-item-time" style="margin-top:17px"></div>
+  <%end%>
+</li>

@@ -1,0 +1,38 @@
+<div class="panel">
+  <div class="row">
+    <div class='col-md-6'>
+      <%= form_tag '/profiles/search/1',:method => :get,:remote => :true do%>
+      <div class="input-group">
+        <%= text_field_tag :q, '' , {:class=>"form-control", :id => "nav-search-input", :placeholder => "#{t(:search)}"}%>
+        <%= hidden_field_tag 'caller', 'addtogroup'%>
+        <%= hidden_field_tag 'class', 'Project'%>
+        <%= hidden_field_tag 'class_id', project.id%>
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="submit" >
+            <i class="fa fa-search fa-fw" style=" vertical-align: middle;"></i> <%= t(:search)%>
+          </button>
+        </span>
+      </div>
+      <%end%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <fieldset>
+        <legend>
+          <%= t(:search_results)%>
+        </legend>
+        <% @profiles = {}%>
+        <%= render partial: 'profiles/compactlist', locals: {profiles: @profiles, item: project}%>
+      </fieldset>
+    </div>
+    <div class="col-md-6">
+      <fieldset>
+        <legend>
+          <%= t(:users_in_project)%>
+        </legend>
+        <%= render partial: 'partnerships/list', locals: {project: project}%>
+      </fieldset>
+    </div>
+  </div>
+</div>

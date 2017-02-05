@@ -1,0 +1,7 @@
+<div id='pr-list'>
+<% for partnership in project.partnerships%>
+<span class='label label-success'>
+  <%= partnership.user.profile.name%> <%= partnership.user.profile.surename%>
+</span>
+<%end%>
+</div>

@@ -249,6 +249,8 @@ fa:
         honor:
             title: 'عنوان'
             year: 'سال'
+        comment:
+          content: 'متن'
         note:
             title: 'عنوان'
             content: 'متن'
@@ -260,11 +262,23 @@ fa:
             password: 'رمز عبور'
             password_confirmation: 'تکرار رمز عبور'
             remember_me: 'مرا به خاطر بسپار'
+        task:
+          name: 'نام'
+          description: 'شرح'
+          start_date: 'تاریخ شروع'
+          due_date: 'تاریخ اتمام'
+          status: 'وضعیت'
         message:
           recipient_id: 'گیرنده'
           sender_id: 'فرستنده'
           content: 'متن'
           title: 'موضوع'
+        question:
+          content: 'متن'
+          title: 'موضوع'
+        project:
+          name: 'نام پروژه'
+          aims: 'اهداف پروژه'
         event:
           name: 'نام رخداد'
           description: 'توضیحات'
@@ -282,6 +296,34 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  users_in_project: 'اعضای پروژه'
+  scheduled: 'برنامه ریزی شده'
+  stoped: 'قطع شده'
+  ended: 'تمام شده'
+  waiting: 'در انتظار'
+  running: 'در حال اجرا'
+  enter_new_task: 'وظیفه جدید'
+  status: 'وضعیت'
+  due_date: 'زمان اتمام'
+  description: 'شرح'
+  partners: 'اعضا'
+  tasks: 'وظایف'
+  timeline: 'گذر زمان'
+  new_project: 'پروژه جدید'
+  please_enter_new_project_data: 'لطفا اطلاعات پروژه را وارد کنید'
+  projects: 'پروژه‌ها'
+  based_on_vote: 'براساس رای'
+  based_on_time: 'براساس تاریخ'
+  post_your_answer: 'پاسخ دهید...'
+  whats_your_comment: 'نظر شما چیست؟'
+  answers: 'پاسخ'
+  write_your_comment: 'نظر خود را بنویسید'
+  please_enter_the_question: 'عنوان و متن سوال خود را وارد کنید'
+  new_question: 'سوال جدید'
+  add_new_question: 'افزودن سوال جدید'
+  qna: 'پرسش و پاسخ'
+  sent_messages: 'پیام‌های ارسالی'
+  received_messages: 'پیام‌های دریافتی'
   edit_your_profile: 'ویرایش پروفایل'
   pervious_comments: 'نظرات قبل'
   number_of_comments: 'تعداد نظرات'

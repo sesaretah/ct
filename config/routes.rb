@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  resources :tasks
+
+  resources :assignments
+
+  resources :partnerships
+
+  resources :projects
+
+  resources :votes
+
+  resources :answers
+
+  resources :questions
+
   resources :seekings
 
   resources :blogs
@@ -76,6 +90,19 @@ Rails.application.routes.draw do
 
   match "/profiles/view_content/:id" => "profiles#view_content", :via => :get
   match "/profiles/profile_search/:id" => "profiles#search", :via => :get
+
+  match "/messages/view_content/:id" => "messages#view_content", :via => :get
+
+  match "/questions/view_content/:id" => "questions#view_content", :via => :get
+
+  match "/votes/vote_up/:id" => "votes#vote_up", :via => :get
+  match "/votes/vote_down/:id" => "votes#vote_down", :via => :get
+
+  match "/tags/remoteq/:id" => "tags#remoteq", :via => :get
+
+  match "/projects/view_content/:id" => "projects#view_content", :via => :get
+
+  match "/partnerships/add_to_project/:id" => "partnerships#add_to_project", :via => :get
 
   post 'upload' => 'upload#create'
   # The priority is based upon order of creation: first created -> highest priority.

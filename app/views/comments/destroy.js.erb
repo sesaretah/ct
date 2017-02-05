@@ -12,3 +12,11 @@ $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_
 $("#note-comments").replaceWith("<%= escape_javascript(render(:partial => 'notes/note_comments', locals: {note: @commntable, page:@page })) %>");
 $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @commntable , page:@page})) %>");
 <%end%>
+
+<% if @comment.commentable_type == 'Question'%>
+$("#comments-block-<%= @commntable.class.name%>-<%=  @commntable.id%>").replaceWith("<%= escape_javascript(render(:partial => 'comments/comments_block', locals: {c: @commntable, page:@page })) %>");
+<%end%>
+
+<% if @comment.commentable_type == 'Answer'%>
+$("#comments-block-<%= @commntable.class.name%>-<%=  @commntable.id%>").replaceWith("<%= escape_javascript(render(:partial => 'comments/comments_block', locals: {c: @commntable, page:@page })) %>");
+<%end%>

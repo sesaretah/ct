@@ -5,5 +5,7 @@ class Comment < ActiveRecord::Base
   belongs_to :event, :class_name => "Event", :foreign_key => "commentable_id"
   belongs_to :channel, :class_name => "Channel", :foreign_key => "commentable_id"
   belongs_to :note, :class_name => "Note", :foreign_key => "commentable_id"
+  belongs_to :question, :class_name => "Question", :foreign_key => "commentable_id"
+  belongs_to :answer, :class_name => "Answer", :foreign_key => "commentable_id"
 
 end
