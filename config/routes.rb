@@ -77,6 +77,8 @@ Rails.application.routes.draw do
   match "/groupings/change_stat/:id" => "groupings#change_stat", :via => :get
 
   match "/comments/xedit/:id" => "comments#xedit", :via => :get
+  match "/comments/render_partial/:id" => "comments#render_partial", :via => :get
+
 
   match "/participations/add_to_event/:id" => "participations#add_to_event", :via => :get
 

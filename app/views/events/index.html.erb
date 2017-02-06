@@ -85,14 +85,12 @@
           </ul>
         </div>
         <div class="panel-body border-light">
-          <div class="panel-scroll border-light height-500 ps-container ps-active-y">
             <div id='event-detail'>
               <% if !@event.blank?%>
               <% @page = 1%>
               <%= render(:partial => 'events/detail', locals: {event: @event, page:@page }) %>
               <%end%>
             </div>
-          </div>
         </div>
         <div  id='cm' class="panel-footer border-light">
           <% if !@event.blank?%>

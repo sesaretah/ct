@@ -7,17 +7,17 @@
             <%= t(:projects)%>
           </a>
         </li>
-        <li >
+        <li class="" >
           <a data-toggle="tab" href="#timeline">
             <%= t(:timeline)%>
           </a>
         </li>
-        <li >
+        <li class="">
           <a data-toggle="tab" href="#tasks">
             <%= t(:tasks)%>
           </a>
         </li>
-        <li >
+        <li class="">
           <a data-toggle="tab" href="#partners">
             <%= t(:partners)%>
           </a>
@@ -30,7 +30,6 @@
               <div class="user-left">
                 <div class="center">
                   <h4><%= @project.name%></h4>
-
                   <div class="col-sm-12" style="margin-top:10px;">
                     <%= link_to edit_project_path(@project.id) do %>
                     <button id='edit' type="button" class="btn btn-wide btn-o btn-warning">
@@ -42,85 +41,123 @@
 
                 </div>
                 <br />
-                <%= project.aims%>
-                </div>
+                <table class="table table-condensed">
+                  <thead>
+                    <tr>
+                      <th colspan="3"><% t(:personal_information)%></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%= t(:project_type)%></td>
+                      <td><%= project.project_type%></td>
+                    </tr>
+                    <tr>
+                      <td><%= t(:location)%></td>
+                      <td><%= project.location%></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h5><%=t :aims%>:</h5><p style='text-align: justify;'><%= project.aims%></p>
               </div>
-              <div class="col-sm-7 col-md-8">
+            </div>
+            <div class="col-sm-7 col-md-8">
+              <div class="panel panel-white" id="">
+                <div class="panel-heading border-light">
+                  <h4 class="panel-title text-primary"><%= t(:projects_characteristics)%></h4>
+                  <paneltool class="panel-tools" tool-collapse="tool-collapse" tool-refresh="load1" tool-dismiss="tool-dismiss"></paneltool>
+                </div>
+                <div collapse="activities" ng-init="activities=false" class="panel-wrapper">
+                  <div class="panel-body">
 
-                <div class="panel panel-white" id="activities">
-                  <div class="panel-heading border-light">
-                    <h4 class="panel-title text-primary"><%= t(:projects_gantt_chart)%></h4>
-                    <paneltool class="panel-tools" tool-collapse="tool-collapse" tool-refresh="load1" tool-dismiss="tool-dismiss"></paneltool>
-                  </div>
-                  <div collapse="activities" ng-init="activities=false" class="panel-wrapper">
-                    <div class="panel-body">
-                        <div class="row">
-                          <div class="col-md-12" id="chart" style='direction:ltr; height:250px;' ></div>
-                        </div>
-                      </div>
+                    <h5 class="over-title margin-bottom-15"><%=t :projects_gantt_chart%></span></h5>
+                    <div class="row">
+                      <div class="col-md-12" id="chart" style='direction:ltr; height:250px;' ></div>
                     </div>
+
+                    <h5 class="over-title margin-bottom-15"><%=t :definition%></span></h5>
+                    <%= project.definition%>
+                    <hr/>
+
+                    <h5 class="over-title margin-bottom-15"><%=t :novelties%></span></h5>
+                    <%= project.novelties%>
+                    <hr/>
+
+                    <h5 class="over-title margin-bottom-15"><%=t :methods%></span></h5>
+                    <%= project.methods%>
+                    <hr/>
+
+                    <h5 class="over-title margin-bottom-15"><%=t :standards%></span></h5>
+                    <%= project.standards%>
+                    <hr/>
+
+                    <h5 class="over-title margin-bottom-15"><%=t :outputs%></span></h5>
+                    <%= project.outputs%>
+                    <hr/>
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div id="timeline" class="tab-pane fade">
+        </div>
+        <div id="timeline" class="tab-pane fade">
 
-          </div>
-          <div id="tasks" class="tab-pane fade">
-            <% @task = Task.new%>
-            <%= render partial: 'tasks/list', locals: {project: @project}%>
-            <%= render partial: 'tasks/form', locals: {task: @task, project: @project}%>
+        </div>
+        <div id="tasks" class="tab-pane fade">
+          <% @task = Task.new%>
+          <%= render partial: 'tasks/list', locals: {project: @project}%>
+          <%= render partial: 'tasks/form', locals: {task: @task, project: @project}%>
 
-          </div>
-          <div id="partners" class="tab-pane fade">
-              <%= render partial: 'projects/add_user', locals: {project: @project}%>
-          </div>
+        </div>
+        <div id="partners" class="tab-pane fade">
+          <%= render partial: 'projects/add_user', locals: {project: @project}%>
         </div>
       </div>
     </div>
   </div>
+</div>
 
 
-  <link rel="stylesheet" href="/assets/gantt.css"/>
-  <script src="/assets/d3.v3.min.js"></script>
-  <script src="/assets/gantt-chart-d3.js"></script>
-  <script>
-  <%temp = ''%>
-  <% for t in project.tasks%>
-  <%temp = temp + '{'+"'startDate':new Date('"+ t.start_date.to_datetime.to_formatted_s(:rfc822)+"'),'endDate':new Date('" +t.due_date.to_datetime.to_formatted_s(:rfc822)+"'),'taskName':'"+t.name+"','status':'"+erstatus(t.status)+"'}"%>
-  <% if t != project.tasks.last%>
-  <%temp = temp + ","%>
-  <%end%>
-  <%end%>
+<link rel="stylesheet" href="/assets/gantt.css"/>
+<script src="/assets/d3.v3.min.js"></script>
+<script src="/assets/gantt-chart-d3.js"></script>
+<script>
+<%temp = ''%>
+<% for t in project.tasks%>
+<%temp = temp + '{'+"'startDate':new Date('"+ t.start_date.to_datetime.to_formatted_s(:rfc822)+"'),'endDate':new Date('" +t.due_date.to_datetime.to_formatted_s(:rfc822)+"'),'taskName':'"+t.name+"','status':'"+erstatus(t.status)+"'}"%>
+<% if t != project.tasks.last%>
+<%temp = temp + ","%>
+<%end%>
+<%end%>
 
-  var tasks = [<%= raw temp%>];
+var tasks = [<%= raw temp%>];
 
-  var taskStatus = {
-      "running" : "running",
-      "scheduled" : "scheduled",
-      "stoped" : "stoped",
-      "ended" : "ended",
-      "waiting" : "waiting"
-  };
-  <% @tasknames = []%>
+var taskStatus = {
+  "running" : "running",
+  "scheduled" : "scheduled",
+  "stoped" : "stoped",
+  "ended" : "ended",
+  "waiting" : "waiting"
+};
+<% @tasknames = []%>
 
-  <% for task in project.tasks%>
-  <% @tasknames << task.name%>
-  <%end%>
-  var taskNames = <%= raw @tasknames.flatten%>
+<% for task in project.tasks%>
+<% @tasknames << task.name%>
+<%end%>
+var taskNames = <%= raw @tasknames.flatten%>
 
-  tasks.sort(function(a, b) {
-      return a.endDate - b.endDate;
-  });
-  var maxDate = tasks[tasks.length - 1].endDate;
-  tasks.sort(function(a, b) {
-      return a.startDate - b.startDate;
-  });
-  var minDate = tasks[0].startDate;
+tasks.sort(function(a, b) {
+  return a.endDate - b.endDate;
+});
+var maxDate = tasks[tasks.length - 1].endDate;
+tasks.sort(function(a, b) {
+  return a.startDate - b.startDate;
+});
+var minDate = tasks[0].startDate;
 
-  var format = "%d";
+var format = "%d";
 
-  var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
-  gantt(tasks);
-  </script>
+var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
+gantt(tasks);
+</script>

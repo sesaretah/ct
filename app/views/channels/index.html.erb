@@ -75,14 +75,14 @@
         </ul>
       </div>
       <div class="panel-body">
-        <div class="panel-scroll height-350 ps-container ps-active-y">
+
             <div id='channel-detail'>
               <% if !@channel.blank?%>
               <% @page = 1%>
               <%= render(:partial => 'channels/detail', locals: {channel: @channel, page:@page }) %>
               <%end%>
             </div>
-          </div>
+          
         </div>
         <div  id='cm' class=" border-light">
           <% if !@channel.blank?%>

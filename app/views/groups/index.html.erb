@@ -82,14 +82,12 @@
             </ul>
           </div>
           <div class="panel-body">
-            <div class="panel-scroll height-350 ps-container ps-active-y">
               <div id='group-detail'>
                 <% if !@group.blank?%>
                 <% @page = 1%>
                 <%= render(:partial => 'groups/detail', locals: {group: @group, page:@page }) %>
                 <%end%>
               </div>
-            </div>
           </div>
           <div  id='cm' class="panel-footer border-light">
 

@@ -18,6 +18,8 @@ class EventsController < ApplicationController
       @page = params[:page].to_i
     end
   end
+
+  
   def upload_avatar
     @event = Event.find(params[:id])
   end

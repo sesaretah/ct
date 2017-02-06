@@ -66,8 +66,9 @@
     </div>
   </div>
   <hr style='margin-top:0px; margin-bottom:0px;' />
+
   <% @comments = Comment.where(commentable_type: 'Channel', commentable_id: channel.id).last(page*3)%>
-  <%= render partial: 'channels/channel_comments', locals: {comments: @comments, channel: channel}%>
+  <%= render partial: 'channels/channel_comments', locals: {comments: @comments, channel: channel, page: page}%>
 
 </div>
 <%= render partial: 'channels/add_user', locals: {channel: channel}%>

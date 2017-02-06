@@ -50,7 +50,7 @@
   </ul>
   <% if public?(group) || !grouping.blank? && grouping.role != 3%>
   <% @comments = Comment.where(commentable_type: 'Group', commentable_id: group.id).last(page*4)%>
-  <%= render partial: 'groups/group_comments', locals: {comments: @comments, group: group}%>
+  <%= render partial: 'groups/group_comments', locals: {comments: @comments, group: group, page: page}%>
   <%end%>
 </div>
 <%= render partial: 'groups/add_user', locals: {group: group}%>

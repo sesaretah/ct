@@ -1,7 +1,18 @@
 <div id='cm' class="panel-footer border-light">
   <% if c.class.name != 'Channel'%>
-  <%= form_for Comment.new,:remote => :true do |f|%>
-  <%= f.text_field :content, :class => "form-control underline", :placeholder => "#{t(:post_your_comment)}", maxlength: "140"%>
+  <%= form_for Comment.new,:remote => :true, :html => { :multipart => true, :id => "fileupload"  }  do |f|%>
+  <div class="row">
+    <div class="col-md-11 padding-left-0 ">
+      <%= f.text_field :content, :class => "form-control underline", :placeholder => "#{t(:post_your_comment)}", maxlength: "140"%>
+    </div>
+    <div class="col-md-1 padding-left-0 padding-right-5" style="padding-top:20px;">
+      <i id='fedit' class="fa fa-file"></i>
+      <i id='cedit' class="fa fa-camera"></i>
+      <%= f.file_field :document, :style =>"display: none;" %>
+      <%= f.file_field :avatar, :style =>"display: none;" %>
+    </div>
+  </div>
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
   <%= f.hidden_field :commentable_type, :value => c.class.name%>
   <%= f.hidden_field :commentable_id, :value => c.id%>
   <%= hidden_field_tag :page, page%>
@@ -9,8 +20,19 @@
   <%else%>
   <% involvement = Involvement.where(channel_id: c.id, user_id: current_user.id).first%>
   <% if admin?(involvement) %>
-  <%= form_for Comment.new,:remote => :true do |f|%>
-  <%= f.text_field :content, :class => "form-control underline", :placeholder => "#{t(:post_your_comment)}", maxlength: "140"%>
+  <%= form_for Comment.new,:remote => :true, :html => { :multipart => true, :id => "fileupload"  }  do |f|%>
+  <div class="row">
+    <div class="col-md-11 padding-left-0 ">
+      <%= f.text_field :content, :class => "form-control underline", :placeholder => "#{t(:post_your_comment)}", maxlength: "140"%>
+    </div>
+    <div class="col-md-1 padding-left-0 padding-right-5" style="padding-top:20px;">
+      <i id='fedit' class="fa fa-file"></i>
+      <i id='cedit' class="fa fa-camera"></i>
+      <%= f.file_field :document, :style =>"display: none;" %>
+      <%= f.file_field :avatar, :style =>"display: none;" %>
+    </div>
+  </div>
+  <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
   <%= f.hidden_field :commentable_type, :value => c.class.name%>
   <%= f.hidden_field :commentable_id, :value => c.id%>
   <%= hidden_field_tag :page, page%>
@@ -18,3 +40,33 @@
   <%end%>
   <%end%>
 </div>
+
+<script type="text/javascript">
+$('#fedit').click(function() {
+  $('#comment_document').click();
+});
+$('#cedit').click(function() {
+  $('#comment_avatar').click();
+});
+$(function () {
+  $('#fileupload').fileupload({
+    dataType: 'json',
+    add: function (e, data) {
+      data.submit();
+    },
+    done: function (e, data) {
+      console.log(data.result)
+      var url = '/comments/render_partial/'+ data.result.id+'?page='+<%= page%>
+      $.get(url,
+        function(d) {
+          console.log(d);
+          $("#<%= c.class.name.downcase%>-detail").replaceWith(d.html);
+        }
+      );
+    }
+  });
+});
+
+
+
+</script>

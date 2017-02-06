@@ -3,6 +3,11 @@ $("#group-detail").replaceWith("<%= escape_javascript(render(:partial => 'groups
 $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @commntable , page:@page})) %>");
 <%end%>
 
+<%if @commntable.class.name == 'Channel'%>
+$("#channel-detail").replaceWith("<%= escape_javascript(render(:partial => 'channels/detail', locals: {channel: @commntable, page:@page })) %>");
+$("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @commntable , page:@page})) %>");
+<%end%>
+
 <%if @commntable.class.name == 'Event'%>
 $("#event-detail").replaceWith("<%= escape_javascript(render(:partial => 'events/detail', locals: {event: @commntable, page:@page })) %>");
 $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @commntable , page:@page})) %>");

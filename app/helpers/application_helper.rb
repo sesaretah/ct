@@ -27,6 +27,15 @@ module ApplicationHelper
     ]
     return @options
   end
+  def project_types
+    @options = [
+      [t(:bonyadi), t(:bonyadi)],
+      [t(:karbordi), t(:karbordi)],
+      [t(:tosei), t(:tosei)],
+      [t(:rahbordi) , t(:rahbordi)]
+    ]
+    return @options
+  end
   def ptypes
     @options = [
       [t(:private), 1],

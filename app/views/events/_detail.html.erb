@@ -71,7 +71,7 @@
   </div>
   <hr style='margin-top:0px; margin-bottom:0px;' />
   <% @comments = Comment.where(commentable_type: 'Event', commentable_id: event.id).last(page*3)%>
-  <%= render partial: 'events/event_comments', locals: {comments: @comments, event: event}%>
+  <%= render partial: 'events/event_comments', locals: {comments: @comments, event: event, page: page}%>
 
 </div>
 <%= render partial: 'events/add_user', locals: {event: event}%>

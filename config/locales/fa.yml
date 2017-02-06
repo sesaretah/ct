@@ -279,6 +279,13 @@ fa:
         project:
           name: 'نام پروژه'
           aims: 'اهداف پروژه'
+          project_type: 'نوع پروژه'
+          location: 'مکان پروژه'
+          definition: 'تعریف پروژه و تشریح آن'
+          novelties: 'نوآوری ها و وجه تمایز پروژه'
+          methods: 'روش ها و فناوری های محوری'
+          standards: 'استانداردهای مورد استفاده'
+          outputs: 'خروجی های اصلی و فرعی پروژه'
         event:
           name: 'نام رخداد'
           description: 'توضیحات'
@@ -296,6 +303,21 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  aims: 'اهداف پروژه'
+  project_type: 'نوع پروژه'
+  location: 'مکان پروژه'
+  definition: 'تعریف پروژه و تشریح آن'
+  novelties: 'نوآوری ها و وجه تمایز پروژه'
+  methods: 'روش ها و فناوری های محوری'
+  standards: 'استانداردهای مورد استفاده'
+  outputs: 'خروجی های اصلی و فرعی پروژه'
+  projects_characteristics: 'مشخصات پروژه'
+  bonyadi: 'بنیادی'
+  karbordi: 'کاربردی'
+  tosei: 'توسعه ای '
+  rahbordi: 'کاربردی'
+  edit_project: 'ویرایش پروژه'
+  projects_gantt_chart: 'گانت چارت پروژه'
   users_in_project: 'اعضای پروژه'
   scheduled: 'برنامه ریزی شده'
   stoped: 'قطع شده'

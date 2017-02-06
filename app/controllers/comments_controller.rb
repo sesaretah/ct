@@ -1,6 +1,19 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
+  def render_partial
+  @comment = Comment.find(params[:id])
+  @cl = @comment.commentable_type.downcase
+  @item =  @comment.commentable_type.classify.constantize.find(@comment.commentable_id)
+  render :json => {
+    :html => render_to_string({
+      :partial => "#{@cl.pluralize}/detail",
+      :locals => { :"#{@cl}" => @item, page: params[:page].to_i}
+    })
+  }
+
+end
+
   def xedit
     @comment = Comment.find(params[:id])
     if @comment.user_id == current_user.id
@@ -82,6 +95,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:content, :user_id, :commentable_type, :commentable_id)
+      params.require(:comment).permit(:content, :user_id,:document, :avatar, :commentable_type, :commentable_id)
     end
 end

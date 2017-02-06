@@ -2,6 +2,9 @@
   <div class="margin-top-5" style='font-size: 10px;'>
     <%=t :number_of_posts%>: (<%= @count = Comment.where(commentable_type: 'Group', commentable_id: group.id).count %>)
   </div>
+  <%if @page.blank? %>
+  <% @page = page.to_i%>
+  <%end%>
   <% @page = @page + 1%>
   <% if @count > 4%>
   <div class="span12 text-center">  <%= link_to 'groups/view_content/'+ group.id.to_s+'?page='+@page.to_s,:remote => true  do%><i class="fa fa-history"></i> <%=t :pervious_posts%> <%end%></div>
@@ -16,6 +19,14 @@
         <div class="timeline-label">
           <h2><%= link_to comment.user.profile do%><%= comment.user.profile.name%> <%= comment.user.profile.surename%><%end%></h2>
           <% if current_user.id == comment.user.id%>
+          <% if comment.document_file_name %>
+            <%= link_to comment.document.url do %>
+                <i class="fa fa-2x fa-file"></i>
+            <%end%>
+          <%end%>
+          <% if comment.avatar_file_name %>
+            <%= image_tag comment.avatar(:medium), :class => "messages-item-avatar bordered border-primary"%>
+          <%end%>
           <a class='xedit-text' href="#" id="cm<%=comment.id%>" data-type="text" data-pk="1" data-url="/comments/xedit/<%= comment.id%>" data-title="Enter username">
             <%= comment.content%>
           </a>
@@ -24,11 +35,19 @@
           $.fn.editable.defaults.ajaxOptions = {type: "GET"};
           $(document).ready(function() {
             $("#cm<%=comment.id%>").editable({
-
+              emptytext: ''
             });
           });
           </script>
           <%else%>
+          <% if comment.document_file_name %>
+            <%= link_to comment.document.url do %>
+                <i class="fa fa-2x fa-file"></i>
+            <%end%>
+          <%end%>
+          <% if comment.avatar_file_name %>
+            <%= image_tag comment.avatar(:medium), :class => "messages-item-avatar bordered border-primary"%>
+          <%end%>
           <p><%= comment.content%></p>
           <%end%>
           <% grouping = Grouping.where(group_id: group.id, user_id: current_user.id).first%>

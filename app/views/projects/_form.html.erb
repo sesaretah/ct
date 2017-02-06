@@ -46,8 +46,53 @@
                 <div class="form-group col-xs-6">
               <%= f.label :aims %><br>
               <%= f.text_area :aims , :class => "form-control" %>
+              </div>
             </div>
+
+            <div class="row">
+                <div class="form-group col-xs-6">
+              <%= f.label :project_type %><br>
+              <%= f.select( :project_type, project_types, {}, {:class => "form-control"})  %>
+              <% f.text_area :project_type , :class => "form-control" %>
+              </div>
             </div>
+
+            <div class="row">
+                <div class="form-group col-xs-6">
+              <%= f.label :definition %><br>
+              <%= f.text_area :definition , :class => "form-control" %>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xs-6">
+              <%= f.label :novelties %><br>
+              <%= f.text_area :novelties , :class => "form-control" %>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xs-6">
+              <%= f.label :methods %><br>
+              <%= f.text_area :methods , :class => "form-control" %>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xs-6">
+              <%= f.label :standards %><br>
+              <%= f.text_area :standards , :class => "form-control" %>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-xs-6">
+              <%= f.label :outputs %><br>
+              <%= f.text_area :outputs , :class => "form-control" %>
+              </div>
+            </div>
+
+
 
             <div class="row top30">
               <div class="form-group col-xs-1 pull-left">

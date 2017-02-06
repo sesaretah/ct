@@ -2,6 +2,9 @@
   <div class="margin-top-5" style='font-size: 10px;'>
     <%=t :number_of_posts%>: (<%= @count = Comment.where(commentable_type: 'Event', commentable_id: event.id).count %>)
   </div>
+  <%if @page.blank? %>
+  <% @page = page.to_i%>
+  <%end%>
   <% @page = @page + 1%>
   <% if @count > 4%>
   <div class="span12 text-center">  <%= link_to 'events/view_content/'+ event.id.to_s+'?page='+@page.to_s,:remote => true  do%><i class="fa fa-history"></i> <%=t :pervious_posts%> <%end%></div>

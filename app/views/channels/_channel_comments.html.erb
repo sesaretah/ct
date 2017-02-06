@@ -7,9 +7,12 @@
       <%=t :number_of_posts%>: (<%= @count = Comment.where(commentable_type: 'Channel', commentable_id: channel.id).count %>)
     </div>
   </div>
+  <%if @page.blank? %>
+  <% @page = page.to_i%>
+  <%end%>
   <% @page = @page + 1%>
   <% if @count > 4%>
-  <div class="span12 text-center">  <%= link_to 'channels/view_content/'+ event.id.to_s+'?page='+@page.to_s,:remote => true  do%><i class="fa fa-history"></i> <%=t :pervious_posts%> <%end%></div>
+  <div class="span12 text-center">  <%= link_to 'channels/view_content/'+ channel.id.to_s+'?page='+@page.to_s,:remote => true  do%><i class="fa fa-history"></i> <%=t :pervious_posts%> <%end%></div>
   <%end%>
   <div class="timeline-centered">
     <% for comment in comments%>
@@ -18,6 +21,14 @@
         <div class="timeline-label" style="margin-right: 10px !important;">
           <h2><%= link_to comment.user.profile do%><%= comment.user.profile.name%> <%= comment.user.profile.surename%><%end%></h2>
           <% if admin?(involvement) %>
+          <% if comment.document_file_name %>
+            <%= link_to comment.document.url do %>
+                <i class="fa fa-2x fa-file"></i>
+            <%end%>
+          <%end%>
+          <% if comment.avatar_file_name %>
+            <%= image_tag comment.avatar(:medium), :class => "messages-item-avatar bordered border-primary"%>
+          <%end%>
           <a class='xedit-text' href="#" id="cm<%=comment.id%>" data-type="text" data-pk="1" data-url="/comments/xedit/<%= comment.id%>" data-title="Enter username">
             <%= comment.content%>
           </a>
@@ -26,11 +37,19 @@
           $.fn.editable.defaults.ajaxOptions = {type: "GET"};
           $(document).ready(function() {
             $("#cm<%=comment.id%>").editable({
-
+                emptytext: ''
             });
           });
           </script>
           <%else%>
+          <% if comment.document_file_name %>
+            <%= link_to comment.document.url do %>
+                <i class="fa fa-2x fa-file"></i>
+            <%end%>
+          <%end%>
+          <% if comment.avatar_file_name %>
+            <%= image_tag comment.avatar(:medium), :class => "messages-item-avatar bordered border-primary"%>
+          <%end%>
           <p><%= comment.content%></p>
           <%end%>
 

@@ -2252,7 +2252,7 @@ td,
 table,
 textarea,
 legend fieldset,
-p, h3,h4, .text-bold, .mainTitle, .mainDescription,
+p, h3,h4,h5,h5.over-title, .text-bold, .mainTitle, .mainDescription,
 .navbar-search .search-query {
 	-webkit-transform: translateZ(0.00001px);
 	font-family: 'koodak' ;
