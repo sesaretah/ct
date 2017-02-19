@@ -62,7 +62,7 @@ class ChannelsController < ApplicationController
     @channel.user_id = current_user.id
     respond_to do |format|
       if @channel.save
-        format.html { redirect_to '/channels/change_avatar/'+ @channel.id.to_s, notice: 'Channel was successfully created.' }
+        format.html { redirect_to '/channels/change_avatar/'+ @channel.id.to_s, notice: :channel_was_successfully_created }
         format.json { render :show, status: :created, location: @channel }
       else
         format.html { render :new }
@@ -76,7 +76,7 @@ class ChannelsController < ApplicationController
   def update
     respond_to do |format|
       if @channel.update(channel_params)
-        format.html { redirect_to '/channels/change_avatar/'+ @channel.id.to_s, notice: 'Channel was successfully updated.' }
+        format.html { redirect_to '/channels/change_avatar/'+ @channel.id.to_s, notice: :channel_was_successfully_updated }
         format.json { render action: 'crop' }
         if @channel.cropping?
           format.js { render action: 'crop', :locals => {:caller => @caller, :id => @channel.id} }

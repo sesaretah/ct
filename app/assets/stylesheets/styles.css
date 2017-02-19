@@ -2832,6 +2832,11 @@ a.text-light:hover {
   color: #ffffff;
 }
 
+.bg-light-grey {
+  background: #eff0f2 !important;
+  color: #ffffff;
+}
+
 .bg-dark-bricky {
   background: #67343c !important;
   color: #ffffff;
@@ -3307,7 +3312,7 @@ a.text-light:hover {
 
 .tab-content > .tab-pane, .pill-content > .pill-pane {
   display: none;
-  padding: 15px;
+  padding: 10px;
 }
 
 .tab-content > .active, .pill-content > .active {
@@ -10343,7 +10348,7 @@ td.small-width {
   bottom: 0;
 }
 .messages-list .messages-item {
-  border-bottom: 1px solid #c8c7cc;
+  border-bottom: 1px solid #eff0f2;
   padding: 5px 15px 5px 25px;
   position: relative;
   min-height: 56px;

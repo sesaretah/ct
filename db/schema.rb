@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206183649) do
+ActiveRecord::Schema.define(version: 20170216193926) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content",     limit: 65535
@@ -72,6 +72,23 @@ ActiveRecord::Schema.define(version: 20170206183649) do
     t.string   "avatar_content_type",   limit: 255
     t.integer  "avatar_file_size",      limit: 4
     t.datetime "avatar_updated_at"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string   "name",              limit: 255
+    t.string   "course_type",       limit: 255
+    t.string   "course_field",      limit: 255
+    t.string   "course_grade",      limit: 255
+    t.integer  "course_points",     limit: 4
+    t.integer  "lecturer_id",       limit: 4
+    t.text     "course_targets",    limit: 65535
+    t.text     "course_results",    limit: 65535
+    t.text     "course_covered",    limit: 65535
+    t.string   "course_softwares",  limit: 255
+    t.string   "problems_period",   limit: 255
+    t.string   "garding_mechanism", limit: 255
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
   create_table "educations", force: :cascade do |t|
@@ -151,6 +168,16 @@ ActiveRecord::Schema.define(version: 20170206183649) do
     t.datetime "updated_at",           null: false
   end
 
+  create_table "labs", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.text     "about",      limit: 65535
+    t.text     "missions",   limit: 65535
+    t.string   "tel",        limit: 255
+    t.text     "address",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "messages", force: :cascade do |t|
     t.integer  "sender_id",    limit: 4
     t.integer  "recipient_id", limit: 4
@@ -185,6 +212,19 @@ ActiveRecord::Schema.define(version: 20170206183649) do
     t.integer  "role",       limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "preports", force: :cascade do |t|
+    t.integer  "user_id",               limit: 4
+    t.integer  "task_id",               limit: 4
+    t.text     "detail",                limit: 65535
+    t.string   "status",                limit: 255
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "document_file_name",    limit: 255
+    t.string   "document_content_type", limit: 255
+    t.integer  "document_file_size",    limit: 4
+    t.datetime "document_updated_at"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -247,6 +287,14 @@ ActiveRecord::Schema.define(version: 20170206183649) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "role",       limit: 4
+  end
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "taggable_id",   limit: 4
+    t.string   "taggable_type", limit: 255
+    t.integer  "tag_id",        limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "tags", force: :cascade do |t|

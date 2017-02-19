@@ -1,0 +1,124 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:new_course)%></h1>
+        <span class="mainDescription"><%= t(:please_enter_new_course_data)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"></span></h5>
+        <div class="panel panel-white">
+          <div class="panel-body">
+            <%= form_for(@course) do |f| %>
+            <% if @course.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+              <ul>
+                <% @course.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+            <% end %>
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <%= f.label :name %><br>
+                <%= f.text_field :name, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <%= f.label :course_type %><br>
+                <%= f.text_field :course_type, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <%= f.label :course_field %><br>
+                <%= f.text_field :course_field, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <%= f.label :course_grade %><br>
+                <%= f.text_field :course_grade , :class => "form-control"%>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <%= f.label :course_points %><br>
+                <%= f.number_field :course_points, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <%= f.label :lecturer_id %><br>
+                <%= f.text_field :lecturer_id , :class => "form-control"%>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <%= f.label :course_targets %><br>
+                <%= f.text_area :course_targets, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <%= f.label :course_results %><br>
+                <%= f.text_area :course_results , :class => "form-control"%>
+              </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-xs-6">
+                  <%= f.label :course_covered %><br>
+                  <%= f.text_area :course_covered, :class => "form-control" %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-xs-6">
+                  <%= f.label :course_softwares %><br>
+                  <%= f.text_field :course_softwares, :class => "form-control" %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-xs-6">
+                  <%= f.label :problems_period %><br>
+                  <%= f.text_field :problems_period , :class => "form-control"%>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-xs-6">
+                  <%= f.label :garding_mechanism %><br>
+                  <%= f.text_field :garding_mechanism, :class => "form-control" %>
+                </div>
+              </div>
+
+              <div class="row top30">
+                <div class="form-group col-xs-1 pull-left">
+                  <%= content_tag :button, :type => :submit, :class => "btn btn-o btn-primary" do %>
+                  <i class="icon-ok bigger-110"></i>
+                  <%=t :submit%>
+                  <% end %>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

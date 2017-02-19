@@ -1,0 +1,1 @@
+json.partial! "preports/preport", preport: @preport

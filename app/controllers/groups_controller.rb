@@ -63,7 +63,7 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.save
         @grouping = Grouping.create(group_id: @group.id, user_id: current_user.id, role: 1)
-        format.html { redirect_to '/groups/change_avatar/'+ @group.id.to_s, notice: 'Group was successfully created.' }
+        format.html { redirect_to '/groups/change_avatar/'+ @group.id.to_s, notice: :group_was_successfully_created }
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
@@ -77,7 +77,7 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
-        format.html { redirect_to '/groups/change_avatar/'+ @group.id.to_s}
+        format.html { redirect_to '/groups/change_avatar/'+ @group.id.to_s, notice: :group_was_successfully_updated}
         format.json { render action: 'crop' }
         if @group.cropping?
           format.js { render action: 'crop', :locals => {:caller => @caller, :id => @group.id} }

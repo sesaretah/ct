@@ -121,8 +121,8 @@ function getEndDate() {
      var month = d3.select(item)[0][0].__data__.getMonth()
      var day = d3.select(item)[0][0].__data__.getDate()
      var jdate3 = new JDate(new Date(year, month, day));
-     console.log(jdate3.getFullYear(), jdate3.getMonth(), jdate3.getDate());
-     var s = jdate3.getMonth() +'/'+ jdate3.getDate();
+     //console.log(jdate3.getFullYear(), jdate3.getMonth(), jdate3.getDate());
+     var s = jdate3.getFullYear().toString().slice(-2)+'/'+jdate3.getMonth() +'/'+ jdate3.getDate();
      d3.select(item).text(s)
      .style("text-anchor", "end")
              .attr("dx", "-.8em")

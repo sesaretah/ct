@@ -4,13 +4,13 @@
     <div class="tabbable padding-right-0 padding-left-0 ">
       <ul id="myTab1" class="nav nav-tabs">
         <li class="">
-          <a href="#myTab1_example1" data-toggle="tab" aria-expanded="false">
+          <a href="#recent-channels" data-toggle="tab" aria-expanded="false">
             <i class="fa fa-clock-o"></i>
             <%t :channels_you_joined%>
           </a>
         </li>
         <li class="active">
-          <a href="#myTab1_example2" data-toggle="tab" aria-expanded="false">
+          <a href="#top-channels" data-toggle="tab" aria-expanded="false">
             <i class="fa fa-trophy"></i>
             <%t :popular_channels%>
           </a>
@@ -30,29 +30,8 @@
         </li>
       </ul>
       <div class="tab-content">
-        <div class="tab-pane fade" id="myTab1_example1">
-          <ul class="list-group">
-            <%= link_to new_channel_path do%>
-            <li class="list-group-item">
-              <i class="fa fa-plus"></i> <%=t :add_new_channel%>
-            </li>
-            <%end%>
-          </ul>
-          <ul class="messages-list relative top-0">
-            <% for c in current_user.channels%>
-            <%= render partial: 'channels/item', locals: {channel: c}%>
-            <%end%>
-          </ul>
-
-
-        </div>
-        <div class="tab-pane fade active in" id="myTab1_example2">
-          <ul class="messages-list relative top-0">
-            <% for c in Channel.all%>
-            <%= render partial: 'channels/item', locals: {channel: c}%>
-            <%end%>
-          </ul>
-        </div>
+        <%= render partial: 'channels/recent_channels', locals: {channel: @channel}%>
+        <%= render partial: 'channels/top_channels', locals: {channel: @channel}%>
         <div class="tab-pane fade " id="myTab1_example3">
 
         </div>
@@ -79,10 +58,10 @@
             <div id='channel-detail'>
               <% if !@channel.blank?%>
               <% @page = 1%>
-              <%= render(:partial => 'channels/detail', locals: {channel: @channel, page:@page }) %>
+              <%= render(:partial => 'channels/detail', locals: {channel: @channel, page:@page, now: @channel }) %>
               <%end%>
             </div>
-          
+
         </div>
         <div  id='cm' class=" border-light">
           <% if !@channel.blank?%>

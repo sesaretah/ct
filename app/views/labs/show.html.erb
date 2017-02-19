@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @lab.name %>
+</p>
+
+<p>
+  <strong>About:</strong>
+  <%= @lab.about %>
+</p>
+
+<p>
+  <strong>Missions:</strong>
+  <%= @lab.missions %>
+</p>
+
+<p>
+  <strong>Tel:</strong>
+  <%= @lab.tel %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @lab.address %>
+</p>
+
+<%= link_to 'Edit', edit_lab_path(@lab) %> |
+<%= link_to 'Back', labs_path %>

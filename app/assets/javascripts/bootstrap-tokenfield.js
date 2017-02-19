@@ -192,6 +192,7 @@
       args[0] = $.extend( {}, defaults, args[0] )
 
       this.$input.typeahead.apply( this.$input, args )
+      this.$hint = this.$input.prev('.tt-hint')
       this.typeahead = true
     }
   }
@@ -268,11 +269,9 @@
           parseInt($tokenLabel.css('margin-right'), 10)
       }
 
-      $tokenLabel.css('max-width', this.maxTokenWidth)
-      if (this.options.html)
-        $tokenLabel.html(attrs.label)
-      else
-        $tokenLabel.text(attrs.label)
+      $tokenLabel
+        .text(attrs.label)
+        .css('max-width', this.maxTokenWidth)
 
       // Listen to events on token
       $token
@@ -312,19 +311,16 @@
       }
 
       // Update tokenfield dimensions
-      var _self = this
-      setTimeout(function () {
-        _self.update()
-      }, 0)
+      this.update()
 
       // Return original element
       return this.$element.get(0)
     }
 
   , setTokens: function (tokens, add, triggerChange) {
-      if (!add) this.$wrapper.find('.token').remove()
-
       if (!tokens) return
+
+      if (!add) this.$wrapper.find('.token').remove()
 
       if (typeof triggerChange === 'undefined') {
           triggerChange = true
@@ -382,16 +378,6 @@
 
   , getInput: function() {
     return this.$input.val()
-  }
-      
-  , setInput: function (val) {
-      if (this.$input.hasClass('tt-input')) {
-          // Typeahead acts weird when simply setting input value to empty,
-          // so we set the query to empty instead
-          this.$input.typeahead('val', val)
-      } else {
-          this.$input.val(val)
-      }
   }
 
   , listen: function () {
@@ -658,7 +644,13 @@
       if (tokensBefore == this.getTokensList() && this.$input.val().length)
         return false // No tokens were added, do nothing (prevent form submit)
 
-      this.setInput('')
+      if (this.$input.hasClass('tt-input')) {
+        // Typeahead acts weird when simply setting input value to empty,
+        // so we set the query to empty instead
+        this.$input.typeahead('val', '')
+      } else {
+        this.$input.val('')
+      }
 
       if (this.$input.data( 'edit' )) {
         this.unedit(focus)
@@ -889,11 +881,12 @@
         }
 
         this.$input.width( mirrorWidth )
+
+        if (this.$hint) {
+          this.$hint.width( mirrorWidth )
+        }
       }
       else {
-        //temporary reset width to minimal value to get proper results
-        this.$input.width(this.options.minWidth);
-        
         var w = (this.textDirection === 'rtl')
               ? this.$input.offset().left + this.$input.outerWidth() - this.$wrapper.offset().left - parseInt(this.$wrapper.css('padding-left'), 10) - inputPadding - 1
               : this.$wrapper.offset().left + this.$wrapper.width() + parseInt(this.$wrapper.css('padding-left'), 10) - this.$input.offset().left - inputPadding;
@@ -902,6 +895,10 @@
         // dimensions returned by jquery will be NaN -> we default to 100%
         // so placeholder won't be cut off.
         isNaN(w) ? this.$input.width('100%') : this.$input.width(w);
+
+        if (this.$hint) {
+          isNaN(w) ? this.$hint.width('100%') : this.$hint.width(w);
+        }
       }
     }
 
@@ -1013,7 +1010,6 @@
   $.fn.tokenfield.defaults = {
     minWidth: 60,
     minLength: 0,
-    html: true,
     allowEditing: true,
     allowPasting: true,
     limit: 0,

@@ -40,9 +40,7 @@
 
           </div>
           <div class="tab-pane fade" id="myTab1_example2">
-            <ul class="messages-list relative top-0">
-
-            </ul>
+              
           </div>
           <div class="tab-pane fade " id="myTab1_example3">
 
@@ -67,7 +65,9 @@
     </div>
 
 
-
+    <% if !@project.blank?%>
+    <%= render(:partial => 'projects/project_detail', locals: {project: @project }) %>
+    <%else%>
 <div id='project-detail'>
     <div class="col-md-7 padding-right-0 padding-left-0" >
       <div class="panel panel-white no-radius">
@@ -79,61 +79,13 @@
             </li>
           </ul>
         </div>
-        <div class="panel-body border-light">
-          <div class=" height-500">
-
-
-            </div>
+        <div class="panel-body ">
 
           </div>
         </div>
       </div>
+      <%end%>
     </div>
 
   </div>
 </div>
-
-	<link rel="stylesheet" href="/assets/gantt.css"/>
-<script src="/assets/d3.v3.min.js"></script>
-<script src="/assets/gantt-chart-d3.js"></script>
-<script>
-<%temp = ''%>
-<% for t in Project.first.tasks%>
-<%temp = temp + '{'+"'startDate':new Date('"+ t.start_date.to_datetime.to_formatted_s(:rfc822)+"'),'endDate':new Date('" +t.due_date.to_datetime.to_formatted_s(:rfc822)+"'),'taskName':'"+t.name+"','status':'"+erstatus(t.status)+"'}"%>
-<% if t != Project.first.tasks.last%>
-<%temp = temp + ","%>
-<%end%>
-<%end%>
-
-var tasks = [<%= raw temp%>];
-
-var taskStatus = {
-    "running" : "running",
-    "scheduled" : "scheduled",
-    "stoped" : "stoped",
-    "ended" : "ended",
-    "waiting" : "waiting"
-};
-<% @tasknames = []%>
-
-<% for task in Project.first.tasks%>
-<% @tasknames << task.name%>
-<%end%>
-var taskNames = <%= raw @tasknames.flatten%>
-
-
-
-tasks.sort(function(a, b) {
-    return a.endDate - b.endDate;
-});
-var maxDate = tasks[tasks.length - 1].endDate;
-tasks.sort(function(a, b) {
-    return a.startDate - b.startDate;
-});
-var minDate = tasks[0].startDate;
-
-var format = "%d";
-
-var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
-gantt(tasks);
-</script>

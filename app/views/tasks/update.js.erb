@@ -1,2 +1,4 @@
+
 $("#tasklist").replaceWith("<%= escape_javascript(render(:partial => 'tasks/list', locals: {project: @project })) %>");
 $("#task-form").replaceWith("<%= escape_javascript(render(:partial => 'tasks/form', locals: {task: Task.new, project: @project })) %>");
+$("#collapseOne").collapse('hide');

@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :labs
+
+  resources :taggings
+
+  resources :courses
+
+  resources :preports
+
   resources :tasks
 
   resources :assignments
@@ -105,6 +113,21 @@ Rails.application.routes.draw do
   match "/projects/view_content/:id" => "projects#view_content", :via => :get
 
   match "/partnerships/add_to_project/:id" => "partnerships#add_to_project", :via => :get
+
+  match "/preports/remote_preport/:id" => "preports#remote_preport", :via => :get
+
+
+    match "/courses/change_avatar/:id" => "courses#change_avatar", :via => :get
+    match "/courses/crop/:id" => "courses#crop", :via => :get
+    match "/courses/upload_avatar/:id" => "courses#upload_avatar", :via => :get
+    match "/courses/view_content/:id" => "courses#view_content", :via => :get
+    match "/courses/search/:id" => "courses#search", :via => :get
+
+    match "/labs/change_avatar/:id" => "labs#change_avatar", :via => :get
+    match "/labs/crop/:id" => "labs#crop", :via => :get
+    match "/labs/upload_avatar/:id" => "labs#upload_avatar", :via => :get
+    match "/labs/view_content/:id" => "labs#view_content", :via => :get
+    match "/labs/search/:id" => "labs#search", :via => :get
 
   post 'upload' => 'upload#create'
   # The priority is based upon order of creation: first created -> highest priority.

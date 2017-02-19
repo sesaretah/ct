@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  course_type: MyString
+  course_field: MyString
+  course_grade: MyString
+  course_points: 1
+  lecturer_id: 
+  course_targets: MyText
+  course_results: MyText
+  course_covered: MyText
+  course_softwares: MyString
+  problems_period: MyString
+  garding_mechanism: MyString
+
+two:
+  name: MyString
+  course_type: MyString
+  course_field: MyString
+  course_grade: MyString
+  course_points: 1
+  lecturer_id: 
+  course_targets: MyText
+  course_results: MyText
+  course_covered: MyText
+  course_softwares: MyString
+  problems_period: MyString
+  garding_mechanism: MyString

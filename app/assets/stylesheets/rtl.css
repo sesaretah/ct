@@ -2578,3 +2578,6 @@ zoom: 0.2;
   width: auto;
 }
 img.jcrop {max-width: none}
+
+.selectwrap{position: relative;float: right;}
+.selectwrap:after{content:"↓";text-align: center;line-height:32px;position: absolute;width: 20px;height: 20px;background: #fff;left: 20px;top: 27px;pointer-events: none;}

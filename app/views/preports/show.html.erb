@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @preport.user_id %>
+</p>
+
+<p>
+  <strong>Task:</strong>
+  <%= @preport.task_id %>
+</p>
+
+<p>
+  <strong>Detail:</strong>
+  <%= @preport.detail %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @preport.status %>
+</p>
+
+<%= link_to 'Edit', edit_preport_path(@preport) %> |
+<%= link_to 'Back', preports_path %>

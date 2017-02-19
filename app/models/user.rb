@@ -34,4 +34,5 @@ class User < ActiveRecord::Base
   has_many :tasks, :through => :assignments
 
   has_many :questions
+  has_many :preports
 end

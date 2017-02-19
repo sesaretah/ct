@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Preports</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Task</th>
+      <th>Detail</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @preports.each do |preport| %>
+      <tr>
+        <td><%= preport.user_id %></td>
+        <td><%= preport.task_id %></td>
+        <td><%= preport.detail %></td>
+        <td><%= preport.status %></td>
+        <td><%= link_to 'Show', preport %></td>
+        <td><%= link_to 'Edit', edit_preport_path(preport) %></td>
+        <td><%= link_to 'Destroy', preport, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Preport', new_preport_path %>

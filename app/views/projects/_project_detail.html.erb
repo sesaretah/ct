@@ -1,4 +1,4 @@
-<div id='profile-detail'>
+<div id='project-detail'>
   <div class="col-md-9 padding-right-0 padding-left-0">
     <div class="tabbable">
       <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue" id="myTab4">
@@ -29,9 +29,9 @@
             <div class="col-sm-5 col-md-4">
               <div class="user-left">
                 <div class="center">
-                  <h4><%= @project.name%></h4>
+                  <h4><%= project.name%></h4>
                   <div class="col-sm-12" style="margin-top:10px;">
-                    <%= link_to edit_project_path(@project.id) do %>
+                    <%= link_to edit_project_path(project.id) do %>
                     <button id='edit' type="button" class="btn btn-wide btn-o btn-warning">
                       <%= t(:edit_project)%>
                     </button>
@@ -102,16 +102,16 @@
           </div>
         </div>
         <div id="timeline" class="tab-pane fade">
-
+            <%= render(:partial => 'projects/timeline', locals: {project: @project }) %>
         </div>
         <div id="tasks" class="tab-pane fade">
           <% @task = Task.new%>
-          <%= render partial: 'tasks/list', locals: {project: @project}%>
-          <%= render partial: 'tasks/form', locals: {task: @task, project: @project}%>
-
+          <%= render partial: 'tasks/form', locals: {task: @task, project: project}%>
+          <%= render partial: 'tasks/list', locals: {project: project}%>
+          <div id='preportform'></div>
         </div>
         <div id="partners" class="tab-pane fade">
-          <%= render partial: 'projects/add_user', locals: {project: @project}%>
+          <%= render partial: 'projects/add_user', locals: {project: project}%>
         </div>
       </div>
     </div>
@@ -123,41 +123,50 @@
 <script src="/assets/d3.v3.min.js"></script>
 <script src="/assets/gantt-chart-d3.js"></script>
 <script>
-<%temp = ''%>
-<% for t in project.tasks%>
-<%temp = temp + '{'+"'startDate':new Date('"+ t.start_date.to_datetime.to_formatted_s(:rfc822)+"'),'endDate':new Date('" +t.due_date.to_datetime.to_formatted_s(:rfc822)+"'),'taskName':'"+t.name+"','status':'"+erstatus(t.status)+"'}"%>
-<% if t != project.tasks.last%>
-<%temp = temp + ","%>
-<%end%>
-<%end%>
 
-var tasks = [<%= raw temp%>];
 
-var taskStatus = {
-  "running" : "running",
-  "scheduled" : "scheduled",
-  "stoped" : "stoped",
-  "ended" : "ended",
-  "waiting" : "waiting"
-};
-<% @tasknames = []%>
 
-<% for task in project.tasks%>
-<% @tasknames << task.name%>
-<%end%>
-var taskNames = <%= raw @tasknames.flatten%>
+$(document).ready(function(){
 
-tasks.sort(function(a, b) {
-  return a.endDate - b.endDate;
+  <%temp = ''%>
+  <% for t in project.tasks%>
+  <%temp = temp + '{'+"'startDate':new Date('"+ t.start_date.to_datetime.to_formatted_s(:rfc822)+"'),'endDate':new Date('" +t.due_date.to_datetime.to_formatted_s(:rfc822)+"'),'taskName':'"+t.name+"','status':'"+erstatus(t.status)+"'}"%>
+  <% if t != project.tasks.last%>
+  <%temp = temp + ","%>
+  <%end%>
+  <%end%>
+
+  var tasks = [<%= raw temp%>];
+
+  var taskStatus = {
+    "running" : "running",
+    "scheduled" : "scheduled",
+    "stoped" : "stoped",
+    "ended" : "ended",
+    "waiting" : "waiting"
+  };
+  <% @tasknames = []%>
+
+  <% for task in project.tasks%>
+  <% @tasknames << task.name%>
+  <%end%>
+  var taskNames = <%= raw @tasknames.flatten%>
+
+  tasks.sort(function(a, b) {
+    return a.endDate - b.endDate;
+  });
+  var maxDate = tasks[tasks.length - 1].endDate;
+  tasks.sort(function(a, b) {
+    return a.startDate - b.startDate;
+  });
+  var minDate = tasks[0].startDate;
+
+  var format = "%d";
+
+  var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
+  gantt(tasks);
+  console.log(gantt);
+   $("[class=chart]:eq(1)").css("display","none");
 });
-var maxDate = tasks[tasks.length - 1].endDate;
-tasks.sort(function(a, b) {
-  return a.startDate - b.startDate;
-});
-var minDate = tasks[0].startDate;
 
-var format = "%d";
-
-var gantt = d3.gantt().taskTypes(taskNames).taskStatus(taskStatus).tickFormat(format);
-gantt(tasks);
 </script>

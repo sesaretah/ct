@@ -1,0 +1,14 @@
+<li class="messages-item padding-5">
+  <%= link_to '/labs/view_content/'+ lab.id.to_s,:remote => true  do%>
+
+  <span class="messages-item-from"><%= lab.name%></span>
+  <div class="messages-item-time">
+    <span class="text">
+
+    </span>
+  </div>
+  <span class="messages-item-subject"></span>
+  <span class="messages-item-content"></span>
+  <div class="messages-item-time" style="margin-top:17px"></div>
+  <%end%>
+</li>

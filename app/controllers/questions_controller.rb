@@ -36,8 +36,21 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user_id = current_user.id
+    @tags = params[:tags].split(',')
+    @tagged = []
+
+
     respond_to do |format|
       if @question.save
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.create(taggable_id: @question.id, taggable_type: 'Question', tag_id: @tag.id)
+          end
+        end
         format.html { redirect_to "/questions?question_id=#{@question.id}", notice: 'Question was successfully created.' }
         format.json { render :show, status: :created, location: @question }
       else
@@ -50,8 +63,25 @@ class QuestionsController < ApplicationController
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
+    @tags = params[:tags].split(',')
+    @tagged = []
+    for prev in Tagging.where(taggable_id: @question.id, taggable_type: 'Question')
+      prev.destroy
+    end
     respond_to do |format|
       if @question.update(question_params)
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.where(taggable_id: @question.id, taggable_type: 'Question', tag_id: @tag.id).first
+            if @tagging.blank?
+              @tagging = Tagging.create(taggable_id: @question.id, taggable_type: 'Question', tag_id: @tag.id)
+            end
+          end
+        end
         format.html { redirect_to @question, notice: 'Question was successfully updated.' }
         format.json { render :show, status: :ok, location: @question }
       else

@@ -33,8 +33,9 @@
 <div class="navbar-title">
   <span><%= t(:main_menu)%></span>
 </div>
+
 <ul class="main-navigation-menu">
-  <li>
+  <li  <% if params[:controller] == 'blogs'%> <%= "class = active "%> <%end%>>
     <a href="/blogs">
       <div class="item-content">
         <div class="item-media">
@@ -47,7 +48,7 @@
     </a>
   </li>
 
-  <li>
+  <li  <% if params[:controller] == 'channels'%> <%= "class = active "%> <%end%>>
     <a href="/channels">
       <div class="item-content">
         <div class="item-media">
@@ -60,7 +61,7 @@
     </a>
   </li>
 
-  <li>
+  <li <% if params[:controller] == 'groups'%> <%= "class = active "%> <%end%>>
     <a href="/groups">
       <div class="item-content">
         <div class="item-media">
@@ -73,7 +74,7 @@
     </a>
   </li>
 
-  <li>
+  <li <% if params[:controller] == 'events'%> <%= "class = active "%> <%end%>>
     <a href="/events">
       <div class="item-content">
         <div class="item-media">
@@ -86,7 +87,7 @@
     </a>
   </li>
 
-  <li>
+  <li <% if params[:controller] == 'questions'%> <%= "class = active "%> <%end%>>
     <a href="/questions">
       <div class="item-content">
         <div class="item-media">
@@ -99,7 +100,7 @@
     </a>
   </li>
 
-  <li>
+  <li <% if params[:controller] == 'projects'%> <%= "class = active "%> <%end%>>
     <a href="/projects">
       <div class="item-content">
         <div class="item-media">
@@ -113,11 +114,35 @@
   </li>
 
 
+  <li <% if params[:controller] == 'courses'%> <%= "class = active "%> <%end%>>
+    <a href="/courses">
+      <div class="item-content">
+        <div class="item-media">
+          <i class="ti-blackboard"></i>
+        </div>
+        <div class="item-inner">
+          <span class="title"><%= t(:courses)%></span>
+        </div>
+      </div>
+    </a>
+  </li>
 
 
+  <li <% if params[:controller] == 'labs'%> <%= "class = active "%> <%end%>>
+    <a href="/labs">
+      <div class="item-content">
+        <div class="item-media">
+          <i class="fa fa-flask"></i>
+        </div>
+        <div class="item-inner">
+          <span class="title"><%= t(:labs)%></span>
+        </div>
+      </div>
+    </a>
+  </li>
 
 
-  <li>
+  <li <% if params[:controller] == 'profiles'%> <%= "class = active "%> <%end%>>
     <a href="/profiles">
       <div class="item-content">
         <div class="item-media">
@@ -129,7 +154,7 @@
       </div>
     </a>
   </li>
-  <li>
+  <li <% if params[:controller] == 'messages'%> <%= "class = active "%> <%end%>>
     <a href="/messages">
       <div class="item-content">
         <div class="item-media">

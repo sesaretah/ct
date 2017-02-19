@@ -1,0 +1,34 @@
+
+<div id='preportlist'>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th><%= t(:user)%></th>
+        <th><%= t(:detail)%></th>
+        <th><%= t(:status)%></th>
+        <th><%= t(:attachment)%></th>
+
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <% task.preports.each do |r| %>
+      <tr class="warning">
+        <td><%= r.user.profile.name%> <%= r.user.profile.surename%></td>
+        <td><%= r.detail %></td>
+        <td><%= r.status %></td>
+        <td><%= link_to r.document.url do %>
+            <i class="fa fa-file"></i>
+        <%end%></td>
+        <td>
+          <%= link_to r, method: :delete, :remote => true, data: { confirm: 'Are you sure?' } do%>
+          <i class="fa fa-trash-o" style=" vertical-align: middle;"></i>
+          <%end%>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

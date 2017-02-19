@@ -1,110 +1,117 @@
 <div id='task-form'>
-  <div class="container-fluid container-fullw bg-white">
-    <div class="row">
-      <div class="col-md-12">
-        <% if task.id == nil%>
-        <h5 class="over-title"> <span class="text-bold"><%= t(:enter_new_task)%></span></h5>
-        <%else%>
-        <h5 class="over-title"> <span class="text-bold"><%= t(:edit_education)%></span></h5>
-
-        <%end%>
-        <div class="panel panel-white">
-          <div class="panel-body">
-            <%= form_for task, :remote => true do |f| %>
-            <% if task.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-              <ul>
-                <% task.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-            <% end %>
-
-            <div class='row'>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <%= f.label :name %><br>
-                  <%= f.text_field :name %>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <%= f.label :description %><br>
-                  <%= f.text_area :description %>
-                </div>
-              </div>
-            </div>
-
-            <div class='row'>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <%= f.label :start_date %><br>
-                  <% if task.id == nil%>
-                  <% @start_date = JalaliDate.to_jalali(Time.now)%>
-                  <%else%>
-                  <% @start_date = JalaliDate.to_jalali(task.start_date)%>
-                  <%end%>
-                  <%=t :day%><%= select_tag  "task_start_date_dd", options_for_select(1..31, @start_date.day) %>/
-                  <%=t :month%><%= select_tag "task_start_date_mm", options_for_select(1..12, @start_date.month) %>/
-                  <%=t :year%><%= select_year(@start_date.year, {:start_year => @start_date.year, :end_year => 1370}, {:name =>"task_start_date_yyyy"}) %>
-
-                  <% f.date_select :start_date %>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="form-group">
-                  <%= f.label :due_date %><br>
-                  <% if task.id == nil%>
-                  <% @due_date = JalaliDate.to_jalali(Time.now)%>
-                  <%else%>
-                  <% @due_date = JalaliDate.to_jalali(task.start_date)%>
-                  <%end%>
-                  <%=t :day%><%= select_tag  "task_due_date_dd", options_for_select(1..31, @due_date.day) %>/
-                  <%=t :month%><%= select_tag "task_due_date_mm", options_for_select(1..12, @due_date.month) %>/
-                  <%=t :year%><%= select_year(@due_date.year, {:start_year => 1400, :end_year => @due_date.year}, {:name =>"task_due_date_yyyy"}) %>
-
-                  <% f.date_select :due_date %>
-                </div>
-              </div>
-            </div>
-            <div class='row'>
-              <div class="col-md-3">
-                <div class="form-group">
-                  <%= f.label :status %><br>
-                  <%= f.select( :status, status, {}, {:class => "form-control"})  %>
-                  <% f.number_field :status %>
-                </div>
-              </div>
-            </div>
-            <%= hidden_field_tag :project, project.id%>
-
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel-group accordion" id="accordion">
+      <div class="panel panel-white">
+        <div class="panel-heading">
+          <h5 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true">
+              <i class="fa fa-plus-square-o" style=" vertical-align: middle; color: #007AFF;"></i> <%=t :add_or_edit_task%>
+            </a></h5>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse" aria-expanded="true" onClick="event.stopPropagation();">
             <div class="panel-body">
-              <% for partner in project.users %>
-              <div class="checkbox clip-check check-primary checkbox-inline">
-                <%@chk = ''%>
-                <% if task.id != nil%>
+              <% if task.id == nil%>
+              <h5 class="over-title"> <span class="text-bold"><%= t(:enter_new_task)%></span></h5>
+              <%else%>
+              <h5 class="over-title"> <span class="text-bold"><%= t(:edit_education)%></span></h5>
+              <%end%>
+              <%= form_for task, :remote => true do |f| %>
+              <% if task.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+                <ul>
+                  <% task.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+              <% end %>
+
+              <div class='row'>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <%= f.label :name %><br>
+                    <%= f.text_field :name %>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <%= f.label :description %><br>
+                    <%= f.text_area :description %>
+                  </div>
+                </div>
+              </div>
+
+              <div class='row'>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <%= f.label :start_date %><br>
+                    <% if task.id == nil%>
+                    <% @start_date = JalaliDate.to_jalali(Time.now)%>
+                    <%else%>
+                    <% @start_date = JalaliDate.to_jalali(task.start_date)%>
+                    <%end%>
+                    <%=t :day%><%= select_tag  "task_start_date_dd", options_for_select(1..31, @start_date.day) %>/
+                    <%=t :month%><%= select_tag "task_start_date_mm", options_for_select(1..12, @start_date.month) %>/
+                    <%=t :year%><%= select_year(@start_date.year, {:start_year => @start_date.year, :end_year => 1370}, {:name =>"task_start_date_yyyy"}) %>
+
+                    <% f.date_select :start_date %>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <%= f.label :due_date %><br>
+                    <% if task.id == nil%>
+                    <% @due_date = JalaliDate.to_jalali(Time.now)%>
+                    <%else%>
+                    <% @due_date = JalaliDate.to_jalali(task.due_date)%>
+                    <%end%>
+                    <%=t :day%><%= select_tag  "task_due_date_dd", options_for_select(1..31, @due_date.day) %>/
+                    <%=t :month%><%= select_tag "task_due_date_mm", options_for_select(1..12, @due_date.month) %>/
+                    <%=t :year%><%= select_year(@due_date.year, {:start_year => 1400, :end_year => @due_date.year}, {:name =>"task_due_date_yyyy"}) %>
+
+                    <% f.date_select :due_date %>
+                  </div>
+                </div>
+              </div>
+              <div class='row'>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <%= f.label :status %><br>
+                    <%= f.select( :status, status, {}, {:class => "form-control"})  %>
+                    <% f.number_field :status %>
+                  </div>
+                </div>
+              </div>
+              <%= hidden_field_tag :project, project.id%>
+
+              <div class="panel-body">
+                <% for partner in project.users %>
+                <div class="checkbox clip-check check-primary checkbox-inline">
+                  <%@chk = ''%>
+                  <% if task.id != nil%>
                   <% @assignmnet = Assignment.where(task_id: task.id, user_id: partner.id).first%>
                   <% if !@assignmnet.blank? %>
-                    <% @chk = 'checked'%>
+                  <% @chk = 'checked'%>
                   <%end%>
-                <%end%>
-                <input type="checkbox" id="checkbox<%= partner.id%>" name="chk-<%= partner.id%>" value="1" <%= @chk%> >
-                <label for="checkbox<%= partner.id%>">
+                  <%end%>
+                  <input type="checkbox" id="checkbox<%= partner.id%>" name="chk-<%= partner.id%>" value="1" <%= @chk%> >
+                  <label for="checkbox<%= partner.id%>">
                     <%= image_tag partner.profile.avatar(:thumb)%>
-                </label>
+                  </label>
+                </div>
+                <%end%>
               </div>
-              <%end%>
-            </div>
 
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary pull-left">
-                <%= t(:submit)%> <i class="fa fa-arrow-circle-left"></i>
-              </button>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary pull-left">
+                  <%= t(:submit)%> <i class="fa fa-arrow-circle-left"></i>
+                </button>
+              </div>
+              <% end %>
             </div>
-            <% end %>
           </div>
         </div>
       </div>

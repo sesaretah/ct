@@ -1,0 +1,1 @@
+json.array! @preports, partial: 'preports/preport', as: :preport

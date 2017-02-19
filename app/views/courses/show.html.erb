@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @course.name %>
+</p>
+
+<p>
+  <strong>Course type:</strong>
+  <%= @course.course_type %>
+</p>
+
+<p>
+  <strong>Course field:</strong>
+  <%= @course.course_field %>
+</p>
+
+<p>
+  <strong>Course grade:</strong>
+  <%= @course.course_grade %>
+</p>
+
+<p>
+  <strong>Course points:</strong>
+  <%= @course.course_points %>
+</p>
+
+<p>
+  <strong>Lecturer:</strong>
+  <%= @course.lecturer_id %>
+</p>
+
+<p>
+  <strong>Course targets:</strong>
+  <%= @course.course_targets %>
+</p>
+
+<p>
+  <strong>Course results:</strong>
+  <%= @course.course_results %>
+</p>
+
+<p>
+  <strong>Course covered:</strong>
+  <%= @course.course_covered %>
+</p>
+
+<p>
+  <strong>Course softwares:</strong>
+  <%= @course.course_softwares %>
+</p>
+
+<p>
+  <strong>Problems period:</strong>
+  <%= @course.problems_period %>
+</p>
+
+<p>
+  <strong>Garding mechanism:</strong>
+  <%= @course.garding_mechanism %>
+</p>
+
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<%= link_to 'Back', courses_path %>

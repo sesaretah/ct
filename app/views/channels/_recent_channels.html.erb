@@ -1,0 +1,14 @@
+<div class="tab-pane fade" id="recent-channels">
+  <ul class="list-group">
+    <%= link_to new_channel_path do%>
+    <li class="list-group-item">
+      <i class="fa fa-plus"></i> <%=t :add_new_channel%>
+    </li>
+    <%end%>
+  </ul>
+  <ul class="messages-list relative top-0">
+    <% for c in current_user.channels%>
+    <%= render partial: 'channels/item', locals: {channel: c, now: channel}%>
+    <%end%>
+  </ul>
+</div>

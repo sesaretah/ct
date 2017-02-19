@@ -55,6 +55,7 @@ $(function () {
       data.submit();
     },
     done: function (e, data) {
+      console.log('yayy');
       console.log(data.result)
       var url = '/comments/render_partial/'+ data.result.id+'?page='+<%= page%>
       $.get(url,
@@ -66,7 +67,4 @@ $(function () {
     }
   });
 });
-
-
-
 </script>

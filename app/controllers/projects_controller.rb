@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
+    @project = Project.find_by_id(params[:project_id])
     #render layout: false
   end
 

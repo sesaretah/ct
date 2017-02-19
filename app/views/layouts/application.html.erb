@@ -36,7 +36,7 @@
 	<!-- start: CLIP-TWO CSS -->
 	<link rel="stylesheet" href="/assets/styles.css">
 	<link rel="stylesheet" href="/assets/plugins.css">
-	<link rel="stylesheet" href="/assets/themes/theme-1.css" id="skin_color" />
+	<link rel="stylesheet" href="/assets/themes/theme-1.css"/>
 
 	<link href="/assets/video-js.min.css" rel="stylesheet">
 	<link href="/assets/bootstrap-editable.css" rel="stylesheet">
@@ -47,6 +47,9 @@
 	<link rel="stylesheet" href="/assets/bootstrap-tokenfield.css"/>
 	<link rel="stylesheet" href="/assets/tokenfield-typeahead.css"/>
 	<link rel="stylesheet" href="/assets/gantt.css"/>
+	<link rel="stylesheet" href="/assets/jquery-ui.css"/>
+	<link rel="stylesheet" href="/assets/notifIt.css"/>
+
 
 
 	<%= csrf_meta_tags %>
@@ -68,9 +71,10 @@
 		</div>
 		<%= render :partial => "layouts/footer"%>
 	</div>
-
+	<% if params[:controller] == 'channels' || params[:controller] == 'groups' || params[:controller] == 'events'%>
 	<script src="/assets/jquery/jquery.min.js"></script>
 	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
+	<%end%>
 	<script src="/assets/modernizr/modernizr.js"></script>
 	<script src="/assets/jquery-cookie/jquery.cookie.js"></script>
 	<script src="/assets/perfect-scrollbar/perfect-scrollbar.min.js"></script>
@@ -104,5 +108,16 @@
 
 	});
 	</script>
+
+<% if !notice.blank?%>
+	<script>
+	$( document ).ready(function() {
+		notif({
+			msg: "<%=t notice%>",
+			type: "info"
+		});
+	});
+	</script>
+	<%end%>
 </body>
 </html>
