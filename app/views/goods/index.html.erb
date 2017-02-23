@@ -1,0 +1,96 @@
+<div class="wrap-content container padding-right-0" id="container">
+  <div class="col-md-12 padding-right-0 padding-left-0" >
+    <div class=" col-md-3 padding-right-0 padding-left-0 " >
+      <div class="tabbable padding-right-0 padding-left-0 ">
+        <ul id="myTab1" class="nav nav-tabs">
+          <li class="active">
+            <a href="#myTab1_example1" data-toggle="tab" aria-expanded="false">
+              <i class="fa fa-clock-o"></i>
+              <%t :events_you_joined%>
+            </a>
+          </li>
+          <li class="">
+            <a href="#myTab1_example3" data-toggle="tab" aria-expanded="true">
+              <i class="fa fa-plug"></i>
+              <%t :events_you_manage%>
+            </a>
+          </li>
+          <li class="">
+            <a href="#myTab1_example4" data-toggle="tab" aria-expanded="true">
+              <i class="fa fa-search"></i>
+              <%t :events_you_manage%>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade active in" id="myTab1_example1">
+            <ul class="list-group">
+              <%= link_to edit_profile_path(current_user.profile) do%>
+              <li class="list-group-item">
+                <i class="fa fa-edit"></i> <%=t :edit_your_profile%>
+              </li>
+              <%end%>
+            </ul>
+            <ul class="messages-list relative top-0">
+              <% for p in Profile.all%>
+              <%= render partial: 'profiles/item', locals: {profile: p}%>
+              <%end%>
+            </ul>
+
+
+          </div>
+          <div class="tab-pane fade" id="myTab1_example2">
+            <ul class="messages-list relative top-0">
+              <% for e in Event.all%>
+              <%= render partial: 'events/item', locals: {event: e}%>
+              <%end%>
+            </ul>
+          </div>
+          <div class="tab-pane fade " id="myTab1_example3">
+
+          </div>
+          <div class="tab-pane fade " id="myTab1_example4">
+            <div>
+              <%= form_tag '/profiles/profile_search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
+              <div class="form-group">
+                <%= text_field_tag :q, '' , {:class=>"form-control", :id => "nav-search-input", :placeholder => "#{t(:search)}"}%>
+
+                <button class="btn search-button" type="submit">
+                  <i class="ti-search"></i>
+                </button>
+
+              </div>
+              <%end%>
+            </div>
+            <div id='search-results'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+<div id='profile-detail'>
+    <div class="col-md-7 padding-right-0 padding-left-0" >
+      <div class="panel panel-white no-radius">
+        <div class="panel-heading border-light">
+          <h4 class="panel-title"></h4>
+          <ul class="panel-heading-tabs border-light">
+            <li class="panel-tools">
+              <a data-original-title="Refresh" data-toggle="tooltip" data-placement="top" class="btn btn-transparent btn-sm panel-refresh" href="#"><i class="ti-reload"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="panel-body border-light">
+          <div class=" height-500">
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

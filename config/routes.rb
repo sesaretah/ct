@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :sub_categories
+
+  resources :categories
+
+  resources :goods
+
   resources :labs
 
   resources :taggings

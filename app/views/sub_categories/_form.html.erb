@@ -1,0 +1,48 @@
+<div id='sub-category-form'>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <% if sub_category.id == nil%>
+        <h5 class="over-title"> <span class="text-bold"><%= t(:enter_new_sub_category)%></span></h5>
+        <%else%>
+        <h5 class="over-title"> <span class="text-bold"><%= t(:edit_sub_category)%></span></h5>
+
+        <%end%>
+        <div class="panel panel-white">
+          <div class="panel-body">
+            <% @sub_category = sub_category%>
+            <%= form_for @sub_category , :remote => true do |f| %>
+            <% if @sub_category.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@sub_category.errors.count, "error") %> prohibited this sub_category from being saved:</h2>
+
+              <ul>
+                <% @sub_category.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+            <% end %>
+
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <%= f.label :name %><br>
+                  <%= f.text_field :name %>
+                </div>
+              </div>
+            </div>
+            <%= f.hidden_field :category_id, value: category.id%>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary pull-left">
+                <%= t(:submit)%> <i class="fa fa-arrow-circle-left"></i>
+              </button>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

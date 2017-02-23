@@ -1,0 +1,22 @@
+<div id='subcategorylist'>
+<table class='table'>
+  <thead>
+    <tr>
+      <th><%= t(:name)%></th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% category.sub_categories.each do |sub| %>
+      <tr>
+        <td><%= sub.name %></td>
+        <td><%= link_to t(:edit), edit_sub_category_path(sub), :remote => true %></td>
+        <td><%= link_to t(:destroy), sub, method: :delete, :remote => true, data: { confirm: 'Are you sure?' } %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

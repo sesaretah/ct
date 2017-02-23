@@ -1,0 +1,32 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:category)%> <%= @category.name %></h1>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <h4><%=t :list_of_sub_categories%></h4>
+      <%= render partial: 'sub_categories/list', locals: {category: @category}%>
+      <%= render partial: 'sub_categories/form', locals: {category: @category, sub_category: SubCategory.new}%>
+    </div>
+    <div class="row">
+      <div class='pull-left margin-top-10'>
+        <%= link_to t(:edit), edit_category_path(@category) %> |
+        <%= link_to t(:back), categories_path %>
+      </div>
+    </div>
+  </div>
+</div>

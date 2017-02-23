@@ -141,6 +141,19 @@
     </a>
   </li>
 
+  <li <% if params[:controller] == 'courses'%> <%= "class = active "%> <%end%>>
+    <a href="/goods">
+      <div class="item-content">
+        <div class="item-media">
+          <i class="ti-shopping-cart"></i>
+        </div>
+        <div class="item-inner">
+          <span class="title"><%= t(:bazar)%></span>
+        </div>
+      </div>
+    </a>
+  </li>
+
 
   <li <% if params[:controller] == 'profiles'%> <%= "class = active "%> <%end%>>
     <a href="/profiles">
@@ -167,39 +180,24 @@
     </a>
   </li>
   <li class="">
-								<a href="javascript:void(0)">
-									<div class="item-content">
-										<div class="item-media">
-											<i class="ti-settings"></i>
-										</div>
-										<div class="item-inner">
-											<span class="title"><%= t(:settings)%></span><i class="icon-arrow"></i>
-										</div>
-									</div>
-								</a>
-								<ul class="sub-menu" style="display: none;">
-									<li>
-										<a href="/roles">
-											<span><%= t(:roles)%></span>
-										</a>
-									</li>
-                  <li>
-                    <a href="/artypes">
-                      <span><%= t(:artypes)%></span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/setypes">
-                      <span><%= t(:setypes)%></span>
-                    </a>
-                  </li>
-
-
-								</ul>
-							</li>
-
-
-</ul>
+    <a href="javascript:void(0)">
+      <div class="item-content">
+        <div class="item-media">
+          <i class="ti-settings"></i>
+        </div>
+        <div class="item-inner">
+          <span class="title"><%= t(:settings)%></span><i class="icon-arrow"></i>
+        </div>
+      </div>
+    </a>
+    <ul class="sub-menu" style="display: none;">
+      <li>
+        <a href="/categories">
+          <span><%= t(:categories_of_bazar)%></span>
+        </a>
+      </li>
+    </li>
+  </ul>
 </nav>
 </div>
 </div>

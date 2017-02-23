@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170216193926) do
+ActiveRecord::Schema.define(version: 20170223151910) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content",     limit: 65535
@@ -39,6 +39,12 @@ ActiveRecord::Schema.define(version: 20170216193926) do
     t.datetime "updated_at",                               null: false
     t.text     "description", limit: 65535
     t.boolean  "delta",       limit: 1,     default: true, null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "channels", force: :cascade do |t|
@@ -125,6 +131,18 @@ ActiveRecord::Schema.define(version: 20170216193926) do
     t.integer  "g_type",              limit: 4
     t.boolean  "delta",               limit: 1,     default: true, null: false
     t.integer  "i_type",              limit: 4
+  end
+
+  create_table "goods", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.text     "description",     limit: 65535
+    t.string   "price",           limit: 255
+    t.integer  "user_id",         limit: 4
+    t.integer  "category_id",     limit: 4
+    t.integer  "sub_category_id", limit: 4
+    t.date     "deadline"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "groupings", force: :cascade do |t|
@@ -287,6 +305,13 @@ ActiveRecord::Schema.define(version: 20170216193926) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.integer  "role",       limit: 4
+  end
+
+  create_table "sub_categories", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.integer  "category_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "taggings", force: :cascade do |t|

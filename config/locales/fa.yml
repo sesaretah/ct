@@ -276,6 +276,10 @@ fa:
         question:
           content: 'متن'
           title: 'موضوع'
+        category:
+          name: 'نام'
+        sub_category:
+          name: 'نام'
         preport:
           detail: 'شرح'
           status: 'وضعیت'
@@ -325,6 +329,16 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  categories_of_bazar: 'دسته بندی های جمعه بازار'
+  edit_sub_category: 'ویرایش زیر دسته'
+  enter_new_sub_category: 'زیر دسته جدید اضافه کنید'
+  list_of_sub_categories: 'لیست زیر دسته ها'
+  category: 'دسته بندی'
+  categories: 'دسته بندی ها'
+  list_of_categories: 'لیست دسته بندی ها'
+  bazar: 'جمعه بازار'
+  new_category: 'دسته بندی جدید'
+  please_enter_new_category_data: 'اطلاعات مورد نیاز را وارد کنید'
   channel_was_successfully_created: 'کانال با موفقیت ایجاد شد'
   channel_was_successfully_updated: 'اطلاعات کانال با موفقیت بروزرسانی شد'
   group_was_successfully_created: 'گروه با موفقیت ایجاد شد'
