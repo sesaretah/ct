@@ -1,45 +1,123 @@
-<%= form_for(@good) do |f| %>
-  <% if @good.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@good.errors.count, "error") %> prohibited this good from being saved:</h2>
-
-      <ul>
-      <% @good.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:new_good)%></h1>
+        <span class="mainDescription"><%= t(:please_enter_new_good_data)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
     </div>
-  <% end %>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"></span></h5>
+        <div class="panel panel-white">
+          <div class="panel-body">
+            <%= form_for @good, html: { multipart: true } do |f| %>
+            <% if @good.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@good.errors.count, "error") %> prohibited this good from being saved:</h2>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+              <ul>
+                <% @good.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+            <% end %>
+
+            <div class="row">
+              <div class="form-group col-xs-3">
+              <%= f.label :name %><br>
+              <%= f.text_field :name , :class => "form-control" %>
+            </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-6">
+              <%= f.label :description %><br>
+              <%= f.text_area :description , :class => "form-control" %>
+            </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-3">
+              <%= f.label :price %>(<%=t :toman%>)<br>
+              <%= f.text_field :price , :class => "form-control" %>
+            </div>
+            </div>
+            <div class="row">
+              <div class="  selectwrap form-group col-xs-3">
+              <%= f.label :category_id %><br>
+              <%= f.select :category_id, Category.all.collect {|p| [p.name, p.id]},{},{:class => "  form-control"}%>
+              <% f.number_field :category_id , :class => "form-control" %>
+            </div>
+            </div>
+            <div class="row">
+              <div class=" selectwrap form-group col-xs-3">
+              <%= f.label :sub_category_id %><br>
+              <%= f.select :sub_category_id, Category.first.sub_categories.all.collect {|p| [p.name, p.id]},{},{:class => "  form-control"}%>
+            </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :deadline %><br>
+                <% if @good.id == nil%>
+                <% @now = JalaliDate.to_jalali(Time.now)%>
+                <%else%>
+                <% @now = JalaliDate.to_jalali(@good.deadline)%>
+                <%end%>
+                <%=t :day%><%= select_tag  "good_deadline_dd", options_for_select(1..31, @now.day) %>/
+                <%=t :month%><%= select_tag "good_deadline_mm", options_for_select(1..12, @now.month) %>/
+                <%=t :year%><%= select_year(@now.year, {:start_year => @now.year, :end_year => @now.year}, {:name =>"good_deadline_yyyy"}) %>
+
+              </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-xs-4">
+                    <%= f.label :avatar %><br>
+                  <%= f.file_field :avatar %>
+                </div>
+              </div>
+
+
+            <div class="row top30">
+              <div class="form-group col-xs-1 pull-left">
+                <%= content_tag :button, :type => :submit, :class => "btn btn-o btn-primary" do %>
+                <i class="icon-ok bigger-110"></i>
+                <%=t :submit%>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-  <div class="field">
-    <%= f.label :category_id %><br>
-    <%= f.number_field :category_id %>
-  </div>
-  <div class="field">
-    <%= f.label :sub_category_id %><br>
-    <%= f.number_field :sub_category_id %>
-  </div>
-  <div class="field">
-    <%= f.label :deadline %><br>
-    <%= f.date_select :deadline %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+
+<script>
+$(document).ready(function(){
+   $('#good_category_id').change(function(){
+       var value = $(this).val()
+       $.ajax({
+          type: 'get',
+          url: '/categories/subs/1',
+          data: {category_id: value},
+          success: function(data){
+            $('#good_sub_category_id').html(data)
+          }
+       })
+   })
+})
+</script>

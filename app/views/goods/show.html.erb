@@ -1,39 +1,85 @@
-<p id="notice"><%= notice %></p>
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:good)%></h1>
+        <span class="mainDescription"></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
 
-<p>
-  <strong>Name:</strong>
-  <%= @good.name %>
-</p>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
 
-<p>
-  <strong>Description:</strong>
-  <%= @good.description %>
-</p>
+      <div class="col-md-12">
+        <div class="panel panel-white no-border">
+          <div class="col-sm-12">
+            <div class="panel panel-white no-radius">
+              <div class="panel-body">
+                <%= image_tag @good.avatar.url(:medium) %>
+                <div class="row">
+                  <div class="form-group col-xs-4">
+                    <strong><%=t :name%>:</strong>
+                    <%= @good.name %>
+                  </div>
+                </div>
 
-<p>
-  <strong>Price:</strong>
-  <%= @good.price %>
-</p>
+                <div class="row">
+                <div class="form-group col-xs-4">
+                  <strong><%=t :description%>:</strong>
+                  <%= @good.description %>
+                </div>
+                </div>
 
-<p>
-  <strong>User:</strong>
-  <%= @good.user_id %>
-</p>
+                <div class="row">
+                <div class="form-group col-xs-4">
+                  <strong><%=t :price%>:</strong>
+                  <%= @good.price %><%=t :toman%>
+                </div>
+                </div>
 
-<p>
-  <strong>Category:</strong>
-  <%= @good.category_id %>
-</p>
+                <div class="row">
+                <div class="form-group col-xs-4">
+                  <strong><%=t :category%>:</strong>
+                  <%= Category.find_by_id(@good.category_id).name %>
+                </div>
+                </div>
 
-<p>
-  <strong>Sub category:</strong>
-  <%= @good.sub_category_id %>
-</p>
+                <div class="row">
+                <div class="form-group col-xs-4">
+                  <strong><%=t :sub_category%>:</strong>
+                  <%= SubCategory.find_by_id(@good.sub_category_id).name %>
+                </div>
+                </div>
 
-<p>
-  <strong>Deadline:</strong>
-  <%= @good.deadline %>
-</p>
 
-<%= link_to 'Edit', edit_good_path(@good) %> |
-<%= link_to 'Back', goods_path %>
+                <div class="row">
+                <div class="form-group col-xs-4">
+                  <strong><%=t :deadline%>:</strong>
+                  <span>	<% @jalali = JalaliDate.to_jalali(@good.deadline)%>
+                    <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%></span>
+                </div>
+                </div>
+
+                <div class="row">
+                  <div class="form-group col-xs-2 pull-left">
+                <%= link_to t(:edit), edit_good_path(@good) %> |
+                <%= link_to t(:back), goods_path %>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

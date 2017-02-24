@@ -234,6 +234,14 @@ fa:
             p_type: 'نوع کانال'
             g_type: 'نوع دعوت'
             i_type: 'افراد دعوت شده'
+        good:
+            name: 'عنوان'
+            description: 'توضیحات'
+            price: 'قیمت'
+            category_id: 'دسته بندی'
+            sub_category_id: 'زیر دسته'
+            deadline: 'مهلت'
+            avatar: 'عکس'
         blog:
             title: ' نام وبلاگ'
             description: 'توضیحات'
@@ -329,6 +337,13 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  good: 'آگهی'
+  deadline: 'انتشار آگهی تا'
+  sub_category: 'زیر دسته'
+  price: 'قیمت'
+  toman: 'تومان'
+  new_good: 'تبلیغ جدید'
+  please_enter_new_good_data: 'اطلاعات مورد نیاز را وارد کنید'
   categories_of_bazar: 'دسته بندی های جمعه بازار'
   edit_sub_category: 'ویرایش زیر دسته'
   enter_new_sub_category: 'زیر دسته جدید اضافه کنید'

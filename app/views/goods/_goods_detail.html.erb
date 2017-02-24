@@ -1,0 +1,26 @@
+<div id='good-detail'>
+  <div class="col-md-12 padding-right-0 padding-left-0">
+    <div class="panel panel-white">
+      <div class="panel-body">
+        <% for good in goods%>
+        <div class="col-sm-3">
+          <div class="panel panel-white no-radius text-center">
+            <div class="panel-body" style="min-height: 180px; max-height: 180px; overflow: scroll;">
+              <%= image_tag good.avatar.url(:thumb) %>
+              <p class="text-small margin-top-10">
+                <%= good.description.truncate(40, separator: ' ')%>
+              </p>
+              <p class="text-small" style='position: absolute;margin-left: auto;margin-right: auto;left: 0;right: 0;bottom:15px;'>
+                <%= good.price%><%=t :toman%>
+              </p>
+              <p class="links cl-effect-1" style='position: absolute;margin-left: auto;margin-right: auto;left: 0;right: 0;bottom:0;'>
+                <%= link_to t(:view), good_path(good)%>
+              </p>
+            </div>
+          </div>
+        </div>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

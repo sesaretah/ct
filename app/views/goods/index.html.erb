@@ -25,19 +25,17 @@
         <div class="tab-content">
           <div class="tab-pane fade active in" id="myTab1_example1">
             <ul class="list-group">
-              <%= link_to edit_profile_path(current_user.profile) do%>
+              <%= link_to new_good_path do%>
               <li class="list-group-item">
-                <i class="fa fa-edit"></i> <%=t :edit_your_profile%>
+                <i class="fa fa-edit"></i> <%=t :new_good%>
               </li>
               <%end%>
             </ul>
-            <ul class="messages-list relative top-0">
-              <% for p in Profile.all%>
-              <%= render partial: 'profiles/item', locals: {profile: p}%>
+            <ul class="list-group">
+              <% for c in Category.all%>
+              <%= render partial: 'categories/item', locals: {category: c}%>
               <%end%>
             </ul>
-
-
           </div>
           <div class="tab-pane fade" id="myTab1_example2">
             <ul class="messages-list relative top-0">
@@ -70,8 +68,8 @@
 
 
 
-<div id='profile-detail'>
-    <div class="col-md-7 padding-right-0 padding-left-0" >
+
+    <div class="col-md-9 padding-right-0 padding-left-0" >
       <div class="panel panel-white no-radius">
         <div class="panel-heading border-light">
           <h4 class="panel-title"></h4>
@@ -82,15 +80,9 @@
           </ul>
         </div>
         <div class="panel-body border-light">
-          <div class=" height-500">
-
-
-            </div>
-
-          </div>
+          <%= render partial: 'goods/goods_detail', locals: {goods: Good.all} %>
         </div>
       </div>
     </div>
-
   </div>
 </div>

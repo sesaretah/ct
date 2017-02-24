@@ -1,6 +1,15 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
+
+  def subs
+      @category = Category.find(params[:category_id])
+      @subs = []
+      for sub in   @category.sub_categories
+          @subs << "<option value='"+ sub.id.to_s + "'>" + sub.name + "</option>"
+      end
+      render :json => @subs
+  end
   # GET /categories
   # GET /categories.json
   def index

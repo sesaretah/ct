@@ -2,7 +2,7 @@ class Comment < ActiveRecord::Base
   has_attached_file :document
   validates_attachment :document, :content_type => {:content_type => %w(application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
 
-  has_attached_file :avatar, :styles => { :medium => "140x140>", :thumb => "35x35>", :large => "500x500>"  }, :default_url => "/assets/profile-pic.jpg"
+  has_attached_file :avatar, :styles => { :medium => "140x140>", :thumb => "35x35>", :large => "500x500>"  }, :default_url => "/assets/noimage-:style.jpg"
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   belongs_to :user

@@ -25,6 +25,9 @@ class GoodsController < ApplicationController
   # POST /goods.json
   def create
     @good = Good.new(good_params)
+    @good.deadline = JalaliDate.to_gregorian(params[:good_deadline_yyyy],params[:good_deadline_mm],params[:good_deadline_dd])
+    @good.user_id = current_user.id
+
 
     respond_to do |format|
       if @good.save
@@ -40,6 +43,7 @@ class GoodsController < ApplicationController
   # PATCH/PUT /goods/1
   # PATCH/PUT /goods/1.json
   def update
+    @good.user_id = current_user.id
     respond_to do |format|
       if @good.update(good_params)
         format.html { redirect_to @good, notice: 'Good was successfully updated.' }
@@ -69,6 +73,6 @@ class GoodsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def good_params
-      params.require(:good).permit(:name, :description, :price, :user_id, :category_id, :sub_category_id, :deadline)
+      params.require(:good).permit(:name, :description,:avatar, :price, :user_id, :category_id, :sub_category_id, :deadline)
     end
 end
