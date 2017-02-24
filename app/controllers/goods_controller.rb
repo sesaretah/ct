@@ -1,6 +1,26 @@
 class GoodsController < ApplicationController
   before_action :set_good, only: [:show, :edit, :update, :destroy]
 
+  def search
+    @sub_category_ids = []
+    params.each do |name, value|
+      if name =~ /chk-(.+)$/
+        @sub_category_ids << $1
+      end
+    end
+
+    @goods = Good.search params[:q], :with => {sub_category_id: @sub_category_ids },:star => true
+  end
+
+  def view_content
+    @goods = Good.where(sub_category_id: params[:sub_category])
+    if params[:page].blank?
+      @page = 1
+    else
+      @page = params[:page].to_i
+    end
+  end
+
   # GET /goods
   # GET /goods.json
   def index

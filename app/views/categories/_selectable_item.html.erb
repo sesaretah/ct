@@ -1,0 +1,17 @@
+<li class="list-group-item">
+  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href='#sub-sel-<%= category.id%>' aria-expanded="false">
+    <i class="fa fa-angle-left" style="vertical-align: middle;"> </i> <%= category.name%>
+  </a>
+  <ul id="sub-sel-<%= category.id%>" class="panel-collapse collapse" aria-expanded="true" style="list-style: none;" onClick="event.stopPropagation();">
+    <% for sub in category.sub_categories%>
+    <li>
+      <div class="checkbox clip-check check-primary checkbox-inline">
+        <input type="checkbox"  id="checkbox<%= sub.id%>" name='chk-<%= sub.id%>' value="1">
+        <label for="checkbox<%= sub.id%>">
+          <%= sub.name%>
+        </label>
+      </div>
+    </li>
+    <%end%>
+  </ul>
+</li>

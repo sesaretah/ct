@@ -5,9 +5,12 @@
         <% for good in goods%>
         <div class="col-sm-3">
           <div class="panel panel-white no-radius text-center">
-            <div class="panel-body" style="min-height: 180px; max-height: 180px; overflow: scroll;">
+            <div class="panel-body" style="min-height: 220px; max-height: 220px; overflow: scroll;">
               <%= image_tag good.avatar.url(:thumb) %>
               <p class="text-small margin-top-10">
+                  <%= good.name%>
+              </p>
+              <p class="text-small margin-top-5">
                 <%= good.description.truncate(40, separator: ' ')%>
               </p>
               <p class="text-small" style='position: absolute;margin-left: auto;margin-right: auto;left: 0;right: 0;bottom:15px;'>

@@ -4,7 +4,7 @@
   <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href='#sub-<%= category.id%>' aria-expanded="true">
     <i class="fa fa-angle-left" style="vertical-align: middle;"> </i> <%= category.name%>
   </a>
-  <ul id="sub-<%= category.id%>" class="panel-collapse collapse" aria-expanded="true" onClick="event.stopPropagation();">
+  <ul id="sub-<%= category.id%>" class="panel-collapse collapse" aria-expanded="true">
     <% for sub in category.sub_categories%>
     <li>
       <%= link_to 'goods/view_content/1?sub_category='+sub.id.to_s ,:remote => true  do%>
