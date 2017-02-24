@@ -5,7 +5,7 @@ class GoodsController < ApplicationController
     @sub_category_ids = []
     params.each do |name, value|
       if name =~ /chk-(.+)$/
-        @sub_category_ids << $1
+        @sub_category_ids << $1.to_i
       end
     end
 
