@@ -1,4 +1,5 @@
 module ApplicationHelper
+  require 'securerandom'
   def sexs
     @options = [
       [t(:male), t(:male)],

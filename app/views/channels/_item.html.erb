@@ -1,11 +1,6 @@
-<% @bg = ''%>
-<% if !now.blank?%>
-<% if  now.id == channel.id %>
-<% @bg = 'bg-light-grey'%>
-<%end%>
-<%end%>
-<li class="messages-item padding-5 <%= @bg%>">
-  <%= link_to 'channels/view_content/'+ channel.id.to_s,:remote => true  do%>
+<% @random_string = SecureRandom.hex%>
+<li class="messages-item padding-5 <%= @bg%>" id='<%=@random_string %>'>
+  <%= link_to 'channels/view_content/'+ channel.id.to_s+'?rnd='+@random_string,:remote => true  do%>
   <%= image_tag channel.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
   <span class="messages-item-from"><%= channel.name%></span>
   <div class="messages-item-time">

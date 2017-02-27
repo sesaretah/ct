@@ -1,14 +1,11 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   def search
-    @events = Event.search params[:q], :star => true
-    @excerpter = ThinkingSphinx::Excerpter.new 'event_core', params[:q]   , {
-    :before_match    => '<span class="bg-warning">',
-    :after_match     => '</span>',
-    :chunk_separator => ' &#8230; ' # ellipsis
-  }
+    if !params[:q].blank?
+      @events = Event.where("name LIKE ? OR description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
+    #search params[:q], :star => true
   end
-
 
   def view_content
     @event = Event.find(params[:id])
@@ -17,9 +14,10 @@ class EventsController < ApplicationController
     else
       @page = params[:page].to_i
     end
+    @rnd = params[:rnd]
   end
 
-  
+
   def upload_avatar
     @event = Event.find(params[:id])
   end

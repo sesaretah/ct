@@ -1,4 +1,4 @@
 $("#channel-detail").replaceWith("<%= escape_javascript(render(:partial => 'channels/detail', locals: {channel: @channel, page:@page })) %>");
-$("#top-channels").replaceWith("<%= escape_javascript(render(:partial => 'channels/top_channels', locals: {channel: @channel })) %>");
-$("#recent-channels").replaceWith("<%= escape_javascript(render(:partial => 'channels/recent_channels', locals: {channel: @channel })) %>");
+$("li").removeClass("bg-light-grey");
+$("#<%= @rnd%>").addClass( "bg-light-grey" );
 $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @channel, page:@page })) %>");

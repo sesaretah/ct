@@ -1,6 +1,14 @@
 class ChannelsController < ApplicationController
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
 
+  def search
+    if !params[:q].blank?
+      @channels = Channel.where("name LIKE ? OR description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
+    #search params[:q], :star => true
+  end
+
+
   def join
     @channel = Channel.find(params[:id])
     @involvement = Involvement.create(user_id: current_user.id, channel_id: @channel.id, role: 3)
@@ -16,6 +24,7 @@ class ChannelsController < ApplicationController
     else
       @page = params[:page].to_i
     end
+    @rnd = params[:rnd]
   end
 
   def upload_avatar

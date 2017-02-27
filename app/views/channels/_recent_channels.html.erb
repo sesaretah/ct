@@ -8,7 +8,7 @@
   </ul>
   <ul class="messages-list relative top-0">
     <% for c in current_user.channels%>
-    <%= render partial: 'channels/item', locals: {channel: c, now: channel}%>
+    <%= render partial: 'channels/item', locals: {channel: c}%>
     <%end%>
   </ul>
 </div>

@@ -70,6 +70,7 @@ Rails.application.routes.draw do
   match "/channels/upload_avatar/:id" => "channels#upload_avatar", :via => :get
   match "/channels/view_content/:id" => "channels#view_content", :via => :get
   match "/channels/join/:id" => "channels#join", :via => :get
+  match "/channels/search/:id" => "channels#search", :via => :get
 
 
   match "/groups/change_avatar/:id" => "groups#change_avatar", :via => :get

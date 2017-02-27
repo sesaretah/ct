@@ -1,12 +1,10 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   def search
-    @groups = Group.search params[:q], :star => true
-    @excerpter = ThinkingSphinx::Excerpter.new 'group_core', params[:q]   , {
-    :before_match    => '<span class="bg-warning">',
-    :after_match     => '</span>',
-    :chunk_separator => ' &#8230; ' # ellipsis
-  }
+    if !params[:q].blank?
+      @groups = Group.where("name LIKE ? OR description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
+    #search params[:q], :star => true
   end
 
   def view_content
@@ -16,6 +14,7 @@ class GroupsController < ApplicationController
     else
       @page = params[:page].to_i
     end
+    @rnd = params[:rnd]
   end
 
   def upload_avatar

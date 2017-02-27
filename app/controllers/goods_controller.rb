@@ -9,7 +9,12 @@ class GoodsController < ApplicationController
       end
     end
 
-    @goods = Good.search params[:q], :with => {sub_category_id: @sub_category_ids },:star => true
+    if !@sub_category_ids.blank?
+      @goods = Good.where("(name LIKE ? OR description LIKE ?) AND sub_category_id IN(?)", "%#{params[:q]}%", "%#{params[:q]}%", @sub_category_ids)
+    else
+      @goods = Good.where("name LIKE ? OR description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
+    #Good.search params[:q], :with => {sub_category_id: @sub_category_ids },:star => true
   end
 
   def view_content
