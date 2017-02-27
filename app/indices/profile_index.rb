@@ -1,4 +1,4 @@
-ThinkingSphinx::Index.define :profile,  :with => :active_record, :delta => true do
+ThinkingSphinx::Index.define :profile,  :with => :active_record do
   indexes name
   indexes surename
 end

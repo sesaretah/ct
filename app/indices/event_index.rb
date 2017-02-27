@@ -1,4 +1,4 @@
-ThinkingSphinx::Index.define :event,  :with => :active_record, :delta => true do
+ThinkingSphinx::Index.define :event,  :with => :active_record do
   indexes name
   indexes description
 end

@@ -1,3 +1,3 @@
-ThinkingSphinx::Index.define :lab,  :with => :active_record, :delta => true do
+ThinkingSphinx::Index.define :lab,  :with => :active_record do
   indexes name
 end
