@@ -1,6 +1,12 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
+  def search
+    if !params[:q].blank?
+      @questions = Question.where("title LIKE ? OR content LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
+  end
+
   def view_content
     @question = Question.find(params[:id])
     if params[:page].blank?
@@ -8,6 +14,7 @@ class QuestionsController < ApplicationController
     else
       @page = params[:page].to_i
     end
+    @rnd = params[:rnd]
   end
 
   # GET /questions

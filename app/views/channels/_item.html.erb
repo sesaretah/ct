@@ -10,6 +10,12 @@
   </div>
   <span class="messages-item-subject"></span>
   <span class="messages-item-content"><%= truncate(channel.description, :length => 20)%></span>
-  <div class="messages-item-time" style="margin-top:17px"></div>
+  <%end%>
+  <% if channel.user_id == current_user.id%>
+  <div class="messages-item-time" style="margin-top:10px">
+    <%= link_to edit_channel_path(channel) do%>
+      <i class="fa fa-edit" style="vertical-align: middle;"></i>
+    <%end%>
+  </div>
   <%end%>
 </li>

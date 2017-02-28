@@ -2,16 +2,14 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
   def search
-    @profiles = Profile.search params[:q], :star => true
-    @excerpter = ThinkingSphinx::Excerpter.new 'profile_core', params[:q]   , {
-    :before_match    => '<span class="bg-warning">',
-    :after_match     => '</span>',
-    :chunk_separator => ' &#8230; ' # ellipsis
-  }
+    if !params[:q].blank?
+      @profiles = Profile.where("name LIKE ? OR surename LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
   end
 
   def view_content
     @profile = Profile.find(params[:id])
+    @rnd = params[:rnd]
   end
 
   def advanced_search

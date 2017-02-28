@@ -1,5 +1,6 @@
-<li class="messages-item padding-5">
-  <%= link_to 'profiles/view_content/'+ profile.id.to_s,:remote => true  do%>
+<% @random_string = SecureRandom.hex%>
+<li class="messages-item padding-5 <%= @bg%>" id='<%=@random_string %>'>
+  <%= link_to 'profiles/view_content/'+ profile.id.to_s+'?rnd='+@random_string,:remote => true  do%>
   <%= image_tag profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
   <span class="messages-item-from"><%= profile.name%></span>
   <div class="messages-item-time">

@@ -4,12 +4,12 @@
       <div class="tabbable padding-right-0 padding-left-0 ">
         <ul id="myTab1" class="nav nav-tabs">
           <li class="">
-            <a href="#myTab1_example1" data-toggle="tab" aria-expanded="false">
+            <a href="#myTab1_example1" data-toggle="tab" aria-expanded="true">
               <i class="fa fa-users"></i>
             </a>
           </li>
           <li class="active">
-            <a href="#myTab1_example2" data-toggle="tab" aria-expanded="false">
+            <a href="#myTab1_example2" data-toggle="tab" aria-expanded="true">
               <i class="fa fa-trophy"></i>
             </a>
           </li>
@@ -26,13 +26,13 @@
 
           <div class="tab-content">
             <div class="tab-pane fade" id="myTab1_example1">
-              <%=t :groups_you_joined%>
+              <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i><%=t :groups_you_joined%></p>
               <hr />
               <%= render partial: 'groups/my_groups'%>
             </div>
 
             <div class="tab-pane fade active in" id="myTab1_example2">
-              <%=t :popular_groups%>
+              <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i><%=t :popular_groups%></p>
               <hr />
               <ul class="list-group">
                 <%= link_to new_group_path do%>
@@ -49,7 +49,7 @@
             </div>
 
             <div class="tab-pane fade" id="myTab1_example3">
-              <%=t :groups_you_manage%>
+              <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i><%=t :groups_you_manage%></p>
               <hr />
             </div>
             <div class="tab-pane fade " id="myTab1_example4">

@@ -1,5 +1,6 @@
-<li class="messages-item padding-5">
-  <%= link_to 'questions/view_content/'+ question.id.to_s,:remote => true  do%>
+<% @random_string = SecureRandom.hex%>
+<li class="messages-item padding-5 <%= @bg%>" id='<%=@random_string %>'>
+  <%= link_to 'questions/view_content/'+ question.id.to_s+'?rnd='+@random_string,:remote => true  do%>
   <%= image_tag question.user.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
   <span class="messages-item-from"><%= question.title%></span>
   <div class="messages-item-time">
@@ -9,6 +10,13 @@
   </div>
   <span class="messages-item-subject"></span>
   <span class="messages-item-content"><%= truncate(question.content, :length => 20)%></span>
-  <div class="messages-item-time" style="margin-top:17px"></div>
+
+  <%end%>
+  <% if question.user_id == current_user.id%>
+  <div class="messages-item-time" style="margin-top:10px">
+    <%= link_to edit_question_path(question) do%>
+      <i class="fa fa-edit" style="vertical-align: middle;"></i>
+    <%end%>
+  </div>
   <%end%>
 </li>

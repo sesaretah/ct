@@ -111,6 +111,7 @@ Rails.application.routes.draw do
   match "/messages/view_content/:id" => "messages#view_content", :via => :get
 
   match "/questions/view_content/:id" => "questions#view_content", :via => :get
+  match "/questions/search/:id" => "questions#search", :via => :get
 
   match "/votes/vote_up/:id" => "votes#vote_up", :via => :get
   match "/votes/vote_down/:id" => "votes#vote_down", :via => :get

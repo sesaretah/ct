@@ -337,6 +337,9 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  questions_you_asked: 'سوالاتی که شما پرسیده اید'
+  popular_questions: 'سوالات متداول'
+  questions_related_to: 'سوالات مرتبط با شما'
   good: 'آگهی'
   deadline: 'انتشار آگهی تا'
   sub_category: 'زیر دسته'
@@ -499,14 +502,15 @@ fa:
   popular_events: 'رخدادهای محبوب'
   events_you_manage: 'مرتبط با شما'
   add_new_event: 'افزودن رخداد جدید'
-  groups_you_joined: 'گروههای شما'
+  groups_you_joined: 'گروههایی که عضو آن هستید'
   popular_groups: 'گروههای محبوب'
   groups_you_manage: 'مرتبط با شما'
   add_new_group: 'افزودن گروه جدید'
   add_new_channel: 'افزودن کانال جدید'
   channels_you_manage: 'مرتبط با شما'
+  channels_related_to_you: 'کانال های مرتبط با شما'
   popular_channels: 'کانال های محبوب'
-  channels_you_joined: 'کانال های شما'
+  channels_you_joined: 'کانال هایی که عضو آن هستید'
   events: 'رخداد‌ها'
   groups: 'گروه‌ها'
   channels: 'کانال‌ها'

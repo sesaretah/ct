@@ -33,10 +33,13 @@
         <%= render partial: 'channels/recent_channels', locals: {channel: @channel}%>
         <%= render partial: 'channels/top_channels', locals: {channel: @channel}%>
         <div class="tab-pane fade " id="myTab1_example3">
+          <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :channels_related_to_you%></p>
+          <hr/>
 
         </div>
 
         <div class="tab-pane fade " id="myTab1_example4">
+
           <div>
             <%= form_tag '/channels/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
             <div class="form-group">
