@@ -1,0 +1,1 @@
+json.partial! "qitems/qitem", qitem: @qitem

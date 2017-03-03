@@ -155,6 +155,32 @@
   </li>
 
 
+    <li <% if params[:controller] == 'researches'%> <%= "class = active "%> <%end%>>
+      <a href="/researches">
+        <div class="item-content">
+          <div class="item-media">
+            <i class="fa fa-mortar-board"></i>
+          </div>
+          <div class="item-inner">
+            <span class="title"><%= t(:researches)%></span>
+          </div>
+        </div>
+      </a>
+    </li>
+
+    <li <% if params[:controller] == 'questionaires'%> <%= "class = active "%> <%end%>>
+      <a href="/questionaires">
+        <div class="item-content">
+          <div class="item-media">
+            <i class="fa fa-microphone"></i>
+          </div>
+          <div class="item-inner">
+            <span class="title"><%= t(:questionaires)%></span>
+          </div>
+        </div>
+      </a>
+    </li>
+
   <li <% if params[:controller] == 'profiles'%> <%= "class = active "%> <%end%>>
     <a href="/profiles">
       <div class="item-content">

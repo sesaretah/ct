@@ -1,0 +1,25 @@
+<%= form_for(@qitem) do |f| %>
+  <% if @qitem.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@qitem.errors.count, "error") %> prohibited this qitem from being saved:</h2>
+
+      <ul>
+      <% @qitem.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_field :content %>
+  </div>
+  <div class="field">
+    <%= f.label :questionaire_id %><br>
+    <%= f.number_field :questionaire_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -25,7 +25,11 @@
         <div class="tab-content">
           <div class="tab-pane fade active in" id="myTab1_example1">
             <ul class="list-group">
-
+              <%= link_to new_lab_path do%>
+              <li class="list-group-item">
+                <i class="fa fa-plus"></i> <%=t :new_lab%>
+              </li>
+              <%end%>
             </ul>
             <ul class="messages-list relative top-0">
               <% for l in Lab.all%>
@@ -47,7 +51,7 @@
           </div>
           <div class="tab-pane fade " id="myTab1_example4">
             <div>
-              <%= form_tag '/labs/lab_search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
+              <%= form_tag '/labs/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
               <div class="form-group">
                 <%= text_field_tag :q, '' , {:class=>"form-control", :id => "nav-search-input", :placeholder => "#{t(:search)}"}%>
 

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :qitems
+
+  resources :questionaires
+
   resources :sub_categories
 
   resources :categories
@@ -143,6 +147,7 @@ Rails.application.routes.draw do
     match "/labs/upload_avatar/:id" => "labs#upload_avatar", :via => :get
     match "/labs/view_content/:id" => "labs#view_content", :via => :get
     match "/labs/search/:id" => "labs#search", :via => :get
+    match "/labs/cropper/:id" => "labs#cropper", :via => :get
 
     match "/categories/subs/:id" => "categories#subs", :via => :get
 

@@ -1,14 +1,23 @@
-<li class="messages-item padding-5">
-  <%= link_to '/labs/view_content/'+ lab.id.to_s,:remote => true  do%>
-
+<% @random_string = SecureRandom.hex%>
+<li class="messages-item padding-5 <%= @bg%>" id='<%=@random_string %>'>
+  <%= link_to 'labs/view_content/'+ lab.id.to_s+'?rnd='+@random_string,:remote => true  do%>
+  <%= image_tag lab.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
   <span class="messages-item-from"><%= lab.name%></span>
   <div class="messages-item-time">
     <span class="text">
-
+      <% link_to edit_lab_path(lab) do%>
+        <%=t :edit%>
+      <%end%>
     </span>
   </div>
   <span class="messages-item-subject"></span>
-  <span class="messages-item-content"></span>
-  <div class="messages-item-time" style="margin-top:17px"></div>
+  <span class="messages-item-content"><%= truncate(lab.about, :length => 20)%></span>
+  <%end%>
+  <% if lab.user_id == current_user.id%>
+  <div class="messages-item-time" style="margin-top:10px">
+    <%= link_to edit_lab_path(lab) do%>
+      <i class="fa fa-edit" style="vertical-align: middle;"></i>
+    <%end%>
+  </div>
   <%end%>
 </li>

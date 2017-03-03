@@ -337,6 +337,8 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  questionaires: 'نظرسنجی ها'
+  researches: 'منتشر شده ها'
   Channel_was_successfully_updated: 'کانال با موفقیت بروزرسانی شد'
   select_button: 'انتخاب'
   avatar_crop: 'قسمت مورد نظر تصویر را انتخاب کنید'

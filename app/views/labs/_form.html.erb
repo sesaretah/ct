@@ -37,8 +37,8 @@
 
             <div class="row">
               <div class="form-group col-xs-6">
-                <%= f.label :name %><br>
-                <%= f.text_field :name, :class => "form-control" %>
+                * <%= f.label :name %><br>
+                <%= f.text_field :name , id: 'name', :class => "form-control" %>
               </div>
             </div>
             <div class="row">
@@ -65,9 +65,46 @@
                 <%= f.text_area :address, :class => "form-control" %>
               </div>
             </div>
+
+
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%if !@lab.avatar.blank?%>
+                <%= image_tag @lab.avatar(:medium), id: 'avatar',:class => "messages-item-avatar bordered border-primary"%>
+                <%else%>
+                <img id='avatar'></img>
+                <%end%>
+                <div class="fileUpload btn btn-o btn-light-purple">
+                  <%if @lab.avatar.blank?%>
+                  <span><i class="fa fa-camera" style='vertical-align:middle;'></i> <%=t :choose_a_file_for_avatar%>...</span>
+                  <%else%>
+                  <span><i class="fa fa-camera" style='vertical-align:middle;'></i> <%=t :change_photo%>...</span>
+                  <%end%>
+                  <%= f.file_field :avatar, class: "upload", onchange: "readURL(this);" %>
+                </div>
+              </div>
+            </div>
+
+            <script>
+            function readURL(input) {
+              if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                  $('#avatar')
+                  .attr('src', e.target.result)
+                  .width(120);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+              }
+            }
+            </script>
+
+
             <div class="row top30">
               <div class="form-group col-xs-1 pull-left">
-                <%= content_tag :button, :type => :submit, :class => "btn btn-o btn-primary" do %>
+                <%= content_tag :button, :type => :submit,id: 'subbtn', :class => "btn btn-o btn-primary" do %>
                 <i class="icon-ok bigger-110"></i>
                 <%=t :submit%>
                 <% end %>
@@ -80,3 +117,15 @@
     </div>
   </div>
 </div>
+
+<script>
+$(document).ready(function(){
+    $('#subbtn').attr('disabled',true);
+    $('#name').keyup(function(){
+        if($(this).val().length !=0)
+            $('#subbtn').attr('disabled', false);
+        else
+            $('#subbtn').attr('disabled',true);
+    })
+});
+</script>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Questionaires</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Question</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questionaires.each do |questionaire| %>
+      <tr>
+        <td><%= questionaire.question %></td>
+        <td><%= questionaire.user_id %></td>
+        <td><%= link_to 'Show', questionaire %></td>
+        <td><%= link_to 'Edit', edit_questionaire_path(questionaire) %></td>
+        <td><%= link_to 'Destroy', questionaire, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Questionaire', new_questionaire_path %>

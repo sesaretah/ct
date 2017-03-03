@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @qitem.content %>
+</p>
+
+<p>
+  <strong>Questionaire:</strong>
+  <%= @qitem.questionaire_id %>
+</p>
+
+<%= link_to 'Edit', edit_qitem_path(@qitem) %> |
+<%= link_to 'Back', qitems_path %>

@@ -2,18 +2,20 @@ class LabsController < ApplicationController
   before_action :set_lab, only: [:show, :edit, :update, :destroy]
 
   def search
-    @labs = Lab.search params[:q], :star => true
-    @excerpter = ThinkingSphinx::Excerpter.new 'lab_core', params[:q]   , {
-    :before_match    => '<span class="bg-warning">',
-    :after_match     => '</span>',
-    :chunk_separator => ' &#8230; ' # ellipsis
-  }
+    if !params[:q].blank?
+      @labs = Lab.where("name LIKE ? OR about LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
   end
 
   def view_content
     @lab = Lab.find(params[:id])
+    @rnd = params[:rnd]
   end
 
+  def cropper
+    @lab = Lab.find(params[:id])
+    @caller = params[:caller]
+  end
   # GET /labs
   # GET /labs.json
   def index
@@ -39,10 +41,10 @@ class LabsController < ApplicationController
   # POST /labs.json
   def create
     @lab = Lab.new(lab_params)
-
+    @lab.user_id = current_user.id
     respond_to do |format|
       if @lab.save
-        format.html { redirect_to '/labs?lab_id='+@lab.id, notice: 'Lab was successfully created.' }
+        format.html { redirect_to '/labs/cropper/'+@lab.id.to_s}
         format.json { render :show, status: :created, location: @lab }
       else
         format.html { render :new }
@@ -56,8 +58,11 @@ class LabsController < ApplicationController
   def update
     respond_to do |format|
       if @lab.update(lab_params)
-        format.html { redirect_to @lab, notice: 'Lab was successfully updated.' }
-        format.json { render :show, status: :ok, location: @lab }
+        if @lab.cropping?
+          format.html { redirect_to '/labs?lab_id='+@lab.id.to_s, notice: :Lab_was_successfully_updated }
+        else
+          format.html { redirect_to '/labs/cropper/'+@lab.id.to_s}
+        end
       else
         format.html { render :edit }
         format.json { render json: @lab.errors, status: :unprocessable_entity }
@@ -83,6 +88,6 @@ class LabsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lab_params
-      params.require(:lab).permit(:name, :about, :missions, :tel, :address)
+      params.require(:lab).permit(:name, :about, :missions, :tel, :address, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller)
     end
 end
