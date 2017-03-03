@@ -24,7 +24,7 @@ body {
 }
 
 header .navbar-header {
-  background: #223c84 !important;
+  background: #15266d !important;
   border-right-color: #c8c7cc !important;
   border-bottom-color: #c8c7cc !important;
 }
@@ -38,7 +38,7 @@ header .navbar-header .menu-toggler {
   color: #007aff !important;
 }
 header .navbar-collapse {
-  background: #223c84 !important;
+  background: #15266d !important;
   border-bottom-color: #c8c7cc !important;
   box-shadow: none !important;
 }
@@ -102,7 +102,7 @@ header .navbar-collapse .navbar-right .dot-badge {
 }
 header .dropdown-off-sidebar {
   border-left-color: #c8c7cc !important;
-  background: #223c84 !important;
+  background: #15266d !important;
   color: #ffffff !important;
 }
 @media (max-width: 991px) {
@@ -158,11 +158,11 @@ header .dropdown-off-sidebar {
 }
 #sidebar nav > ul > li.active {
 /*  background: #3a597a !important;* #f7b7c1 */
-background: #ef4239 !important;
+background: #cccfd1 !important;
 
 }
 #sidebar nav > ul > li.active:hover {
-  background: #ef4239 !important;
+  background: #cccfd1 !important;
 }
 @media (min-width: 992px) {
   #sidebar nav > ul > li.active:before {
