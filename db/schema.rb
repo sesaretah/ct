@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303104510) do
+ActiveRecord::Schema.define(version: 20170303130718) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content",     limit: 65535
@@ -330,9 +330,10 @@ ActiveRecord::Schema.define(version: 20170303104510) do
     t.string   "pub_type",    limit: 255
     t.string   "pub_name",    limit: 255
     t.string   "pub_authors", limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.integer  "user_id",     limit: 4
+    t.text     "abstract",    limit: 65535
   end
 
   create_table "seekings", force: :cascade do |t|

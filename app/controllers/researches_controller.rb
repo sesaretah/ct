@@ -1,6 +1,10 @@
 class ResearchesController < ApplicationController
   before_action :set_research, only: [:show, :edit, :update, :destroy]
 
+  def view_content
+    @research = Research.find(params[:id])
+    @rnd = params[:rnd]
+  end
   # GET /researches
   # GET /researches.json
   def index
@@ -86,6 +90,6 @@ class ResearchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def research_params(my_params)
-      my_params.permit(:name, :pub_year, :pub_type, :pub_name, :pub_authors)
+      my_params.permit(:name, :pub_year, :pub_type, :pub_name, :pub_authors, :abstract)
     end
 end

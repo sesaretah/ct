@@ -154,6 +154,8 @@ Rails.application.routes.draw do
     match "/goods/search/:id" => "goods#search", :via => :get
     match "/goods/view_content/:id" => "goods#view_content", :via => :get
 
+    match "/researches/view_content/:id" => "researches#view_content", :via => :get
+
   post 'upload' => 'upload#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

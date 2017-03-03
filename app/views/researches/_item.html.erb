@@ -1,0 +1,24 @@
+<% @random_string = SecureRandom.hex%>
+<li class="messages-item padding-5 <%= @bg%>" id='<%=@random_string %>'>
+
+  <%= link_to 'researches/view_content/'+ research.id.to_s+'?rnd='+@random_string,:remote => true  do%>
+ <i class="fa fa-2x fa-book messages-item-avatar" ></i>
+  <span class="messages-item-from"><%= research.name%></span>
+  <div class="messages-item-time">
+    <span class="text">
+      <% link_to edit_project_path(research) do%>
+        <%=t :edit%>
+      <%end%>
+    </span>
+  </div>
+  <span class="messages-item-subject"></span>
+  <span class="messages-item-content"><%= truncate(research.abstract, :length => 20)%></span>
+  <%end%>
+  <% if research.user_id == current_user.id%>
+  <div class="messages-item-time" style="margin-top:10px">
+    <%= link_to edit_research_path(research) do%>
+      <i class="fa fa-edit" style="vertical-align: middle;"></i>
+    <%end%>
+  </div>
+  <%end%>
+</li>

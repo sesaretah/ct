@@ -1,35 +1,92 @@
-<p id="notice"><%= notice %></p>
+<link rel="stylesheet" href="/assets/gantt.css"/>
+<script src="/assets/jdate.min.js"></script>
+<script src="/assets/d3.v3.min.js"></script>
+<script src="/assets/gantt-chart-d3.js"></script>
+<div class="wrap-content container padding-right-0" id="container">
+  <div class="col-md-12 padding-right-0 padding-left-0" >
+    <div class=" col-md-5 padding-right-0 padding-left-0 " >
+      <div class="tabbable padding-right-0 padding-left-0 ">
+        <ul id="myTab1" class="nav nav-tabs">
+          <li class="active">
+            <a href="#myTab1_example1" data-toggle="tab" aria-expanded="false">
+              <i class="fa fa-clock-o"></i>
+            </a>
+          </li>
+          <li class="">
+            <a href="#myTab1_example3" data-toggle="tab" aria-expanded="true">
+              <i class="fa fa-plug"></i>
+            </a>
+          </li>
+          <li class="">
+            <a href="#myTab1_example4" data-toggle="tab" aria-expanded="true">
+              <i class="fa fa-search"></i>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade active in" id="myTab1_example1">
+            <ul class="list-group">
+              <%= link_to new_research_path do%>
+              <li class="list-group-item">
+                <i class="fa fa-edit"></i> <%=t :new_research%>
+              </li>
+              <%end%>
+            </ul>
+            <ul class="messages-list relative top-0">
+              <% for r in Research.all%>
+              <%= render partial: 'researches/item', locals: {research: r}%>
+              <%end%>
+            </ul>
 
-<h1>Listing Researches</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Pub year</th>
-      <th>Pub type</th>
-      <th>Pub name</th>
-      <th>Pub authors</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+          </div>
+          <div class="tab-pane fade" id="myTab1_example2">
 
-  <tbody>
-    <% @researches.each do |research| %>
-      <tr>
-        <td><%= research.name %></td>
-        <td><%= research.pub_year %></td>
-        <td><%= research.pub_type %></td>
-        <td><%= research.pub_name %></td>
-        <td><%= research.pub_authors %></td>
-        <td><%= link_to 'Show', research %></td>
-        <td><%= link_to 'Edit', edit_research_path(research) %></td>
-        <td><%= link_to 'Destroy', research, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          </div>
+          <div class="tab-pane fade " id="myTab1_example3">
 
-<br>
+          </div>
+          <div class="tab-pane fade " id="myTab1_example4">
+            <div>
+              <%= form_tag '/researches/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
+              <div class="form-group">
+                <%= text_field_tag :q, '' , {:class=>"form-control", :id => "nav-search-input", :placeholder => "#{t(:search)}"}%>
 
-<%= link_to 'New Research', new_research_path %>
+                <button class="btn search-button" type="submit">
+                  <i class="ti-search"></i>
+                </button>
+
+              </div>
+              <%end%>
+            </div>
+            <div id='search-results'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <% if !@research.blank?%>
+    <%= render(:partial => 'researches/research_detail', locals: {research: @research }) %>
+    <%else%>
+<div id='research-detail'>
+    <div class="col-md-7 padding-right-0 padding-left-0" >
+      <div class="panel panel-white no-radius">
+        <div class="panel-heading border-light">
+          <h4 class="panel-title"></h4>
+          <ul class="panel-heading-tabs border-light">
+            <li class="panel-tools">
+              <a data-original-title="Refresh" data-toggle="tooltip" data-placement="top" class="btn btn-transparent btn-sm panel-refresh" href="#"><i class="ti-reload"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="panel-body ">
+
+          </div>
+        </div>
+      </div>
+      <%end%>
+    </div>
+
+  </div>
+</div>

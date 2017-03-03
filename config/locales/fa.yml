@@ -228,6 +228,7 @@ fa:
             pub_name: 'نام منتشر کننده'
             pub_authors: 'مولفین'
             pub_year: 'سال انتشار'
+            abstract: 'چکیده'
         channel:
             name: 'نام کانال'
             description: 'توضیحات'
@@ -337,6 +338,9 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  abstract: 'چکیده'
+  please_enter_new_research_data: 'اطلاعات مورد نیاز را وارد کنید'
+  new_research: 'منتشرشده جدید'
   questionaires: 'نظرسنجی ها'
   researches: 'منتشر شده ها'
   Channel_was_successfully_updated: 'کانال با موفقیت بروزرسانی شد'
