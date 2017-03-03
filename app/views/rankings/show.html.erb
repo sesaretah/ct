@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Rankable type:</strong>
+  <%= @ranking.rankable_type %>
+</p>
+
+<p>
+  <strong>Rankable:</strong>
+  <%= @ranking.rankable_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @ranking.user_id %>
+</p>
+
+<p>
+  <strong>Rank type:</strong>
+  <%= @ranking.rank_type %>
+</p>
+
+<%= link_to 'Edit', edit_ranking_path(@ranking) %> |
+<%= link_to 'Back', rankings_path %>

@@ -67,24 +67,37 @@
         </div>
         <hr/>
         <div class="row">
+          <% @soundness = Ranking.where(rankable_id: research.id, rankable_type: research.class.name, rank_type: 'soundness', user_id: current_user.id).first%>
+          <% @presentation = Ranking.where(rankable_id: research.id, rankable_type: research.class.name, rank_type: 'presentation', user_id: current_user.id).first%>
+          <% @novelty = Ranking.where(rankable_id: research.id, rankable_type: research.class.name, rank_type: 'novelty', user_id: current_user.id).first%>
+
+          <% if !@soundness.blank?%>
+            <%@soundness_value = @soundness.value%>
+          <%end%>
+          <% if !@presentation.blank?%>
+            <%@presentation_value = @presentation.value%>
+          <%end%>
+          <% if !@novelty.blank?%>
+            <%@novelty_value = @novelty.value%>
+          <%end%>
           <div class="col-md-4 padding-right-20 padding-left-0">
             <div class=" text-extra-large">
               <span class='text-small'>  <%=t :soundness %></span>
-              <input type="hidden" class="rating-tooltip" data-filled="fa fa-star margin-right-5 text-yellow" data-empty="fa fa-star-o margin-right-5" id='soundness'/>
+              <input type="hidden" class="rating-tooltip" data-filled="fa fa-star margin-right-5 text-yellow" data-empty="fa fa-star-o margin-right-5" id='soundness' value='<%= @soundness_value %>'/>
               <span class="label label-success"></span>
             </div>
           </div>
           <div class="col-md-4  padding-right-0 padding-left-0">
             <div class=" text-extra-large">
               <span class='text-small'>  <%=t :presentation %></span>
-              <input type="hidden" class="rating-tooltip" data-filled="fa fa-star margin-right-5 text-yellow" data-empty="fa fa-star-o margin-right-5" id='presentation'/>
+              <input type="hidden" class="rating-tooltip" data-filled="fa fa-star margin-right-5 text-yellow" data-empty="fa fa-star-o margin-right-5" id='presentation' value='<%= @presentation_value%>'/>
               <span class="label label-success"></span>
             </div>
           </div>
           <div class="col-md-4  padding-right-0 padding-left-0">
             <div class=" text-extra-large">
               <span class='text-small'>  <%=t :novelty %></span>
-              <input type="hidden" class="rating-tooltip" data-filled="fa fa-star margin-right-5 text-yellow" data-empty="fa fa-star-o margin-right-5" id='novelty'/>
+              <input type="hidden" class="rating-tooltip" data-filled="fa fa-star margin-right-5 text-yellow" data-empty="fa fa-star-o margin-right-5" id='novelty' value='<%= @novelty_value%>'/>
               <span class="label label-success"></span>
             </div>
           </div>
@@ -95,9 +108,36 @@
         $('#soundness').rating();
         $('#presentation').rating();
         $('#novelty').rating();
-        $('#rating').on('change', function () {
-          alert('Rating: ' + $(this).val());
+        $('#soundness').on('change', function () {
+          var url = '/rankings/remote/1?rankable_id='+ '<%= research.id%>' +'&rankable_type=' + '<%= research.class.name%>' + '&rank_type=' + 'soundness' + '&value=' + $(this).val();
+          $.get(url,
+            function(d) {
+              console.log(d);
+            }
+          );
         });
+
+        $('#presentation').on('change', function () {
+          var url = '/rankings/remote/1?rankable_id='+ '<%= research.id%>' +'&rankable_type=' + '<%= research.class.name%>' + '&rank_type=' + 'presentation' + '&value=' + $(this).val();
+          $.get(url,
+            function(d) {
+              console.log(d);
+            }
+          );
+        });
+
+        $('#novelty').on('change', function () {
+          var url = '/rankings/remote/1?rankable_id='+ '<%= research.id%>' +'&rankable_type=' + '<%= research.class.name%>' + '&rank_type=' + 'novelty' + '&value=' + $(this).val();
+          $.get(url,
+            function(d) {
+              console.log(d);
+            }
+          );
+        });
+
+
+
+
         </script>
       </div>
     </div>

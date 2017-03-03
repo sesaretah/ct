@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :rankings
+
   resources :qitems
 
   resources :questionaires
@@ -155,6 +157,8 @@ Rails.application.routes.draw do
     match "/goods/view_content/:id" => "goods#view_content", :via => :get
 
     match "/researches/view_content/:id" => "researches#view_content", :via => :get
+
+    match "/rankings/remote/:id" => "rankings#remote", :via => :get
 
   post 'upload' => 'upload#create'
   # The priority is based upon order of creation: first created -> highest priority.

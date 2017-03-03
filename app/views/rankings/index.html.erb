@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Rankings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rankable type</th>
+      <th>Rankable</th>
+      <th>User</th>
+      <th>Rank type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rankings.each do |ranking| %>
+      <tr>
+        <td><%= ranking.rankable_type %></td>
+        <td><%= ranking.rankable_id %></td>
+        <td><%= ranking.user_id %></td>
+        <td><%= ranking.rank_type %></td>
+        <td><%= link_to 'Show', ranking %></td>
+        <td><%= link_to 'Edit', edit_ranking_path(ranking) %></td>
+        <td><%= link_to 'Destroy', ranking, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ranking', new_ranking_path %>

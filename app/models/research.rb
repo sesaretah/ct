@@ -3,4 +3,6 @@ class Research < ActiveRecord::Base
   validates_attachment :document, :content_type => {:content_type => %w(application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
 
   belongs_to :user
+  has_many :researches, :as => :rankable, :dependent => :destroy
+
 end
