@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224195906) do
+ActiveRecord::Schema.define(version: 20170303084416) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content",     limit: 65535
@@ -81,21 +81,26 @@ ActiveRecord::Schema.define(version: 20170224195906) do
   end
 
   create_table "courses", force: :cascade do |t|
-    t.string   "name",              limit: 255
-    t.string   "course_type",       limit: 255
-    t.string   "course_field",      limit: 255
-    t.string   "course_grade",      limit: 255
-    t.integer  "course_points",     limit: 4
-    t.integer  "lecturer_id",       limit: 4
-    t.text     "course_targets",    limit: 65535
-    t.text     "course_results",    limit: 65535
-    t.text     "course_covered",    limit: 65535
-    t.string   "course_softwares",  limit: 255
-    t.string   "problems_period",   limit: 255
-    t.string   "garding_mechanism", limit: 255
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.boolean  "delta",             limit: 1,     default: true, null: false
+    t.string   "name",                limit: 255
+    t.string   "course_type",         limit: 255
+    t.string   "course_field",        limit: 255
+    t.string   "course_grade",        limit: 255
+    t.integer  "course_points",       limit: 4
+    t.integer  "lecturer_id",         limit: 4
+    t.text     "course_targets",      limit: 65535
+    t.text     "course_results",      limit: 65535
+    t.text     "course_covered",      limit: 65535
+    t.string   "course_softwares",    limit: 255
+    t.string   "problems_period",     limit: 255
+    t.string   "garding_mechanism",   limit: 255
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.boolean  "delta",               limit: 1,     default: true, null: false
+    t.string   "avatar_file_name",    limit: 255
+    t.string   "avatar_content_type", limit: 255
+    t.integer  "avatar_file_size",    limit: 4
+    t.datetime "avatar_updated_at"
+    t.integer  "user_id",             limit: 4
   end
 
   create_table "educations", force: :cascade do |t|
@@ -272,18 +277,23 @@ ActiveRecord::Schema.define(version: 20170224195906) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string   "name",         limit: 255
-    t.text     "aims",         limit: 65535
-    t.integer  "owner",        limit: 4
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.string   "project_type", limit: 255
-    t.string   "location",     limit: 255
-    t.text     "definition",   limit: 65535
-    t.text     "novelties",    limit: 65535
-    t.text     "methods",      limit: 65535
-    t.text     "standards",    limit: 65535
-    t.text     "outputs",      limit: 65535
+    t.string   "name",                limit: 255
+    t.text     "aims",                limit: 65535
+    t.integer  "owner",               limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "project_type",        limit: 255
+    t.string   "location",            limit: 255
+    t.text     "definition",          limit: 65535
+    t.text     "novelties",           limit: 65535
+    t.text     "methods",             limit: 65535
+    t.text     "standards",           limit: 65535
+    t.text     "outputs",             limit: 65535
+    t.string   "avatar_file_name",    limit: 255
+    t.string   "avatar_content_type", limit: 255
+    t.integer  "avatar_file_size",    limit: 4
+    t.datetime "avatar_updated_at"
+    t.integer  "user_id",             limit: 4
   end
 
   create_table "questions", force: :cascade do |t|

@@ -38,11 +38,6 @@
                     <div class="center">
                       <h4><%= @profile.name%> <%= @profile.surename%></h4>
                       <%= render :partial => 'crop'%>
-                      <div class="col-sm-12">
-                        <button id='edit' type="button" class="btn btn-wide btn-o btn-info">
-                          <%= t(:change_photo)%>
-                        </button>
-                      </div>
 
                       <div class="col-sm-12" style="margin-top:10px;">
                         <%= link_to edit_profile_path(@profile.id) do %>
@@ -159,46 +154,3 @@
   <%= render :partial => "crop_modal"%>
 </div>
 </div>
-  <script type="text/javascript">
-  $('#edit').click(function() {
-    $('input[type=file]').click();
-  });
-  $(function () {
-    $('#fileupload').fileupload({
-      dataType: 'json',
-      add: function (e, data) {
-        data.submit();
-      },
-      done: function (e, data) {
-        var ratio = parseInt(data.result.original_width) / parseInt(data.result.large_width);
-        $("#ratio").val(ratio);
-        $('#cropimage').replaceWith("<div id='cropimage'><img id='cropbox' src="+data.result.url+"/></div>");
-        jQuery(function($){
-          $("#cropmodal").appendTo("body").modal('show');
-        });
-        jQuery(function($){
-          var jcrop_api;
-          $('#cropbox').Jcrop({
-            onChange: update_crop,
-            onSelect: update_crop,
-            setSelect: [0, 0, 500, 500],
-            aspectRatio: 1
-
-          },function(){
-            jcrop_api = this;
-            jcrop_api.enable();
-          });
-        });
-      }
-    });
-  });
-  function update_crop(coords) {
-    var ratio = $("#ratio").val();
-    $("#crop_x").val(Math.round(coords.x * parseInt(ratio)));
-    $("#crop_y").val(Math.round(coords.y * parseInt(ratio)));
-    $("#crop_w").val(Math.round(coords.w * parseInt(ratio)));
-    $("#crop_h").val(Math.round(coords.h * parseInt(ratio)));
-  }
-
-
-  </script>

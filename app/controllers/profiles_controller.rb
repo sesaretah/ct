@@ -27,6 +27,11 @@ class ProfilesController < ApplicationController
     @profile = Profile.find(params[:id])
   end
 
+  def cropper
+    @profile = Profile.find(params[:id])
+    @caller = params[:caller]
+  end
+
 
   def crop
     @profile = Profile.find(params[:id])
@@ -91,7 +96,11 @@ class ProfilesController < ApplicationController
         if params[:caller] == 'reg'
           format.html { redirect_to '/registeration_steps?step=2'}
         else
-          format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
+        if @profile.cropping?
+          format.html { redirect_to '/', notice: :Profile_was_successfully_updated }
+        else
+          format.html { redirect_to '/profiles/cropper/'+@profile.id.to_s}
+        end
         end
         format.json { render action: 'crop' }
         if @profile.cropping?

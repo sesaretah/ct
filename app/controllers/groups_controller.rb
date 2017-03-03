@@ -21,6 +21,11 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
   end
 
+  def cropper
+    @group = Group.find(params[:id])
+    @caller = params[:caller]
+  end
+
 
   def crop
     @group = Group.find(params[:id])
@@ -62,7 +67,7 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.save
         @grouping = Grouping.create(group_id: @group.id, user_id: current_user.id, role: 1)
-        format.html { redirect_to '/groups/change_avatar/'+ @group.id.to_s, notice: :group_was_successfully_created }
+        format.html { redirect_to '/groups/cropper/'+@group.id.to_s}
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
@@ -76,12 +81,10 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
-        format.html { redirect_to '/groups/change_avatar/'+ @group.id.to_s, notice: :group_was_successfully_updated}
-        format.json { render action: 'crop' }
         if @group.cropping?
-          format.js { render action: 'crop', :locals => {:caller => @caller, :id => @group.id} }
+          format.html { redirect_to '/groups?group_id='+@group.id.to_s, notice: :Group_was_successfully_updated }
         else
-          format.js { render action: 'update' }
+          format.html { redirect_to '/groups/cropper/'+@group.id.to_s}
         end
       else
         format.html { render :edit }

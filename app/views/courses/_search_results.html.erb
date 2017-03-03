@@ -1,0 +1,7 @@
+<div id='search-results'>
+  <ul class="messages-list relative top-0">
+    <% for c in courses%>
+    <%= render partial: 'courses/item', locals: {course: c}%>
+    <%end%>
+  </ul>
+</div>

@@ -22,6 +22,11 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def cropper
+    @event = Event.find(params[:id])
+    @caller = params[:caller]
+  end
+
 
   def crop
     @event = Event.find(params[:id])
@@ -64,7 +69,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to '/events/change_avatar/'+ @event.id.to_s, notice: 'Event was successfully created.' }
+        format.html { redirect_to '/events/cropper/'+@event.id.to_s}
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -81,12 +86,10 @@ class EventsController < ApplicationController
         @event.event_date = JalaliDate.to_gregorian(params[:event_date_yyyy],params[:event_date_mm],params[:event_date_dd])
       end
       if @event.update(event_params)
-        format.html { redirect_to '/events/change_avatar/'+ @event.id.to_s, notice: 'Event was successfully updated.' }
-        format.json { render action: 'crop' }
         if @event.cropping?
-          format.js { render action: 'crop', :locals => {:caller => @caller, :id => @event.id} }
+          format.html { redirect_to '/events?event_id='+@event.id.to_s, notice: :Event_was_successfully_updated }
         else
-          format.js { render action: 'update' }
+          format.html { redirect_to '/events/cropper/'+@event.id.to_s}
         end
       else
         format.html { render :edit }

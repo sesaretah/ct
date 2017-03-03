@@ -337,6 +337,11 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  Channel_was_successfully_updated: 'کانال با موفقیت بروزرسانی شد'
+  select_button: 'انتخاب'
+  avatar_crop: 'قسمت مورد نظر تصویر را انتخاب کنید'
+  Profile_was_successfully_updated: 'پروفایل شما با موفقیت بروزرسانی شد'
+  choose_a_file_for_avatar: 'انتخاب تصویر'
   questions_you_asked: 'سوالاتی که شما پرسیده اید'
   popular_questions: 'سوالات متداول'
   questions_related_to: 'سوالات مرتبط با شما'

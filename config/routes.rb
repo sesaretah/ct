@@ -71,6 +71,7 @@ Rails.application.routes.draw do
   match "/channels/view_content/:id" => "channels#view_content", :via => :get
   match "/channels/join/:id" => "channels#join", :via => :get
   match "/channels/search/:id" => "channels#search", :via => :get
+  match "/channels/cropper/:id" => "channels#cropper", :via => :get
 
 
   match "/groups/change_avatar/:id" => "groups#change_avatar", :via => :get
@@ -78,12 +79,14 @@ Rails.application.routes.draw do
   match "/groups/upload_avatar/:id" => "groups#upload_avatar", :via => :get
   match "/groups/view_content/:id" => "groups#view_content", :via => :get
   match "/groups/search/:id" => "groups#search", :via => :get
+  match "/groups/cropper/:id" => "groups#cropper", :via => :get
 
   match "/events/change_avatar/:id" => "events#change_avatar", :via => :get
   match "/events/crop/:id" => "events#crop", :via => :get
   match "/events/upload_avatar/:id" => "events#upload_avatar", :via => :get
   match "/events/view_content/:id" => "events#view_content", :via => :get
   match "/events/search/:id" => "events#search", :via => :get
+  match "/events/cropper/:id" => "events#cropper", :via => :get
 
   match "/messages/view_content/:id" => "messages#view_content", :via => :get
 
@@ -107,6 +110,7 @@ Rails.application.routes.draw do
 
   match "/profiles/view_content/:id" => "profiles#view_content", :via => :get
   match "/profiles/profile_search/:id" => "profiles#search", :via => :get
+  match "/profiles/cropper/:id" => "profiles#cropper", :via => :get
 
   match "/messages/view_content/:id" => "messages#view_content", :via => :get
 
@@ -119,6 +123,8 @@ Rails.application.routes.draw do
   match "/tags/remoteq/:id" => "tags#remoteq", :via => :get
 
   match "/projects/view_content/:id" => "projects#view_content", :via => :get
+  match "/projects/cropper/:id" => "projects#cropper", :via => :get
+  match "/projects/search/:id" => "projects#search", :via => :get
 
   match "/partnerships/add_to_project/:id" => "partnerships#add_to_project", :via => :get
 
@@ -130,6 +136,7 @@ Rails.application.routes.draw do
     match "/courses/upload_avatar/:id" => "courses#upload_avatar", :via => :get
     match "/courses/view_content/:id" => "courses#view_content", :via => :get
     match "/courses/search/:id" => "courses#search", :via => :get
+    match "/courses/cropper/:id" => "courses#cropper", :via => :get
 
     match "/labs/change_avatar/:id" => "labs#change_avatar", :via => :get
     match "/labs/crop/:id" => "labs#crop", :via => :get

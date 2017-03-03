@@ -1,0 +1,62 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:avatar_crop)%></h1>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"></span></h5>
+        <div class="panel panel-white">
+          <div class="panel-body">
+
+            <%= image_tag @event.avatar.url(:large),:class => "img-responsive" ,:id => "cropbox" %>
+            <%= form_for @event do |form| %>
+            <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+            <%= form.hidden_field attribute, :id => attribute %>
+            <% end %>
+            <div class="row top30">
+              <div class="form-group col-xs-1">
+                <%= content_tag :button, :type => :submit, :class => "btn btn-o btn-primary" do %>
+                <i class="icon-ok bigger-110"></i>
+                <%=t :submit%>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+
+            <script>
+            $(function() {
+              $('#cropbox').Jcrop({
+                onChange: update_crop,
+                onSelect: update_crop,
+                setSelect: [0, 0, 500, 500],
+                aspectRatio: 1
+              });
+            });
+            function update_crop(coords) {
+              var ratio = <%= @event.avatar_geometry(:original).width %> / <%= @event.avatar_geometry(:large).width %>;
+              $('#crop_x').val(Math.floor(coords.x * ratio));
+              $('#crop_y').val(Math.floor(coords.y * ratio));
+              $('#crop_w').val(Math.floor(coords.w * ratio));
+              $('#crop_h').val(Math.floor(coords.h * ratio));
+            }
+            </script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

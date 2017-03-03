@@ -29,8 +29,9 @@
     </div>
     <div class="col-sm-6 padding-5  style='margin-left:0px;'">
 
+<% if event.event_date > Time.now%>
       <div class="row " style="direction: ltr;">
-        <% @e = DateTime.new(event.event_date.year, event.event_date.month, event.event_date.day, Event.find(1).start_time.hour, Event.find(1).start_time.min)  %>
+        <% @e = DateTime.new(event.event_date.year, event.event_date.month, event.event_date.day, event.start_time.hour, event.start_time.min)  %>
         <%@day = TimeDifference.between(Time.now, @e).in_days.to_i%>
         <% @hours = TimeDifference.between(Time.now, @e).in_hours.to_i - 24*@day%>
         <% @min = TimeDifference.between(Time.now, @e).in_minutes.to_i - 24*60*@day%>
@@ -40,6 +41,7 @@
         $('.counter').counter({});
         </script>
       </div>
+      <%end%>
 
       <div class="row padding-5 pull-left" style='margin-left:40px;'>
         <table class="table" style="margin-bottom: 0px; color:#007AFF;">

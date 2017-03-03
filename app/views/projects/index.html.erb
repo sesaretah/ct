@@ -29,9 +29,9 @@
         <div class="tab-content">
           <div class="tab-pane fade active in" id="myTab1_example1">
             <ul class="list-group">
-              <% link_to edit_profile_path(current_user.profile) do%>
+              <%= link_to new_project_path do%>
               <li class="list-group-item">
-                <i class="fa fa-edit"></i> <%=t :edit_your_profile%>
+                <i class="fa fa-edit"></i> <%=t :new_project%>
               </li>
               <%end%>
             </ul>
@@ -51,7 +51,7 @@
           </div>
           <div class="tab-pane fade " id="myTab1_example4">
             <div>
-              <%= form_tag '/projects/project_search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
+              <%= form_tag '/projects/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
               <div class="form-group">
                 <%= text_field_tag :q, '' , {:class=>"form-control", :id => "nav-search-input", :placeholder => "#{t(:search)}"}%>
 

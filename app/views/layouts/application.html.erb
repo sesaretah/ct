@@ -26,6 +26,8 @@
 	<!-- end: GOOGLE FONTS -->
 	<!-- start: MAIN CSS -->
 
+
+
 	<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap-rtl.min.css">
 	<link rel="stylesheet" href="/assets/fontawesome/css/font-awesome.min.css">
@@ -50,7 +52,6 @@
 	<link rel="stylesheet" href="/assets/gantt.css"/>
 	<link rel="stylesheet" href="/assets/jquery-ui.css"/>
 	<link rel="stylesheet" href="/assets/notifIt.css"/>
-
 
 
 	<%= csrf_meta_tags %>
@@ -97,6 +98,7 @@
 	<script src="/assets/bootstrap-tokenfield.js"></script>
 	<script src="/assets/d3.v3.min.js"></script>
 	<script src="/assets/gantt-chart-d3.js"></script>
+
 	<!-- end: MAIN JAVASCRIPTS -->
 	<!-- start: CLIP-TWO JAVASCRIPTS -->
 	<script src="/assets/main.js"></script>
@@ -115,7 +117,7 @@
 	$( document ).ready(function() {
 		notif({
 			msg: "<%=t notice%>",
-			type: "info"
+			type: "success"
 		});
 	});
 	</script>
