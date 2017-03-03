@@ -10,13 +10,15 @@
         </ul>
       </div>
       <div class="panel-body ">
+
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-10">
             <p>
               <%=t :title%>:
               <%= research.name%>
             </p>
           </div>
+
         </div>
         <div class="row">
           <div class="col-md-4">
@@ -41,20 +43,62 @@
         <div class="row">
           <div class="col-md-4">
             <p>
-            <%=t :pub_authors%>:
-            <%= research.pub_authors%>
+              <%=t :pub_authors%>:
+              <%= research.pub_authors%>
             </p>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-12">
             <p>
               <%=t :abstract%>:
               <%= research.abstract%>
             </p>
           </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-10 "></div>
+          <div class="col-md-2 ">
+            <%= link_to research.document.url do%>
+              <i class="fa fa-2x fa-file-pdf-o" style='color:red'></i>
+              <%end%>
+          </div>
+        </div>
         <hr/>
+        <div class="row">
+          <div class="col-md-4 padding-right-20 padding-left-0">
+            <div class=" text-extra-large">
+              <span class='text-small'>  <%=t :soundness %></span>
+              <input type="hidden" class="rating-tooltip" data-filled="fa fa-star margin-right-5 text-yellow" data-empty="fa fa-star-o margin-right-5" id='soundness'/>
+              <span class="label label-success"></span>
+            </div>
+          </div>
+          <div class="col-md-4  padding-right-0 padding-left-0">
+            <div class=" text-extra-large">
+              <span class='text-small'>  <%=t :presentation %></span>
+              <input type="hidden" class="rating-tooltip" data-filled="fa fa-star margin-right-5 text-yellow" data-empty="fa fa-star-o margin-right-5" id='presentation'/>
+              <span class="label label-success"></span>
+            </div>
+          </div>
+          <div class="col-md-4  padding-right-0 padding-left-0">
+            <div class=" text-extra-large">
+              <span class='text-small'>  <%=t :novelty %></span>
+              <input type="hidden" class="rating-tooltip" data-filled="fa fa-star margin-right-5 text-yellow" data-empty="fa fa-star-o margin-right-5" id='novelty'/>
+              <span class="label label-success"></span>
+            </div>
+          </div>
+        </div>
+        <hr/>
+
+        <script>
+        $('#soundness').rating();
+        $('#presentation').rating();
+        $('#novelty').rating();
+        $('#rating').on('change', function () {
+          alert('Rating: ' + $(this).val());
+        });
+        </script>
       </div>
     </div>
   </div>

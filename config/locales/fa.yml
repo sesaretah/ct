@@ -338,6 +338,10 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  upload_file: 'آپلود متن کامل'
+  soundness: 'صحت'
+  presentation: 'کیفیت ارائه'
+  novelty: 'نوآوری'
   abstract: 'چکیده'
   please_enter_new_research_data: 'اطلاعات مورد نیاز را وارد کنید'
   new_research: 'منتشرشده جدید'

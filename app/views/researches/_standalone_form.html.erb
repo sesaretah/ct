@@ -64,6 +64,11 @@
                 </div>
               </div>
             </div>
+
+            <div class="fileUpload btn btn-o btn-light-purple">
+              <span><i class="fa fa-book" style='vertical-align:middle;'></i> <%=t :upload_file%>...</span>
+              <%= f.file_field :document, class: "upload" %>
+            </div>
             <hr>
             <div class="form-actions">
               <button type="submit" class="btn btn-primary pull-left">
