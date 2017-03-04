@@ -4,5 +4,6 @@ class Research < ActiveRecord::Base
 
   belongs_to :user
   has_many :researches, :as => :rankable, :dependent => :destroy
+  has_many :comments, :as => :commentable, :dependent => :destroy
 
 end

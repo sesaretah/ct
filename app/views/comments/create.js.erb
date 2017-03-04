@@ -12,6 +12,11 @@ $("#channel-detail").replaceWith("<%= escape_javascript(render(:partial => 'chan
 $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @item , page:@page})) %>");
 <%end%>
 
+<% if @comment.commentable_type == 'Research'%>
+$("#research-detail").replaceWith("<%= escape_javascript(render(:partial => 'researches/research_detail', locals: {research: @item, page:@page })) %>");
+$("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @item , page:@page})) %>");
+<%end%>
+
 <% if @comment.commentable_type == 'Note'%>
 $("#note-comments").replaceWith("<%= escape_javascript(render(:partial => 'notes/note_comments', locals: {note: @item, page:@page })) %>");
 $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @item , page:@page})) %>");

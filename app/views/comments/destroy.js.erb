@@ -13,6 +13,11 @@ $("#event-detail").replaceWith("<%= escape_javascript(render(:partial => 'events
 $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @commntable , page:@page})) %>");
 <%end%>
 
+<% if @comment.commentable_type == 'Research'%>
+$("#research-detail").replaceWith("<%= escape_javascript(render(:partial => 'researches/research_detail', locals: {research: @commntable, page:@page })) %>");
+$("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @commntable , page:@page})) %>");
+<%end%>
+
 <%if @commntable.class.name == 'Note'%>
 $("#note-comments").replaceWith("<%= escape_javascript(render(:partial => 'notes/note_comments', locals: {note: @commntable, page:@page })) %>");
 $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @commntable , page:@page})) %>");

@@ -3,6 +3,11 @@ class ResearchesController < ApplicationController
 
   def view_content
     @research = Research.find(params[:id])
+    if params[:page].blank?
+      @page = 1
+    else
+      @page = params[:page].to_i
+    end
     @rnd = params[:rnd]
   end
   # GET /researches

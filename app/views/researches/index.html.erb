@@ -66,10 +66,7 @@
     </div>
 
 
-    <% if !@research.blank?%>
-    <%= render(:partial => 'researches/research_detail', locals: {research: @research }) %>
-    <%else%>
-<div id='research-detail'>
+
     <div class="col-md-7 padding-right-0 padding-left-0" >
       <div class="panel panel-white no-radius">
         <div class="panel-heading border-light">
@@ -81,11 +78,19 @@
           </ul>
         </div>
         <div class="panel-body ">
+          <div id='research-detail'>
+            <% @page = 1%>
+            <% if !@research.blank?%>
+            <%= render(:partial => 'researches/research_detail', locals: {research: @research, page: @page }) %>
+            <%end%>
+          </div>
+          </div>
+          <div  id='cm' class="panel-footer border-light">
 
           </div>
         </div>
       </div>
-      <%end%>
+
     </div>
 
   </div>
