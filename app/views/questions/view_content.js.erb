@@ -1,3 +1,4 @@
 $("#question-detail").replaceWith("<%= escape_javascript(render(:partial => 'questions/detail', locals: {question: @question, page:@page })) %>");
 $("li").removeClass("bg-light-grey");
 $("#<%= @rnd%>").addClass( "bg-light-grey" );
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
