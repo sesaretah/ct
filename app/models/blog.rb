@@ -1,5 +1,5 @@
 class Blog < ActiveRecord::Base
-  has_many :seekings
+  has_many :seekings, dependent: :destroy
   has_many :users, :through => :seekings
   has_many :notes
   after_create :set_admin
