@@ -1,0 +1,23 @@
+<div class="row">
+	<% for friendship in user.friendships%>
+	<div class="col-sm-3">
+		<div class="panel panel-white">
+			<div class="panel-body">
+				<div class="col-sm-6">
+					<%= image_tag friendship.friend.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+				</div>
+				<div class="col-sm-6">
+					<%= link_to friendship.friend.profile do %>
+					<div class="row">
+						<%= friendship.friend.profile.name%>
+					</div>
+					<div class="row">
+						<%= friendship.friend.profile.surename%>
+					</div>
+					<%end%>
+				</div>
+			</div>
+		</div>
+	</div>
+	<%end%>
+</div>

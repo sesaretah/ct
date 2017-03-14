@@ -1,6 +1,16 @@
 class ParticipationsController < ApplicationController
   before_action :set_participation, only: [:show, :edit, :update, :destroy]
 
+  def change_stat
+    @participation = Participation.find(params[:id])
+    @event_admin = Participation.where(user_id: current_user.id, event_id: @participation.event_id).first
+    @event = @participation.event
+    if @event_admin.role == 1
+      @participation.role = 2
+      @participation.save
+    end
+  end
+
   def add_to_event
     @event = Event.find(params[:event_id])
     if params[:page].blank?

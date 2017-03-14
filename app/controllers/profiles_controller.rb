@@ -13,14 +13,12 @@ class ProfilesController < ApplicationController
   end
 
   def advanced_search
-    @profiles = Profile.search params[:q], :star => true
+    if !params[:q].blank?
+      @profiles = Profile.where("name LIKE ? OR surename LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
     @caller = params[:caller]
     @item = params[:class].classify.constantize.find(params[:class_id])
-    @excerpter = ThinkingSphinx::Excerpter.new 'profile_core', params[:q]   , {
-    :before_match    => '<span class="bg-warning">',
-    :after_match     => '</span>',
-    :chunk_separator => ' &#8230; ' # ellipsis
-  }
+
   end
 
   def upload_avatar

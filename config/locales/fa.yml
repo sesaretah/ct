@@ -338,6 +338,9 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  by: 'توسط'
+  follow: 'دنبال کن'
+  unfollow: 'دنبال نکن'
   upload_file: 'آپلود متن کامل'
   soundness: 'صحت'
   presentation: 'کیفیت ارائه'

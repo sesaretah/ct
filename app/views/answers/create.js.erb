@@ -1,1 +1,2 @@
 $("#question-detail").replaceWith("<%= escape_javascript(render(:partial => 'questions/detail', locals: {question: @question, page:@page })) %>");
+MathJax.Hub.Queue(["Typeset",MathJax.Hub]);

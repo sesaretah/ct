@@ -3,7 +3,6 @@
     <% profiles.each do |profile| %>
 
     <li class="messages-item padding-5">
-
       <%= image_tag profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
       <span class="messages-item-from"><%= profile.name %> <%= profile.surename %></span>
       <div class="messages-item-time">
@@ -13,6 +12,7 @@
               <%= link_to "/groupings/add_to_group/1?user_id=#{profile.user.id}&group_id=#{item.id}&adder_id=#{current_user.id}", :method => :get, :remote => true do %>
                 <i class='fa fa-plus-square'></i>
                 <%end%>
+              
             <%end%>
           <%end%>
 

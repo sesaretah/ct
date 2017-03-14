@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :friendships
+
   resources :rankings
 
   resources :qitems
@@ -105,8 +107,10 @@ Rails.application.routes.draw do
 
 
   match "/participations/add_to_event/:id" => "participations#add_to_event", :via => :get
+  match "/participations/change_stat/:id" => "participations#change_stat", :via => :get
 
   match "/involvements/add_to_channel/:id" => "involvements#add_to_channel", :via => :get
+  match "/involvements/change_stat/:id" => "involvements#change_stat", :via => :get
 
   match "/blogs/view_content/:id" => "blogs#view_content", :via => :get
   match "/blogs/join/:id" => "blogs#join", :via => :get
@@ -159,6 +163,9 @@ Rails.application.routes.draw do
     match "/researches/view_content/:id" => "researches#view_content", :via => :get
 
     match "/rankings/remote/:id" => "rankings#remote", :via => :get
+
+    match "/friendships/add_friend/:id" => "friendships#add_friend", :via => :get
+    match "/friendships/remove_friend/:id" => "friendships#remove_friend", :via => :get
 
   post 'upload' => 'upload#create'
   # The priority is based upon order of creation: first created -> highest priority.

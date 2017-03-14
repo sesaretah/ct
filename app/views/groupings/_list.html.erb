@@ -4,8 +4,11 @@
 <span class='label label-success'>
 <%else%>
 <span class='label label-warning'>
+  <% @group_admin = Grouping.where(user_id: current_user.id, group_id: grouping.group_id, role: 1).first%>
+  <% if !@group_admin.blank?%>
   <%= link_to "groupings/change_stat/#{grouping.id}", :method => :get, :remote => true do %>
   <i class='fa fa-check-circle-o' style="color:white"></i>
+  <%end%>
   <%end%>
 <%end%>
   <%= link_to grouping_path(grouping), :method => :delete, :remote => true do %>

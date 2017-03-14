@@ -20,7 +20,10 @@ class GroupingsController < ApplicationController
     if @group.p_type != 1
       params[:role] = 3
     end
-    @grouping = Grouping.create(user_id: params[:user_id], group_id: params[:group_id], adder_id: params[:adder_id], role: params[:role])
+    @grouping = Grouping.where(user_id: params[:user_id], group_id: params[:group_id], adder_id: params[:adder_id]).first
+    if @grouping.blank?
+       @grouping = Grouping.create(user_id: params[:user_id], group_id: params[:group_id], adder_id: params[:adder_id], role: params[:role])
+     end
   end
   # GET /groupings
   # GET /groupings.json

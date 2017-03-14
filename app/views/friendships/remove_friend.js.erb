@@ -1,0 +1,6 @@
+$("#friendship").replaceWith("<%= escape_javascript(render(:partial => 'friendships/profile_block', locals: {profile: @profile })) %>");
+notif({
+    msg: "<%=t :friend_removed%>",
+    type: "warning",
+    position: "center"
+});

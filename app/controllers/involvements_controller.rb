@@ -1,5 +1,15 @@
 class InvolvementsController < ApplicationController
   before_action :set_involvement, only: [:show, :edit, :update, :destroy]
+
+  def change_stat
+    @involvement = Involvement.find(params[:id])
+    @channel_admin = Involvement.where(user_id: current_user.id, channel_id: @involvement.channel_id).first
+    @channel = @involvement.channel
+    if @channel_admin.role == 1
+      @involvement.role = 2
+      @involvement.save
+    end
+  end
   def add_to_channel
     @channel = Channel.find(params[:channel_id])
     if params[:page].blank?

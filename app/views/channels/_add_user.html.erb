@@ -23,23 +23,25 @@
             <%end%>
           </div>
         </div>
+
+
         <div class="row">
           <div class="col-md-6">
-            <h5 class="over-title"><%= t(:search_results)%></h5>
-            <div class="panel panel-white">
-              <div class="panel-body">
-                <% @profiles = {}%>
-                  <%= render partial: 'profiles/compactlist', locals: {profiles: @profiles, item: channel}%>
-              </div>
-            </div>
+            <fieldset>
+              <legend>
+                <%= t(:search_results)%>
+              </legend>
+              <% @profiles = {}%>
+              <%= render partial: 'profiles/compactlist', locals: {profiles: @profiles, item: channel}%>
+            </fieldset>
           </div>
           <div class="col-md-6">
-            <h5 class="over-title"><%= t(:users_in_event)%></h5>
-            <div class="panel panel-white">
-              <div class="panel-body">
-                <%= render partial: 'involvements/list', locals: {channel: channel}%>
-              </div>
-            </div>
+            <fieldset>
+              <legend>
+                <%= t(:users_in_event)%>
+              </legend>
+              <%= render partial: 'involvements/list', locals: {channel: channel}%>
+            </fieldset>
           </div>
         </div>
 

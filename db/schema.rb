@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303201108) do
+ActiveRecord::Schema.define(version: 20170314041703) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content",     limit: 65535
@@ -137,6 +137,14 @@ ActiveRecord::Schema.define(version: 20170303201108) do
     t.integer  "g_type",              limit: 4
     t.boolean  "delta",               limit: 1,     default: true, null: false
     t.integer  "i_type",              limit: 4
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "friend_id",  limit: 4
+    t.integer  "status",     limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "goods", force: :cascade do |t|
@@ -328,7 +336,7 @@ ActiveRecord::Schema.define(version: 20170303201108) do
     t.string   "rankable_type", limit: 255
     t.integer  "rankable_id",   limit: 4
     t.integer  "user_id",       limit: 4
-    t.integer  "rank_type",     limit: 4
+    t.string   "rank_type",     limit: 255
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "value",         limit: 4

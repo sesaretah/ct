@@ -27,6 +27,16 @@
             <%= t(:experties)%>
           </a>
         </li>
+        <li >
+          <a data-toggle="tab" href="#followers">
+            <%= t(:followers)%>
+          </a>
+        </li>
+        <li >
+          <a data-toggle="tab" href="#followees">
+            <%= t(:followees)%>
+          </a>
+        </li>
       </ul>
       <div class="tab-content">
         <div id="panel_overview" class="tab-pane fade in active">
@@ -37,25 +47,18 @@
                   <h4><%= @profile.name%> <%= @profile.surename%></h4>
 
                   <%= render :partial => 'crop'%>
-                  <% if @profile.user.id == current_user.id%>
-                  <div class="col-sm-12">
-                    <button id='edit' type="button" class="btn btn-wide btn-o btn-info">
-                      <%= t(:change_photo)%>
-                    </button>
-                  </div>
+
+                  <%= render partial: 'friendships/profile_block', locals: {profile: @profile}%>
 
                   <div class="col-sm-12" style="margin-top:10px;">
+                    <% if @profile.user.id == current_user.id%>
                     <%= link_to edit_profile_path(@profile.id) do %>
-                    <button id='edit' type="button" class="btn btn-wide btn-o btn-warning">
+                    <button type="button" class="btn btn-wide btn-o btn-warning">
                       <%= t(:edit_person)%>
                     </button>
                     <%end%>
+                  <%end%>
                   </div>
-                  <%= form_for @profile, :html => { :multipart => true, :id => "fileupload"  } do |f| %>
-                  <%= f.file_field :avatar, :style =>"visibility:hidden;" %>
-
-                  <%end%>
-                  <%end%>
                   <hr>
 
                 </div>
@@ -133,22 +136,36 @@
           <div id="education" class="tab-pane fade">
             <% @education = Education.new%>
             <%= render partial: 'educations/list', locals: {user: @profile.user}%>
-            <%= render partial: 'educations/form', locals: {education: @education}%>
+            <% if @profile.user.id == current_user.id%>
+              <%= render partial: 'educations/form', locals: {education: @education}%>
+            <%end%>
           </div>
           <div id="research" class="tab-pane fade">
             <% @research = Research.new%>
             <%= render partial: 'researches/list', locals: {user: @profile.user}%>
+            <% if @profile.user.id == current_user.id%>
             <%= render partial: 'researches/form', locals: {research: @research}%>
+            <%end%>
           </div>
           <div id="honor" class="tab-pane fade">
             <% @honor = Honor.new%>
             <%= render partial: 'honors/list', locals: {user: @profile.user}%>
+            <% if @profile.user.id == current_user.id%>
             <%= render partial: 'honors/form', locals: {honor: @honor}%>
+            <%end%>
           </div>
           <div id="tag" class="tab-pane fade">
             <% @tag = Tag.new%>
             <%= render partial: 'tags/list', locals: {user: @profile.user}%>
+            <% if @profile.user.id == current_user.id%>
             <%= render partial: 'tags/form', locals: {tag: @tag}%>
+            <%end%>
+          </div>
+          <div id="followers" class="tab-pane fade">
+            <%= render partial: 'friendships/followers', locals: {user: @profile.user}%>
+          </div>
+          <div id="followees" class="tab-pane fade">
+            <%= render partial: 'friendships/followees', locals: {user: @profile.user}%>
           </div>
         </div>
       </div>
