@@ -81,7 +81,7 @@ var d = new Crawler({
                 var student =  jrdata[1].substring(0, 200);
                 var thesis_type =  jrdata[2].substring(0, 200);
                 var faculty =  jrdata[3].substring(0, 200);
-                var tdate = jrdata[4].substring(0, 200);
+                var tdate = jrdata[4];
                 var supervisor_utid = res.request.uri.path.split('/')[2]
 
                 connection.query('INSERT INTO theses SET ?', {title: title, student: student, thesis_type: thesis_type, faculty: faculty, tdate: tdate, supervisor_utid: res.request.uri.path.split('/')[2] }, function (error, results, fields) {
@@ -114,7 +114,7 @@ var d = new Crawler({
                 var student =  jrdata[1].substring(0, 200);
                 var thesis_type =  jrdata[2].substring(0, 200);
                 var faculty =  jrdata[3].substring(0, 200);
-                var tdate = jrdata[4].substring(0, 200);
+                var tdate = jrdata[4];
                 var advisor_utid = res.request.uri.path.split('/')[2]
 
                 connection.query('INSERT INTO theses SET ?', {title: title, student: student, thesis_type: thesis_type, faculty: faculty, tdate: tdate, advisor_utid: res.request.uri.path.split('/')[2] }, function (error, results, fields) {
