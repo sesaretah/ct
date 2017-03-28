@@ -78,9 +78,9 @@ var d = new Crawler({
 
               if (typeof jrdata[5] == 'undefined'){
                 var title = jrdata[0].substring(0, 200);
-                var student =  jrdata[1].substring(0, 200);
+                var student =  jrdata[1];
                 var thesis_type =  jrdata[2].substring(0, 200);
-                var faculty =  jrdata[3].substring(0, 200);
+                var faculty =  jrdata[3];
                 var tdate = jrdata[4];
                 var supervisor_utid = res.request.uri.path.split('/')[2]
 
@@ -111,9 +111,9 @@ var d = new Crawler({
               var jrdata = item.children[0].children[0].data.split('،')
               if (typeof jrdata[5] == 'undefined'){
                 var title = jrdata[0].substring(0, 200);
-                var student =  jrdata[1].substring(0, 200);
+                var student =  jrdata[1];
                 var thesis_type =  jrdata[2].substring(0, 200);
-                var faculty =  jrdata[3].substring(0, 200);
+                var faculty =  jrdata[3];
                 var tdate = jrdata[4];
                 var advisor_utid = res.request.uri.path.split('/')[2]
 
