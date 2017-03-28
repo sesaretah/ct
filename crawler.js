@@ -7,7 +7,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'salam64511',
-  database : 'shoa'
+  database : 'shoa2'
 });
 
 var d = new Crawler({
