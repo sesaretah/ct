@@ -1,0 +1,53 @@
+<%= form_for(@thesis) do |f| %>
+  <% if @thesis.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@thesis.errors.count, "error") %> prohibited this thesis from being saved:</h2>
+
+      <ul>
+      <% @thesis.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :student %><br>
+    <%= f.text_field :student %>
+  </div>
+  <div class="field">
+    <%= f.label :thesis_type %><br>
+    <%= f.text_field :thesis_type %>
+  </div>
+  <div class="field">
+    <%= f.label :faculty %><br>
+    <%= f.text_field :faculty %>
+  </div>
+  <div class="field">
+    <%= f.label :tdate %><br>
+    <%= f.text_field :tdate %>
+  </div>
+  <div class="field">
+    <%= f.label :supervisor_utid %><br>
+    <%= f.text_field :supervisor_utid %>
+  </div>
+  <div class="field">
+    <%= f.label :advisor_utid %><br>
+    <%= f.text_field :advisor_utid %>
+  </div>
+  <div class="field">
+    <%= f.label :advisor_id %><br>
+    <%= f.number_field :advisor_id %>
+  </div>
+  <div class="field">
+    <%= f.label :supervisor_id %><br>
+    <%= f.number_field :supervisor_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Operacts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>User</th>
+      <th>Start date j</th>
+      <th>End date j</th>
+      <th>Country</th>
+      <th>City</th>
+      <th>Utid</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @operacts.each do |operact| %>
+      <tr>
+        <td><%= operact.title %></td>
+        <td><%= operact.user_id %></td>
+        <td><%= operact.start_date_j %></td>
+        <td><%= operact.end_date_j %></td>
+        <td><%= operact.country %></td>
+        <td><%= operact.city %></td>
+        <td><%= operact.utid %></td>
+        <td><%= link_to 'Show', operact %></td>
+        <td><%= link_to 'Edit', edit_operact_path(operact) %></td>
+        <td><%= link_to 'Destroy', operact, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Operact', new_operact_path %>

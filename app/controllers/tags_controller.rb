@@ -2,12 +2,9 @@ class TagsController < ApplicationController
   before_action :set_tag, only: [:show, :edit, :update, :destroy]
 
   def remoteq
-    @tags = Tag.search params[:q], :star => true
-    @excerpter = ThinkingSphinx::Excerpter.new 'tag_core', params[:q]   , {
-    :before_match    => '<span class="bg-warning">',
-    :after_match     => '</span>',
-    :chunk_separator => ' &#8230; ' # ellipsis
-  }
+    if !params[:q].blank?
+      @tags = Tag.where("title LIKE ? ", "%#{params[:q]}%")
+    end
   resp = []
   for tag in @tags
     resp << tag.title

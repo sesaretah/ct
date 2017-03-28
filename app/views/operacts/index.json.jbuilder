@@ -1,0 +1,1 @@
+json.array! @operacts, partial: 'operacts/operact', as: :operact

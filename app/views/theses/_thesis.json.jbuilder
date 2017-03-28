@@ -1,0 +1,2 @@
+json.extract! thesis, :id, :title, :student, :thesis_type, :faculty, :tdate, :supervisor_utid, :advisor_utid, :advisor_id, :supervisor_id, :created_at, :updated_at
+json.url thesis_url(thesis, format: :json)

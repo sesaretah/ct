@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Theses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Student</th>
+      <th>Thesis type</th>
+      <th>Faculty</th>
+      <th>Tdate</th>
+      <th>Supervisor utid</th>
+      <th>Advisor utid</th>
+      <th>Advisor</th>
+      <th>Supervisor</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @theses.each do |thesis| %>
+      <tr>
+        <td><%= thesis.title %></td>
+        <td><%= thesis.student %></td>
+        <td><%= thesis.thesis_type %></td>
+        <td><%= thesis.faculty %></td>
+        <td><%= thesis.tdate %></td>
+        <td><%= thesis.supervisor_utid %></td>
+        <td><%= thesis.advisor_utid %></td>
+        <td><%= thesis.advisor_id %></td>
+        <td><%= thesis.supervisor_id %></td>
+        <td><%= link_to 'Show', thesis %></td>
+        <td><%= link_to 'Edit', edit_thesis_path(thesis) %></td>
+        <td><%= link_to 'Destroy', thesis, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Thesis', new_thesis_path %>

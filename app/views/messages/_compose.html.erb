@@ -1,0 +1,46 @@
+<div id='msg-content'>
+  <div class="row">
+    <div class="col-md-12 padding-right-20 padding-left-20">
+    <% @m =  Message.new%>
+    <%= form_for(@m) do |f| %>
+
+    <div class="row">
+      <div class="form-group col-xs-12">
+        <%= f.label :recipient_id, :class => 'pull-right' %>
+        <%= f.number_field :recipient_id , :class => "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-12">
+        <%= f.label :title, :class => 'pull-right' %>
+        <%= f.text_field :title , :class => "form-control" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-12">
+        <%= f.label :content, :class => 'pull-right' %>
+        <%= f.text_area :content, {:class=> "form-control autosize area-animated", 'data-autosize-on' => "true", style: "overflow: hidden; resize: horizontal; word-wrap: break-word;" } %>
+      </div>
+    </div>
+
+    <style>
+    .ui-helper-hidden-accessible { position: absolute; left:-999em; }
+    </style>
+
+    <div class="col-xs-6 padding-right-0 margin-top-5 rtl">
+      <input type="text"  id="tokenfield" value="" placeholder="" tabindex="-1" >
+    </div>
+
+
+
+    <%= content_tag :button, :type => :submit, :class => "btn btn-o btn-success" do %>
+    <i class="icon-ok bigger-110"></i>
+    <%=t :send%>
+    <% end %>
+    <button type="button" class="btn btn-primary btn-o" data-dismiss="modal">
+      <%= t(:close)%>
+    </button>
+    <% end %>
+      </div>
+  </div>
+</div>

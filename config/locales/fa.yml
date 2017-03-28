@@ -338,6 +338,7 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  new_message: 'پیام جدید'
   by: 'توسط'
   follow: 'دنبال کن'
   unfollow: 'دنبال نکن'

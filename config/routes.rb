@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :theses
+
+  resources :books
+
+  resources :operacts
+
+  resources :recipients
+
   resources :friendships
 
   resources :rankings
@@ -123,6 +131,7 @@ Rails.application.routes.draw do
   match "/profiles/cropper/:id" => "profiles#cropper", :via => :get
 
   match "/messages/view_content/:id" => "messages#view_content", :via => :get
+  match "/messages/compose/:id" => "messages#compose", :via => :get
 
   match "/questions/view_content/:id" => "questions#view_content", :via => :get
   match "/questions/search/:id" => "questions#search", :via => :get
@@ -131,6 +140,8 @@ Rails.application.routes.draw do
   match "/votes/vote_down/:id" => "votes#vote_down", :via => :get
 
   match "/tags/remoteq/:id" => "tags#remoteq", :via => :get
+
+  match "/profiles/remoteq/:id" => "profiles#remoteq", :via => :get
 
   match "/projects/view_content/:id" => "projects#view_content", :via => :get
   match "/projects/cropper/:id" => "projects#cropper", :via => :get

@@ -15,15 +15,18 @@
         	<% @sender_profile = message.sender.profile%>
         <%= image_tag @sender_profile.avatar(:thumb), :class => "messages-item-avatar"%>
         <div class="message-time">
-          <%= JalaliDate.to_jalali(message.created_at).strftime("%d/%m/%Y")%>
+          <%= JalaliDate.to_jalali(message.created_at).strftime("%Y/%m/%d")%>
         </div>
 
         <div class="message-from">
           <%= @sender_profile.name%> <%= @sender_profile.surename%>
         </div>
         <div class="message-to">
-          <% @recipient_profile = message.recipient.profile%>
-          <%=t :to%> <%= @recipient_profile.name%> <%= @recipient_profile.surename%>
+          <%=t :to%>
+          <% for recipient in Recipient.where(message_id: @message.id)%>
+          <% @recipient_profile = User.find_by_id(recipient.user_id).profile%>
+           <span><%= link_to @recipient_profile do%><%= @recipient_profile.name%> <%= @recipient_profile.surename%><%end%></span>,
+           <%end%>
         </div>
       </div>
       <div class="message-subject">

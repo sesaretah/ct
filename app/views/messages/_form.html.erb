@@ -1,33 +1,140 @@
-<%= form_for(@message) do |f| %>
-  <% if @message.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
-
-      <ul>
-      <% @message.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:new_message)%></h1>
+        <span class="mainDescription"></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
     </div>
-  <% end %>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"></span></h5>
+        <div class="panel panel-white">
+          <div class="panel-body">
+            <% @m =  Message.new%>
+            <%= form_for(@m) do |f| %>
 
-  <div class="field">
-    <%= f.label :sender_id %><br>
-    <%= f.number_field :sender_id %>
+            <div class="row">
+              <div class="form-group col-xs-12">
+                <%= f.label :recipient_id, :class => 'pull-right' %>
+                <% f.number_field :recipient_id , :class => "form-control" %>
+                <style>
+                .ui-helper-hidden-accessible { position: absolute; left:-999em; }
+                </style>
+
+                <div class="col-xs-10  rtl pull-right">
+                  <input type="text"  id="tokenfield" value="" placeholder="" tabindex="-1" >
+                </div>
+                <input type="hidden" id='recipients' name="recipients" value="">
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-12">
+                <%= f.label :title, :class => 'pull-right' %>
+                <%= f.text_field :title , :class => "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-12">
+                <%= f.label :content, :class => 'pull-right' %>
+                <%= f.text_area :content, {:class=> "form-control autosize area-animated", 'data-autosize-on' => "true", style: "overflow: hidden; resize: horizontal; word-wrap: break-word;" } %>
+              </div>
+            </div>
+
+
+
+
+            <div class="row top30">
+              <div class="form-group col-xs-1 pull-left">
+                <%= content_tag :button, :type => :submit, :class => "btn btn-o btn-primary" do %>
+                <i class="icon-ok bigger-110"></i>
+                <%=t :submit%>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :recipient_id %><br>
-    <%= f.number_field :recipient_id %>
-  </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.number_field :status %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+
+<script>
+
+$('#tokenfield')
+
+.on('tokenfield:createtoken', function (e) {
+  var data = e.attrs.value.split('|')
+  console.log( e);
+  $("#recipients").val(function() {
+    return this.value + ',' +data;
+  });
+})
+
+
+.on('tokenfield:edittoken', function (e) {
+  var data = e.attrs.value.split('|')
+  var prev = $("#tags").val().split(',')
+  $("#recipients").val('');
+  for (var i in prev) {
+    if (prev[i].toString() !== data.toString()){
+      console.log(prev[i]);
+      $("#recipients").val(function() {
+        return this.value + ',' +prev[i];
+      });
+    }
+  }
+})
+
+.on('tokenfield:removedtoken', function (e) {
+  var data = e.attrs.value.split('|')
+  var prev = $("#tags").val().split(',')
+  $("#recipients").val('');
+  for (var i in prev) {
+    if (prev[i].toString() !== data.toString()){
+      console.log(prev[i]);
+      $("#recipients").val(function() {
+        return this.value + ',' +prev[i];
+      });
+    }
+  }
+})
+
+
+
+
+
+.tokenfield({
+
+  autocomplete: {
+    source: function( request, response ) {
+      $.ajax({
+        url: "/profiles/remoteq/1",
+        dataType: "jsonp",
+        data: {
+          q: request.term
+        },
+        success: function( data ) {
+          //console.log(data[0][0]);
+          response( data );
+        }
+      });
+    },
+    minLength: 1,
+    delay: 30
+  },
+  showAutocompleteOnFocus: true
+})
+</script>

@@ -1,6 +1,9 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
 
+  def compose
+
+  end
   def search
     @messages = Message.search params[:q], :star => true
     @excerpter = ThinkingSphinx::Excerpter.new 'message_core', params[:q]   , {
@@ -42,10 +45,18 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     @message = Message.new(message_params)
-
+    @message.sender_id = current_user.id
+    @recipients =  params[:recipients].split(',')
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        for recipient in @recipients
+          if !recipient.blank?
+            @tokenize = recipient.split('-')
+            @profile = Profile.where(name: @tokenize[0], surename: @tokenize[1] ).first
+            Recipient.create(user_id: @profile.user_id, message_id: @message.id)
+        end
+        end
+        format.html { redirect_to '/messages', notice: 'Message was successfully created.' }
         format.json { render :show, status: :created, location: @message }
       else
         format.html { render :new }

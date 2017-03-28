@@ -1,6 +1,17 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
+  def remoteq
+    if !params[:q].blank?
+      @profiles = Profile.where("name LIKE ? OR surename LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
+  resp = []
+  for profile in @profiles
+    resp <<  "#{profile.name}-#{profile.surename}"
+  end
+  render :json => resp.to_json, :callback => params['callback']
+  end
+
   def search
     if !params[:q].blank?
       @profiles = Profile.where("name LIKE ? OR surename LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")

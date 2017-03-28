@@ -1,0 +1,45 @@
+<%= form_for(@operact) do |f| %>
+  <% if @operact.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@operact.errors.count, "error") %> prohibited this operact from being saved:</h2>
+
+      <ul>
+      <% @operact.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date_j %><br>
+    <%= f.text_field :start_date_j %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date_j %><br>
+    <%= f.text_field :end_date_j %>
+  </div>
+  <div class="field">
+    <%= f.label :country %><br>
+    <%= f.text_field :country %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :utid %><br>
+    <%= f.text_field :utid %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

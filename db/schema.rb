@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314041703) do
+ActiveRecord::Schema.define(version: 20170328075007) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content",     limit: 65535
@@ -39,6 +39,17 @@ ActiveRecord::Schema.define(version: 20170314041703) do
     t.datetime "updated_at",                               null: false
     t.text     "description", limit: 65535
     t.boolean  "delta",       limit: 1,     default: true, null: false
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.string   "authors",    limit: 255
+    t.string   "publisher",  limit: 255
+    t.string   "city",       limit: 255
+    t.string   "pub_year",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "utid",       limit: 255
   end
 
   create_table "categories", force: :cascade do |t|
@@ -80,6 +91,14 @@ ActiveRecord::Schema.define(version: 20170314041703) do
     t.datetime "avatar_updated_at"
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "sender_id",    limit: 4
+    t.integer  "recipient_id", limit: 4
+    t.integer  "message_id",   limit: 4
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string   "name",                limit: 255
     t.string   "course_type",         limit: 255
@@ -117,6 +136,7 @@ ActiveRecord::Schema.define(version: 20170314041703) do
     t.float    "gpa",        limit: 24
     t.string   "title",      limit: 255
     t.string   "thesis_gpa", limit: 255
+    t.integer  "utid",       limit: 4
   end
 
   create_table "events", force: :cascade do |t|
@@ -240,6 +260,18 @@ ActiveRecord::Schema.define(version: 20170314041703) do
     t.integer  "blog_id",    limit: 4
   end
 
+  create_table "operacts", force: :cascade do |t|
+    t.string   "title",        limit: 255
+    t.integer  "user_id",      limit: 4
+    t.string   "start_date_j", limit: 255
+    t.string   "end_date_j",   limit: 255
+    t.string   "country",      limit: 255
+    t.string   "city",         limit: 255
+    t.string   "utid",         limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "participations", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "event_id",   limit: 4
@@ -342,6 +374,13 @@ ActiveRecord::Schema.define(version: 20170314041703) do
     t.integer  "value",         limit: 4
   end
 
+  create_table "recipients", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "message_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "researches", force: :cascade do |t|
     t.string   "name",                  limit: 255
     t.string   "pub_year",              limit: 255
@@ -357,6 +396,8 @@ ActiveRecord::Schema.define(version: 20170314041703) do
     t.integer  "document_file_size",    limit: 4
     t.datetime "document_updated_at"
     t.integer  "value",                 limit: 4
+    t.string   "pp",                    limit: 255
+    t.string   "utid",                  limit: 255
   end
 
   create_table "seekings", force: :cascade do |t|
@@ -399,6 +440,20 @@ ActiveRecord::Schema.define(version: 20170314041703) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "project_id",  limit: 4
+  end
+
+  create_table "theses", force: :cascade do |t|
+    t.string   "title",           limit: 255
+    t.string   "student",         limit: 255
+    t.string   "thesis_type",     limit: 255
+    t.string   "faculty",         limit: 255
+    t.string   "tdate",           limit: 255
+    t.string   "supervisor_utid", limit: 255
+    t.string   "advisor_utid",    limit: 255
+    t.integer  "advisor_id",      limit: 4
+    t.integer  "supervisor_id",   limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "uploads", force: :cascade do |t|

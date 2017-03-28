@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @operact.title %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @operact.user_id %>
+</p>
+
+<p>
+  <strong>Start date j:</strong>
+  <%= @operact.start_date_j %>
+</p>
+
+<p>
+  <strong>End date j:</strong>
+  <%= @operact.end_date_j %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @operact.country %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @operact.city %>
+</p>
+
+<p>
+  <strong>Utid:</strong>
+  <%= @operact.utid %>
+</p>
+
+<%= link_to 'Edit', edit_operact_path(@operact) %> |
+<%= link_to 'Back', operacts_path %>
