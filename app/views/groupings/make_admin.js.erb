@@ -1,0 +1,2 @@
+$("#gr-list").replaceWith("<%= escape_javascript(render(:partial => 'groupings/list',locals: {group: @group})) %>");
+$("#admins").replaceWith("<%= escape_javascript(render(:partial => 'groups/admins',locals: {group: @group})) %>");

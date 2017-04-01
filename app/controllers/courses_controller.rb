@@ -40,7 +40,7 @@ class CoursesController < ApplicationController
   # POST /courses.json
   def create
     @course = Course.new(course_params)
-
+    @course.user_id = current_user.id
     respond_to do |format|
       if @course.save
         format.html { redirect_to '/courses/cropper/'+@group.id.to_s}

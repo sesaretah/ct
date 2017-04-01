@@ -1,0 +1,66 @@
+
+<div id='pollsection-form'>
+  <% @a = [nil,nil,nil,nil,nil,nil]%>
+  <% if defined?(pollsection)%>
+  <% @a[0] = pollsection.question %>
+  <% @i = 1%>
+  <% for pollitem in pollsection.pollitems %>
+  <% @a[@i] = pollitem.content%>
+  <% @i = @i+1%>
+  <%end%>
+  <%end%>
+    <% if defined?(pollsection)%>
+      <% @url = '/pollsections/' + pollsection.id.to_s  %>
+      <% @method = 'PUT'%>
+    <%else%>
+    <% @url = '/pollsections'%>
+    <% @method = 'POST'%>
+    <%end%>
+
+<%= form_tag @url, method: @method,  remote: true do %>
+<div class="row">
+  <div class="form-group col-xs-10">
+    <%=t  :question %><br>
+    <%= text_field_tag :question , @a[0], :class => "form-control" %>
+  </div>
+</div>
+<%=t :options%>
+<hr style='margin-top:0px; margin-bottom:10px;'/>
+<div class="row">
+  <div class="form-group col-xs-8">
+    <%= text_field_tag :option_1 , @a[1], :class => "form-control" %>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-xs-8">
+    <%= text_field_tag :option_2 , @a[2], :class => "form-control" %>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-xs-8">
+    <%= text_field_tag :option_3 , @a[3], :class => "form-control" %>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-xs-8">
+    <%= text_field_tag :option_4 , @a[4], :class => "form-control" %>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-xs-8">
+    <%= text_field_tag :option_5 , @a[5], :class => "form-control" %>
+  </div>
+</div>
+<%= hidden_field_tag :poll_id, poll.id%>
+
+
+<div class="row top30">
+  <div class="form-group col-xs-1 pull-left">
+    <%= content_tag :button, :type => :submit,id: 'subbtn', :class => "btn btn-o btn-primary" do %>
+    <i class="icon-ok bigger-110"></i>
+    <%=t :submit%>
+    <% end %>
+  </div>
+</div>
+<%end%>
+</div>

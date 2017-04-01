@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_one :profile
 
   has_many :send_messages, :class_name=>"Message", :foreign_key=>"sender_id"
-  
+
   has_many :events
   has_many :groups
   has_many :channels
@@ -36,6 +36,11 @@ class User < ActiveRecord::Base
 
   has_many :questions
   has_many :preports
+  has_many :polls
+
+  has_many :followships
+
+  has_many :courses
 
   has_many :friendships
   has_many :friends, :through => :friendships

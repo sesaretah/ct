@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Followships</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Followable type</th>
+      <th>Followable</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @followships.each do |followship| %>
+      <tr>
+        <td><%= followship.user_id %></td>
+        <td><%= followship.followable_type %></td>
+        <td><%= followship.followable_id %></td>
+        <td><%= link_to 'Show', followship %></td>
+        <td><%= link_to 'Edit', edit_followship_path(followship) %></td>
+        <td><%= link_to 'Destroy', followship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Followship', new_followship_path %>

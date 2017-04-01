@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328075007) do
+ActiveRecord::Schema.define(version: 20170401171045) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content",     limit: 65535
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20170328075007) do
     t.integer  "g_type",              limit: 4
     t.integer  "p_type",              limit: 4
     t.integer  "i_type",              limit: 4
+    t.string   "uuid",                limit: 255
   end
 
   create_table "comments", force: :cascade do |t|
@@ -159,6 +160,14 @@ ActiveRecord::Schema.define(version: 20170328075007) do
     t.integer  "i_type",              limit: 4
   end
 
+  create_table "followships", force: :cascade do |t|
+    t.integer  "user_id",         limit: 4
+    t.string   "followable_type", limit: 255
+    t.integer  "followable_id",   limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
   create_table "friendships", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "friend_id",  limit: 4
@@ -206,6 +215,7 @@ ActiveRecord::Schema.define(version: 20170328075007) do
     t.integer  "p_type",              limit: 4
     t.boolean  "delta",               limit: 1,     default: true, null: false
     t.integer  "i_type",              limit: 4
+    t.integer  "g_type",              limit: 4
   end
 
   create_table "honors", force: :cascade do |t|
@@ -287,6 +297,28 @@ ActiveRecord::Schema.define(version: 20170328075007) do
     t.integer  "role",       limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "pollitems", force: :cascade do |t|
+    t.string   "content",        limit: 255
+    t.integer  "poll_id",        limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "pollsection_id", limit: 4
+  end
+
+  create_table "polls", force: :cascade do |t|
+    t.string   "title",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "user_id",    limit: 4
+  end
+
+  create_table "pollsections", force: :cascade do |t|
+    t.integer  "poll_id",    limit: 4
+    t.string   "question",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "preports", force: :cascade do |t|
@@ -413,6 +445,15 @@ ActiveRecord::Schema.define(version: 20170328075007) do
     t.integer  "category_id", limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.integer  "pollitem_id", limit: 4
+    t.integer  "user_id",     limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.integer  "poll_id",     limit: 4
+    t.integer  "fignum",      limit: 4
   end
 
   create_table "taggings", force: :cascade do |t|

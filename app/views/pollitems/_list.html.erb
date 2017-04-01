@@ -1,0 +1,34 @@
+<div id='pollitemlist'>
+  <% poll.pollsections.each do |section| %>
+  <div class="row">
+    <div class='col-md-12'>
+      <hr style='margin-top:0px; margin-bottom:10px;'/>
+      <div class="row">
+        <div class='col-md-11'>
+          <h5><%=t :question%>: <%= section.question %></h5>
+        </div>
+        <div class='col-md-1'>
+          <%= link_to edit_pollsection_path(section), :remote => true  do%>
+            <i class="fa fa-edit" style='vertical-align:middle'></i>
+          <%end%>
+          <%= link_to section, method: :delete, :remote => true, data: { confirm: 'Are you sure?' } do %>
+            <i class="fa fa-trash" style='vertical-align:middle'></i>
+            <%end%>
+        </div>
+      </div>
+      <div class="row">
+        <div class='col-md-12'>
+        <%=t :options%>
+        <hr style='margin-top:0px; margin-bottom:10px;'/>
+        <ol>
+          <% for pollitem in section.pollitems%>
+          <li><%= pollitem.content%></li>
+          <%end%>
+        </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+<hr style='margin-top:0px; margin-bottom:10px;'/>

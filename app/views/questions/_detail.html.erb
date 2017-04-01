@@ -2,19 +2,28 @@
   <div class="row">
     <div class="col-md-2">
       <%= render partial: 'votes/votes_block', locals:{c:question}%>
+
     </div>
     <div class="col-md-10">
       <div class="row">
         <div class="col-md-1">
           <%= image_tag question.user.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9">
           <span class="margin-right-5"><i class="fa fa-question-circle" style="color: #007AFF !important;vertical-align: middle;"></i> <b><%= question.title%></b></span>
         </div>
-        <div class="col-md-1">
+        <div class="col-md-2">
+          <div class="row">
           <%= link_to 'questions/'+ question.id.to_s, :method => :delete, data: {confirm: "Are you sure?"}  do %>
-            <i class="fa fa-trash-o" style="color: #007AFF !important;"></i>
+
+            <button type="button" class="btn btn-light-blue btn-squared btn-xs">
+              <i class="fa fa-trash-o" style="color: white !important;vertical-align: middle;"></i> <%= t(:delete)%>
+            </button>
           <%end%>
+        </div>
+          <div class="row" style='margin-top:1px;'>
+            <%= render partial: 'followships/follow', locals:{item: question}%>
+          </div>
         </div>
       </div>
       <hr/>

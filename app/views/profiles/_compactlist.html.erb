@@ -10,16 +10,16 @@
           <% if item.class.name == 'Group'%>
             <% if profile.user.groupings.find_by_group_id(item.id).blank?%>
               <%= link_to "/groupings/add_to_group/1?user_id=#{profile.user.id}&group_id=#{item.id}&adder_id=#{current_user.id}", :method => :get, :remote => true do %>
-                <i class='fa fa-plus-square'></i>
+                <i class='fa fa-plus'></i>
                 <%end%>
-              
+
             <%end%>
           <%end%>
 
           <% if item.class.name == 'Event'%>
             <% if profile.user.participations.find_by_event_id(item.id).blank?%>
               <%= link_to "/participations/add_to_event/1?user_id=#{profile.user.id}&event_id=#{item.id}&adder_id=#{current_user.id}", :method => :get, :remote => true do %>
-                <i class='fa fa-plus-square'></i>
+                <i class='fa fa-plus'></i>
                 <%end%>
             <%end%>
           <%end%>
@@ -27,7 +27,7 @@
           <% if item.class.name == 'Channel'%>
             <% if profile.user.involvements.find_by_channel_id(item.id).blank?%>
               <%= link_to "/involvements/add_to_channel/1?user_id=#{profile.user.id}&channel_id=#{item.id}&adder_id=#{current_user.id}", :method => :get, :remote => true do %>
-                <i class='fa fa-plus-square'></i>
+                <i class='fa fa-plus'></i>
                 <%end%>
             <%end%>
           <%end%>
@@ -35,7 +35,7 @@
           <% if item.class.name == 'Project'%>
             <% if profile.user.partnerships.find_by_project_id(item.id).blank?%>
               <%= link_to "/partnerships/add_to_project/1?user_id=#{profile.user.id}&project_id=#{item.id}", :method => :get, :remote => true do %>
-                <i class='fa fa-plus-square'></i>
+                <i class='fa fa-plus'></i>
                 <%end%>
             <%end%>
           <%end%>

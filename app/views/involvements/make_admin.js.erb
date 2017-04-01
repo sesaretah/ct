@@ -1,0 +1,2 @@
+$("#ch-list").replaceWith("<%= escape_javascript(render(:partial => 'involvements/list',locals: {channel: @channel})) %>");
+$("#admins").replaceWith("<%= escape_javascript(render(:partial => 'channels/admins',locals: {channel: @channel})) %>");

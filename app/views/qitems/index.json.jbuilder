@@ -1,1 +1,0 @@
-json.array! @qitems, partial: 'qitems/qitem', as: :qitem

@@ -57,7 +57,7 @@
                 <%end%>
                 <%=t :day%><%= select_tag  "event_date_dd", options_for_select(1..31, @now.day) %>/
                 <%=t :month%><%= select_tag "event_date_mm", options_for_select(1..12, @now.month) %>/
-                <%=t :year%><%= select_year(@now.year, {:start_year => @now.year, :end_year => 1370}, {:name =>"event_date_yyyy"}) %>
+                <%=t :year%><%= select_year(@now.year, {:start_year => @now.year, :end_year => 1400}, {:name =>"event_date_yyyy"}) %>
 
                 <% f.date_select :event_date , :class => "form-control"%>
               </div>

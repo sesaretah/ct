@@ -1,14 +1,153 @@
-<p id="notice"><%= notice %></p>
+<% @grouping = Grouping.where(group_id: @group.id, user_id: current_user.id).first%>
+<% if !@grouping.blank? && @grouping.role == 1%>
+<% @admin = true%>
+<%else%>
+<% @admin = false%>
+<%end%>
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:group)%>: <%= @group.name %></h1>
+        <span class="mainDescription"><% t(:please_enter_new_group_data)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-12">
+          <div class="row">
+            <fieldset>
+              <legend>
+                <%= t(:characteristics)%>
+              </legend>
+              <div class="col-md-12">
+                <div class="col-md-9">
+                  <p>
+                    <strong><%=t :name%>:</strong>
+                    <%= @group.name %>
+                  </p>
+                  <p>
+                    <strong><%=t :description%>:</strong>
+                    <%= @group.description %>
+                  </p>
+                  <p>
+                    <strong><%=t :p_type%>:</strong>
+                    <%= rptypes(@group.p_type) %>
+                  </p>
+                  <p>
+                    <strong><%=t :g_type%>:</strong>
+                    <%= rgtypes(@group.g_type) %>
+                  </p>
+                  <p>
+                    <strong><%=t :i_type%>:</strong>
+                    <%= ritypes(@group.i_type) %>
+                  </p>
+                </div>
+                <div class="col-md-3">
+                  <%= image_tag @group.avatar(:medium)%>
+                </div>
+              </div>
+            </fieldset>
+          </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @group.name %>
-</p>
+          <div class='row'>
+            <fieldset>
+              <legend>
+                <%= t(:actions)%>
+              </legend>
+              <div class="col-md-12">
+                <%= render partial: 'groups/actions', locals: {group: @group}%>
+              </div>
+            </fieldset>
+          </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @group.description %>
-</p>
+          <div class='row'>
+            <fieldset>
+              <legend>
+                <%= t(:admins)%>
+              </legend>
+              <div class="col-md-12">
+                <%= render partial: 'groups/admins', locals: {group: @group}%>
+              </div>
+            </fieldset>
+          </div>
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
-<%= link_to 'Back', groups_path %>
+          <div class='row'>
+            <fieldset>
+              <legend>
+                <%= t(:add_user_to_group)%>
+              </legend>
+              <% if @group.g_type == 1 || @admin%>
+              <div class="panel-scroll height-350 ps-container ps-active-y">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class='col-md-6'>
+                      <%= form_tag '/profiles/search/1',:method => :get,:remote => :true do%>
+                      <div class="input-group">
+                        <%= text_field_tag :q, '' , {:class=>"form-control", :id => "nav-search-input", :placeholder => "#{t(:search)}"}%>
+                        <%= hidden_field_tag 'caller', 'addtogroup'%>
+                        <%= hidden_field_tag 'class', 'Group'%>
+                        <%= hidden_field_tag 'class_id', @group.id%>
+                        <span class="input-group-btn">
+                          <button class="btn btn-primary" type="submit" >
+                            <i class="fa fa-search fa-fw" style=" vertical-align: middle;"></i> <%= t(:search)%>
+                          </button>
+                        </span>
+                      </div>
+                      <%end%>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <fieldset>
+                        <legend>
+                          <%= t(:search_results)%>
+                        </legend>
+                        <div style='margin-bottom:15px;'>
+                          <i class='fa fa-plus' style="vertical-align: middle"></i> <%=t :add%>
+                        </div>
+
+                        <% @profiles = {}%>
+                        <%= render partial: 'profiles/compactlist', locals: {profiles: @profiles, item: @group}%>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                      <fieldset>
+                        <legend>
+                          <%= t(:users_in_event)%>
+                        </legend>
+                        <div style='margin-bottom:15px;'>
+                          <i class='fa fa-times' style="vertical-align: middle"></i> <%=t :delete%>
+                          <% if @admin%>
+                          | <i class='fa fa-check' style="vertical-align: middle"></i> <%=t :accept%> |
+                          <i class='fa fa-user-secret' style="vertical-align: middle"></i> <%=t :make_admin%>
+                          <%end%>
+                        </div>
+
+                        <%= render partial: 'groupings/list', locals: {group: @group}%>
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% else%>
+              <p><%=t :only_admins_can_add_users%></p>
+              <%end%>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

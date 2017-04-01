@@ -1,29 +1,170 @@
-<p id="notice"><%= notice %></p>
+<% @participation = Participation.where(event_id: @event.id, user_id: current_user.id).first%>
+<% if !@participation.blank? && @participation.role == 1%>
+<% @admin = true%>
+<%else%>
+<% @admin = false%>
+<%end%>
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:event)%>: <%= @event.name %></h1>
+        <span class="mainDescription"><% t(:please_enter_new_event_data)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-12">
+          <div class="row">
+            <fieldset>
+              <legend>
+                <%= t(:characteristics)%>
+              </legend>
+              <div class="col-md-12">
+                <div class="col-md-9">
+                  <% @e = DateTime.new(@event.event_date.year, @event.event_date.month, @event.event_date.day, @event.start_time.hour, @event.start_time.min, 0, "+04:30")  %>
+                  <% @day = TimeDifference.between(Time.now.in_time_zone("Tehran"), @e).in_days.to_i%>
+                  <% @hours = TimeDifference.between(Time.now.in_time_zone("Tehran"), @e).in_hours.to_i - 24*@day%>
+                  <% @min = TimeDifference.between(Time.now.in_time_zone("Tehran"), @e).in_minutes.to_i - 24*60*@day - @hours*60%>
+                    <h4>  <%= @day%> <%=t :days %>  <%=t :and %> <%= @hours%><%=t :hours%> <%=t :and %> <%=t @min%> <%=t :minutes%> <%=t :remains%> </h4>
+                  <p>
+                    <strong><%=t :name%>:</strong>
+                    <%= @event.name %>
+                  </p>
+                  <p>
+                    <strong><%=t :description%>:</strong>
+                    <%= @event.description %>
+                  </p>
+                  <p>
+                    <%=t :start_time%> <%= JalaliDate.to_jalali(@event.event_date).day%>/ <%= JalaliDate.to_jalali(@event.event_date).month%>/ <%= JalaliDate.to_jalali(@event.event_date).year%>
+                    <%=t :start_time_ex%> <%= @event.start_time.min%>: <%= @event.start_time.hour%>
+                  </p>
+                  <p>
+                    <%=t :end_time%> <%= JalaliDate.to_jalali(@event.event_date).day%>/ <%= JalaliDate.to_jalali(@event.event_date).month%>/ <%= JalaliDate.to_jalali(@event.event_date).year%>
+                    <%=t :start_time_ex%><%= @event.end_time.min%>: <%= @event.end_time.hour%>
+                  </p>
+                  <p>
+                    <strong><%=t :location%>:</strong>
+                    <%= @event.location %>
+                  </p>
+                  <p>
+                    <strong><%=t :p_type%>:</strong>
+                    <%= rptypes(@event.p_type) %>
+                  </p>
+                  <p>
+                    <strong><%=t :g_type%>:</strong>
+                    <%= rgtypes(@event.g_type) %>
+                  </p>
+                  <p>
+                    <strong><%=t :i_type%>:</strong>
+                    <%= ritypes(@event.i_type) %>
+                  </p>
+                </div>
+                <div class="col-md-3">
+                  <%= image_tag @event.avatar(:medium)%>
+                </div>
+              </div>
+            </fieldset>
+          </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+          <div class='row'>
+            <fieldset>
+              <legend>
+                <%= t(:actions)%>
+              </legend>
+              <div class="col-md-12">
+                <%= render partial: 'events/actions', locals: {event: @event}%>
+              </div>
+            </fieldset>
+          </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
+          <div class='row'>
+            <fieldset>
+              <legend>
+                <%= t(:admins)%>
+              </legend>
+              <div class="col-md-12">
+                <%= render partial: 'events/admins', locals: {event: @event}%>
+              </div>
+            </fieldset>
+          </div>
 
-<p>
-  <strong>Event date:</strong>
-  <%= @event.event_date %>
-</p>
+          <div class='row'>
+            <fieldset>
+              <legend>
+                <%= t(:add_user_to_event)%>
+              </legend>
+              <% if @event.g_type == 1 || @admin%>
+              <div class="panel-scroll height-350 ps-container ps-active-y">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class='col-md-6'>
+                      <%= form_tag '/profiles/search/1',:method => :get,:remote => :true do%>
+                      <div class="input-group">
+                        <%= text_field_tag :q, '' , {:class=>"form-control", :id => "nav-search-input", :placeholder => "#{t(:search)}"}%>
+                        <%= hidden_field_tag 'caller', 'addtogroup'%>
+                        <%= hidden_field_tag 'class', 'Event'%>
+                        <%= hidden_field_tag 'class_id', @event.id%>
+                        <span class="input-group-btn">
+                          <button class="btn btn-primary" type="submit" >
+                            <i class="fa fa-search fa-fw" style=" vertical-align: middle;"></i> <%= t(:search)%>
+                          </button>
+                        </span>
+                      </div>
+                      <%end%>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <fieldset>
+                        <legend>
+                          <%= t(:search_results)%>
+                        </legend>
+                        <div style='margin-bottom:15px;'>
+                          <i class='fa fa-plus' style="vertical-align: middle"></i> <%=t :add%>
+                        </div>
 
-<p>
-  <strong>Start time:</strong>
-  <%= @event.start_time %>
-</p>
+                        <% @profiles = {}%>
+                        <%= render partial: 'profiles/compactlist', locals: {profiles: @profiles, item: @event}%>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                      <fieldset>
+                        <legend>
+                          <%= t(:users_in_event)%>
+                        </legend>
+                        <div style='margin-bottom:15px;'>
+                          <i class='fa fa-times' style="vertical-align: middle"></i> <%=t :delete%>
+                          <% if @admin%>
+                          | <i class='fa fa-check' style="vertical-align: middle"></i> <%=t :accept%> |
+                          <i class='fa fa-user-secret' style="vertical-align: middle"></i> <%=t :make_admin%>
+                          <%end%>
+                        </div>
 
-<p>
-  <strong>End time:</strong>
-  <%= @event.end_time %>
-</p>
-
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+                        <%= render partial: 'participations/list', locals: {event: @event}%>
+                      </fieldset>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% else%>
+              <p><%=t :only_admins_can_add_users%></p>
+              <%end%>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,17 +1,44 @@
 <div id='ch-list'>
-<% for involvement in channel.involvements%>
-<% if involvement.role != 3 %>
-<span class='label label-success'>
-<%else%>
-<span class='label label-warning'>
-  <%= link_to "involvements/change_stat/#{involvement.id}", :method => :get, :remote => true do %>
-  <i class='fa fa-check-circle-o' style="color:white"></i>
+  <% @involvement = Involvement.where(channel_id: channel.id, user_id: current_user.id).first%>
+  <% if !@involvement.blank? && @involvement.role == 1%>
+  <% @admin = true%>
+  <%else%>
+  <% @admin = false%>
   <%end%>
-<%end%>
-  <%= link_to involvement_path(involvement), :method => :delete, :remote => true do %>
-  <i class='fa fa-trash-o' style="color:white"></i>
-  <%end%>
-  <%= involvement.user.profile.name%> <%= involvement.user.profile.surename%>
-</span>
-<%end%>
+  <div class="col-md-12 padding-left-0 padding-right-0">
+    <% for involvement in channel.involvements%>
+        <% case involvement.role%>
+        <%when 1%>
+          <span class='label label-info'>
+        <%when 2%>
+          <span class='label label-warning'>
+        <%when 3%>
+          <span class='label label-success'>
+        <%end%>
+
+        <% if @admin && channel.i_type == 1 && involvement.role == 2%>
+        <%= link_to "/involvements/change_stat/#{involvement.id}", :method => :get, :remote => true do %>
+        <i class='fa fa-check' style="color:white; vertical-align: middle"></i>
+        <%end%>
+        <%end%>
+
+
+        <% if @admin %>
+        <%= link_to involvement_path(involvement), :method => :delete, :remote => true do %>
+        <i class='fa fa-times' style="color:white; vertical-align: middle"></i>
+        <%end%>
+
+        <% if @admin && involvement.role != 1 %>
+        <%= link_to "/involvements/make_admin/#{involvement.id}", :method => :get, :remote => true do %>
+        <i class='fa fa-user-secret' style="color:white; vertical-align: middle"></i>
+        <%end%>
+        <%end%>
+
+        <%end%>
+        <%= link_to involvement.user.profile do%>
+        <span style='color: white'>  <%= involvement.user.profile.name%> <%= involvement.user.profile.surename%></span>
+        <%end%>
+      </span>
+      <%end%>
+  </div>
 </div>

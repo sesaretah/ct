@@ -1,77 +1,65 @@
 <% participation = Participation.where(event_id: event.id, user_id: current_user.id).first%>
 <div id='event-detail' >
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="col-sm-3">
-        <div class="pull-right">
-          <%= image_tag event.avatar(:thumb), :class => " messages-item-avatar bordered border-primary"%>
-        </div>
-      </div>
-      <div class="col-sm-9">
-        <div class="row">
-          <%= event.name%>
-        </div>
-        <div class="row">
-          <%=t :start_time%> <%= JalaliDate.to_jalali(event.event_date).day%>/ <%= JalaliDate.to_jalali(event.event_date).month%>/ <%= JalaliDate.to_jalali(event.event_date).year%>
-          <%=t :start_time_ex%> <%= event.start_time.min%>: <%= event.start_time.hour%>
-        </div>
-        <div class="row">
-          <%=t :end_time%> <%= JalaliDate.to_jalali(event.event_date).day%>/ <%= JalaliDate.to_jalali(event.event_date).month%>/ <%= JalaliDate.to_jalali(event.event_date).year%>
-          <%=t :start_time_ex%><%= event.end_time.min%>: <%= event.end_time.hour%>
-        </div>
-        <div class='row'>
-          <%=t :location%> <%= event.location%>
+  <% @e = DateTime.new(event.event_date.year, event.event_date.month, event.event_date.day, event.start_time.hour, event.start_time.min, 0, "+04:30")  %>
+  <% @day = TimeDifference.between(Time.now, @e).in_days.to_i%>
+  <% @hours = TimeDifference.between(Time.now, @e).in_hours.to_i - 24*@day%>
+  <% @min = TimeDifference.between(Time.now, @e).in_minutes.to_i - 24*60*@day - @hours*60%>
 
-          <% @e = DateTime.new(event.event_date.year, event.event_date.month, event.event_date.day, Event.find(1).start_time.hour, Event.find(1).start_time.min)  %>
-
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6 padding-5  style='margin-left:0px;'">
-
-<% if event.event_date > Time.now%>
-      <div class="row " style="direction: ltr;">
-        <% @e = DateTime.new(event.event_date.year, event.event_date.month, event.event_date.day, event.start_time.hour, event.start_time.min)  %>
-        <%@day = TimeDifference.between(Time.now, @e).in_days.to_i%>
-        <% @hours = TimeDifference.between(Time.now, @e).in_hours.to_i - 24*@day%>
-        <% @min = TimeDifference.between(Time.now, @e).in_minutes.to_i - 24*60*@day%>
-        <span class="counter counter-analog pull-right" data-direction="down" data-format="20.23:59:59"><%= @day%>.<%= @hours%>:<%= @min%>:00</span>
-
-        <script>
-        $('.counter').counter({});
-        </script>
-      </div>
-      <%end%>
-
-      <div class="row padding-5 pull-left" style='margin-left:40px;'>
-        <table class="table" style="margin-bottom: 0px; color:#007AFF;">
-          <tr>
-        <% if global?(event)%>
-        <td style="color: #007AFF !important;"><span data-toggle="modal" data-target="#addprofile"  data-placement="right" data-toggle= "tooltip" title= "<%=t :add_user_to_group%>">
-          <i class="fa fa-user-plus"></i>
-        </span>
-      </td>
+  <div class="col-md-12 padding-right-0 padding-left-0">
+    <div class="row">
+      <div class="col-md-12 padding-right-0 padding-left-0">
+        <% if @e < Time.now%>
+        <div class="ribbon"><span><%=t :ended%></span></div>
         <%end%>
-        <% if !participation.blank?%>
-          <td style="color: #007AFF !important;"><%= link_to participation_path(participation.id), :method => :delete, :remote => true, data: {confirm: "Are you sure?"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:leave_event)  do %>
-            <i class="fa fa-trash-o"></i>
+        <div class="col-sm-6  padding-right-0 padding-left-0">
+          <div class="col-sm-3">
+            <%= image_tag event.avatar(:thumb), :class => " messages-item-avatar bordered border-primary"%>
+          </div>
+          <div class="col-sm-9">
+            <div class="row">
+              <%= event.name%>
+            </div>
+            <div class="row">
+              <%=t :start_time%> <%= JalaliDate.to_jalali(event.event_date).day%>/ <%= JalaliDate.to_jalali(event.event_date).month%>/ <%= JalaliDate.to_jalali(event.event_date).year%>
+              <%=t :start_time_ex%> <%= event.start_time.min%>: <%= event.start_time.hour%>
+            </div>
+            <div class="row">
+              <%=t :end_time%> <%= JalaliDate.to_jalali(event.event_date).day%>/ <%= JalaliDate.to_jalali(event.event_date).month%>/ <%= JalaliDate.to_jalali(event.event_date).year%>
+              <%=t :start_time_ex%><%= event.end_time.min%>: <%= event.end_time.hour%>
+            </div>
+            <div class='row'>
+              <%=t :location%> <%= event.location%>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5 padding-right-0 padding-left-0">
+
+          <% if @e > Time.now%>
+          <% if @day == 0%>
+          <div class="row" style="direction: ltr; padding:0px; margin:0px;">
+            <span class="counter counter-analog pull-right" data-direction="down" data-format="23:59:59"><%= @hours%>:<%= @min%>:00</span>
+            <script>
+            $('.counter').counter({});
+            </script>
+          </div>
+          <%else%>
+          <div class="row">
+            <h4>  <%= @day%> <%=t :days %>  <%=t :and %> <%= @hours%><%=t :hours%> <%=t :and %> <%=t @min%> <%=t :minutes%> </h4>
+          </div>
           <%end%>
-        </td>
-        <%end%>
-        <% if admin?(participation)%>
-        <td style="color: #007AFF !important;">
-          <%= link_to edit_event_path(event), 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:edit) do%>
-            <i class="fa fa-edit"></i>
-            <%end%>
-        </td>
-        <%end%>
-      </tr>
-    </table>
-      </div>
 
+
+          <%end%>
+        </div>
+        <div class="col-sm-1" style='margin-left:0px;'>
+          <%= link_to event_path(event) do%>
+          <i class="fa fa-cog"></i>
+          <%end%>
+        </div>
+      </div>
     </div>
+    <hr style='margin-top:10px; margin-bottom:5px;' />
   </div>
-  <hr style='margin-top:0px; margin-bottom:0px;' />
   <% @comments = Comment.where(commentable_type: 'Event', commentable_id: event.id).last(page*3)%>
   <%= render partial: 'events/event_comments', locals: {comments: @comments, event: event, page: page}%>
 

@@ -1,0 +1,46 @@
+
+<div id='pollitem-form'>
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"><%= t(:new_pollitem)%></span></h5>
+        <div class="panel panel-white">
+          <div class='panel-body'>
+            <div class="col-md-12">
+              <% @pollitem = pollitem%>
+              <%= form_tag @pollitem, remote: true do |f| %>
+              <% if @pollitem.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@pollitem.errors.count, "error") %> prohibited this pollitem from being saved:</h2>
+
+                <ul>
+                  <% @pollitem.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+              <% end %>
+
+              <div class="row">
+                <div class="form-group col-xs-10">
+                  <%= f.label :content %><br>
+                  <%= f.text_field :content , id: 'content', :class => "form-control" %>
+                </div>
+              </div>
+              <%= f.hidden_field :poll_id, value: poll.id%>
+
+
+              <div class="row top30">
+                <div class="form-group col-xs-1 pull-left">
+                  <%= content_tag :button, :type => :submit,id: 'subbtn', :class => "btn btn-o btn-primary" do %>
+                  <i class="icon-ok bigger-110"></i>
+                  <%=t :submit%>
+                  <% end %>
+                </div>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

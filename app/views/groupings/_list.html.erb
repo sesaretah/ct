@@ -1,20 +1,44 @@
 <div id='gr-list'>
-<% for grouping in group.groupings%>
-<% if grouping.role != 3 %>
-<span class='label label-success'>
-<%else%>
-<span class='label label-warning'>
-  <% @group_admin = Grouping.where(user_id: current_user.id, group_id: grouping.group_id, role: 1).first%>
-  <% if !@group_admin.blank?%>
-  <%= link_to "groupings/change_stat/#{grouping.id}", :method => :get, :remote => true do %>
-  <i class='fa fa-check-circle-o' style="color:white"></i>
+  <% @grouping = Grouping.where(group_id: group.id, user_id: current_user.id).first%>
+  <% if !@grouping.blank? && @grouping.role == 1%>
+  <% @admin = true%>
+  <%else%>
+  <% @admin = false%>
   <%end%>
-  <%end%>
-<%end%>
-  <%= link_to grouping_path(grouping), :method => :delete, :remote => true do %>
-  <i class='fa fa-trash-o' style="color:white"></i>
-  <%end%>
-  <%= grouping.user.profile.name%> <%= grouping.user.profile.surename%>
-</span>
-<%end%>
+  <div class="col-md-12 padding-left-0 padding-right-0">
+    <% for grouping in group.groupings%>
+        <% case grouping.role%>
+        <%when 1%>
+          <span class='label label-info'>
+        <%when 2%>
+          <span class='label label-warning'>
+        <%when 3%>
+          <span class='label label-success'>
+        <%end%>
+
+        <% if @admin && group.i_type == 1 && grouping.role == 2%>
+        <%= link_to "/groupings/change_stat/#{grouping.id}", :method => :get, :remote => true do %>
+        <i class='fa fa-check' style="color:white; vertical-align: middle"></i>
+        <%end%>
+        <%end%>
+
+
+        <% if @admin %>
+        <%= link_to grouping_path(grouping), :method => :delete, :remote => true do %>
+        <i class='fa fa-times' style="color:white; vertical-align: middle"></i>
+        <%end%>
+
+        <% if @admin && grouping.role != 1 %>
+        <%= link_to "/groupings/make_admin/#{grouping.id}", :method => :get, :remote => true do %>
+        <i class='fa fa-user-secret' style="color:white; vertical-align: middle"></i>
+        <%end%>
+        <%end%>
+
+        <%end%>
+        <%= link_to grouping.user.profile do%>
+        <span style='color: white'>  <%= grouping.user.profile.name%> <%= grouping.user.profile.surename%></span>
+        <%end%>
+      </span>
+      <%end%>
+  </div>
 </div>

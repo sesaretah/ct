@@ -1,0 +1,2 @@
+$("#pollitemlist").replaceWith("<%= escape_javascript(render(:partial => 'pollitems/list',locals: {poll: @poll})) %>");
+$("#pollsection-form").replaceWith("<%= escape_javascript(render(:partial => 'pollsections/form',locals: {poll: @poll})) %>");

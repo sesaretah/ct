@@ -1,0 +1,22 @@
+<% @random_string = SecureRandom.hex%>
+<li class="messages-item padding-5 <%= @bg%>" id='<%=@random_string %>'>
+  <%= link_to 'polls/view_content/'+ poll.id.to_s+'?rnd='+@random_string,:remote => true  do%>
+  <%= image_tag poll.user.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+  <span class="messages-item-from"><%= poll.title%></span>
+  <div class="messages-item-time">
+    <span class="text">
+
+    </span>
+  </div>
+  <span class="messages-item-subject"></span>
+  <span class="messages-item-content"></span>
+
+  <%end%>
+  <% if poll.user_id == current_user.id%>
+  <div class="messages-item-time" style="margin-top:10px">
+    <%= link_to edit_poll_path(poll) do%>
+      <i class="fa fa-edit" style="vertical-align: middle;"></i>
+    <%end%>
+  </div>
+  <%end%>
+</li>

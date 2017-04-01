@@ -1,0 +1,61 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:new_poll)%></h1>
+        <span class="mainDescription"><%= t(:please_enter_new_poll_data)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"></span></h5>
+        <div class="panel panel-white">
+          <div class="panel-body">
+            <%= form_for(@poll) do |f| %>
+            <% if @poll.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@poll.errors.count, "error") %> prohibited this poll from being saved:</h2>
+
+              <ul>
+                <% @poll.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+            <% end %>
+
+            <div class="row">
+              <div class="form-group col-xs-10">
+                <%= f.label :title %><br>
+                <%= f.text_field :title , id: 'title', :class => "form-control" %>
+              </div>
+            </div>
+
+
+
+            <div class="row top30">
+              <div class="form-group col-xs-1 pull-left">
+                <%= content_tag :button, :type => :submit,id: 'subbtn', :class => "btn btn-o btn-primary" do %>
+                <i class="icon-ok bigger-110"></i>
+                <%=t :submit%>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

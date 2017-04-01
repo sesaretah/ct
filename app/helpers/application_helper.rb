@@ -45,6 +45,11 @@ module ApplicationHelper
     return @options
   end
 
+  def rptypes(p)
+    @options = [t(:private),t(:public)]
+    return @options[p-1]
+  end
+
   def gtypes
     @options = [
       [t(:open), 1],
@@ -53,12 +58,22 @@ module ApplicationHelper
     return @options
   end
 
+  def rgtypes(g)
+    @options = [t(:open),t(:closed)]
+    return @options[g-1]
+  end
+
   def itypes
     @options = [
       [t(:need_approval), 1],
       [t(:dont_need_approval) , 2]
     ]
     return @options
+  end
+
+  def ritypes(i)
+    @options = [t(:need_approval),t(:dont_need_approval)]
+    return @options[i-1]
   end
 
   def grades

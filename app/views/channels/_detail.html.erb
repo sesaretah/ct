@@ -1,74 +1,30 @@
 <% involvement = Involvement.where(channel_id: channel.id, user_id: current_user.id).first%>
 <div id='channel-detail' >
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="col-sm-3">
-        <div class="pull-right">
-          <%= image_tag channel.avatar(:thumb), :class => " messages-item-avatar bordered border-primary"%>
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-sm-11">
+          <div class="col-sm-2">
+            <%= image_tag channel.avatar(:thumb), :class => " messages-item-avatar bordered border-primary"%>
+          </div>
+          <div class="col-sm-10" style='margin-bottom:15px;'>
+            <div class="row">
+              <%= channel.name%>
+            </div>
+            <div class="row">
+              <%= truncate(channel.description, :length => 20)%>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-sm-9" style='margin-bottom:15px;'>
-        <div class="row">
-          <%= channel.name%>
+        <div class="col-sm-1" style='margin-left:0px;'>
+          <%= link_to channel_path(channel) do%>
+          <i class="fa fa-cog"></i>
+          <%end%>
         </div>
-        <div class="row">
-          <%= channel.description%>
-        </div>
-
       </div>
     </div>
-    <div class="col-sm-6 padding-5  style='margin-left:0px;'">
-
-      <div class="row padding-5 pull-left" style='margin-left:40px;'>
-        <table class="table" style="margin-bottom: 0px; color:#007AFF;">
-          <tr>
-            <% if global?(channel)%>
-            <td style="color: #007AFF !important;">
-              <span data-toggle="modal" data-target="#addprofile"  data-placement="right" data-toggle= "tooltip" title= "<%=t :add_user_to_group%>">
-                <i class="fa fa-user-plus"></i>
-              </span>
-            </td>
-            <%end%>
-            <% if !involvement.blank? && !admin?(involvement)%>
-            <td style="color: #007AFF !important;"><%= link_to involvement_path(involvement.id), :method => :delete, :remote => true, data: {confirm: "Are you sure?"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:leave_channel)  do %>
-              <i class="fa fa-sign-out"></i>
-              <%end%>
-            </td>
-            <%end%>
-            <% if admin?(involvement)%>
-            <td style="color: #007AFF !important;">
-              <%= link_to edit_channel_path(channel), 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:edit) do%>
-              <i class="fa fa-edit"></i>
-              <%end%>
-            </td>
-            <%end%>
-
-            <% if admin?(involvement)%>
-            <td style="color: #007AFF !important;">
-              <%= link_to channel_path(channel.id), :method => :delete, :remote => true, data: {confirm: "Are you sure?"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:destroy) do%>
-              <i class="fa fa-trash"></i>
-              <%end%>
-            </td>
-            <%end%>
-
-            <% if involvement.blank?%>
-            <td style="color: #007AFF !important;">
-              <%= link_to "/channels/join/#{channel.id}", :remote => true, data: {confirm: "Are you sure?"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:join) do%>
-              <i class="fa fa-plus-square"></i>
-              <%end%>
-            </td>
-            <%end%>
-
-          </tr>
-        </table>
-      </div>
-
-    </div>
+    <hr style='margin-top:20px; margin-bottom:0px;' />
   </div>
-  <hr style='margin-top:0px; margin-bottom:0px;' />
-
   <% @comments = Comment.where(commentable_type: 'Channel', commentable_id: channel.id).last(page*3)%>
   <%= render partial: 'channels/channel_comments', locals: {comments: @comments, channel: channel, page: page}%>
-
 </div>
-<%= render partial: 'channels/add_user', locals: {channel: channel}%>

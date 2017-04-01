@@ -1,15 +1,26 @@
 class InvolvementsController < ApplicationController
   before_action :set_involvement, only: [:show, :edit, :update, :destroy]
 
+  def make_admin
+    @involvement = Involvement.find(params[:id])
+    @channel_admin = Involvement.where(user_id: current_user.id, channel_id: @involvement.channel_id).first
+    @channel = @involvement.channel
+    if @channel_admin.role == 1
+      @involvement.role = 1
+      @involvement.save
+    end
+  end
+
   def change_stat
     @involvement = Involvement.find(params[:id])
     @channel_admin = Involvement.where(user_id: current_user.id, channel_id: @involvement.channel_id).first
     @channel = @involvement.channel
     if @channel_admin.role == 1
-      @involvement.role = 2
+      @involvement.role = 3
       @involvement.save
     end
   end
+
   def add_to_channel
     @channel = Channel.find(params[:channel_id])
     if params[:page].blank?
@@ -18,10 +29,15 @@ class InvolvementsController < ApplicationController
     if params[:user_id].blank?
       params[:user_id] = current_user.id
     end
-    if @channel.p_type != 1
+    if @channel.i_type == 1
+      params[:role] = 2
+    else
       params[:role] = 3
     end
-    @involvement = Involvement.create(user_id: params[:user_id], channel_id: params[:channel_id], adder_id: params[:adder_id], role: params[:role])
+    @involvement = Involvement.where(user_id: params[:user_id], channel_id: params[:channel_id]).first
+    if @involvement.blank?
+      @involvement = Involvement.create(user_id: params[:user_id], channel_id: params[:channel_id], adder_id: params[:adder_id], role: params[:role])
+    end
   end
   # GET /involvements
   # GET /involvements.json

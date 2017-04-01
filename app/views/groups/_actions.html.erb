@@ -1,0 +1,36 @@
+<div id='actions'>
+  <% @grouping = Grouping.where(group_id: group.id, user_id: current_user.id).first%>
+  <% if !@grouping.blank? && @grouping.role == 1%>
+  <% @admin = true%>
+  <%else%>
+  <% @admin = false%>
+  <%end%>
+  <% if @admin%>
+
+  <%= link_to edit_group_path(@group) do %>
+  <button id='edit' type="button" class="btn btn-warning">
+    <i class='fa fa-edit' style="vertical-align: middle"></i> <%= t(:edit)%>
+  </button>
+  <%end%>
+
+  <%= link_to group_path(@group), :method => :delete, data: {confirm: "Are you sure?"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:destroy) do%>
+  <button type="button" class="btn btn-danger">
+    <i class='fa fa-trash' style="vertical-align: middle"></i> <%= t(:delete_group)%>
+  </button>
+  <%end%>
+  <%end%>
+
+  <% if !@grouping.blank? %>
+  <%= link_to grouping_path(@grouping), :method => :delete, :remote => true, data: {confirm: "Are you sure?"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:leave_group)  do %>
+  <button type="button" class="btn btn-beige">
+    <i class='fa fa-sign-out' style="vertical-align: middle"></i> <%= t(:exit)%>
+  </button>
+  <%end%>
+  <%else%>
+  <%= link_to "/groupings/add_to_group/1?user_id=#{current_user.id}&group_id=#{@group.id}&adder_id=#{current_user.id}", :method => :get, :remote => true do %>
+  <button type="button" class="btn btn-success">
+    <i class='fa fa-plus' style="vertical-align: middle"></i> <%= t(:membership)%>
+  </button>
+  <%end%>
+  <%end%>
+</div>

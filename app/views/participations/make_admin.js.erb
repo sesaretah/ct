@@ -1,0 +1,2 @@
+$("#pr-list").replaceWith("<%= escape_javascript(render(:partial => 'participations/list',locals: {event: @event})) %>");
+$("#admins").replaceWith("<%= escape_javascript(render(:partial => 'events/admins',locals: {event: @event})) %>");

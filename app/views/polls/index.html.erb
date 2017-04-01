@@ -1,0 +1,110 @@
+<div class="wrap-content container padding-right-0" id="container">
+  <div class="col-md-12 padding-right-0 padding-left-0" >
+    <div class=" col-md-4 padding-right-0 padding-left-0 " >
+      <div class="tabbable padding-right-0 padding-left-0 ">
+        <ul id="myTab1" class="nav nav-tabs">
+          <li class="active">
+            <a href="#followed_polls" data-toggle="tab" aria-expanded="false">
+              <i class="fa fa-chain"></i>
+
+            </a>
+          </li>
+          <li class="">
+            <a href="#top_polls" data-toggle="tab" aria-expanded="true">
+              <i class="fa fa-trophy"></i>
+
+            </a>
+          </li>
+          <li class="">
+            <a href="#related_polls" data-toggle="tab" aria-expanded="true">
+              <i class="fa fa-plug"></i>
+
+            </a>
+          </li>
+          <li class="">
+            <a href="#search_polls" data-toggle="tab" aria-expanded="true">
+              <i class="fa fa-search"></i>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade active in" id="followed_polls">
+            <ul class="list-group">
+              <%= link_to new_poll_path do%>
+              <li class="list-group-item">
+                <i class="fa fa-edit"></i> <%=t :new_poll%>
+              </li>
+              <%end%>
+            </ul>
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :polls_you_created%></span>
+            <hr style="margin-top:0px; margin-bottom:0px;">
+            <ul class="messages-list relative top-0 margin-bottom-5">
+              <% for c in current_user.polls%>
+              <%= render partial: 'polls/item', locals: {poll: c}%>
+              <%end%>
+            </ul>
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :polls_you_follow%></span>
+            <hr style="margin-top:0px; margin-bottom:0px;">
+            <ul class="messages-list relative top-0 margin-bottom-5">
+              <% for f in Followship.where(followable_type: 'poll', user_id: current_user.id)%>
+              <% @c = f.followable_type.classify.constantize.find(f.followable_id)%>
+              <%= render partial: 'polls/item', locals: {poll: @c}%>
+              <%end%>
+            </ul>
+          </div>
+          <div class="tab-pane fade" id="top_polls">
+            <ul class="messages-list relative top-0">
+              <% @j = 0%>
+              <% for i in Followship.where('followable_type = ?', 'Poll').group('followable_id').order('count_id desc').count('id') %>
+                <% if @j < 10%>
+                <%= render partial: 'polls/item', locals: {poll: Poll.find(i[0])}%>
+                <%end%>
+                <% @j = @j+1%>
+              <%end%>
+            </ul>
+          </div>
+          <div class="tab-pane fade " id="related_polls">
+
+          </div>
+          <div class="tab-pane fade " id="search_polls">
+            <div>
+              <%= form_tag '/polls/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
+              <div class="form-group">
+                <%= text_field_tag :q, '' , {:class=>"form-control", :id => "nav-search-input", :placeholder => "#{t(:search)}"}%>
+
+                <button class="btn search-button" type="submit">
+                  <i class="ti-search"></i>
+                </button>
+
+              </div>
+              <%end%>
+            </div>
+            <div id='search-results'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% if !@poll.blank?%>
+    <%= render(:partial => 'polls/poll_detail', locals: {poll: @poll }) %>
+    <%else%>
+    <div id='poll-detail'>
+      <div class="col-md-7 padding-right-0 padding-left-0" >
+        <div class="panel panel-white no-radius">
+          <div class="panel-heading border-light">
+            <h4 class="panel-title"></h4>
+            <ul class="panel-heading-tabs border-light">
+              <li class="panel-tools">
+                <a data-original-title="Refresh" data-toggle="tooltip" data-placement="top" class="btn btn-transparent btn-sm panel-refresh" href="#"><i class="ti-reload"></i></a>
+              </li>
+            </ul>
+          </div>
+          <div class="panel-body ">
+
+          </div>
+        </div>
+      </div>
+      <%end%>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 <div id='course-detail'>
-  <div class="col-md-9 padding-right-0 padding-left-0">
+  <div class="col-md-8 padding-right-0 padding-left-0">
     <div class="tabbable">
       <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue" id="myTab4">
         <li class="active">
@@ -29,13 +29,30 @@
             <div class="col-sm-5 col-md-4">
               <div class="user-left">
                 <div class="center">
+                  <div style='margin: 0 auto; display: inline-block;'><%= image_tag course.avatar(:medium), :class => "img-responsive"%></div>
                   <h4><%= course.name%></h4>
-                  <div class="col-sm-12" style="margin-top:10px;">
-                    <%= link_to edit_course_path(course.id) do %>
-                    <button id='edit' type="button" class="btn btn-wide btn-o btn-warning">
-                      <%= t(:edit_course)%>
-                    </button>
+                  <div class="col-sm-12" style="margin-top:10px;margin-bottom:10px;">
+                    <% if course.user_id == current_user.id%>
+                    <div class="row">
+                      <%= link_to edit_course_path(course.id) do %>
+                      <button type="button" class="btn btn-light-azure btn-squared btn-xs">
+                        <i class="fa fa-edit" style="color: white !important;vertical-align: middle;"></i> &nbsp <%= t(:edit)%>&nbsp
+                      </button>
+                      <%end%>
+                    </div>
+
+                    <div class="row" style='margin-top:1px;'>
+                      <%= link_to '/courses/'+ course.id.to_s, :method => :delete, data: {confirm: "Are you sure?"}  do %>
+
+                      <button type="button" class="btn btn-light-blue btn-squared btn-xs">
+                        <i class="fa fa-trash-o" style="color: white !important;vertical-align: middle;"></i> <%= t(:delete)%>
+                      </button>
+                      <%end%>
+                    </div>
                     <%end%>
+                    <div class="row" style='margin-top:1px;'>
+                      <%= render partial: '/followships/follow', locals:{item: course}%>
+                    </div>
                   </div>
                   <hr>
 

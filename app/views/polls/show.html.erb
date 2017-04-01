@@ -1,0 +1,141 @@
+<script src="//chartjs.org/assets/Chart.min.js"></script>
+
+
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:poll)%>: <%= @poll.title%></h1>
+        <span class="mainDescription"><% t(:please_enter_new_channel_data)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-12">
+          <div class="row">
+            <fieldset>
+              <legend>
+                <%= t(:characteristics)%>
+              </legend>
+              <div class="col-md-12">
+                <div class="col-md-9">
+                  <p>
+                    <% for pollsection in @poll.pollsections%>
+                    <h5><%=t :question%>: <%= pollsection.question %></h5>
+                    <%=t :options%>
+                    <hr style='margin-top:0px; margin-bottom:5px;'/>
+                    <ol>
+                      <% for pollitem in pollsection.pollitems%>
+                      <li><%= pollitem.content%></li>
+                      <%end%>
+                    </ol>
+                    <%end%>
+                  </p>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class='row'>
+            <fieldset>
+              <legend>
+                <%= t(:results)%>
+              </legend>
+              <div class="col-md-12">
+                <% for pollsection in @poll.pollsections%>
+                <div class="col-sm-3">
+                  <div style="text-align:center"><%= pollsection.question%> </div>
+                  <canvas id="canvas-<%= pollsection.id%>" height="150" width="150"></canvas>
+                </div>
+                <script>
+                <% @colors = ["#A1D2CE", "#78CAD2","#62A8AC","#5497A7", "#50858B", "#CB48B7", "#2E2D4D", "#337357", "#6D9F71", "#E4E3D3"]%>
+                <% a = []%>
+                <% for p  in pollsection.pollitems%>
+                <% a << p.id%>
+                <%end%>
+                <% @v = Survey.where('pollitem_id IN (?)', a ).group('pollitem_id').count('id')%>
+                $(document).ready(function () {
+                  var pieData = [
+                    <% @j = 0%>
+                    <% for i in @v%>
+                    {
+                      value: <%= i[1]%>,
+                      color: "<%= @colors[@j]%>",
+                      label: '<%=t :option%> <%= i[0]%>',
+                      labelColor: 'white',
+                      labelFontSize: '16'
+                    }
+                    <% if @j < @v.length%>
+                    ,
+                    <%end%>
+                    <% @j = @j +1%>
+                    <%end%>
+                  ];
+
+
+                  var myPie = new Chart(document.getElementById("canvas-<%= pollsection.id%>").getContext("2d")).Pie(pieData, {
+                    animation: true,
+                    animationSteps: 100,
+                    animationEasing: 'easeInOutQuart'
+
+                  });
+                });
+                </script>
+
+              <%end%>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class='row'>
+            <fieldset>
+              <legend>
+                <%= t(:actions)%>
+              </legend>
+              <div class="col-md-12">
+
+                <%= link_to "/polls/#{@poll.id}.xls" do %>
+                <button type="button" class="btn btn-success btn-squared btn-xs">
+                  <i class="fa fa-file-excel-o" style="color: white !important;vertical-align: middle;"></i> <%= t(:export_excel)%>&nbsp
+                </button>
+                <%end%>
+                <p>
+              </div>
+            </fieldset>
+          </div>
+
+
+
+          <div class='row'>
+            <fieldset>
+              <legend>
+                <%= t(:users_that_surveyed)%>
+              </legend>
+
+              <% Survey.where(poll_id: @poll.id).group_by(&:user_id).each do |user, survey| %>
+              <% @profile = User.find(user.to_i).profile%>
+              <%= link_to @profile do%>
+              <button type="button" class="btn btn-info btn-squared btn-xs">
+                <%= @profile.name %>  <%= @profile.surename %>
+              </button>
+              <%end%>
+              <%end%>
+
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1 @@
+$("#pollitem-form").replaceWith("<%= escape_javascript(render(:partial => 'pollitems/form',locals: {pollitem: @pollitem, poll: @pollitem.poll})) %>");

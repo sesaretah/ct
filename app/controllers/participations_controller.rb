@@ -1,12 +1,22 @@
 class ParticipationsController < ApplicationController
   before_action :set_participation, only: [:show, :edit, :update, :destroy]
 
+  def make_admin
+    @participation = Participation.find(params[:id])
+    @event_admin = Participation.where(user_id: current_user.id, event_id: @participation.event_id).first
+    @event = @participation.event
+    if @event_admin.role == 1
+      @participation.role = 1
+      @participation.save
+    end
+  end
+
   def change_stat
     @participation = Participation.find(params[:id])
     @event_admin = Participation.where(user_id: current_user.id, event_id: @participation.event_id).first
     @event = @participation.event
     if @event_admin.role == 1
-      @participation.role = 2
+      @participation.role = 3
       @participation.save
     end
   end
@@ -19,10 +29,15 @@ class ParticipationsController < ApplicationController
     if params[:user_id].blank?
       params[:user_id] = current_user.id
     end
-    if @event.p_type != 1
+    if @event.i_type == 1
+      params[:role] = 2
+    else
       params[:role] = 3
     end
-    @participation = Participation.create(user_id: params[:user_id], event_id: params[:event_id], adder_id: params[:adder_id], role: params[:role])
+    @participation = Participation.where(user_id: params[:user_id], event_id: params[:event_id]).first
+    if @participation.blank?
+      @participation = Participation.create(user_id: params[:user_id], event_id: params[:event_id], adder_id: params[:adder_id], role: params[:role])
+    end
   end
 
   # GET /participations

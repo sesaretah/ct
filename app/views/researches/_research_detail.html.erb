@@ -1,39 +1,82 @@
 <div id='research-detail'>
   <div class="row">
-    <div class="col-md-10">
-      <p>
-        <%=t :title%>:
-        <%= research.name%>
-      </p>
-    </div>
+    <div class="col-md-9 padding-left-0">
+      <div class="row">
+        <div class="col-md-10">
+          <p>
+            <%=t :title%>:
+            <%= research.name%>
+          </p>
+        </div>
 
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <p>
-        <%=t :pub_year%>:
-        <%= research.pub_year%>
-      </p>
+      </div>
+      <div class="row">
+        <div class="col-md-4 ">
+          <p>
+            <%=t :pub_year%>:
+            <%= research.pub_year%>
+          </p>
+        </div>
+        <div class="col-md-3 padding-right-0 padding-left-0">
+          <p>
+            <%=t :pub_type%>:
+            <%= research.pub_type%>
+          </p>
+        </div>
+        <div class="col-md-5 padding-right-0 padding-left-0">
+          <p>
+            <%=t :pub_name%>:
+            <%= research.pub_name%>
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p>
+            <%=t :pub_authors%>:
+            <%= research.pub_authors%>
+          </p>
+        </div>
+      </div>
     </div>
-    <div class="col-md-4">
-      <p>
-        <%=t :pub_type%>:
-        <%= research.pub_type%>
-      </p>
-    </div>
-    <div class="col-md-4">
-      <p>
-        <%=t :pub_name%>:
-        <%= research.pub_name%>
-      </p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <p>
-        <%=t :pub_authors%>:
-        <%= research.pub_authors%>
-      </p>
+    <div class="col-md-3">
+      <div class="panel panel-white">
+        <div class="panel-body">
+          <div class="col-md-12">
+            <div class="row" style='margin-bottom:2px;'>
+            <%= render partial: '/followships/follow', locals:{item: research}%>
+          </div>
+            <div class="row" style='margin-bottom:5px;'>
+
+              <%= link_to research.document.url do%>
+              <button type="button" class="btn btn-light-red btn-squared btn-xs">
+                <i class="fa fa-file-pdf-o" style="color: white !important;vertical-align: middle;"></i> &nbsp <%= t(:fulltext)%>
+              </button>
+              <%end%>
+            </div>
+            <div class="row">
+              <span class='text-small'><%=t :users_vote%></span>
+              <table>
+                <tbody>
+                  <tr>
+                    <td><span class='text-small'>  <%=t :soundness %></span></td>
+                    <td><%= Ranking.where(rankable_id: research.id, rankable_type: research.class.name, rank_type: 'soundness').average(:value)%></td>
+                  </tr>
+                  <tr>
+                    <td><span class='text-small'>  <%=t :presentation %></span></td>
+                    <td><%= Ranking.where(rankable_id: research.id, rankable_type: research.class.name, rank_type: 'presentation').average(:value)%></td>
+                  </tr>
+                  <tr>
+                    <td><span class='text-small'>  <%=t :novelty %></span></td>
+                    <td><%= Ranking.where(rankable_id: research.id, rankable_type: research.class.name, rank_type: 'novelty').average(:value)%></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -45,16 +88,7 @@
     </div>
   </div>
 
-<% if !research.document.blank?%>
-  <div class="row">
-    <div class="col-md-10 "></div>
-    <div class="col-md-2 ">
-      <%= link_to research.document.url do%>
-      <i class="fa fa-2x fa-file-pdf-o" style='color:red'></i>
-      <%end%>
-    </div>
-  </div>
-<%end%>
+
   <hr/>
   <div class="row">
     <% @soundness = Ranking.where(rankable_id: research.id, rankable_type: research.class.name, rank_type: 'soundness', user_id: current_user.id).first%>
@@ -74,21 +108,20 @@
       <div class=" text-extra-large">
         <span class='text-small'>  <%=t :soundness %></span>
         <input type="hidden" class="rating-tooltip" data-filled="fa fa-star margin-right-5 text-yellow" data-empty="fa fa-star-o margin-right-5" id='soundness' value='<%= @soundness_value %>'/>
-        <span class="label label-success"></span>
+
       </div>
     </div>
     <div class="col-md-4  padding-right-0 padding-left-0">
       <div class=" text-extra-large">
         <span class='text-small'>  <%=t :presentation %></span>
         <input type="hidden" class="rating-tooltip" data-filled="fa fa-star margin-right-5 text-yellow" data-empty="fa fa-star-o margin-right-5" id='presentation' value='<%= @presentation_value%>'/>
-        <span class="label label-success"></span>
+
       </div>
     </div>
     <div class="col-md-4  padding-right-0 padding-left-0">
       <div class=" text-extra-large">
         <span class='text-small'>  <%=t :novelty %></span>
         <input type="hidden" class="rating-tooltip" data-filled="fa fa-star margin-right-5 text-yellow" data-empty="fa fa-star-o margin-right-5" id='novelty' value='<%= @novelty_value%>'/>
-        <span class="label label-success"></span>
       </div>
     </div>
   </div>

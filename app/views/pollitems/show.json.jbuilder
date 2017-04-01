@@ -1,0 +1,1 @@
+json.partial! "pollitems/pollitem", pollitem: @pollitem

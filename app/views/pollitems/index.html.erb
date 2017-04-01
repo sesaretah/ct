@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Pollitems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Poll</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pollitems.each do |pollitem| %>
+      <tr>
+        <td><%= pollitem.content %></td>
+        <td><%= pollitem.poll_id %></td>
+        <td><%= link_to 'Show', pollitem %></td>
+        <td><%= link_to 'Edit', edit_pollitem_path(pollitem) %></td>
+        <td><%= link_to 'Destroy', pollitem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pollitem', new_pollitem_path %>

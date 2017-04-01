@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @pollitem.content %>
+</p>
+
+<p>
+  <strong>Poll:</strong>
+  <%= @pollitem.poll_id %>
+</p>
+
+<%= link_to 'Edit', edit_pollitem_path(@pollitem) %> |
+<%= link_to 'Back', pollitems_path %>

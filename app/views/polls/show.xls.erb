@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+xmlns:html="http://www.w3.org/TR/REC-html40">
+<Worksheet ss:Name="Sheet1">
+  <Table>
+    <Row>
+      <Cell><Data ss:Type="String">User</Data></Cell>
+      <% for pollsection in @poll.pollsections%>
+      <Cell><Data ss:Type="String"><%= pollsection.question%></Data></Cell>
+      <%end%>
+    </Row>
+    <% Survey.where(poll_id: @poll.id).group_by(&:user_id).each do |user, survey| %>
+    <Row>
+      <Cell><Data ss:Type="String"><%= User.find(user.to_i).profile.name %> <%= User.find(user.to_i).profile.surename %></Data></Cell>
+      <% survey.each do |s| %>
+      <Cell><Data ss:Type="String"><%= s.pollitem.content %></Data></Cell>
+      <% end %>
+    </Row>
+    <% end %>
+  </Table>
+</Worksheet>
+</Workbook>

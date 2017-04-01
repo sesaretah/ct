@@ -1,0 +1,9 @@
+<div id='admins'>
+<% for admin in Involvement.where(channel_id: channel.id, role: 1)%>
+    <span class='label label-info'>
+      <%= link_to admin.user.profile do%>
+      <span style='color: white'>  <%= admin.user.profile.name%> <%= admin.user.profile.surename%></span>
+      <%end%>
+    </span>
+<%end%>
+    </div>

@@ -1,0 +1,57 @@
+<div id='poll-detail'>
+  <div class="col-md-7 padding-right-0 padding-left-0" >
+    <div class="panel panel-white no-radius">
+      <div class="panel-heading border-light">
+        <h4 class="panel-title"></h4>
+        <ul class="panel-heading-tabs border-light">
+          <li class="panel-tools">
+            <a data-original-title="Refresh" data-toggle="tooltip" data-placement="top" class="btn btn-transparent btn-sm panel-refresh" href="#"><i class="ti-reload"></i></a>
+          </li>
+        </ul>
+      </div>
+      <div class="panel-body ">
+        <div class='col-md-12'>
+          <div class="row">
+            <div class='col-md-11 padding-left-0'>
+            <h4><%=t :poll_question%>: <%= poll.title%></h4>
+          </div>
+          <div class='col-md-1'>
+            <%= link_to poll_path(poll) do%>
+            <i class="fa fa-cog"></i>
+            <%end%>
+          </div>
+          </div>
+          <div class="row">
+            <hr style='margin-top:0px; margin-bottom:0px;'/>
+            <%= form_tag '/surveys', :method => :post, remote: true do %>
+            <div class="panel-body">
+              <% for pollsection in poll.pollsections%>
+              <h4><%=t :question%>: <%= pollsection.question%></h4>
+                <% for pollitem in pollsection.pollitems %>
+              <div class="radio clip-radio radio-primary">
+                <input type="radio" id="radio<%= pollitem.id%>" name="vertical_<%= pollitem.id%>" value="radio<%= pollitem.id%>">
+                <label for="radio<%= pollitem.id%>">
+                  <%= pollitem.content%>
+                </label>
+              </div>
+              <%end%>
+              <%end%>
+            </div>
+
+            <hr style='margin-top:0px; margin-bottom:10px;'/>
+            <div class="row">
+              <div class='col-md-10'></div>
+              <div class='col-md-2 '>
+                <%= content_tag :button, :type => :submit,id: 'subbtn', :class => "btn btn-sm btn-success" do %>
+                <i class="icon-ok bigger-110"></i>
+                <%=t :submit%>
+                <% end %>
+              </div>
+            </div>
+            <%end%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

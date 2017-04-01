@@ -1,29 +1,34 @@
 <div class="wrap-content container padding-right-0" id="container">
   <div class="col-md-12 padding-right-0 padding-left-0" >
-    <div class=" col-md-3 padding-right-0 padding-left-0 " >
+    <div class=" col-md-4 padding-right-0 padding-left-0 " >
       <div class="tabbable padding-right-0 padding-left-0 ">
         <ul id="myTab1" class="nav nav-tabs">
           <li class="active">
-            <a href="#myTab1_example1" data-toggle="tab" aria-expanded="false">
-              <i class="fa fa-clock-o"></i>
-              <%t :events_you_joined%>
+            <a href="#followed_courses" data-toggle="tab" aria-expanded="false">
+              <i class="fa fa-chain"></i>
+
             </a>
           </li>
           <li class="">
-            <a href="#myTab1_example3" data-toggle="tab" aria-expanded="true">
+            <a href="#top_courses" data-toggle="tab" aria-expanded="true">
+              <i class="fa fa-trophy"></i>
+
+            </a>
+          </li>
+          <li class="">
+            <a href="#related_courses" data-toggle="tab" aria-expanded="true">
               <i class="fa fa-plug"></i>
-              <%t :events_you_manage%>
+
             </a>
           </li>
           <li class="">
-            <a href="#myTab1_example4" data-toggle="tab" aria-expanded="true">
+            <a href="#search_courses" data-toggle="tab" aria-expanded="true">
               <i class="fa fa-search"></i>
-              <%t :events_you_manage%>
             </a>
           </li>
         </ul>
         <div class="tab-content">
-          <div class="tab-pane fade active in" id="myTab1_example1">
+          <div class="tab-pane fade active in" id="followed_courses">
             <ul class="list-group">
               <%= link_to new_course_path do%>
               <li class="list-group-item">
@@ -31,23 +36,37 @@
               </li>
               <%end%>
             </ul>
-            <ul class="messages-list relative top-0">
-              <% for c in Course.all%>
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :courses_you_created%></span>
+            <hr style="margin-top:0px; margin-bottom:0px;">
+            <ul class="messages-list relative top-0 margin-bottom-5">
+              <% for c in current_user.courses%>
               <%= render partial: 'courses/item', locals: {course: c}%>
               <%end%>
             </ul>
-
-
-          </div>
-          <div class="tab-pane fade" id="myTab1_example2">
-            <ul class="messages-list relative top-0">
-
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :courses_you_follow%></span>
+            <hr style="margin-top:0px; margin-bottom:0px;">
+            <ul class="messages-list relative top-0 margin-bottom-5">
+              <% for f in Followship.where(followable_type: 'Course', user_id: current_user.id)%>
+              <% @c = f.followable_type.classify.constantize.find(f.followable_id)%>
+              <%= render partial: 'courses/item', locals: {course: @c}%>
+              <%end%>
             </ul>
           </div>
-          <div class="tab-pane fade " id="myTab1_example3">
+          <div class="tab-pane fade" id="top_courses">
+            <ul class="messages-list relative top-0">
+              <% @j = 0%>
+              <% for i in Followship.where('followable_type = ?', 'Course').group('followable_id').order('count_id desc').count('id') %>
+                <% if @j < 10%>
+                <%= render partial: 'courses/item', locals: {course: Course.find(i[0])}%>
+                <%end%>
+                <% @j = @j+1%>
+              <%end%>
+            </ul>
+          </div>
+          <div class="tab-pane fade " id="related_courses">
 
           </div>
-          <div class="tab-pane fade " id="myTab1_example4">
+          <div class="tab-pane fade " id="search_courses">
             <div>
               <%= form_tag '/courses/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
               <div class="form-group">

@@ -4,7 +4,7 @@ class Course < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :ratio, :caller
   after_update :reprocess_avatar, :if => :cropping?
-
+  belongs_to :user
 
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?

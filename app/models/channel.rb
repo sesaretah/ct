@@ -8,7 +8,13 @@ class Channel < ActiveRecord::Base
   has_many :users, :through => :involvements, dependent: :destroy
   has_many :comments, :as => :commentable, :dependent => :destroy
 
+
+  before_create :set_uuid
   after_create :set_admin
+
+  def set_uuid
+    self.uuid = SecureRandom.uuid
+  end
 
   def set_admin
     @involvement = {user_id: self.user_id, channel_id: self.id, role: 1}

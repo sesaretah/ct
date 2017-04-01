@@ -1,0 +1,50 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:new_pollitem)%></h1>
+        <span class="mainDescription"><% t(:please_enter_new_pollitem_data)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"></span></h5>
+        <div class="panel panel-white">
+          <div class="panel-body">
+            <div class="row">
+
+              <div class="col-xs-10">
+                <% @poll = Poll.find(params[:poll_id])%>
+                <h4><%=t :poll_question%>: <%= @poll.title%></h4>
+                <%= render partial: '/pollitems/list', locals: {poll: @poll}%>
+              </div>
+            </div>
+            <%= render partial: '/pollitems/form', locals: {pollitem: Pollitem.new, poll: @poll} %>
+
+            <div class="row">
+              <div class="col-md-10"></div>
+              <div class="col-md-2">
+              <%= link_to "/polls?poll_id="+@poll.id.to_s   do %>
+              <button type="button" class="btn btn-success btn-squared">
+                <i class="fa fa-pie-chart" style="color: white !important;vertical-align: middle;"></i> &nbsp <%= t(:view)%>&nbsp
+              </button>
+              <%end%>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  resources :pollsections
+
+  resources :surveys
+
+  resources :pollitems
+
+  resources :polls
+
+  resources :followships
+
   resources :theses
 
   resources :books
@@ -10,10 +20,6 @@ Rails.application.routes.draw do
   resources :friendships
 
   resources :rankings
-
-  resources :qitems
-
-  resources :questionaires
 
   resources :sub_categories
 
@@ -107,8 +113,10 @@ Rails.application.routes.draw do
   match "/messages/view_content/:id" => "messages#view_content", :via => :get
 
   match "/profiles/search/:id" => "profiles#advanced_search", :via => :get
+
   match "/groupings/add_to_group/:id" => "groupings#add_to_group", :via => :get
   match "/groupings/change_stat/:id" => "groupings#change_stat", :via => :get
+  match "/groupings/make_admin/:id" => "groupings#make_admin", :via => :get
 
   match "/comments/xedit/:id" => "comments#xedit", :via => :get
   match "/comments/render_partial/:id" => "comments#render_partial", :via => :get
@@ -116,9 +124,11 @@ Rails.application.routes.draw do
 
   match "/participations/add_to_event/:id" => "participations#add_to_event", :via => :get
   match "/participations/change_stat/:id" => "participations#change_stat", :via => :get
+  match "/participations/make_admin/:id" => "participations#make_admin", :via => :get
 
   match "/involvements/add_to_channel/:id" => "involvements#add_to_channel", :via => :get
   match "/involvements/change_stat/:id" => "involvements#change_stat", :via => :get
+  match "/involvements/make_admin/:id" => "involvements#make_admin", :via => :get
 
   match "/blogs/view_content/:id" => "blogs#view_content", :via => :get
   match "/blogs/join/:id" => "blogs#join", :via => :get
@@ -177,6 +187,11 @@ Rails.application.routes.draw do
 
     match "/friendships/add_friend/:id" => "friendships#add_friend", :via => :get
     match "/friendships/remove_friend/:id" => "friendships#remove_friend", :via => :get
+
+    match "/followships/follow/:id" => "followships#follow", :via => :get
+    match "/followships/unfollow/:id" => "followships#unfollow", :via => :get
+
+    match "/polls/completion/:id" => "polls#completion", :via => :get
 
   post 'upload' => 'upload#create'
   # The priority is based upon order of creation: first created -> highest priority.
