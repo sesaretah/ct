@@ -35,7 +35,7 @@ class PollsController < ApplicationController
 
     respond_to do |format|
       if @poll.save
-        format.html { redirect_to '/pollitems/completion/'+ @poll.id.to_s, notice: 'Poll was successfully created.' }
+        format.html { redirect_to '/polls/completion/'+ @poll.id.to_s, notice: 'Poll was successfully created.' }
         format.json { render :show, status: :created, location: @poll }
       else
         format.html { render :new }
