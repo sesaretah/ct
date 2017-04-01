@@ -342,6 +342,7 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  complete_the_questions_and_options: 'سوال ها و گزینه ها را تکمیل کنید'
   export_excel: 'خروجی اکسل'
   question: 'سوال'
   option: 'گزینه'

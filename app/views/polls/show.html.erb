@@ -72,7 +72,7 @@
                     {
                       value: <%= i[1]%>,
                       color: "<%= @colors[@j]%>",
-                      label: '<%=t :option%> <%= i[0]%>',
+                      label: '<%= Pollitem.find(i[0].to_i).content%>',
                       labelColor: 'white',
                       labelFontSize: '16'
                     }
