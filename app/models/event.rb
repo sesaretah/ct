@@ -9,6 +9,13 @@ class Event < ActiveRecord::Base
   has_many :users, :through => :participations, dependent: :destroy
   has_many :comments, :as => :commentable, :dependent => :destroy
 
+  after_create :set_admin
+
+  def set_admin
+    @participation = {user_id: self.user_id, event_id: self.id, role: 1}
+    Participation.create(@participation)
+  end
+
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
   end

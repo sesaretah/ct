@@ -66,8 +66,11 @@ class GroupsController < ApplicationController
     @group.user_id = current_user.id
     respond_to do |format|
       if @group.save
-        @grouping = Grouping.create(group_id: @group.id, user_id: current_user.id, role: 1)
-        format.html { redirect_to '/groups/cropper/'+@group.id.to_s}
+        if params[:group][:avatar].blank?
+          format.html { redirect_to '/groups?group_id='+@group.id.to_s, notice: :group_was_successfully_created }
+        else
+          format.html { redirect_to '/groups/cropper/'+@group.id.to_s}
+        end
         format.json { render :show, status: :created, location: @group }
       else
         format.html { render :new }
@@ -81,7 +84,7 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
-        if @group.cropping?
+        if params[:group][:avatar].blank?
           format.html { redirect_to '/groups?group_id='+@group.id.to_s, notice: :Group_was_successfully_updated }
         else
           format.html { redirect_to '/groups/cropper/'+@group.id.to_s}
@@ -112,6 +115,6 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:name, :description, :i_type ,:p_type, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller)
+      params.require(:group).permit(:name, :description, :i_type ,:p_type, :g_type, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller)
     end
 end

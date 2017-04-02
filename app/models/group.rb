@@ -7,6 +7,12 @@ class Group < ActiveRecord::Base
   has_many :groupings, dependent: :destroy
   has_many :users, :through => :groupings, dependent: :destroy
   has_many :comments, :as => :commentable, :dependent => :destroy
+  after_create :set_admin
+
+  def set_admin
+    @grouping = {user_id: self.user_id, group_id: self.id, role: 1}
+    Grouping.create(@grouping)
+  end
 
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?

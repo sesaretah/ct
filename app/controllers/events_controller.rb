@@ -69,7 +69,11 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to '/events/cropper/'+@event.id.to_s}
+        if params[:event][:avatar].blank?
+          format.html { redirect_to '/events?event_id='+@event.id.to_s, notice: :Event_was_successfully_created }
+        else
+          format.html { redirect_to '/events/cropper/'+@event.id.to_s}
+        end
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new }
@@ -86,7 +90,7 @@ class EventsController < ApplicationController
         @event.event_date = JalaliDate.to_gregorian(params[:event_date_yyyy],params[:event_date_mm],params[:event_date_dd])
       end
       if @event.update(event_params)
-        if @event.cropping?
+        if params[:event][:avatar].blank?
           format.html { redirect_to '/events?event_id='+@event.id.to_s, notice: :Event_was_successfully_updated }
         else
           format.html { redirect_to '/events/cropper/'+@event.id.to_s}

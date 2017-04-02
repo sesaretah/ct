@@ -159,7 +159,12 @@
 
 <script>
 $(document).ready(function(){
+  if ($('#name').val()){
+    $('#subbtn').attr('disabled',false);
+  } else {
     $('#subbtn').attr('disabled',true);
+  }
+
     $('#name').keyup(function(){
         if($(this).val().length !=0)
             $('#subbtn').attr('disabled', false);

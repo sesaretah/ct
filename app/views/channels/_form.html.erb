@@ -120,7 +120,12 @@
 
 <script>
 $(document).ready(function(){
-  $('#subbtn').attr('disabled',true);
+  if ($('#name').val()){
+    $('#subbtn').attr('disabled',false);
+  } else {
+    $('#subbtn').attr('disabled',true);
+  }
+
   $('#name').keyup(function(){
     if($(this).val().length !=0)
     $('#subbtn').attr('disabled', false);

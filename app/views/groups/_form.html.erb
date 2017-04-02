@@ -56,6 +56,14 @@
 
             <div class="row">
               <div class="selectwrap form-group col-xs-4">
+                <%= f.label :g_type %><br>
+                <%= f.select( :g_type, gtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="selectwrap form-group col-xs-4">
                 <%= f.label :i_type %><br>
                 <%= f.select( :i_type, itypes, {}, {:class => "form-control"})  %>
               </div>
@@ -116,7 +124,12 @@
 
 <script>
 $(document).ready(function(){
+  if ($('#name').val()){
+    $('#subbtn').attr('disabled',false);
+  } else {
     $('#subbtn').attr('disabled',true);
+  }
+
     $('#name').keyup(function(){
         if($(this).val().length !=0)
             $('#subbtn').attr('disabled', false);
