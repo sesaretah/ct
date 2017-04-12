@@ -12,13 +12,19 @@
       <div class="panel-body ">
         <div class='col-md-12'>
           <div class="row">
-            <div class='col-md-11 padding-left-0'>
+            <div class='col-md-10 padding-left-0'>
             <h4><%=t :poll_question%>: <%= poll.title%></h4>
           </div>
-          <div class='col-md-1'>
-            <%= link_to poll_path(poll) do%>
-            <i class="fa fa-cog"></i>
-            <%end%>
+          <div class='col-md-2'>
+            <% if poll.user_id == current_user.id%>
+              <%= link_to poll_path(poll) do%>
+                <i class="fa fa-cog"></i>
+              <%end%>
+              <%else%>
+                <div class="row" style='margin-bottom:5px;'>
+                  <%= render partial: 'followships/follow', locals:{item: poll}%>
+                </div>
+              <%end%>
           </div>
           </div>
           <div class="row">
