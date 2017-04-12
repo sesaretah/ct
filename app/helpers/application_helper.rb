@@ -1,5 +1,15 @@
 module ApplicationHelper
   require 'securerandom'
+
+  def policytypes
+    @options = [
+      [t(:everyone), 1],
+      [t(:only_followers) , 2],
+      [t(:only_me) , 3]
+    ]
+    return @options
+  end
+
   def sexs
     @options = [
       [t(:male), t(:male)],

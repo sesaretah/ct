@@ -1,6 +1,16 @@
 class PollsController < ApplicationController
   before_action :set_poll, only: [:show, :edit, :update, :destroy]
 
+  def view_content
+    @poll = Poll.find(params[:id])
+    if params[:page].blank?
+      @page = 1
+    else
+      @page = params[:page].to_i
+    end
+    @rnd = params[:rnd]
+  end
+
   def completion
     @poll = Poll.find(params[:id])
   end
@@ -49,7 +59,7 @@ class PollsController < ApplicationController
   def update
     respond_to do |format|
       if @poll.update(poll_params)
-        format.html { redirect_to @poll, notice: 'Poll was successfully updated.' }
+        format.html {redirect_to '/polls/completion/'+ @poll.id.to_s, notice: 'Poll was successfully updated.' }
         format.json { render :show, status: :ok, location: @poll }
       else
         format.html { render :edit }

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  privatable_type: MyString
+  privatable_id: 1
+  policy_type: 1
+
+two:
+  privatable_type: MyString
+  privatable_id: 1
+  policy_type: 1

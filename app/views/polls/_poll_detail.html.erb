@@ -29,7 +29,7 @@
               <h4><%=t :question%>: <%= pollsection.question%></h4>
                 <% for pollitem in pollsection.pollitems %>
               <div class="radio clip-radio radio-primary">
-                <input type="radio" id="radio<%= pollitem.id%>" name="vertical_<%= pollitem.id%>" value="radio<%= pollitem.id%>">
+                <input type="radio" id="radio<%= pollitem.id%>" name="vertical_<%= pollsection.id%>" value="radio<%= pollitem.id%>">
                 <label for="radio<%= pollitem.id%>">
                   <%= pollitem.content%>
                 </label>

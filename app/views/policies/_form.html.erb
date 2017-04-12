@@ -1,0 +1,177 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:new_poll)%></h1>
+        <span class="mainDescription"><%= t(:please_enter_new_poll_data)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"></span></h5>
+
+        <%= form_tag '/policies' do %>
+        <div class='row'>
+          <fieldset>
+            <legend>
+              <%= t(:profile)%>
+            </legend>
+            <div class="col-md-12">
+
+              <div class="row">
+                <div class="form-group col-xs-10">
+                  <%=t :fathername %>:
+                  <%= select_tag :profile_fathername, options_for_select(policytypes), {} %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-xs-10">
+                  <%=t :sex %>:
+                  <%= select_tag :profile_sex, options_for_select(policytypes), {} %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-xs-10">
+                  <%=t :birthdate %>:
+                  <%= select_tag :profile_birthdate, options_for_select(policytypes), {} %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-xs-10">
+                  <%=t :ssn %>:
+                  <%= select_tag :profile_ssn, options_for_select(policytypes), {} %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-xs-10">
+                  <%=t :phonenumber %>:
+                  <%= select_tag :profile_phonenumber, options_for_select(policytypes), {} %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form-group col-xs-10">
+                  <%=t :mobilenumber %>:
+                  <%= select_tag :profile_mobilenumber, options_for_select(policytypes), {} %>
+                </div>
+              </div>
+
+
+            </div>
+          </fieldset>
+        </div>
+
+        <div class='row'>
+          <fieldset>
+            <legend>
+              <%= t(:education)%>
+            </legend>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="form-group col-xs-10">
+                  <%=t :education %>:
+                  <%= select_tag :education_all, options_for_select(policytypes), {} %>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class='row'>
+            <fieldset>
+              <legend>
+                <%= t(:research)%>
+              </legend>
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="form-group col-xs-10">
+                    <%=t :research %>:
+                    <%= select_tag :research_all, options_for_select(policytypes), {} %>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class='row'>
+              <fieldset>
+                <legend>
+                  <%= t(:honor)%>
+                </legend>
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="form-group col-xs-10">
+                      <%=t :honor %>:
+                      <%= select_tag :honor_all, options_for_select(policytypes), {} %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class='row'>
+                <fieldset>
+                  <legend>
+                    <%= t(:tag)%>
+                  </legend>
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="form-group col-xs-10">
+                        <%=t :tag %>:
+                        <%= select_tag :tag_all, options_for_select(policytypes), {} %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class='row'>
+                  <fieldset>
+                    <legend>
+                      <%= t(:social_relations)%>
+                    </legend>
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="form-group col-xs-10">
+                          <%=t :followers %>:
+                          <%= select_tag :followers_all, options_for_select(policytypes), {} %>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="form-group col-xs-10">
+                          <%=t :followees %>:
+                          <%= select_tag :followees_all, options_for_select(policytypes), {} %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
+          <div class="row top30">
+            <div class="form-group col-xs-1 pull-left">
+              <%= content_tag :button, :type => :submit,id: 'subbtn', :class => "btn btn-o btn-primary" do %>
+              <i class="icon-ok bigger-110"></i>
+              <%=t :submit%>
+              <% end %>
+            </div>
+          </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>

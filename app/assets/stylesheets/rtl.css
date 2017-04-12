@@ -1732,7 +1732,7 @@ ul.sub-menu li ul.sub-menu li ul.sub-menu li a {
 }
 .clip-radio label {
   margin-right: 0;
-  margin-left: 15px;
+/*  margin-left: 15px;*/
   padding-left: 0 !important;
   padding-right: 25px !important;
 }

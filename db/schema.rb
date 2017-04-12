@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401171045) do
+ActiveRecord::Schema.define(version: 20170402080939) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content",     limit: 65535
@@ -297,6 +297,14 @@ ActiveRecord::Schema.define(version: 20170401171045) do
     t.integer  "role",       limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "policies", force: :cascade do |t|
+    t.string   "privatable_type", limit: 255
+    t.integer  "privatable_id",   limit: 4
+    t.integer  "policy_type",     limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "pollitems", force: :cascade do |t|

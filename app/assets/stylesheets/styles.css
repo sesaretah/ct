@@ -5561,6 +5561,7 @@ input[type="radio"], input[type="checkbox"] {
   display: inline-block;
   height: 20px;
   left: 0;
+  top: 0;
   margin-right: 10px;
   position: absolute;
   width: 20px;
@@ -5574,6 +5575,7 @@ input[type="radio"], input[type="checkbox"] {
   display: inline-block;
   height: 20px;
   left: 0;
+  top: 0;
   margin-right: 10px;
   position: absolute;
   width: 20px;

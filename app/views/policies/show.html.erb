@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Privatable type:</strong>
+  <%= @policy.privatable_type %>
+</p>
+
+<p>
+  <strong>Privatable:</strong>
+  <%= @policy.privatable_id %>
+</p>
+
+<p>
+  <strong>Policy type:</strong>
+  <%= @policy.policy_type %>
+</p>
+
+<%= link_to 'Edit', edit_policy_path(@policy) %> |
+<%= link_to 'Back', policies_path %>

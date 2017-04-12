@@ -342,6 +342,9 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  only_me: 'فقط خودم'
+  only_followers: 'فقط دنبال کنندگان'
+  everyone: 'همه'
   complete_the_questions_and_options: 'سوال ها و گزینه ها را تکمیل کنید'
   export_excel: 'خروجی اکسل'
   question: 'سوال'

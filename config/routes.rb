@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :policies
+
   resources :pollsections
 
   resources :surveys
@@ -192,6 +194,7 @@ Rails.application.routes.draw do
     match "/followships/unfollow/:id" => "followships#unfollow", :via => :get
 
     match "/polls/completion/:id" => "polls#completion", :via => :get
+    match "/polls/view_content/:id" => "polls#view_content", :via => :get
 
   post 'upload' => 'upload#create'
   # The priority is based upon order of creation: first created -> highest priority.
