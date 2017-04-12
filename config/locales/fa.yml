@@ -342,6 +342,8 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  top_polls: 'محبوب ترین نظرسنجی ها'
+  newest_polls: 'جدیدترین نظرسنجی ها'
   only_me: 'فقط خودم'
   only_followers: 'فقط دنبال کنندگان'
   everyone: 'همه'
