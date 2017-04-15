@@ -67,7 +67,6 @@
             <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :newest_polls%></span>
             <hr style="margin-top:0px; margin-bottom:0px;">
             <ul class="messages-list relative top-0">
-              <% @j = 0%>
               <% for poll in Poll.all.order("id desc").limit(5).reverse%>
                 <%= render partial: 'polls/item', locals: {poll: poll}%>
               <%end%>

@@ -44,7 +44,11 @@ class LabsController < ApplicationController
     @lab.user_id = current_user.id
     respond_to do |format|
       if @lab.save
-        format.html { redirect_to '/labs/cropper/'+@lab.id.to_s}
+        if params[:lab][:avatar].blank?
+          format.html { redirect_to '/labs?lab_id='+@lab.id.to_s, notice: :lab_was_successfully_created }
+        else
+          format.html { redirect_to '/labs/cropper/'+@lab.id.to_s}
+        end
         format.json { render :show, status: :created, location: @lab }
       else
         format.html { render :new }
@@ -58,8 +62,8 @@ class LabsController < ApplicationController
   def update
     respond_to do |format|
       if @lab.update(lab_params)
-        if @lab.cropping?
-          format.html { redirect_to '/labs?lab_id='+@lab.id.to_s, notice: :Lab_was_successfully_updated }
+        if params[:lab][:avatar].blank?
+          format.html { redirect_to '/labs?lab_id='+@lab.id.to_s, notice: :lab_was_successfully_updated }
         else
           format.html { redirect_to '/labs/cropper/'+@lab.id.to_s}
         end

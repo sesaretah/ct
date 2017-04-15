@@ -15,6 +15,9 @@
         <%= link_to edit_note_path(note.id) do %>
         <i class="fa fa-edit"></i>
         <%end%>
+        <%= link_to note_path(note.id), :method => :delete, data: {confirm: "Are you sure?"} do %>
+        <i class="fa fa-trash"></i>
+        <%end%>
         <%end%>
 
       </span>

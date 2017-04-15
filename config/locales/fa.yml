@@ -342,6 +342,10 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  top_labs: 'محبوب ترین آزمایشگاهها'
+  newest_labs: 'جدیدترین آزمایشگاهها'
+  top_courses: 'محبوب ترین دروس'
+  newest_courses: 'جدیدترین دروس'
   top_polls: 'محبوب ترین نظرسنجی ها'
   newest_polls: 'جدیدترین نظرسنجی ها'
   only_me: 'فقط خودم'

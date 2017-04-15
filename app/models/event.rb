@@ -6,7 +6,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
 
   has_many :participations, dependent: :destroy
-  has_many :users, :through => :participations, dependent: :destroy
+  has_many :users, :through => :participations
   has_many :comments, :as => :commentable, :dependent => :destroy
 
   after_create :set_admin

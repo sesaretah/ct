@@ -43,7 +43,11 @@ class CoursesController < ApplicationController
     @course.user_id = current_user.id
     respond_to do |format|
       if @course.save
-        format.html { redirect_to '/courses/cropper/'+@group.id.to_s}
+        if params[:course][:avatar].blank?
+          format.html { redirect_to '/courses?course_id='+@course.id.to_s, notice: :course_was_successfully_created }
+        else
+          format.html { redirect_to '/courses/cropper/'+@course.id.to_s}
+        end
         format.json { render :show, status: :created, location: @course }
       else
         format.html { render :new }
@@ -57,8 +61,8 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
-        if @course.cropping?
-          format.html { redirect_to '/courses?course_id='+@course.id.to_s, notice: :Course_was_successfully_updated }
+        if params[:course][:avatar].blank?
+          format.html { redirect_to '/courses?course_id='+@course.id.to_s, notice: :course_was_successfully_created }
         else
           format.html { redirect_to '/courses/cropper/'+@course.id.to_s}
         end

@@ -53,6 +53,8 @@
             </ul>
           </div>
           <div class="tab-pane fade" id="top_courses">
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :top_courses%></span>
+            <hr style="margin-top:0px; margin-bottom:0px;">
             <ul class="messages-list relative top-0">
               <% @j = 0%>
               <% for i in Followship.where('followable_type = ?', 'Course').group('followable_id').order('count_id desc').count('id') %>
@@ -60,6 +62,13 @@
                 <%= render partial: 'courses/item', locals: {course: Course.find(i[0])}%>
                 <%end%>
                 <% @j = @j+1%>
+              <%end%>
+            </ul>
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :newest_courses%></span>
+            <hr style="margin-top:0px; margin-bottom:0px;">
+            <ul class="messages-list relative top-0">
+              <% for course in Course.all.order("id desc").limit(5).reverse%>
+                <%= render partial: 'courses/item', locals: {course: course}%>
               <%end%>
             </ul>
           </div>

@@ -4,9 +4,9 @@ class Project < ActiveRecord::Base
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :ratio, :caller
   after_update :reprocess_avatar, :if => :cropping?
 
-  has_many :partnerships
+  has_many :partnerships, :dependent => :destroy
   has_many :users, :through => :partnerships
-  has_many :tasks
+  has_many :tasks, :dependent => :destroy
   has_many :followships, :as => :followable, :dependent => :destroy
 
   def cropping?

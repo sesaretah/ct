@@ -46,7 +46,11 @@ class ProjectsController < ApplicationController
     @project.user_id = current_user.id
     respond_to do |format|
       if @project.save
-        format.html { redirect_to '/projects/cropper/'+@project.id.to_s}
+        if params[:project][:avatar].blank?
+          format.html { redirect_to '/projects?project_id='+@project.id.to_s, notice: :project_was_successfully_created }
+        else
+          format.html { redirect_to '/projects/cropper/'+@project.id.to_s}
+        end
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
@@ -60,8 +64,8 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
-        if @project.cropping?
-          format.html { redirect_to '/projects?project_id='+@project.id.to_s, notice: :Group_was_successfully_updated }
+        if params[:project][:avatar].blank?
+          format.html { redirect_to '/projects?project_id='+@project.id.to_s, notice: :project_was_successfully_updated }
         else
           format.html { redirect_to '/projects/cropper/'+@project.id.to_s}
         end

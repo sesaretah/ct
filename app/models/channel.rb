@@ -5,7 +5,7 @@ class Channel < ActiveRecord::Base
   after_update :reprocess_avatar, :if => :cropping?
 
   has_many :involvements, dependent: :destroy
-  has_many :users, :through => :involvements, dependent: :destroy
+  has_many :users, :through => :involvements
   has_many :comments, :as => :commentable, :dependent => :destroy
 
 
