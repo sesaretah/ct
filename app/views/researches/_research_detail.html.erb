@@ -47,11 +47,12 @@
             <%= render partial: '/followships/follow', locals:{item: research}%>
           </div>
             <div class="row" style='margin-bottom:5px;'>
-
+              <% if !research.document_file_name.blank? %>
               <%= link_to research.document.url do%>
               <button type="button" class="btn btn-light-red btn-squared btn-xs">
                 <i class="fa fa-file-pdf-o" style="color: white !important;vertical-align: middle;"></i> &nbsp <%= t(:fulltext)%>
               </button>
+              <%end%>
               <%end%>
             </div>
             <div class="row">

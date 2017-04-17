@@ -342,6 +342,10 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  policies: 'سیاست‌های حریم خصوصی'
+  education: 'سوابق آموزشی'
+  honor: 'افتخارات'
+  tag: 'زمینه‌های فعالیت'
   top_labs: 'محبوب ترین آزمایشگاهها'
   newest_labs: 'جدیدترین آزمایشگاهها'
   top_courses: 'محبوب ترین دروس'

@@ -69,7 +69,7 @@ class BlogsController < ApplicationController
   def update
     respond_to do |format|
       if @blog.update(blog_params)
-        format.html { redirect_to @blog, notice: 'Blog was successfully updated.' }
+        format.html {  redirect_to '/blogs?blog_id='+@blog.id.to_s, notice: 'Blog was successfully updated.' }
         format.json { render :show, status: :ok, location: @blog }
       else
         format.html { render :edit }

@@ -42,7 +42,7 @@
             <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :projects_you_created%></span>
             <hr style="margin-top:0px; margin-bottom:0px;">
             <ul class="messages-list relative top-0 margin-bottom-5">
-              <% for p in current_user.projects%>
+              <% for p in Project.where(user_id: current_user.id)%>
               <%= render partial: 'projects/item', locals: {project: p}%>
               <%end%>
             </ul>
