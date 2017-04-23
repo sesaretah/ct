@@ -44,9 +44,11 @@
 <script type="text/javascript">
 $('#fedit').click(function() {
   $('#comment_document').click();
+  console.log('file');
 });
 $('#cedit').click(function() {
   $('#comment_avatar').click();
+  console.log('camera');
 });
 $(function () {
   $('#fileupload').fileupload({
@@ -55,6 +57,7 @@ $(function () {
       data.submit();
     },
     done: function (e, data) {
+      console.log(e);
       console.log('yayy');
       console.log(data.result)
       var url = '/comments/render_partial/'+ data.result.id+'?page='+<%= page%>

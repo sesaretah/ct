@@ -33,10 +33,7 @@
             </div>
           </div>
           <div class="panel-body">
-            <% page = 1%>
-
-            <%= render partial: 'notes/note_comments', locals: { note: @note, page: page}%>
-            <%= render partial: 'comments/remote_form', locals: {c: @note, page: page } %>
+            <%= render partial: 'notes/detail', locals: {note: @note} %>
           </div>
         </div>
       </div>

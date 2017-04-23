@@ -92,11 +92,8 @@
               <%end%>
             </div>
         </div>
-        <div  id='cm' class="panel-footer border-light">
-          <% if !@event.blank?%>
-          <% @page = 1%>
-          <%= render(:partial => 'comments/remote_form', locals: {c: @event, page:@page }) %>
-          <%end%>
+        <div id='cm' class="panel-footer border-light">
+   
         </div>
       </div>
     </div>

@@ -79,7 +79,7 @@
 		</div>
 		<%= render :partial => "layouts/footer"%>
 	</div>
-	<% if params[:controller] == 'channels' || params[:controller] == 'groups' || params[:controller] == 'events'%>
+	<% if params[:controller] == 'channels' || params[:controller] == 'groups' || params[:controller] == 'events' || params[:controller] == 'notes'%>
 	<script src="/assets/jquery/jquery.min.js"></script>
 	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
 	<%end%>
@@ -105,7 +105,7 @@
 	<script src="/assets/d3.v3.min.js"></script>
 	<script src="/assets/gantt-chart-d3.js"></script>
 	<script src="/assets/bootstrap-rating.min.js"></script>
-	
+
 
 
 	<!-- end: MAIN JAVASCRIPTS -->

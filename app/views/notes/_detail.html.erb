@@ -1,7 +1,5 @@
-<div id='notes'>
-  <ul class="messages-list relative top-0">
-  <% for n in notes%>
-  <%= render partial: 'notes/item', locals: {note: n}%>
-  <%end%>
-</ul>
+<% page = 1%>
+<div id='note-detail'>
+<%= render partial: 'notes/note_comments', locals: { note: note, page: page}%>
+<%= render partial: 'comments/remote_form', locals: {c: note, page: page } %>
 </div>
