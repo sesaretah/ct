@@ -25,6 +25,11 @@ class ChannelsController < ApplicationController
       @page = params[:page].to_i
     end
     @rnd = params[:rnd]
+    @visit = Visit.where(user_id: current_user.id, visitable_id: @channel.id, visitable_type: 'Channel').first
+    if !@visit.blank?
+      @visit.destroy
+    end
+    Visit.create(user_id: current_user.id, visitable_id: @channel.id, visitable_type: 'Channel')
   end
 
   def upload_avatar
@@ -52,6 +57,13 @@ class ChannelsController < ApplicationController
   def index
     @channels = Channel.all
     @channel = Channel.find_by_id(params[:channel_id])
+    if !@channel.blank?
+      @visit = Visit.where(user_id: current_user.id, visitable_id: @channel.id, visitable_type: 'Channel').first
+      if !@visit.blank?
+        @visit.destroy
+      end
+      Visit.create(user_id: current_user.id, visitable_id: @channel.id, visitable_type: 'Channel')
+    end
   end
 
   # GET /channels/1

@@ -4,10 +4,10 @@ class BlogsController < ApplicationController
   def search
     @blogs = Blog.search params[:q], :star => true
     @excerpter = ThinkingSphinx::Excerpter.new 'blog_core', params[:q]   , {
-    :before_match    => '<span class="bg-warning">',
-    :after_match     => '</span>',
-    :chunk_separator => ' &#8230; ' # ellipsis
-  }
+      :before_match    => '<span class="bg-warning">',
+      :after_match     => '</span>',
+      :chunk_separator => ' &#8230; ' # ellipsis
+    }
   end
 
   def join
@@ -25,6 +25,12 @@ class BlogsController < ApplicationController
     else
       @page = params[:page].to_i
     end
+    @rnd = params[:rnd]
+    @visit = Visit.where(user_id: current_user.id, visitable_id: @blog.id, visitable_type: 'Blog').first
+    if !@visit.blank?
+      @visit.destroy
+    end
+    Visit.create(user_id: current_user.id, visitable_id: @blog.id, visitable_type: 'Blog')
   end
 
   # GET /blogs
@@ -32,6 +38,13 @@ class BlogsController < ApplicationController
   def index
     @blogs = Blog.all
     @blog = Blog.find_by_id(params[:blog_id])
+    if !@blog.blank?
+      @visit = Visit.where(user_id: current_user.id, visitable_id: @blog.id, visitable_type: 'Blog').first
+      if !@visit.blank?
+        @visit.destroy
+      end
+      Visit.create(user_id: current_user.id, visitable_id: @blog.id, visitable_type: 'Blog')
+    end
   end
 
   # GET /blogs/1
@@ -89,13 +102,13 @@ class BlogsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_blog
-      @blog = Blog.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_blog
+    @blog = Blog.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def blog_params
-      params.require(:blog).permit(:title, :user_id, :p_type, :g_type, :i_type)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def blog_params
+    params.require(:blog).permit(:title, :user_id, :p_type, :g_type, :i_type)
+  end
 end

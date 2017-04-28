@@ -13,11 +13,23 @@
   <span class="messages-item-subject"></span>
   <span class="messages-item-content"><%= truncate(project.aims, :length => 20)%></span>
   <%end%>
-  <% if project.user_id == current_user.id%>
   <div class="messages-item-time" style="margin-top:10px">
-    <%= link_to edit_project_path(project) do%>
-      <i class="fa fa-edit" style="vertical-align: middle;"></i>
+    <% @fl = Followship.where(user_id: current_user.id, followable_id: project.id, followable_type: 'Project').first%>
+    <% if !@fl.blank? %>
+    <div id='<%= @random_string%>-label'>
+      <% @v = Visit.where(user_id: current_user.id, visitable_id: project.id, visitable_type: 'Project').first%>
+      <% if !@v.blank?%>
+      <% @count = project.tasks.where("created_at > ?", @v.created_at ).count%>
+      <% if @count > 0%>
+      <span class="label label-info pull-left" style="color: white;"><%= @count%></span>
+      <% end%>
+      <%else%>
+      <% @count = project.tasks.count%>
+      <% if @count > 0%>
+      <span class="label label-info pull-left" style="color: white;"><%= @count%></span>
+      <% end%>
+      <%end%>
+    </div>
     <%end%>
   </div>
-  <%end%>
 </li>

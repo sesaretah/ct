@@ -15,6 +15,11 @@ class GroupsController < ApplicationController
       @page = params[:page].to_i
     end
     @rnd = params[:rnd]
+    @visit = Visit.where(user_id: current_user.id, visitable_id: @group.id, visitable_type: 'Group').first
+    if !@visit.blank?
+      @visit.destroy
+    end
+    Visit.create(user_id: current_user.id, visitable_id: @group.id, visitable_type: 'Group')
   end
 
   def upload_avatar
@@ -43,6 +48,13 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.all
     @group = Group.find_by_id(params[:group_id])
+    if !@group.blank?
+      @visit = Visit.where(user_id: current_user.id, visitable_id: @group.id, visitable_type: 'Group').first
+      if !@visit.blank?
+        @visit.destroy
+      end
+      Visit.create(user_id: current_user.id, visitable_id: @group.id, visitable_type: 'Group')
+    end
   end
 
   # GET /groups/1

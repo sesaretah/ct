@@ -1,0 +1,1 @@
+json.partial! "csessions/csession", csession: @csession

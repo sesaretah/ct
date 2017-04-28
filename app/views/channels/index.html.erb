@@ -4,41 +4,82 @@
     <div class="tabbable padding-right-0 padding-left-0 ">
       <ul id="myTab1" class="nav nav-tabs">
         <li class="">
-          <a href="#recent-channels" data-toggle="tab" aria-expanded="false">
-            <i class="fa fa-clock-o"></i>
-            <%t :channels_you_joined%>
+          <a href="#my_channels" data-toggle="tab" aria-expanded="false">
+            <i class="fa fa-chain"></i>
+
           </a>
         </li>
         <li class="active">
-          <a href="#top-channels" data-toggle="tab" aria-expanded="false">
+          <a href="#top_channels" data-toggle="tab" aria-expanded="false">
             <i class="fa fa-trophy"></i>
-            <%t :popular_channels%>
+
           </a>
         </li>
         <li class="">
-          <a href="#myTab1_example3" data-toggle="tab" aria-expanded="true">
+          <a href="#related_channels" data-toggle="tab" aria-expanded="true">
             <i class="fa fa-plug"></i>
-            <%t :channels_you_manage%>
+
           </a>
         </li>
 
         <li class="">
-          <a href="#myTab1_example4" data-toggle="tab" aria-expanded="true">
+          <a href="#search_channels" data-toggle="tab" aria-expanded="true">
             <i class="fa fa-search"></i>
-            <%t :channels_you_manage%>
           </a>
         </li>
       </ul>
       <div class="tab-content">
-        <%= render partial: 'channels/recent_channels', locals: {channel: @channel}%>
-        <%= render partial: 'channels/top_channels', locals: {channel: @channel}%>
-        <div class="tab-pane fade " id="myTab1_example3">
-          <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :channels_related_to_you%></p>
-          <hr/>
-
+        <div class="tab-pane fade" id="my_channels">
+          <ul class="list-group">
+            <%= link_to new_channel_path do%>
+            <li class="list-group-item">
+              <i class="fa fa-plus"></i> <%=t :new_channel%>
+            </li>
+            <%end%>
+          </ul>
+          <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :channels_you_joined%></span>
+          <hr style="margin-top:0px; margin-bottom:0px;">
+          <ul class="messages-list relative top-0 margin-bottom-5">
+            <% for inv in Involvement.where(user_id: current_user.id)%>
+            <%= render partial: 'channels/item', locals: {channel: inv.channel}%>
+            <%end%>
+          </ul>
+          <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :channels_you_manage%></span>
+          <hr style="margin-top:0px; margin-bottom:0px;">
+          <ul class="messages-list relative top-0 margin-bottom-5">
+            <% for inv in Involvement.where(user_id: current_user.id, role: 1)%>
+            <%= render partial: 'channels/item', locals: {channel: inv.channel}%>
+            <%end%>
+          </ul>
         </div>
 
-        <div class="tab-pane fade " id="myTab1_example4">
+        <div class="tab-pane fade active in" id="top_channels">
+          <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :popular_channels%></span>
+          <ul class="messages-list relative top-0">
+            <% @j = 0%>
+            <% for i in Involvement.group('channel_id').order('count_id desc').count('id')%>
+            <% if @j < 5%>
+            <%= render partial: 'channels/item', locals: {channel: Channel.find(i[0])}%>
+            <%end%>
+            <% @j = @j+1%>
+            <%end%>
+          </ul>
+
+          <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :newest_channels%></span>
+          <hr style="margin-top:0px; margin-bottom:0px;">
+          <ul class="messages-list relative top-0">
+            <% for channel in Channel.all.order("id desc").limit(5).reverse%>
+              <%= render partial: 'channels/item', locals: {channel: channel}%>
+            <%end%>
+          </ul>
+        </div>
+
+        <div class="tab-pane fade" id="related_channels">
+          <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i></p>
+          <hr />
+        </div>
+
+        <div class="tab-pane fade " id="search_channels">
 
           <div>
             <%= form_tag '/channels/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
@@ -83,7 +124,7 @@
           <% @page = 1%>
           <%= render(:partial => 'comments/remote_form', locals: {c: @channel, page:@page }) %>
           <%end%>
-          
+
         </div>
       </div>
     </div>

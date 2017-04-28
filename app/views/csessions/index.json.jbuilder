@@ -1,0 +1,1 @@
+json.array! @csessions, partial: 'csessions/csession', as: :csession

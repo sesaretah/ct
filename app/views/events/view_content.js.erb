@@ -1,4 +1,5 @@
 $("#cm").replaceWith("<%= escape_javascript(render(:partial => 'comments/remote_form', locals: {c: @event, page:@page })) %>");
 $("#event-detail").replaceWith("<%= escape_javascript(render(:partial => 'events/detail', locals: {event: @event, page:@page })) %>");
+$("#<%= @rnd%>-label").css('display','none');
 $("li").removeClass("bg-light-grey");
 $("#<%= @rnd%>").addClass( "bg-light-grey" );

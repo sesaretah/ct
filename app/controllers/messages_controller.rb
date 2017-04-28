@@ -25,6 +25,9 @@ class MessagesController < ApplicationController
   # GET /messages.json
   def index
     @messages = Message.where('recipient_id OR sender_id', current_user.id , current_user.id ).order('created_at DESC')
+    if !params[:message_id].blank?
+      @ms = Message.find_by_id(params[:message_id])
+    end
   end
 
   # GET /messages/1

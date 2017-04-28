@@ -42,7 +42,23 @@
           <i class=" ti-pencil-alt"></i>
         </div>
         <div class="item-inner">
+            <% @blogflag = false%>
+            <% @seekings = Seeking.where(user_id: current_user.id)%>
+            <% for seeking in @seekings%>
+              <% @v = Visit.where(user_id: current_user.id, visitable_id: seeking.blog_id , visitable_type: 'Blog').first%>
+              <% if !seeking.blog.notes.blank? && !@v.blank?%>
+              <% if seeking.blog.notes.last.created_at > @v.created_at%>
+                <% @blogflag = true%>
+              <%end%>
+              <%end%>
+              <% if @v.blank?%>
+                <% @pflag = true%>
+              <%end%>
+            <%end%>
           <span class="title"><%= t(:blogs)%></span>
+          <% if @blogflag%>
+            <span class='custom-dot'></span>
+          <%end%>
         </div>
       </div>
     </a>
@@ -55,7 +71,23 @@
           <i class=" ti-announcement"></i>
         </div>
         <div class="item-inner">
+          <% @channelflag = false%>
+          <% @involvements = Involvement.where(user_id: current_user.id)%>
+          <% for involvement in @involvements%>
+            <% @v = Visit.where(user_id: current_user.id, visitable_id: involvement.channel_id , visitable_type: 'Channel').first%>
+            <% if !involvement.channel.comments.blank? && !@v.blank?%>
+            <% if involvement.channel.comments.last.created_at > @v.created_at%>
+              <% @channelflag = true%>
+            <%end%>
+            <%end%>
+            <% if @v.blank?%>
+              <% @pflag = true%>
+            <%end%>
+            <%end%>
           <span class="title"><%= t(:channels)%></span>
+          <% if @channelflag%>
+            <span class='custom-dot'></span>
+          <%end%>
         </div>
       </div>
     </a>
@@ -68,7 +100,23 @@
           <i class=" ti-face-smile"></i>
         </div>
         <div class="item-inner">
+          <% @groupflag = false%>
+          <% @groupings = Grouping.where(user_id: current_user.id)%>
+          <% for grouping in @groupings%>
+            <% @v = Visit.where(user_id: current_user.id, visitable_id: grouping.group_id , visitable_type: 'Group').first%>
+            <% if !grouping.group.comments.blank? && !@v.blank?%>
+            <% if grouping.group.comments.last.created_at > @v.created_at%>
+              <% @groupflag = true%>
+            <%end%>
+            <%end%>
+            <% if @v.blank?%>
+              <% @pflag = true%>
+            <%end%>
+            <%end%>
           <span class="title"><%= t(:groups)%></span>
+          <% if @groupflag%>
+            <span class='custom-dot'></span>
+          <%end%>
         </div>
       </div>
     </a>
@@ -81,7 +129,23 @@
           <i class="ti-alarm-clock"></i>
         </div>
         <div class="item-inner">
+          <% @eventflag = false%>
+          <% @participations = Participation.where(user_id: current_user.id)%>
+          <% for participation in @participations%>
+            <% @v = Visit.where(user_id: current_user.id, visitable_id: participation.event_id , visitable_type: 'Event').first%>
+            <% if !participation.event.comments.blank? && !@v.blank?%>
+            <% if participation.event.comments.last.created_at > @v.created_at%>
+              <% @eventflag = true%>
+            <%end%>
+            <%end%>
+            <% if @v.blank?%>
+              <% @pflag = true%>
+            <%end%>
+            <%end%>
           <span class="title"><%= t(:events)%></span>
+          <% if @eventflag%>
+            <span class='custom-dot'></span>
+          <%end%>
         </div>
       </div>
     </a>
@@ -94,7 +158,23 @@
           <i class="ti-help"></i>
         </div>
         <div class="item-inner">
+          <% @qflag = false%>
+          <% @followships = Followship.where(user_id: current_user.id, followable_type: 'Question')%>
+          <% for followship in @followships%>
+            <% @v = Visit.where(user_id: current_user.id, visitable_id: followship.followable_id , visitable_type: 'Question').first%>
+            <% if !Question.find(followship.followable_id).answers.blank? && !@v.blank?%>
+            <% if Question.find(followship.followable_id).answers.last.created_at > @v.created_at%>
+              <% @qflag = true%>
+            <%end%>
+            <%end%>
+            <% if @v.blank?%>
+              <% @pflag = true%>
+            <%end%>
+            <%end%>
           <span class="title"><%= t(:qna)%></span>
+          <% if @qflag%>
+            <span class='custom-dot'></span>
+          <%end%>
         </div>
       </div>
     </a>
@@ -107,7 +187,23 @@
           <i class="ti-marker"></i>
         </div>
         <div class="item-inner">
+          <% @pflag = false%>
+          <% @followships = Followship.where(user_id: current_user.id, followable_type: 'Project')%>
+          <% for followship in @followships%>
+            <% @v = Visit.where(user_id: current_user.id, visitable_id: followship.followable_id , visitable_type: 'Project').first%>
+            <% if !Project.find(followship.followable_id).tasks.last.blank? && !@v.blank?%>
+            <% if Project.find(followship.followable_id).tasks.last.created_at > @v.created_at%>
+              <% @pflag = true%>
+            <%end%>
+            <%end%>
+            <% if @v.blank?%>
+              <% @pflag = true%>
+            <%end%>
+            <%end%>
           <span class="title"><%= t(:projects)%></span>
+          <% if @pflag%>
+            <span class='custom-dot'></span>
+          <%end%>
         </div>
       </div>
     </a>

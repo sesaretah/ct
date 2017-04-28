@@ -49,13 +49,13 @@ header .navbar-collapse .navbar-right > li > a i {
   color: #ffffff !important;
 }
 header .navbar-collapse .navbar-right > li > a:hover, header .navbar-collapse .navbar-right > li > a:focus, header .navbar-collapse .navbar-right > li > a:active {
-  background: #ebebeb !important;
+  background: #20498c !important;
 }
 header .navbar-collapse .navbar-right > li.open > a {
-  background: #ebebeb !important;
+  background: #20498c !important;
 }
 header .navbar-collapse .navbar-right .dot-badge {
-  border-color: #ffffff;
+  border-color: #C82E29;
 }
 @media (max-width: 991px) {
   header .navbar-collapse {
@@ -82,7 +82,7 @@ header .navbar-collapse .navbar-right .dot-badge {
 }
 @media (max-width: 991px) {
   header .navbar-collapse .navbar-right .dot-badge {
-    border-color: #ffffff;
+    border-color: #C82E29;
   }
 }
 @media (max-width: 767px) {

@@ -4,55 +4,78 @@
       <div class="tabbable padding-right-0 padding-left-0 ">
         <ul id="myTab1" class="nav nav-tabs">
           <li class="">
-            <a href="#myTab1_example1" data-toggle="tab" aria-expanded="true">
-              <i class="fa fa-users"></i>
+            <a href="#my_groups" data-toggle="tab" aria-expanded="true">
+              <i class="fa fa-chain"></i>
             </a>
           </li>
           <li class="active">
-            <a href="#myTab1_example2" data-toggle="tab" aria-expanded="true">
+            <a href="#top_groups" data-toggle="tab" aria-expanded="true">
               <i class="fa fa-trophy"></i>
             </a>
           </li>
           <li class="">
-            <a href="#myTab1_example3" data-toggle="tab" aria-expanded="true">
+            <a href="#related_groups" data-toggle="tab" aria-expanded="true">
               <i class="fa fa-plug"></i>
             </a>
           </li>
           <li class="">
-            <a href="#myTab1_example4" data-toggle="tab" aria-expanded="true">
+            <a href="#search_groups" data-toggle="tab" aria-expanded="true">
               <i class="fa fa-search"></i>
             </li>
           </ul>
 
-          <div class="tab-content">
-            <div class="tab-pane fade" id="myTab1_example1">
-              <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i><%=t :groups_you_joined%></p>
-              <hr />
-              <%= render partial: 'groups/my_groups'%>
-            </div>
 
-            <div class="tab-pane fade active in" id="myTab1_example2">
-              <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i><%=t :popular_groups%></p>
-              <hr />
+          <div class="tab-content">
+            <div class="tab-pane fade" id="my_groups">
               <ul class="list-group">
                 <%= link_to new_group_path do%>
                 <li class="list-group-item">
-                  <i class="fa fa-plus"></i> <%=t :add_new_group%>
+                  <i class="fa fa-plus"></i> <%=t :new_group%>
                 </li>
                 <%end%>
               </ul>
-              <ul class="messages-list relative top-0">
-                <% for g in Group.all%>
-                <%= render partial: 'groups/item', locals: {group: g}%>
+              <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :groups_you_joined%></span>
+              <hr style="margin-top:0px; margin-bottom:0px;">
+              <ul class="messages-list relative top-0 margin-bottom-5">
+                <% for gr in Grouping.where(user_id: current_user.id)%>
+                <%= render partial: 'groups/item', locals: {group: gr.group}%>
+                <%end%>
+              </ul>
+              <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :groups_you_manage%></span>
+              <hr style="margin-top:0px; margin-bottom:0px;">
+              <ul class="messages-list relative top-0 margin-bottom-5">
+                <% for gr in Grouping.where(user_id: current_user.id, role: 1)%>
+                <%= render partial: 'groups/item', locals: {group: gr.group}%>
                 <%end%>
               </ul>
             </div>
 
-            <div class="tab-pane fade" id="myTab1_example3">
+            <div class="tab-pane fade active in" id="top_groups">
+              <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :popular_groups%></span>
+              <ul class="messages-list relative top-0">
+                <% @j = 0%>
+                <% for i in Grouping.group('group_id').order('count_id desc').count('id')%>
+                <% if @j < 10%>
+                <%= render partial: 'groups/item', locals: {group: Group.find(i[0])}%>
+                <%end%>
+                <% @j = @j+1%>
+                <%end%>
+              </ul>
+
+              <span><i class="fa fa-hand-o-left" style='margin-top:10px; vertical-align:middle'></i>  <%=t :newest_groups%></span>
+              <hr style="margin-top:0px; margin-bottom:0px;">
+              <ul class="messages-list relative top-0">
+                <% for group in Group.all.order("id desc").limit(5).reverse%>
+                  <%= render partial: 'groups/item', locals: {group: group}%>
+                <%end%>
+              </ul>
+            </div>
+
+            <div class="tab-pane fade" id="related_groups">
               <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i><%=t :groups_you_manage%></p>
               <hr />
             </div>
-            <div class="tab-pane fade " id="myTab1_example4">
+            <div class="tab-pane fade " id="search_groups">
               <div>
                 <%= form_tag '/groups/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
                 <div class="form-group">

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :csessions
+
+  resources :visits
+
   resources :policies
 
   resources :pollsections

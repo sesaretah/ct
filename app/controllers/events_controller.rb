@@ -15,6 +15,11 @@ class EventsController < ApplicationController
       @page = params[:page].to_i
     end
     @rnd = params[:rnd]
+    @visit = Visit.where(user_id: current_user.id, visitable_id: @event.id, visitable_type: 'Event').first
+    if !@visit.blank?
+      @visit.destroy
+    end
+    Visit.create(user_id: current_user.id, visitable_id: @event.id, visitable_type: 'Event')
   end
 
 
@@ -44,6 +49,13 @@ class EventsController < ApplicationController
   def index
     @events = Event.all
     @event = Event.find_by_id(params[:event_id])
+    if !@event.blank?
+      @visit = Visit.where(user_id: current_user.id, visitable_id: @event.id, visitable_type: 'Event').first
+      if !@visit.blank?
+        @visit.destroy
+      end
+      Visit.create(user_id: current_user.id, visitable_id: @event.id, visitable_type: 'Event')
+    end
   end
 
   # GET /events/1
@@ -113,13 +125,13 @@ class EventsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:name, :description,:i_type,:p_type, :g_type, :location ,:event_date, :start_time, :end_time, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(:name, :description,:i_type,:p_type, :g_type, :location ,:event_date, :start_time, :end_time, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller)
+  end
 end

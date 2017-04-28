@@ -2653,3 +2653,21 @@ img.jcrop {max-width: none}
     vertical-align: middle;
     float: none;
 }
+
+.custom-dot {
+  border-radius: 100%;
+  border-style: solid;
+  border-width: 3px;
+  height: 10px;
+  margin: 2px;
+  position: absolute !important;
+  border-color: #f9541d;
+  top: 5px;
+  width: 10px;
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  right: 21px;
+  margin-left: 10px;
+}

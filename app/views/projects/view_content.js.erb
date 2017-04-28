@@ -1,3 +1,4 @@
 $("#project-detail").replaceWith("<%= escape_javascript(render(:partial => 'projects/project_detail', locals: {project: @project })) %>");
 $("li").removeClass("bg-light-grey");
 $("#<%= @rnd%>").addClass( "bg-light-grey" );
+$("#<%= @rnd%>-label").css('display','none');

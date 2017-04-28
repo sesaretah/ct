@@ -4,58 +4,78 @@
       <div class="tabbable padding-right-0 padding-left-0 ">
         <ul id="myTab1" class="nav nav-tabs">
           <li class="active">
-            <a href="#myTab1_example1" data-toggle="tab" aria-expanded="false">
+            <a href="#my_events" data-toggle="tab" aria-expanded="false">
               <i class="fa fa-clock-o"></i>
               <%t :events_you_joined%>
             </a>
           </li>
           <li class="">
-            <a href="#myTab1_example2" data-toggle="tab" aria-expanded="false">
+            <a href="#top_events" data-toggle="tab" aria-expanded="false">
               <i class="fa fa-trophy"></i>
               <%t :popular_events%>
             </a>
           </li>
           <li class="">
-            <a href="#myTab1_example3" data-toggle="tab" aria-expanded="true">
+            <a href="#related_events" data-toggle="tab" aria-expanded="true">
               <i class="fa fa-plug"></i>
               <%t :events_you_manage%>
             </a>
           </li>
           <li class="">
-            <a href="#myTab1_example4" data-toggle="tab" aria-expanded="true">
+            <a href="#search_events" data-toggle="tab" aria-expanded="true">
               <i class="fa fa-search"></i>
               <%t :events_you_manage%>
             </a>
           </li>
         </ul>
         <div class="tab-content">
-          <div class="tab-pane fade active in" id="myTab1_example1">
+          <div class="tab-pane fade active in" id="my_events">
             <ul class="list-group">
               <%= link_to new_event_path do%>
               <li class="list-group-item">
-                <i class="fa fa-plus"></i> <%=t :add_new_event%>
+                <i class="fa fa-plus"></i> <%=t :new_event%>
               </li>
               <%end%>
             </ul>
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :events_you_joined%></span>
+            <hr style="margin-top:0px; margin-bottom:0px;">
+            <ul class="messages-list relative top-0 margin-bottom-5">
+              <% for pr in Participation.where(user_id: current_user.id)%>
+              <%= render partial: 'events/item', locals: {event: pr.event}%>
+              <%end%>
+            </ul>
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :events_you_manage%></span>
+            <hr style="margin-top:0px; margin-bottom:0px;">
+            <ul class="messages-list relative top-0 margin-bottom-5">
+              <% for pr in Participation.where(user_id: current_user.id, role: 1)%>
+              <%= render partial: 'events/item', locals: {event: pr.event}%>
+              <%end%>
+            </ul>
+          </div>
+          <div class="tab-pane fade" id="top_events">
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :popular_events%></span>
             <ul class="messages-list relative top-0">
-              <% for e in current_user.events%>
-              <%= render partial: 'events/item', locals: {event: e}%>
+              <% @j = 0%>
+              <% for i in Participation.group('event_id').order('count_id desc').count('id')%>
+              <% if @j < 10%>
+              <%= render partial: 'events/item', locals: {event: Event.find(i[0])}%>
+              <%end%>
+              <% @j = @j+1%>
               <%end%>
             </ul>
 
-
-          </div>
-          <div class="tab-pane fade" id="myTab1_example2">
+            <span><i class="fa fa-hand-o-left" style='margin-top:10px; vertical-align:middle'></i>  <%=t :newest_events%></span>
+            <hr style="margin-top:0px; margin-bottom:0px;">
             <ul class="messages-list relative top-0">
-              <% for e in Event.all%>
-              <%= render partial: 'events/item', locals: {event: e}%>
+              <% for event in Event.all.order("id desc").limit(5).reverse%>
+                <%= render partial: 'events/item', locals: {event: event}%>
               <%end%>
             </ul>
           </div>
-          <div class="tab-pane fade " id="myTab1_example3">
+          <div class="tab-pane fade " id="related_events">
 
           </div>
-          <div class="tab-pane fade " id="myTab1_example4">
+          <div class="tab-pane fade " id="search_events">
             <div>
               <%= form_tag '/events/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
               <div class="form-group">
@@ -93,7 +113,7 @@
             </div>
         </div>
         <div id='cm' class="panel-footer border-light">
-   
+
         </div>
       </div>
     </div>

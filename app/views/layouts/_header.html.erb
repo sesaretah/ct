@@ -20,6 +20,47 @@
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-right">
 
+
+      <li class="dropdown">
+        <a href class="dropdown-toggle" data-toggle="dropdown">
+          <span class="dot-badge partition-red"></span> <i class="ti-comment"></i> <span><%=t :messages%></span>
+        </a>
+        <ul class="dropdown-menu dropdown-light dropdown-messages dropdown-large">
+          <li>
+            <span class="dropdown-header" style="margin-top:5px;"><%=t :inbox%></span>
+          </li>
+          <li>
+            <div class="drop-down-wrapper ps-container">
+              <ul>
+                <%  Recipient.where(user_id: current_user.id).limit(5).order("id desc").each do |r|%>
+                <% @message = Message.find(r.message_id)%>
+                <li class="unread">
+                  <a href="/messages?message_id=<%= @message.id%>" class="unread">
+                    <div class="clearfix">
+                      <div class="thread-image">
+                        <%= image_tag @message.sender.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+                      </div>
+                      <div class="thread-content">
+                        <span class="author"><%= @message.sender.profile.name%> <%= @message.sender.profile.surename%></span>
+                        <span class="preview"><%= truncate(@message.content, :length => 20)%></span>
+                        <span class="time"><span>	<% @jalali = JalaliDate.to_jalali(@message.created_at)%>
+                          <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%></span></span>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <%end%>
+              </ul>
+            </div>
+          </li>
+          <li class="view-all">
+            <a href="/messages">
+              <%=t :all%>
+            </a>
+          </li>
+        </ul>
+      </li>
+
       <!-- start: USER OPTIONS DROPDOWN -->
       <li class="dropdown current-user">
         <a href class="dropdown-toggle" data-toggle="dropdown">
@@ -40,6 +81,9 @@
         </ul>
       </li>
       <!-- end: USER OPTIONS DROPDOWN -->
+
+
+
     </ul>
     <script>
     $(document).ready(function() {

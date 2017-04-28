@@ -16,13 +16,24 @@ class ProjectsController < ApplicationController
     def view_content
       @project = Project.find(params[:id])
       @rnd = params[:rnd]
+      @visit = Visit.where(user_id: current_user.id, visitable_id: @project.id, visitable_type: 'Project').first
+      if !@visit.blank?
+        @visit.destroy
+      end
+      Visit.create(user_id: current_user.id, visitable_id: @project.id, visitable_type: 'Project')
     end
   # GET /projects
   # GET /projects.json
   def index
     @projects = Project.all
     @project = Project.find_by_id(params[:project_id])
-    #render layout: false
+    if !@project.blank?
+    @visit = Visit.where(user_id: current_user.id, visitable_id: @project.id, visitable_type: 'Project').first
+    if !@visit.blank?
+      @visit.destroy
+    end
+    Visit.create(user_id: current_user.id, visitable_id: @project.id, visitable_type: 'Project')
+  end
   end
 
   # GET /projects/1

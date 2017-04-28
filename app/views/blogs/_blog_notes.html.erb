@@ -4,8 +4,8 @@
   <div class="row padding-5">
     <% for note in blog.notes%>
     <div class="alert alert-info">
-      <span><%= note.title%></span>...
-      <span style="color:grey"><%= truncate(note.content, :length => 20)%></span>
+      <span><%= truncate(note.title, :length => 20)%></span>
+      <span style="color:grey"></span>
 
       <span class="pull-left">
         <%= link_to note_path(note.id) do %>
