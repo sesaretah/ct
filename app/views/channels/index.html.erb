@@ -40,7 +40,7 @@
           <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :channels_you_joined%></span>
           <hr style="margin-top:0px; margin-bottom:0px;">
           <ul class="messages-list relative top-0 margin-bottom-5">
-            <% for inv in Involvement.where(user_id: current_user.id)%>
+            <% for inv in Involvement.where(user_id: current_user.id, role: 3)%>
             <%= render partial: 'channels/item', locals: {channel: inv.channel}%>
             <%end%>
           </ul>

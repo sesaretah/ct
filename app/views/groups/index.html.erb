@@ -37,7 +37,7 @@
               <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :groups_you_joined%></span>
               <hr style="margin-top:0px; margin-bottom:0px;">
               <ul class="messages-list relative top-0 margin-bottom-5">
-                <% for gr in Grouping.where(user_id: current_user.id)%>
+                <% for gr in Grouping.where(user_id: current_user.id, role: 3)%>
                 <%= render partial: 'groups/item', locals: {group: gr.group}%>
                 <%end%>
               </ul>
@@ -55,7 +55,7 @@
               <ul class="messages-list relative top-0">
                 <% @j = 0%>
                 <% for i in Grouping.group('group_id').order('count_id desc').count('id')%>
-                <% if @j < 10%>
+                <% if @j < 5%>
                 <%= render partial: 'groups/item', locals: {group: Group.find(i[0])}%>
                 <%end%>
                 <% @j = @j+1%>
