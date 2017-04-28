@@ -52,7 +52,7 @@
               <%end%>
               <%end%>
               <% if @v.blank?%>
-                <% @pflag = true%>
+                <% @blogflag = true%>
               <%end%>
             <%end%>
           <span class="title"><%= t(:blogs)%></span>
@@ -81,7 +81,7 @@
             <%end%>
             <%end%>
             <% if @v.blank?%>
-              <% @pflag = true%>
+              <% @channelflag = true%>
             <%end%>
             <%end%>
           <span class="title"><%= t(:channels)%></span>
@@ -110,7 +110,7 @@
             <%end%>
             <%end%>
             <% if @v.blank?%>
-              <% @pflag = true%>
+              <% @groupflag = true%>
             <%end%>
             <%end%>
           <span class="title"><%= t(:groups)%></span>
@@ -139,7 +139,7 @@
             <%end%>
             <%end%>
             <% if @v.blank?%>
-              <% @pflag = true%>
+              <% @eventflag = true%>
             <%end%>
             <%end%>
           <span class="title"><%= t(:events)%></span>
@@ -168,7 +168,7 @@
             <%end%>
             <%end%>
             <% if @v.blank?%>
-              <% @pflag = true%>
+              <% @qflag = true%>
             <%end%>
             <%end%>
           <span class="title"><%= t(:qna)%></span>
