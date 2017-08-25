@@ -45,7 +45,7 @@
             <% @blogflag = false%>
             <% @seekings = Seeking.where(user_id: current_user.id)%>
             <% for seeking in @seekings%>
-              <% @v = Visit.where(user_id: current_user.id, visitable_id: seeking.blog_id , visitable_type: 'Blog').first%>
+              <% @v = Visit.where(user_id: current_user.id, visitable_id: seeking.blog_id , visitable_type: 'Blog').last%>
               <% if !seeking.blog.notes.blank? && !@v.blank?%>
               <% if seeking.blog.notes.last.created_at > @v.created_at%>
                 <% @blogflag = true%>
@@ -74,7 +74,7 @@
           <% @channelflag = false%>
           <% @involvements = Involvement.where(user_id: current_user.id)%>
           <% for involvement in @involvements%>
-            <% @v = Visit.where(user_id: current_user.id, visitable_id: involvement.channel_id , visitable_type: 'Channel').first%>
+            <% @v = Visit.where(user_id: current_user.id, visitable_id: involvement.channel_id , visitable_type: 'Channel').last%>
             <% if !involvement.channel.comments.blank? && !@v.blank?%>
             <% if involvement.channel.comments.last.created_at > @v.created_at%>
               <% @channelflag = true%>
@@ -103,7 +103,7 @@
           <% @groupflag = false%>
           <% @groupings = Grouping.where(user_id: current_user.id)%>
           <% for grouping in @groupings%>
-            <% @v = Visit.where(user_id: current_user.id, visitable_id: grouping.group_id , visitable_type: 'Group').first%>
+            <% @v = Visit.where(user_id: current_user.id, visitable_id: grouping.group_id , visitable_type: 'Group').last%>
             <% if !grouping.group.comments.blank? && !@v.blank?%>
             <% if grouping.group.comments.last.created_at > @v.created_at%>
               <% @groupflag = true%>
@@ -132,7 +132,7 @@
           <% @eventflag = false%>
           <% @participations = Participation.where(user_id: current_user.id)%>
           <% for participation in @participations%>
-            <% @v = Visit.where(user_id: current_user.id, visitable_id: participation.event_id , visitable_type: 'Event').first%>
+            <% @v = Visit.where(user_id: current_user.id, visitable_id: participation.event_id , visitable_type: 'Event').last%>
             <% if !participation.event.comments.blank? && !@v.blank?%>
             <% if participation.event.comments.last.created_at > @v.created_at%>
               <% @eventflag = true%>
@@ -161,7 +161,7 @@
           <% @qflag = false%>
           <% @followships = Followship.where(user_id: current_user.id, followable_type: 'Question')%>
           <% for followship in @followships%>
-            <% @v = Visit.where(user_id: current_user.id, visitable_id: followship.followable_id , visitable_type: 'Question').first%>
+            <% @v = Visit.where(user_id: current_user.id, visitable_id: followship.followable_id , visitable_type: 'Question').last%>
             <% if !Question.find(followship.followable_id).answers.blank? && !@v.blank?%>
             <% if Question.find(followship.followable_id).answers.last.created_at > @v.created_at%>
               <% @qflag = true%>
@@ -190,7 +190,7 @@
           <% @pflag = false%>
           <% @followships = Followship.where(user_id: current_user.id, followable_type: 'Project')%>
           <% for followship in @followships%>
-            <% @v = Visit.where(user_id: current_user.id, visitable_id: followship.followable_id , visitable_type: 'Project').first%>
+            <% @v = Visit.where(user_id: current_user.id, visitable_id: followship.followable_id , visitable_type: 'Project').last%>
             <% if !Project.find(followship.followable_id).tasks.last.blank? && !@v.blank?%>
             <% if Project.find(followship.followable_id).tasks.last.created_at > @v.created_at%>
               <% @pflag = true%>

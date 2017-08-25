@@ -342,6 +342,9 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  my_own_blog_data: 'آمار مشاهده'
+  blog_analytics: 'آمار وبلاگ'
+  selected_blogs: 'گزیده وبلاگ ها'
   all: 'همه'
   contact: 'ارتباط'
   policies: 'سیاست‌های حریم خصوصی'

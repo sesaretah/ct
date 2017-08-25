@@ -1,4 +1,5 @@
 class PollsController < ApplicationController
+  before_action :authenticate_user!, :except => [:index,:show]
   before_action :set_poll, only: [:show, :edit, :update, :destroy]
 
   def view_content

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170428150812) do
+ActiveRecord::Schema.define(version: 20170824144520) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "content",     limit: 65535
@@ -90,14 +90,6 @@ ActiveRecord::Schema.define(version: 20170428150812) do
     t.string   "avatar_content_type",   limit: 255
     t.integer  "avatar_file_size",      limit: 4
     t.datetime "avatar_updated_at"
-  end
-
-  create_table "conversations", force: :cascade do |t|
-    t.integer  "sender_id",    limit: 4
-    t.integer  "recipient_id", limit: 4
-    t.integer  "message_id",   limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
   end
 
   create_table "courses", force: :cascade do |t|
@@ -389,20 +381,6 @@ ActiveRecord::Schema.define(version: 20170428150812) do
     t.integer  "user_id",             limit: 4
   end
 
-  create_table "qitems", force: :cascade do |t|
-    t.string   "content",         limit: 255
-    t.integer  "questionaire_id", limit: 4
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-  end
-
-  create_table "questionaires", force: :cascade do |t|
-    t.text     "question",   limit: 65535
-    t.integer  "user_id",    limit: 4
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
   create_table "questions", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.text     "content",    limit: 65535
@@ -535,10 +513,12 @@ ActiveRecord::Schema.define(version: 20170428150812) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "username",               limit: 255,              null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "visits", force: :cascade do |t|
     t.integer  "user_id",        limit: 4

@@ -259,4 +259,14 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+  config.cas_base_url = "https://utecsso.ut.ac.ir"
+  #  config.cas_create_user = false
+  # Instead username we use email for login field
+  config.cas_username_column = "username"
+  # After logout we use a 'destination' url to be redirected
+  config.cas_logout_url_param = "destination"
+  # The url for redirect after logout
+  config.cas_destination_url = "http://localhost:3000/"
+  # Enable single sign out
+  #config.cas_enable_single_sign_out = true
 end
