@@ -132,6 +132,7 @@ GEM
       mimemagic (~> 0.3.0)
     pkg-config (1.1.7)
     rack (1.6.4)
+    rack-cors (1.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.0)
@@ -250,6 +251,7 @@ DEPENDENCIES
   jquery-ui-rails
   mysql2 (~> 0.3.18)
   paperclip (~> 5.0.0)
+  rack-cors
   rails (= 4.2.0)
   sass-rails (~> 5.0)
   savon (~> 2.11.0)
