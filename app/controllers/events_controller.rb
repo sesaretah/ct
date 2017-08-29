@@ -5,6 +5,14 @@ class EventsController < ApplicationController
     if !params[:q].blank?
       @events = Event.where("name LIKE ? OR description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
+
+    respond_to do |format|
+    format.html
+    format.js
+    format.json { render json: @events }
+  end
+
+
     #search params[:q], :star => true
   end
 
