@@ -74,10 +74,15 @@ var perdata = [];
 
 app.get('/research', function (req, res) {
 var utid = req.query.name;
+var researches = [];
 var sql = 'SELECT * FROM researches where utid =' + mysql.escape(utid);
 connection.query(sql, function (error, results, fields) {
   if (error) throw error;
-  console.log(results);
+  for(r in results){
+    console.log(results[r]);
+    console.log('-----');
+  }
+//  console.log(results);
 });
 });
 
