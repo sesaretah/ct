@@ -77,7 +77,7 @@ var utid = req.query.name;
 var sql = 'SELECT * FROM researches where utid =' + mysql.escape(utid);
 connection.query(sql, function (error, results, fields) {
   if (error) throw error;
-  callback();
+  console.log(results);
 });
 });
 
