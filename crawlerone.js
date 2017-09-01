@@ -78,10 +78,7 @@ var researches = [];
 var sql = 'SELECT * FROM researches where utid =' + mysql.escape(utid);
 connection.query(sql, function (error, rows) {
   if (error) throw error;
-  for(r in rows){
-    console.log(rows[r].RowDataPacket);
-    console.log('-----');
-  }
+  console.log(rows);
 //  console.log(results);
 });
 });
