@@ -133,7 +133,7 @@ $(document).ready(function(){
     var name = getUrlParameter('name');
     $('#form').hide();
     $('#loading').show();
-    axios.get('http://localhost:8080/?name='+ name)
+    axios.get('http://sn.ut.ac.ir:8080/?name='+ name)
     .then(function (response) {
       for ( r in response.data.edu) {
       $('#grade'+r).val(response.data.edu[r][0]);

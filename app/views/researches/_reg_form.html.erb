@@ -4,9 +4,66 @@
       <%= t(:research_history)%>
     </legend>
     <% @research = Research.new%>
-  <%= render partial: 'researches/form', locals: {research: @research}%>
+    <div id='papers' style='direction:ltr'></div>
 
   </fieldset>
 </div>
+<script>
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+$(document).ready(function(){
+    var name = getUrlParameter('name');
+    axios.get('http://sn.ut.ac.ir:8080/research?name='+ name)
+    .then(function (response) {
+      var papers = '<ul>'
+      for (p in response.data){
+        papers +=
+        "<li id='item-"+ p +"'><ul>" +
+        '<li>'+ '<b>Author(s):</b> ' + "<a href='#' id=authors-"+ p + ">" + response.data[p].pub_authors + '</a></li>' +
+        '<li>'+ '<b>Title:</b> ' + "<a href='#' id=title-"+ p + ">" + response.data[p].name +'</a></li>' +
+        '<li>'+ '<b>Publisher:</b> ' + "<a href='#' id=publisher-"+ p + ">" + response.data[p].pub_name +'</a></li>' +
+        '<li>'+ '<b>Publication Type:</b> ' + "<a href='#' id=pub_type-"+ p + ">" + response.data[p].pub_type +'</a></li>' +
+        '<li>'+ '<b>Year:</b> ' + "<a href='#' id=year-"+ p + ">" + response.data[p].pub_year +'</a></li>' +
+        '<li>'+ '<b>Pages:</b> ' + "<a href='#' id=pages-"+ p + ">" + response.data[p].pp +'</a></li>'+
+        '</ul>'+
+        "<div class='pull-right' style='margin-top:-20px'> <button id='quit_paper-"+ p +"' type='button' class='btn btn-sm'><%= t(:quit)%></button>" +
+        " <button id='submit_paper-"+ p +"' type='button' class='btn btn-primary btn-sm'><%= t(:submit)%></button><p id='result-"+ p+"'></p></div>" +
+        '<hr/></li>'+
+        "<script" + ">" + "$('#submit_paper-"+p +"').click(function(){" +
+        "axios.post('/researches', { research:{pub_authors: $('#authors-"+ p +
+        "').text(), name: $('#title-"+ p +"').text(), pub_year:  $('#year-"+ p +"').text(), pub_type:  $('#pub_type-"+ p +"').text(), pp:  $('#pages-"+ p +"').text(), pub_name:  $('#publisher-"+ p +"').text()" +
+        "}}).then(function (response) {$('#submit_paper-" + p+"').hide();$('#quit_paper-" + p+"').hide(); $('#result-"+p+"').text('<%=t :done%>');}).catch(function (error){console.log(error);});});"+"</script"+ ">" +
+
+        "<script" + ">" + "$('#quit_paper-"+p +"').click(function(){ $('#item-"+ p +"').hide();});</script"+ ">" +
+
+        "<script" + ">" + "$('#authors-" + p + "').editable({ type: 'text', pk: 1 });" +"</script"+ ">" +
+        "<script" + ">" + "$('#title-" + p + "').editable({ type: 'text', pk: 1 });" +"</script"+ ">" +
+        "<script" + ">" + "$('#publisher-" + p + "').editable({ type: 'text', pk: 1 });" +"</script"+ ">" +
+        "<script" + ">" + "$('#year-" + p + "').editable({ type: 'text', pk: 1 });" +"</script"+ ">" +
+        "<script" + ">" + "$('#pages-" + p + "').editable({ type: 'text', pk: 1 });" +"</script"+ ">"
+
+      }
+        papers += '</ul>'
+        $('#papers').html(papers);
+
+    })
+    .catch(function (error) {
+      $('#loading').show();
+      console.log(error);
+    });
+});
+</script>
 
 <%= hidden_field_tag 'caller', 'reg'%>

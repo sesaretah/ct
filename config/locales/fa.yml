@@ -345,6 +345,7 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  done: 'انجام شد'
   loading: 'در حال دریافت اطلاعات'
   quit: 'انصراف'
   please_enter_your_official_email: 'ایمیل دانشگاهی خود را وارد کنید'

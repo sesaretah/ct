@@ -1,6 +1,10 @@
 class ResearchesController < ApplicationController
   before_action :set_research, only: [:show, :edit, :update, :destroy]
 
+  def reg_add
+
+  end
+
   def view_content
     @research = Research.find(params[:id])
     if params[:page].blank?
@@ -32,6 +36,7 @@ class ResearchesController < ApplicationController
 
   # POST /researches
   # POST /researches.json
+  skip_before_filter :verify_authenticity_token, :only => :create
   def create
     if !params["research_history"].blank?
     params["research_history"].each do |research|
@@ -95,6 +100,6 @@ class ResearchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def research_params(my_params)
-      my_params.permit(:name, :pub_year, :pub_type, :pub_name, :pub_authors, :abstract, :document)
+      my_params.permit(:name, :pub_year, :pub_type, :pub_name, :pub_authors, :abstract, :document, :pp)
     end
 end
