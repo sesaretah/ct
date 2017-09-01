@@ -39,8 +39,9 @@ class EducationsController < ApplicationController
       @education = Education.new(education_params(params["education"]))
       @education.user_id = current_user.id
       @education.save
-      @email = current_user.profile.official_email.split("@").first
+
     end
+    @email = current_user.profile.official_email.split("@").first
     respond_to do |format|
       if params[:caller] == 'reg'
         format.html { redirect_to '/registeration_steps?step=3&name='+ @email}
