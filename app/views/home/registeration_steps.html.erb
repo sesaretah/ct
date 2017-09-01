@@ -12,16 +12,27 @@
             <div class="col-md-5">
               <div class="padding-30">
                 <%case params[:step] %>
+                <%when  "0"%>
+                <h2 class="StepTitle">
+                  <i class="ti-user fa-2x text-primary block margin-bottom-10"></i>
+                  <%=t :enter_your_personal_information%>
+                </h2>
+                <p>
+                  <%t :step_1_content%>
+                </p>
+                <p class="text-small">
+                  <%t :step_1_sub_content%>
+                </p>
                 <%when  "1"%>
                 <h2 class="StepTitle">
                   <i class="ti-user fa-2x text-primary block margin-bottom-10"></i>
                   <%=t :enter_your_personal_information%>
                 </h2>
                 <p>
-                  <%=t :step_1_content%>
+                  <%t :step_1_content%>
                 </p>
                 <p class="text-small">
-                  <%=t :step_1_sub_content%>
+                  <%t :step_1_sub_content%>
                 </p>
                 <%when  "2"%>
                 <h2 class="StepTitle">
@@ -29,10 +40,10 @@
                   <%=t :enter_your_education_history%>
                 </h2>
                 <p>
-                  <%=t :step_2_content%>
+                  <%t :step_2_content%>
                 </p>
                 <p class="text-small">
-                  <%=t :step_2_sub_content%>
+                  <%t :step_2_sub_content%>
                 </p>
                 <%when  "3"%>
                 <h2 class="StepTitle">
@@ -40,10 +51,10 @@
                   <%=t :enter_your_research_history%>
                 </h2>
                 <p>
-                  <%=t :step_3_content%>
+                  <%t :step_3_content%>
                 </p>
                 <p class="text-small">
-                  <%=t :step_3_sub_content%>
+                  <%t :step_3_sub_content%>
                 </p>
                 <%when  "4"%>
                 <h2 class="StepTitle">

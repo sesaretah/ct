@@ -10,6 +10,9 @@ end
     <legend>
       <%= t(:education_history)%>
     </legend>
+    <p id='loading' style="display:none"><%= image_tag '/assets/loadingline.gif', height:"48" ,style: 'margin-top:4px;'%><%=t :loading%></p>
+    <div id='form'>
+  <% @i = 0%>
   <% @edu_history.each do |edu| %>
   <%= fields_for 'edu_history[]', edu do |f| %>
 
@@ -17,27 +20,27 @@ end
       <div class="col-md-4">
         <div class="form-group">
           <label><%= f.label :name %></label>
-          <%= f.text_field :name, class: "form-control" %>
+          <%= f.text_field :name, class: "form-control", id: 'name'+@i.to_s %>
         </div>
       </div>
 
       <div class="col-md-2">
         <div class="form-group">
           <label><%= f.label :grade %></label>
-          <%= f.select( :grade, grades, {}, {:class => "form-control"})  %>
-          <% f.text_field :grade, class: "form-control" %>
+          <% f.select( :grade, grades, {}, {:class => "form-control"})  %>
+          <%= f.text_field :grade, class: "form-control", id: 'grade'+@i.to_s %>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label><%= f.label :field %></label>
-          <%= f.text_field :field, class: "form-control" %>
+          <%= f.text_field :field, class: "form-control", id: 'field'+@i.to_s  %>
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
           <label><%= f.label :gpa %></label>
-          <%= f.number_field :gpa,step: :any, class: "form-control" %>
+          <%= f.number_field :gpa,step: :any, class: "form-control", id: 'gpa'+@i.to_s %>
         </div>
       </div>
     </div>
@@ -45,25 +48,25 @@ end
       <div class="col-md-2">
         <div class="form-group">
           <label><%= f.label :start_year %></label>
-          <%= f.text_field :start_year , class: "form-control"%>
+          <%= f.text_field :start_year , class: "form-control", id: 'start_year'+@i.to_s%>
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
           <label><%= f.label :end_year %></label>
-          <%= f.text_field :end_year , class: "form-control"%>
+          <%= f.text_field :end_year , class: "form-control", id: 'end_year'+@i.to_s%>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label><%= f.label :city %></label>
-          <%= f.text_field :city , class: "form-control"%>
+          <%= f.text_field :city , class: "form-control", id: 'city'+@i.to_s%>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <label><%= f.label :country %></label>
-          <%= f.text_field :country, class: "form-control" %>
+          <%= f.text_field :country, class: "form-control", id: 'country'+@i.to_s %>
         </div>
       </div>
     </div>
@@ -71,18 +74,19 @@ end
       <div class="col-md-10">
         <div class="form-group">
           <label><%= f.label :title %></label>
-          <%= f.text_field :title, class: "form-control" %>
+          <%= f.text_field :title, class: "form-control", id: 'title'+@i.to_s %>
         </div>
       </div>
       <div class="col-md-2">
         <div class="form-group">
           <label><%= f.label :thesis_gpa %></label>
-          <%= f.text_field :thesis_gpa, class: "form-control" %>
+          <%= f.text_field :thesis_gpa, class: "form-control", id: 'thesis_gpa'+@i.to_s %>
         </div>
       </div>
     </div>
     <hr />
     <% end %>
+    <%@i = @i + 1%>
     <% end %>
     <div class="row top30">
       <div class="form-group col-xs-3 pull-left">
@@ -97,7 +101,52 @@ end
         <%end%>
       </div>
     </div>
+  </div>
   </fieldset>
+
   <%= hidden_field_tag 'caller', 'reg'%>
   <% end %>
 </div>
+
+<script>
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+$(document).ready(function(){
+  $('#new_profile').hide();
+  $("#quit_email").click(function(){
+    $('#new_profile').show();
+    $('#enter_email').hide();
+  });
+
+    var name = getUrlParameter('name');
+    $('#form').hide();
+    $('#loading').show();
+    axios.get('http://localhost:8080/?name='+ name)
+    .then(function (response) {
+      for ( r in response.data.edu) {
+      $('#grade'+r).val(response.data.edu[r][0]);
+      $('#end_year'+r).val(response.data.edu[r][1]);
+      $('#field'+r).val(response.data.edu[r][2]);
+      $('#name'+r).val(response.data.edu[r][3]);
+      }
+      $('#form').show();
+      $('#loading').hide();
+    })
+    .catch(function (error) {
+      $('#loading').show();
+      console.log(error);
+    });
+});
+</script>

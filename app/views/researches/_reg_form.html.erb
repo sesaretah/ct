@@ -1,81 +1,12 @@
-<%
-@research_history = []
-10.times do
-  @research_history << Research.new
-end
-%>
 <div class="col-md-7">
-  <%= form_tag researches_path do %>
   <fieldset>
     <legend>
       <%= t(:research_history)%>
     </legend>
-    <div class="row top30">
-      <div class="form-group col-xs-3 pull-left">
-        <%= content_tag :button, :type => :submit,id: 'subbtn', :class => "btn btn-o btn-primary " do %>
-        <i class="icon-ok bigger-110"></i>
-        <%=t :submit%>
-        <% end %>
-        <%= link_to '/registeration_steps?step=4' do%>
-        <button  class="btn btn-o btn-success " , style: 'margin-left:2px;'>
-          <%= t(:next)%>
-        </button>
-        <%end%>
-      </div>
-    </div>
-    <%@i  = 0%>
-    <% @research_history.each do |research| %>
+    <% @research = Research.new%>
+  <%= render partial: 'researches/form', locals: {research: @research}%>
 
-    <%= fields_for 'research_history[]', research do |f| %>
-    <% if @i == 4%>
-      <div id="more" class="collapse">
-    <%end%>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-group">
-          <label><%= f.label :name %></label>
-          <%= f.text_field :name, class: "form-control"  %>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label><%= f.label :pub_year %></label>
-          <%= f.text_field :pub_year, class: "form-control"  %>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="form-group">
-          <label><%= f.label :pub_type %></label>
-          <%= f.text_field :pub_type, class: "form-control"  %>
-        </div>
-      </div>
-
-      <div class="col-md-7">
-        <div class="form-group">
-          <label><%= f.label :pub_name %></label>
-          <%= f.text_field :pub_name, class: "form-control"  %>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div class="form-group">
-          <label><%= f.label :pub_authors %></label>
-          <%= f.text_field :pub_authors , class: "form-control"%>
-        </div>
-      </div>
-    </div>
-    <hr>
-    <% if @i == 3%>
-    <div class="form-actions">
-      <button type="button" class="btn btn-info pull-left" data-toggle="collapse" data-target="#more"><%= t(:more)%>...</button>
-    </div>
-    <%end%>
-    <% if @i == 10%>
-      </div>
-    <%end%>
-    <% @i = @i + 1%>
-    <% end %>
-    <% end %>
-<%= hidden_field_tag 'caller', 'reg'%>
   </fieldset>
-  <% end %>
 </div>
+
+<%= hidden_field_tag 'caller', 'reg'%>

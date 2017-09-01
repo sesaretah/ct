@@ -75,12 +75,12 @@ class ProfilesController < ApplicationController
     @profile = Profile.new(profile_params)
     @profile.user_id = current_user.id
     @profile.birthdate = JalaliDate.to_gregorian(params[:ja_birth_yyyy],params[:ja_birth_mm],params[:ja_birth_dd])
-
+    @email = @profile.official_email.split("@").first
 
     respond_to do |format|
       if @profile.save
         if params[:caller] == 'reg'
-          format.html { redirect_to '/registeration_steps?step=2'}
+          format.html { redirect_to '/registeration_steps?step=2&name=' + @email}
         else
           format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         end
@@ -103,7 +103,7 @@ class ProfilesController < ApplicationController
     respond_to do |format|
       if @profile.update(profile_params)
         if params[:caller] == 'reg'
-          format.html { redirect_to '/registeration_steps?step=2'}
+          format.html { redirect_to '/registeration_steps?step=2&name='}
         else
         if @profile.cropping?
           format.html { redirect_to '/', notice: :Profile_was_successfully_updated }
@@ -141,6 +141,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:name, :surename, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller,:sex, :fathername, :ssn, :birthdate, :phonenumber, :mobilenumber)
+      params.require(:profile).permit(:name, :surename, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller,:sex, :fathername, :ssn, :birthdate, :phonenumber, :mobilenumber, :official_email, :faculty, :rank)
     end
 end

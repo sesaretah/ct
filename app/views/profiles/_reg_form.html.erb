@@ -4,7 +4,7 @@
   <% else %>
   <% @profile = current_user.profile%>
   <%end%>
-  <%= form_for(@profile) do |f| %>
+  <%= form_for @profile, 'data-toggle' => "validator" do |f| %>
   <fieldset>
     <legend>
       <%= t(:profile)%>
@@ -25,21 +25,21 @@
       <div class="col-md-6">
         <div class="form-group">
           <%= f.label :name %> *
-          <%= f.text_field :name , id: 'name', :class => "form-control"%>
+          <%= f.text_field :name , id: 'name', :class => "form-control", required: '',  oninvalid: "this.setCustomValidity('#{t(:please_enter_data_in_this_field)}')"%>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group ">
           <%= f.label :surename %> *<br>
-          <%= f.text_field :surename, :class => "form-control" %>
+          <%= f.text_field :surename, :class => "form-control", required: '',  oninvalid: "this.setCustomValidity('#{t(:please_enter_data_in_this_field)}')"%>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group ">
-          <%= f.label :fathername %><br>
-          <%= f.text_field :fathername, :class => "form-control" %>
+          <%= f.label :faculty %><br>
+          <%= f.text_field :faculty, :class => "form-control" %>
         </div>
       </div>
       <div class="col-md-6">
@@ -61,17 +61,18 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
+          <%= f.label :official_email %><br>
+          <%= f.text_field :official_email, :class => "form-control", placeholder: '...@ut.ac.ir', style: 'direction: ltr' %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
           <%= f.label :sex %><br>
           <%= f.select( :sex, sexs, {}, {:class => "form-control"})  %>
           <% f.text_field :surename, :class => "form-control" %>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="form-group">
-          <%= f.label :ssn %><br>
-          <%= f.text_field :ssn, :class => "form-control" %>
-        </div>
-      </div>
+
     </div>
     <div class="row">
       <div class="col-md-6">
@@ -87,7 +88,16 @@
         </div>
       </div>
     </div>
-   <%= hidden_field_tag 'caller', 'reg' %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= f.label :rank %><br>
+          <%= f.text_field :rank, :class => "form-control" %>
+        </div>
+      </div>
+    </div>
+    <%= hidden_field_tag 'caller', 'reg' %>
 
     <div class="row top30">
       <div class="form-group col-xs-3 pull-left">
@@ -99,18 +109,59 @@
     </div>
   </fieldset>
   <% end %>
+
+  <fieldset id='enter_email'>
+    <legend>
+      <%= t(:please_enter_your_official_email)%>
+    </legend>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <%= text_field_tag :official_email, nil ,:class => "form-control" %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <button id='submit_email' type="button" class="btn btn-success"><%= t(:submit)%></button>
+          <button id='quit_email' type="button" class="btn btn-warning"><%= t(:quit)%></button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <p id='loading' style="display:none"><%= image_tag '/assets/loadingline.gif', height:"48" ,style: 'margin-top:4px;'%><%=t :loading%></p>
+      </div>
+    </div>
+  </fieldset>
 </div>
+
 <script>
 $(document).ready(function(){
-    $('#subbtn').attr('disabled',true);
-    $('#nextbtn').attr('disabled',true);
-    $('#name').keyup(function(){
-        if($(this).val().length !=0)
-            $('#subbtn').attr('disabled', false);
-            $('#nextbtn').attr('disabled', false);
-        else
-            $('#subbtn').attr('disabled',true);
-            $('#nextbtn').attr('disabled',true);
+  $('#new_profile').hide();
+  $("#quit_email").click(function(){
+    $('#new_profile').show();
+    $('#enter_email').hide();
+  });
+
+  $("#submit_email").click(function(){
+    var name = $('#official_email').val();
+    $('#loading').show();
+    axios.get('http://localhost:8080/?name='+ name)
+    .then(function (response) {
+      //console.log(response.data.per[0]);
+      $('#name').val(response.data.per[0].split(/(\s+)/)[0]);
+      $('#profile_surename').val(response.data.per[0].split(/(\s+)/)[2]);
+      $('#profile_phonenumber').val(response.data.per[5]);
+      $('#profile_official_email').val(name+'@ut.ac.ir');
+      $('#profile_faculty').val(response.data.per[4]);
+      $('#profile_rank').val(response.data.per[2]);
+      $('#new_profile').show();
+      $('#loading').hide();
     })
+    .catch(function (error) {
+      $('#loading').show();
+      console.log(error);
+    });
+  });
 });
 </script>

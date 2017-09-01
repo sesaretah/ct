@@ -3,50 +3,54 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :cas_authenticatable
-  has_many :educations
-  has_many :honors
-  has_many :researches
-  has_many :tags
-  has_one :profile
 
-  has_many :send_messages, :class_name=>"Message", :foreign_key=>"sender_id"
+  has_many :educations, dependent: :destroy
+  has_many :honors, dependent: :destroy
+  has_many :researches, dependent: :destroy
+  has_many :tags, dependent: :destroy
+  has_one :profile, dependent: :destroy
 
-  has_many :events
-  has_many :groups
-  has_many :channels
-  has_many :comments
-  has_many :notes
-  has_many :groupings
+  has_many :send_messages, :class_name=>"Message", :foreign_key=>"sender_id", dependent: :destroy
+
+
+  has_many :events, dependent: :destroy
+  has_many :groups, dependent: :destroy
+  has_many :channels, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :notes, dependent: :destroy
+  has_one :blog, dependent: :destroy
+
+  has_many :groupings, dependent: :destroy
   has_many :groups, :through => :groupings
 
-  has_many :participations
+  has_many :participations, dependent: :destroy
   has_many :events, :through => :participations
 
-  has_many :involvements
+  has_many :involvements, dependent: :destroy
   has_many :channels, :through => :involvements
   #has_one :blog
-  has_many :seekings
+  has_many :seekings, dependent: :destroy
   has_many :blogs, :through => :seekings
 
-  has_many :partnerships
+  has_many :partnerships, dependent: :destroy
   has_many :projects, :through => :partnerships
 
-  has_many :assignments
+  has_many :assignments, dependent: :destroy
   has_many :tasks, :through => :assignments
 
-  has_many :questions
-  has_many :preports
-  has_many :polls
+  has_many :questions, dependent: :destroy
+  has_many :preports, dependent: :destroy
+  has_many :polls, dependent: :destroy
 
-  has_many :followships
+  has_many :followships, dependent: :destroy
 
-  has_many :courses
+  has_many :courses, dependent: :destroy
 
-  has_many :visits
+  has_many :visits, dependent: :destroy
 
-  has_many :friendships
+  has_many :friendships, dependent: :destroy
   has_many :friends, :through => :friendships
-  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id", dependent: :destroy
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
   before_create :set_email
