@@ -76,10 +76,10 @@ app.get('/research', function (req, res) {
 var utid = req.query.name;
 var researches = [];
 var sql = 'SELECT * FROM researches where utid =' + mysql.escape(utid);
-connection.query(sql, function (error, results, fields) {
+connection.query(sql, function (error, rows) {
   if (error) throw error;
-  for(r in results){
-    console.log(results[r]);
+  for(r in rows){
+    console.log(rows[r]);
     console.log('-----');
   }
 //  console.log(results);
