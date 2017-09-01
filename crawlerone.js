@@ -79,6 +79,7 @@ var sql = 'SELECT * FROM researches where utid =' + mysql.escape(utid);
 connection.query(sql, function (error, rows) {
   if (error) throw error;
   console.log(rows);
+  res.send(rows);
 //  console.log(results);
 });
 });
