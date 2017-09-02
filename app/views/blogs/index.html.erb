@@ -46,6 +46,7 @@
             <%end%>
           </ul>
           <ul class="messages-list relative top-0">
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :blogs_you_seek%></span>
             <% for s in current_user.seekings%>
             <%= render partial: 'blogs/item', locals: {blog: s.blog}%>
             <%end%>

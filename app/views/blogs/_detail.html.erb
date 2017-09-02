@@ -24,7 +24,7 @@
         <table class="table" style="margin-bottom: 0px; color:#007AFF;">
           <tr>
             <% if !seeking.blank? && !admin?(seeking)%>
-            <td style="color: #007AFF !important;"><%= link_to seeking_path(seeking.id), :method => :delete, :remote => true, data: {confirm: "Are you sure?"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:leave_channel)  do %>
+            <td style="color: #007AFF !important;"><%= link_to seeking_path(seeking.id), :method => :delete, :remote => true, data: {confirm: "#{t(:do_you_want_to_leave_?)}"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:leave)  do %>
               <i class="fa fa-sign-out"></i>
               <%end%>
             </td>
@@ -39,7 +39,7 @@
 
             <% if admin?(seeking)%>
             <td style="color: #007AFF !important;">
-              <%= link_to blog_path(blog.id), :method => :delete, :remote => true, data: {confirm: "Are you sure?"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:destroy) do%>
+              <%= link_to blog_path(blog.id), :method => :delete, :remote => true, data: {confirm: "#{t(:do_you_want_to_destroy_?)}"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:destroy) do%>
               <i class="fa fa-trash"></i>
               <%end%>
             </td>
@@ -47,7 +47,7 @@
 
             <% if seeking.blank?%>
             <td style="color: #007AFF !important;">
-              <%= link_to "/blogs/join/#{blog.id}", :remote => true, data: {confirm: "Are you sure?"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:join) do%>
+              <%= link_to "/blogs/join/#{blog.id}", :remote => true, data: {confirm: "#{t(:do_you_want_to_join_?)}"}, 'data-placement'=>"right", 'data-toggle' => "tooltip", 'title'=>t(:join) do%>
               <i class="fa fa-plus-square"></i>
               <%end%>
             </td>

@@ -3,12 +3,9 @@ class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy]
 
   def search
-    @blogs = Blog.search params[:q], :star => true
-    @excerpter = ThinkingSphinx::Excerpter.new 'blog_core', params[:q]   , {
-      :before_match    => '<span class="bg-warning">',
-      :after_match     => '</span>',
-      :chunk_separator => ' &#8230; ' # ellipsis
-    }
+    if !params[:q].blank?
+      @blogs = Blog.where("title LIKE ? OR description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
   end
 
   def join

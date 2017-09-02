@@ -5,8 +5,7 @@
         <div class="panel panel-white no-radius">
           <div class="panel-heading border-light">
             <div class="row">
-              <div class="col-sm-6"><h4 class="panel-title"><%= @note.title%></h4></div>
-              <div class="col-sm-5">
+              <div class="col-sm-11">
                 <span><%=t :wrote_in_blog_named %> <%=link_to "/blogs?blog_id=#{@note.blog.id}" do%><%= @note.blog.title%><%end%>
                   <%=t :by%> <%= User.find_by_id(@note.blog.user_id).profile.name%> <%=  User.find_by_id(@note.blog.user_id).profile.surename%>
                 </span>

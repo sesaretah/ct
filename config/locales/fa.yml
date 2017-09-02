@@ -345,6 +345,12 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  without_title: 'بدون عنوان'
+  do_you_want_to_join_?: 'آیا مایلید عضو شوید؟'
+  do_you_want_to_destroy_?: 'ایا میخواهید پاک کنید؟'
+  leave: 'ترک'
+  do_you_want_to_leave_?: 'آیا مایلید ترک کنید؟'
+  blogs_you_seek: 'وبلاگ هایی که پیگیری می کنید'
   done: 'انجام شد'
   loading: 'در حال دریافت اطلاعات'
   quit: 'انصراف'
