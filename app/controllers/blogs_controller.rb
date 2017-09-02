@@ -5,6 +5,7 @@ class BlogsController < ApplicationController
   def search
     if !params[:q].blank?
       @blogs = Blog.where("title LIKE ? OR description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+      
     end
   end
 
