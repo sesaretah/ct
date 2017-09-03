@@ -1,0 +1,1 @@
+$("#search-results").replaceWith("<%= escape_javascript(render(:partial => 'researches/search_results', locals: {researches: @researches })) %>");

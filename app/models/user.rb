@@ -53,6 +53,12 @@ class User < ActiveRecord::Base
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id", dependent: :destroy
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
 
+  has_many :contributions, dependent: :destroy
+  has_many :researches, :through => :contributions
+
+  has_many :memberships, dependent: :destroy
+  has_many :labs, :through => :memberships
+
   before_create :set_email
   def set_email
       self.email = self.username + '@ut.ac.ir'

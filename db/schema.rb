@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901064611) do
+ActiveRecord::Schema.define(version: 20170903182625) do
+
+  create_table "announcements", force: :cascade do |t|
+    t.integer  "lab_id",     limit: 4
+    t.integer  "user_id",    limit: 4
+    t.string   "title",      limit: 255
+    t.text     "content",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "answers", force: :cascade do |t|
     t.text     "content",     limit: 65535
@@ -90,6 +99,14 @@ ActiveRecord::Schema.define(version: 20170901064611) do
     t.string   "avatar_content_type",   limit: 255
     t.integer  "avatar_file_size",      limit: 4
     t.datetime "avatar_updated_at"
+  end
+
+  create_table "contributions", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "research_id", limit: 4
+    t.string   "role",        limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "courses", force: :cascade do |t|
@@ -249,6 +266,14 @@ ActiveRecord::Schema.define(version: 20170901064611) do
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "lab_id",     limit: 4
+    t.integer  "user_id",    limit: 4
+    t.string   "role",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "messages", force: :cascade do |t|

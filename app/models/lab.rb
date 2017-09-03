@@ -5,7 +5,12 @@ class Lab < ActiveRecord::Base
   after_update :reprocess_avatar, :if => :cropping?
 
   has_many :followships, :as => :followable, :dependent => :destroy
-  
+
+  has_many :memberships, dependent: :destroy
+  has_many :users, :through => :memberships
+
+  has_many :announcements
+
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
   end

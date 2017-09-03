@@ -1,0 +1,1 @@
+$("#annlist").replaceWith("<%= escape_javascript(render(:partial => 'announcements/list', locals: {lab: @announcement.lab })) %>");

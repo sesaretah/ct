@@ -39,6 +39,14 @@
                 <%end%>
             <%end%>
           <%end%>
+
+          <% if item.class.name == 'Lab'%>
+            <% if profile.user.memberships.find_by_lab_id(item.id).blank?%>
+              <%= link_to "/memberships/add_to_lab/1?user_id=#{profile.user.id}&lab_id=#{item.id}", :method => :get, :remote => true do %>
+                <i class='fa fa-plus'></i>
+                <%end%>
+            <%end%>
+          <%end%>
         </span>
       </div>
       <span class="messages-item-subject"></span>

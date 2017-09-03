@@ -284,6 +284,9 @@ fa:
           start_date: 'تاریخ شروع'
           due_date: 'تاریخ اتمام'
           status: 'وضعیت'
+        announcement:
+          title: 'عنوان'
+          content: 'متن'
         message:
           recipient_id: 'گیرنده'
           sender_id: 'فرستنده'
@@ -345,6 +348,15 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  enter_new_announcement: 'خبر جدید'
+  edit_announcement: 'ویرایش خبر'
+  edit_task: 'ویرایش اطلاعات وظیفه'
+  task_assignment: 'تخصیص وظیفه'
+  labs_you_created: 'آزمایشگاههایی که شما ایجاد کرده اید'
+  labs_you_followed: 'آزمایشگاههایی که دنبال می کنید'
+  top_researches: 'برترین ها'
+  researches_you_have_contribution: 'آنهایی که در آن مشارکت دارید'
+  researches_you_followed: 'آنهایی که دنبال می کنید'
   without_title: 'بدون عنوان'
   do_you_want_to_join_?: 'آیا مایلید عضو شوید؟'
   do_you_want_to_destroy_?: 'ایا میخواهید پاک کنید؟'

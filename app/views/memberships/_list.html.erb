@@ -1,0 +1,7 @@
+<div id='lb-list'>
+<% for membership in lab.memberships%>
+<span class='label label-success'>
+  <%= membership.user.profile.name%> <%= membership.user.profile.surename%>
+</span>
+<%end%>
+</div>

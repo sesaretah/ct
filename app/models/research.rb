@@ -6,4 +6,7 @@ class Research < ActiveRecord::Base
   has_many :rankings, :as => :rankable, :dependent => :destroy
   has_many :comments, :as => :commentable, :dependent => :destroy
 
+  has_many :contributions, dependent: :destroy
+  has_many :users, :through => :contributions
+
 end

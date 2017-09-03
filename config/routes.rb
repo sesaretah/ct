@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :announcements
+
+  resources :memberships
+
+  resources :contributions
+
   resources :csessions
 
   resources :visits
@@ -166,6 +172,8 @@ Rails.application.routes.draw do
 
   match "/partnerships/add_to_project/:id" => "partnerships#add_to_project", :via => :get
 
+  match "/memberships/add_to_lab/:id" => "memberships#add_to_lab", :via => :get
+
   match "/preports/remote_preport/:id" => "preports#remote_preport", :via => :get
 
 
@@ -189,6 +197,7 @@ Rails.application.routes.draw do
   match "/goods/view_content/:id" => "goods#view_content", :via => :get
 
   match "/researches/view_content/:id" => "researches#view_content", :via => :get
+  match "/researches/search/:id" => "researches#search", :via => :get
 
   match "/rankings/remote/:id" => "rankings#remote", :via => :get
 

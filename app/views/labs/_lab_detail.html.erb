@@ -100,13 +100,15 @@
           </div>
         </div>
         <div id="news" class="tab-pane fade">
-
+          <% @announcement = Announcement.new%>
+            <%= render partial: 'announcements/list', locals: {lab: lab}%>
+            <%= render partial: 'announcements/form', locals: {lab: lab, announcement: @announcement}%>
         </div>
         <div id="research" class="tab-pane fade">
 
         </div>
         <div id="pepole" class="tab-pane fade">
-
+          <%= render partial: 'labs/add_user', locals: {lab: lab}%>
         </div>
       </div>
     </div>

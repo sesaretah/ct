@@ -119,7 +119,7 @@
           </div>
         </div>
         <div id="timeline" class="tab-pane fade">
-          <%= render(:partial => 'projects/timeline', locals: {project: @project }) %>
+          <% render(:partial => 'projects/timeline', locals: {project: @project }) %>
         </div>
         <div id="tasks" class="tab-pane fade">
           <% @task = Task.new%>

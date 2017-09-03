@@ -1,8 +1,11 @@
 class ResearchesController < ApplicationController
   before_action :set_research, only: [:show, :edit, :update, :destroy]
 
-  def reg_add
-
+  def search
+    if !params[:q].blank?
+      @researches = Research.where("name LIKE ? OR pub_name LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
+    #search params[:q], :star => true
   end
 
   def view_content
