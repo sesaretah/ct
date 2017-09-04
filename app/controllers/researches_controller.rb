@@ -53,6 +53,7 @@ class ResearchesController < ApplicationController
     @research = Research.new(research_params(params["research"]))
     @research.user_id = current_user.id
     @research.save
+    @contribution = Contribution.create(research_id: @research.id, user_id: current_user.id);
   end
     respond_to do |format|
       if params[:caller] == 'reg'

@@ -64,6 +64,8 @@
               <%end%>
             </div>
             <%end%>
+
+
             <div class="row">
               <span class='text-small'><%=t :users_vote%></span>
               <table>
@@ -96,6 +98,15 @@
         <%= research.abstract%>
       </p>
     </div>
+  </div>
+
+<hr/>
+  <div class="row">
+    <div class="col-md-12">
+    <% for contribution in research.contributions %>
+    <%= image_tag contribution.user.profile.avatar(:tiny)%> <%= contribution.user.profile.name%> <%= contribution.user.profile.surename%>
+    <%end%>
+  </div>
   </div>
 
 

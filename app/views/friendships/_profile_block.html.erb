@@ -3,14 +3,14 @@
   <% @f = Friendship.where(user_id: current_user.id, friend_id: profile.user_id).first%>
   <% if @f.blank?%>
   <%= link_to "/friendships/add_friend/1?friend_id=#{profile.user_id}", remote: true do%>
-  <button type="button" class="btn btn-wide btn-o btn-success">
-    <%= t(:follow)%>
+  <button type="button" class="btn btn-light-purple btn-squared btn-xs">
+    <i class="fa fa-chain" style="color: white !important;vertical-align: middle;"></i>&nbsp <%= t(:follow)%>&nbsp
   </button>
   <%end%>
   <%else%>
   <%= link_to "/friendships/remove_friend/1?friend_id=#{profile.user_id}", remote: true do%>
-  <button  type="button" class="btn btn-wide btn-o btn-danger">
-    <%= t(:unfollow)%>
+  <button type="button" class="btn btn-dark-yellow btn-squared btn-xs">
+    <i class="fa fa-chain-broken" style="color: white !important;vertical-align: middle;"></i><%= t(:unfollow)%>&nbsp
   </button>
   <%end%>
   <%end%>

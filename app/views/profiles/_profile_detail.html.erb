@@ -53,8 +53,8 @@
                   <div class="col-sm-12" style="margin-top:10px;">
                     <% if @profile.user.id == current_user.id%>
                     <%= link_to edit_profile_path(@profile.id) do %>
-                    <button type="button" class="btn btn-wide btn-o btn-warning">
-                      <%= t(:edit_person)%>
+                    <button type="button" class="btn btn-dark-grey btn-squared btn-xs">
+                      <i class="fa fa-file-pdf-o" style="color: white !important;vertical-align: middle;"></i>&nbsp <%= t(:edit)%> &nbsp
                     </button>
                     <%end%>
                   <%end%>

@@ -70,6 +70,9 @@
 
 
 
+    <% if !@profile.blank?%>
+    <%= render(:partial => 'profiles/profile_detail', locals: {profile: @profile }) %>
+    <%else%>
 <div id='profile-detail'>
     <div class="col-md-7 padding-right-0 padding-left-0" >
       <div class="panel panel-white no-radius">
@@ -91,6 +94,7 @@
         </div>
       </div>
     </div>
+    <%end%>
 
   </div>
 </div>

@@ -53,6 +53,7 @@ class ProfilesController < ApplicationController
   # GET /profiles.json
   def index
     @profiles = Profile.all
+    @profile = Profile.find_by_id(params[:profile_id])
   end
 
   # GET /profiles/1
