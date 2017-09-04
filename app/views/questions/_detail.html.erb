@@ -4,12 +4,13 @@
       <%= render partial: 'votes/votes_block', locals:{c:question}%>
 
     </div>
-    <div class="col-md-10">
+    <div class="col-md-10 margin-right-0 padding-right-0">
       <div class="row">
-        <div class="col-md-1">
+        <div class="col-md-2 text-small text-center padding-right-0 padding-left-0">
           <%= image_tag question.user.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+          <p style='font-size: 10px;'><%= question.user.profile.name %> <%= question.user.profile.surename %>  </p>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8 padding-right-0 padding-left-0">
           <span class="margin-right-5"><i class="fa fa-question-circle" style="color: #007AFF !important;vertical-align: middle;"></i> <b><%= question.title%></b></span>
         </div>
         <div class="col-md-2">

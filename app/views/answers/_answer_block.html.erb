@@ -4,10 +4,11 @@
   </div>
   <div class="col-md-10">
     <div class="row">
-    <div class="col-md-1">
+    <div class="col-md-2 text-small text-center padding-right-0 padding-left-0">
       <%= image_tag answer.user.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+      <p style='font-size: 10px;'><%= answer.user.profile.name %> <%= answer.user.profile.surename %>  </p>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-8 padding-right-0 padding-left-0">
       <span class="margin-right-5"><small><%= answer.content%></small></span>
     </div>
     <div class="col-md-1">
