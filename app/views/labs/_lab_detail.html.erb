@@ -102,7 +102,9 @@
         <div id="news" class="tab-pane fade">
           <% @announcement = Announcement.new%>
             <%= render partial: 'announcements/list', locals: {lab: lab}%>
+            <% if lab.user_id == current_user.id%>
             <%= render partial: 'announcements/form', locals: {lab: lab, announcement: @announcement}%>
+            <%end%>
         </div>
         <div id="research" class="tab-pane fade">
 

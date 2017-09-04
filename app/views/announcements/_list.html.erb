@@ -1,11 +1,14 @@
 <div id='annlist'>
   <% for announcement in lab.announcements%>
-  <div class="row">
-    <%=t(:title)%>: <%= announcement.title%>
-    <hr style="margin-top:0px; margin-bottom:0px;">
-  </div>
-  <div class="row">
-    <%= announcement.content%>
+  <div class="panel panel-white" id="panel1">
+    <div class="panel-heading border-light">
+      <h4 class="panel-title text-primary"><%= announcement.title%></h4>
+    </div>
+    <div class="panel-body">
+      <p>
+        <%= announcement.content%>
+      </p>
+    </div>
   </div>
   <%end%>
 </div>
