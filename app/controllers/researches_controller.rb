@@ -59,7 +59,7 @@ class ResearchesController < ApplicationController
       if params[:caller] == 'reg'
         format.html { redirect_to '/registeration_steps?step=4'}
       else
-        format.html { redirect_to researches_url, notice: 'Education ....' }
+        format.html { render json: @research }
       end
       format.json { head :no_content }
       format.js

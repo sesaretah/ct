@@ -53,6 +53,11 @@
 	<link rel="stylesheet" href="/assets/jquery-ui.css"/>
 	<link rel="stylesheet" href="/assets/notifIt.css"/>
 	<link rel="stylesheet" href="/assets/bootstrap-rating.css"/>
+	<link rel="stylesheet" href="/assets/emojionearea.css"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/lib/js/emojione.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/css/emojione.min.css" />
+
+
 	<script type="text/x-mathjax-config">
 	  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 	</script>
@@ -79,7 +84,7 @@
 		</div>
 		<%= render :partial => "layouts/footer"%>
 	</div>
-	<% if params[:controller] == 'channels' || params[:controller] == 'groups' || params[:controller] == 'events' || params[:controller] == 'notes'%>
+	<% if params[:controller] == 'channels' || params[:controller] == 'groups' || params[:controller] == 'events' || params[:controller] == 'notes' || params[:controller] == 'questions'%>
 	<script src="/assets/jquery/jquery.min.js"></script>
 	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
 	<%end%>
@@ -106,6 +111,7 @@
 	<script src="/assets/gantt-chart-d3.js"></script>
 	<script src="/assets/bootstrap-rating.min.js"></script>
 	<script src="/assets/axios.min.js"></script>
+		<script src="/assets/emojionearea.js"></script>
 
 
 

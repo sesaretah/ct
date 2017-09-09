@@ -6,10 +6,19 @@
     <% for i in c.comments%>
     <div class="row">
       <div class="col-md-1 padding-left-0">
-        <%= image_tag i.user.profile.avatar(:tiny), :class => "messages-item-avatar bordered border-primary"%>
+        <%= image_tag i.user.profile.avatar(:tiny), :class => "messages-item-avatar bordered border-primary", title: "#{i.user.profile.name} #{i.user.profile.surename} "%>
       </div>
       <div class="col-md-10 padding-right-0 padding-left-0">
-        <span class="margin-right-5" style='color:#8E9AA2'><small><%= i.content%></small></span>
+        <% if i.document_file_name %>
+        <%= link_to i.document.url do %>
+        <i class="fa fa-file"></i>
+        <%end%>
+        <%end%>
+        <% if i.avatar_file_name %>
+        <%= image_tag i.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+        <%end%>
+        <span class="margin-right-5" style='color:#8E9AA2'><small class="convert-emoji"><%= i.content%></small></span>
+
       </div>
       <div class="col-md-1">
         <%= link_to 'comments/'+ i.id.to_s + '?page='+@page.to_s, :method => :delete, :remote => true, data: {confirm: "Are you sure?"}  do %>
@@ -34,4 +43,14 @@
     });
     </script>
   </div>
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $(".convert-emoji").each(function() {
+      var original = $(this).html();
+      var converted = emojione.unicodeToImage(original);
+      $(this).html(converted);
+    });
+  });
+  </script>
+
 </div>

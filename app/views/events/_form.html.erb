@@ -38,7 +38,7 @@
             <div class="row">
               <div class="form-group col-xs-4">
                 * <%= f.label :name %><br>
-                <%= f.text_field :name , id: 'name', :class => "form-control" %>
+                <%= f.text_field :name , id: 'name', :class => "form-control" , required: '',  oninvalid: "this.setCustomValidity('#{t(:please_enter_data_in_this_field)}')"%>
               </div>
             </div>
             <div class="row">
@@ -155,21 +155,3 @@
     </div>
   </div>
 </div>
-
-
-<script>
-$(document).ready(function(){
-  if ($('#name').val()){
-    $('#subbtn').attr('disabled',false);
-  } else {
-    $('#subbtn').attr('disabled',true);
-  }
-
-    $('#name').keyup(function(){
-        if($(this).val().length !=0)
-            $('#subbtn').attr('disabled', false);
-        else
-            $('#subbtn').attr('disabled',true);
-    })
-});
-</script>

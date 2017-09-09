@@ -20,33 +20,33 @@
           <h2><%= link_to comment.user.profile do%><%= comment.user.profile.name%> <%= comment.user.profile.surename%><%end%></h2>
           <% if current_user.id == comment.user.id%>
           <% if comment.document_file_name %>
-            <%= link_to comment.document.url do %>
-                <i class="fa fa-2x fa-file"></i>
-            <%end%>
+          <%= link_to comment.document.url do %>
+          <i class="fa fa-2x fa-file"></i>
+          <%end%>
           <%end%>
           <% if comment.avatar_file_name %>
-            <%= image_tag comment.avatar(:medium), :class => "messages-item-avatar bordered border-primary"%>
+          <%= image_tag comment.avatar(:medium), :class => "messages-item-avatar bordered border-primary"%>
           <%end%>
-          <a class='xedit-text' href="#" id="cm<%=comment.id%>" data-type="text" data-pk="1" data-url="/comments/xedit/<%= comment.id%>" data-title="Enter username">
-            <%= comment.content%>
-          </a>
-          <script>
-          $.fn.editable.defaults.mode = 'inline';
-          $.fn.editable.defaults.ajaxOptions = {type: "GET"};
+          <p class="convert-emoji"><%= comment.content%></p>
+
+          <script type="text/javascript">
           $(document).ready(function() {
-            $("#cm<%=comment.id%>").editable({
-              emptytext: ''
+            $(".convert-emoji").each(function() {
+              var original = $(this).html();
+              var converted = emojione.unicodeToImage(original);
+              $(this).html(converted);
             });
           });
           </script>
+
           <%else%>
           <% if comment.document_file_name %>
-            <%= link_to comment.document.url do %>
-                <i class="fa fa-2x fa-file"></i>
-            <%end%>
+          <%= link_to comment.document.url do %>
+          <i class="fa fa-2x fa-file"></i>
+          <%end%>
           <%end%>
           <% if comment.avatar_file_name %>
-            <%= image_tag comment.avatar(:medium), :class => "messages-item-avatar bordered border-primary"%>
+          <%= image_tag comment.avatar(:medium), :class => "messages-item-avatar bordered border-primary"%>
           <%end%>
           <p><%= comment.content%></p>
           <%end%>

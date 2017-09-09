@@ -44,6 +44,7 @@ end
 
   # POST /comments
   # POST /comments.json
+  skip_before_filter :verify_authenticity_token, :only => :create
   def create
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id

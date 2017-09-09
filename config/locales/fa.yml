@@ -348,6 +348,9 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  none: 'هیچکدام'
+  attached_file: 'فایل ضمیمه'
+  has_not_any: 'ندارد'
   enter_new_announcement: 'خبر جدید'
   edit_announcement: 'ویرایش خبر'
   edit_task: 'ویرایش اطلاعات وظیفه'
