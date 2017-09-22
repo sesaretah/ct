@@ -194,9 +194,6 @@ app.get('/scholar', function (req, res) {
   });
 });
 
-app.listen(8080, function () {
-  console.log('Example app listening on port 8080!')
-})
 
 app.get('/research', function (req, res) {
   var utid = req.query.name;
@@ -209,3 +206,7 @@ app.get('/research', function (req, res) {
     //  console.log(results);
   });
 });
+
+app.listen(8080, function () {
+  console.log('Example app listening on port 8080!')
+})
