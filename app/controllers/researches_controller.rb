@@ -50,10 +50,16 @@ class ResearchesController < ApplicationController
       end
     end
   else
-    @research = Research.new(research_params(params["research"]))
-    @research.user_id = current_user.id
-    @research.save
-    @contribution = Contribution.create(research_id: @research.id, user_id: current_user.id);
+    @research = Research.where(name: params["research"]["name"]).first
+    if @research.blank?
+      @research = Research.new(research_params(params["research"]))
+      @research.user_id = current_user.id
+      @research.save
+    end
+    @contribution = Contribution.where(user_id: current_user.id, research_id: @research.id )
+    if @contribution.blank?
+      @contribution = Contribution.create(research_id: @research.id, user_id: current_user.id)
+    end
   end
     respond_to do |format|
       if params[:caller] == 'reg'

@@ -1,3 +1,38 @@
+<fieldset id='import'>
+  <legend>
+    <%= t(:import_from_scholar)%>
+  </legend>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= text_field_tag :scholar_id, nil ,:class => "form-control" %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group">
+        <button id='submit_scholar' type="button" class="btn btn-success"><%= t(:import)%></button>
+      </div>
+    </div>
+  </div>
+
+  <hr />
+  <div class="row">
+    <button id='checkAll' type="button" class="btn btn-green btn-squared btn-xs">
+      <i class="fa fa-check-circle-o" style="color: white !important;vertical-align: middle;"></i> <%= t(:all)%>&nbsp
+    </button>
+    <button id='uncheckAll' type="button" class="btn btn-light-red btn-squared btn-xs">
+      <i class="fa fa-circle-o" style="color: white !important;vertical-align: middle;"></i> <%= t(:none)%>&nbsp
+    </button>
+    <button id='all' type="button" class="btn btn-light-azure btn-squared btn-xs">
+      <i class="fa fa-check" style="color: white !important;vertical-align: middle;"></i> <%= t(:submit)%>&nbsp
+    </button>
+  </div>
+    <hr />
+    <div class="row">
+  <div id='papers' style='direction:ltr'></div>
+</div>
+</fieldset>
+
 <div id='research-list'>
 <table class='table'>
   <thead>
@@ -14,16 +49,137 @@
   <tbody>
 
     <% user.researches.each do |research| %>
+    <% @contribution = Contribution.where(user_id: current_user.id, research_id: research.id).first%>
       <tr>
         <td><%= research.name %></td>
         <td><%= research.pub_year %></td>
         <td><%= research.pub_type %></td>
         <td><%= research.pub_name %></td>
         <td><%= research.pub_authors %></td>
+        <% if !@contribution.blank?%>
         <td><%= link_to t(:edit), edit_research_path(research), :remote => true %></td>
-        <td><%= link_to t(:destroy), research, method: :delete, :remote => true, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to t(:destroy), @contribution, method: :delete, :remote => true, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>
 </table>
 </div>
+
+
+<script>
+var getUrlParameter = function getUrlParameter(url) {
+  var sPageURL = url,
+  uri = sPageURL.split('?'),
+  sURLVariables = uri[1].split('&'),
+  sParameterName,
+  i;
+
+  for (i = 0; i < sURLVariables.length; i++) {
+    sParameterName = sURLVariables[i].split('=');
+    console.log(sParameterName);
+    if (sParameterName[0] === 'user') {
+      return sParameterName[1] === undefined ? true : sParameterName[1];
+    }
+  }
+};
+$(document).ready(function(){
+  $('#new_profile').hide();
+  $("#quit_email").click(function(){
+    $('#new_profile').show();
+    $('#enter_email').hide();
+  });
+
+  $("#submit_scholar").click(function(){
+    console.log($('#scholar_id').val());
+    var name = getUrlParameter($('#scholar_id').val());
+    console.log(name);
+    $('#loading').show();
+    var papers = '<ul>'
+    axios.get('http://localhost:8090/scholar?name='+ name + "&user=" + <%= current_user.id%>)
+    .then(function (response) {
+      console.log(response.data.papers);
+      for (p in response.data.papers){
+        if (response.data.papers[p].similar === parseInt(response.data.papers[p].similar, 10)){
+          var similar =   " <button id='similar_paper-"+ p +"' type='button' class='btn btn-beige btn-squared btn-xs'> <%= t(:similar)%> &nbsp<i class='fa fa-exclamation-triangle' style='color: white !important;vertical-align: middle;'></i> </button> "
+        } else {
+          var similar = ""
+        }
+        papers +=
+        "<li id='item-"+ p +"'><ul>" +
+        '<li>'+ '<b>Author(s):</b> ' + "<a href='#' id=authors-"+ p + ">" + response.data.papers[p].authors + '</a></li>' +
+        '<li>'+ '<b>Title:</b> ' + "<a href='#' id=title-"+ p + ">" + response.data.papers[p].title +'</a></li>' +
+        '<li>'+ '<b>Publisher:</b> ' + "<a href='#' id=publisher-"+ p + ">" + response.data.papers[p].publisher +'</a></li>' +
+        '<li>'+ '<b>Publication Type:</b> ' + "<a href='#' id=pub_type-"+ p + ">" +'</a></li>' +
+        '<li>'+ '<b>Year:</b> ' + "<a href='#' id=year-"+ p + ">" + response.data.papers[p].year +'</a></li>' +
+        '<li>'+ '<b>Pages:</b> ' + "<a href='#' id=pages-"+ p + ">" +'</a></li>'+
+        '</ul>'+
+        "<div class='pull-right' style='margin-top:-20px'> " +
+        similar +
+        " <button id='quit_paper-"+ p +"' type='button' class='btn btn-grey btn-squared btn-xs'><%= t(:quit)%></button>" +
+        " <button id='submit_paper-"+ p +"' type='button' class='btn btn-green btn-squared btn-xs'><%= t(:submit)%></button> " +
+        "<input type='checkbox' id='checkbox-" + p +"' value='" + p + "' checked=''>" +
+        "<p id='result-"+ p+"'></p></div>" +
+        '<hr/></li>'+
+        "<script" + ">" + "$('#submit_paper-"+p +"').click(function(){" +
+        "axios.post('/researches', { research:{pub_authors: $('#authors-"+ p +
+        "').text(), name: $('#title-"+ p +"').text(), pub_year:  $('#year-"+ p +"').text(), pub_type:  $('#pub_type-"+ p +"').text(), pp:  $('#pages-"+ p +"').text(), pub_name:  $('#publisher-"+ p +"').text()" +
+        "}}).then(function (response) {$('#submit_paper-" + p+"').hide();$('#quit_paper-" + p+"').hide(); $('#result-"+p+"').text('<%=t :done%>');}).catch(function (error){console.log(error);});});"+"</script"+ ">" +
+
+        "<script" + ">" + "$('#quit_paper-"+p +"').click(function(){ $('#item-"+ p +"').hide();});</script"+ ">" +
+
+        "<script" + ">" + "$('#authors-" + p + "').editable({ type: 'text', pk: 1 });" +"</script"+ ">" +
+        "<script" + ">" + "$('#title-" + p + "').editable({ type: 'text', pk: 1 });" +"</script"+ ">" +
+        "<script" + ">" + "$('#publisher-" + p + "').editable({ type: 'text', pk: 1 });" +"</script"+ ">" +
+        "<script" + ">" + "$('#year-" + p + "').editable({ type: 'text', pk: 1 });" +"</script"+ ">" +
+        "<script" + ">" + "$('#pages-" + p + "').editable({ type: 'text', pk: 1 });" +"</script"+ ">"
+
+      }
+      papers += '</ul>'
+      $('#papers').html(papers);
+    })
+    .catch(function (error) {
+      $('#loading').show();
+      console.log(error);
+    });
+  });
+
+
+  $('#all').click(function () {
+    $('input[type=checkbox]').each(function () {
+      if(this.checked == 1){
+        var current = this.value;
+        //console.log(this.value);
+        axios.post('/researches', {
+          research:{
+            pub_authors: $("#authors-"+ this.value).text(),
+            name: $("#title-"+ this.value ).text(),
+            pub_year:  $("#year-"+ this.value).text(),
+            pub_type:  $("#pub_type-"+ this.value ).text(),
+            pp:  $("#pages-"+ this.value).text(),
+            pub_name:  $("#publisher-"+ this.value).text()
+          }
+        })
+        .then(function (response) {
+          console.log(response);
+          $("#submit_paper-" +  current ).hide();
+          $("#quit_paper-" + current).hide();
+          $("#checkbox-" + current).hide();
+          $("#result-"+ current ).text('<%=t :done%>');
+        })
+        .catch(function (error){
+          console.log(error);
+        });
+      }
+    });
+  });
+
+  $("#checkAll").click(function(){
+    $('input[type=checkbox]').prop('checked', true);
+  });
+
+  $("#uncheckAll").click(function(){
+    $('input[type=checkbox]').prop('checked', false);
+  });
+});
+</script>

@@ -12,26 +12,26 @@ end
     </legend>
 
     <div class="row top30">
-      <div class="col-xs-3">
+      <div class="col-xs-5">
         <button id='checkAll' type="button" class="btn btn-green btn-squared btn-xs">
           <i class="fa fa-check-circle-o" style="color: white !important;vertical-align: middle;"></i> <%= t(:all)%>&nbsp
         </button>
         <button id='uncheckAll' type="button" class="btn btn-light-red btn-squared btn-xs">
           <i class="fa fa-circle-o" style="color: white !important;vertical-align: middle;"></i> <%= t(:none)%>&nbsp
         </button>
-      </div>
-      <div class="form-group col-xs-3 pull-left">
-        <%= content_tag :button, :type => :submit,id: 'subbtn', :class => "btn btn-o btn-primary " do %>
-        <i class="icon-ok bigger-110"></i>
-        <%=t :submit%>
-        <% end %>
+        <button id='all' type="button" class="btn btn-light-azure btn-squared btn-xs">
+          <i class="fa fa-check" style="color: white !important;vertical-align: middle;"></i> <%= t(:submit)%>&nbsp
+        </button>
         <%= link_to '/registeration_steps?step=4' do%>
-        <button  class="btn btn-o btn-success " , style: 'margin-left:2px;'>
-          <%= t(:next)%>
+        <button type="button" class="btn btn-dark-green btn-squared btn-xs">
+           &nbsp<%= t(:next)%>
+           <i class="fa fa-arrow-left" style="color: white !important;vertical-align: middle;"></i>
         </button>
         <%end%>
       </div>
+
     </div>
+      <hr />
     <p id='loading' style="display:none"><%= image_tag '/assets/loadingline.gif', height:"48" ,style: 'margin-top:4px;'%><%=t :loading%></p>
 
 

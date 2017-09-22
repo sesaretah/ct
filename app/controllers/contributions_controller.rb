@@ -54,10 +54,12 @@ class ContributionsController < ApplicationController
   # DELETE /contributions/1
   # DELETE /contributions/1.json
   def destroy
+    @profile = current_user.profile
     @contribution.destroy
     respond_to do |format|
       format.html { redirect_to contributions_url, notice: 'Contribution was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 

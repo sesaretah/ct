@@ -348,6 +348,9 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  similar: 'مشابه'
+  import_from_scholar: 'دریافت از Google Scholar'
+  import: 'دریافت'
   none: 'هیچکدام'
   attached_file: 'فایل ضمیمه'
   has_not_any: 'ندارد'
