@@ -209,7 +209,3 @@ app.get('/research', function (req, res) {
     //  console.log(results);
   });
 });
-
-app.listen(8090, function () {
-  console.log('Example app listening on port 8080!')
-})
