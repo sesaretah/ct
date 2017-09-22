@@ -96,7 +96,7 @@ $(document).ready(function(){
     console.log(name);
     $('#loading').show();
     var papers = '<ul>'
-    axios.get('http://localhost:8090/scholar?name='+ name + "&user=" + <%= current_user.id%>)
+    axios.get('http://sn.ut.ac.ir:8080/scholar?name='+ name + "&user=" + <%= current_user.id%>)
     .then(function (response) {
       console.log(response.data.papers);
       for (p in response.data.papers){
