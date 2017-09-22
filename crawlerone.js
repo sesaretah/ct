@@ -8,8 +8,15 @@ var similarity = require("similarity");
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : '',
+  password : 'salam64511',
   database : 'shoa2'
+});
+
+var connection1 = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'salam64511',
+  database : 'shoa3'
 });
 
 const express = require('express')
@@ -126,7 +133,7 @@ app.get('/scholar', function (req, res) {
       function(cb) {
         var sql = "SELECT `researches`.* FROM `researches` INNER JOIN `contributions` ON `researches`.`id` = `contributions`.`research_id` WHERE `contributions`.`user_id` =" + mysql.escape(user_id);
         //console.log(sql);
-        connection.query(sql, function (error, rows) {
+        connection1.query(sql, function (error, rows) {
           if (error) throw error;
           for(var i in p){
             for( var r in rows){
