@@ -117,6 +117,7 @@ app.get('/scholar', function (req, res) {
             }
             var t = {'similar': '','link': link , 'title' : title, 'authors' : authors, 'publisher' : JSON.stringify(publisher), 'year' : parseInt(year.replace(', ', ''))}
             p.push(t);
+            console.log(t);
             callback();
           } else {
             callback();
