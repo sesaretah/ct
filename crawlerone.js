@@ -100,6 +100,7 @@ app.get('/scholar', function (req, res) {
     var barval = $('.gsc_g_al');
     var ind = $('.gsc_rsb_std');
     var cap = $('.gsc_rsb_sth');
+    console.log(trows);
 
     async.series([
       function(cb) {
