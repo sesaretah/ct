@@ -149,7 +149,8 @@ app.get('/scholar', function (req, res) {
             }
           }
         });
-      },
+      }
+      /*,
       function(cb) {
         for (var i in trows) {
           if (typeof trows[i].children != 'undefined' && typeof trows[i].children[0] != 'undefined' && trows[i].children[0].type == 'text' ){
@@ -182,7 +183,7 @@ app.get('/scholar', function (req, res) {
             cb ();
           }
         }
-      }
+      }*/
     ],
 
     // optional callback
