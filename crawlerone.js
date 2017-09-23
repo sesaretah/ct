@@ -142,7 +142,7 @@ app.get('/scholar', function (req, res) {
               }
             }
             if (i == p.length - 1){
-              console.log('cb');
+              console.log('cb1');
               cb ();
             }
           }
@@ -154,7 +154,7 @@ app.get('/scholar', function (req, res) {
             tags.push(trows[i].children[0].data);
           }
           if (i == trows.length - 1){
-            console.log('cb');
+            console.log('cb2');
             cb ();
           }
         }
@@ -165,7 +165,7 @@ app.get('/scholar', function (req, res) {
             bar[barleg[i].children[0].data] = barval[i].children[0].data
           }
           if (i == barleg.length - 1){
-            console.log('cb');
+            console.log('cb3');
             cb ();
           }
         }
@@ -176,7 +176,7 @@ app.get('/scholar', function (req, res) {
             citations.push(ind[i].children[0].data);
           }
           if (i == ind.length - 1){
-            console.log('cb');
+            console.log('cb4');
             cb ();
           }
         }
