@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Couplings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Coupler</th>
+      <th>Coupler type</th>
+      <th>Couplee</th>
+      <th>Couplee type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @couplings.each do |coupling| %>
+      <tr>
+        <td><%= coupling.coupler_id %></td>
+        <td><%= coupling.coupler_type %></td>
+        <td><%= coupling.couplee_id %></td>
+        <td><%= coupling.couplee_type %></td>
+        <td><%= link_to 'Show', coupling %></td>
+        <td><%= link_to 'Edit', edit_coupling_path(coupling) %></td>
+        <td><%= link_to 'Destroy', coupling, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Coupling', new_coupling_path %>

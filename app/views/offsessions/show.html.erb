@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Offering:</strong>
+  <%= @offsession.offering_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @offsession.name %>
+</p>
+
+<%= link_to 'Edit', edit_offsession_path(@offsession) %> |
+<%= link_to 'Back', offsessions_path %>

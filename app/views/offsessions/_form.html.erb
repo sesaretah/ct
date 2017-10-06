@@ -1,0 +1,40 @@
+<div id='offsession-form-<%= offering.id%>' style ='margin-right:20px;'>
+  <div id="collapse-offering-<%= offering.id %>" class="panel-collapse collapse" aria-expanded="true" onClick="event.stopPropagation();">
+
+  <div class="panel panel-white" >
+    <div class="panel-body">
+      <%= form_for @offsession, remote: true do |f| %>
+      <% if @offsession.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@offsession.errors.count, "error") %> prohibited this offsession from being saved:</h2>
+
+        <ul>
+          <% @offsession.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+
+      <div class="row">
+        <%= f.hidden_field :offering_id, value: offering.id %>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group margin-bottom-0 margin-top-5">
+            <br/>
+            <button type="submit" class="btn btn-light-azure btn-squared">
+              <i class="fa fa-check" style="color: white !important;vertical-align: middle;"></i>&nbsp <%= t(:submit)%>&nbsp
+            </button>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  </div>
+</div>

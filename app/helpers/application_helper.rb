@@ -18,6 +18,24 @@ module ApplicationHelper
     return @options
   end
 
+  def sfiletypes
+    @options = [
+      [t(:video), t(:video)],
+      [t(:slide) , t(:slide)],
+      [t(:document) , t(:document)]
+    ]
+    return @options
+  end
+
+  def periods
+    @options = [
+      [t(:fall), t(:fall)],
+      [t(:spring), t(:spring)],
+      [t(:summer) , t(:summer)]
+    ]
+    return @options
+  end
+
   def rstatus(s)
     @options = [t(:running),t(:scheduled),t(:stoped),t(:ended), t(:waiting)]
     return @options[s-1]

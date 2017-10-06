@@ -1,0 +1,1 @@
+json.array! @offsessionmaterials, partial: 'offsessionmaterials/offsessionmaterial', as: :offsessionmaterial

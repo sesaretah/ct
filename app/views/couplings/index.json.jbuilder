@@ -1,0 +1,1 @@
+json.array! @couplings, partial: 'couplings/coupling', as: :coupling

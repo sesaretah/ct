@@ -328,6 +328,15 @@ fa:
           missions: 'اهداف و ماموریت ها'
           tel: 'تلفن'
           address: 'آدرس'
+        offering:
+          period: 'دوره'
+          year: 'سال'
+          location: 'محل برگزاری'
+        offsession:
+          name: 'عنوان جلسه'
+        offsessionmaterial:
+          title: 'عنوان فایل'
+          sfiletype: 'نوع فایل'
         course:
           name: 'نام درس'
           course_type: 'نوع درس'
@@ -348,6 +357,27 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  blog_coupled_to_course: 'وبلاگ مربوط به درس'
+  group_coupled_to_course: 'گروه مربوط به درس'
+  channel_coupled_to_course: 'کانال مربوط به درس'
+  make_official_channel_for_offering: 'ایجاد کانال رسمی برای هر ارائه'
+  make_official_group_for_offering: 'ایجاد گروه رسمی برای هر ارائه'
+  make_official_blog_for_offering: 'ایجاد وبلاگ رسمی برای هر ارائه'
+  link: 'دانلود'
+  sfiletype: 'نوع فایل'
+  slide: 'اسلاید'
+  offsessions: 'جلسات درس'
+  materials: 'مواد درسی'
+  fall: 'پاییز'
+  spring: 'بهار'
+  summer: 'تابستان'
+  period: 'دوره'
+  offerings: 'ارائه ها'
+  enter_new_offering: 'ارائه جدید'
+  edit_offering: 'ویرایش اطلاعات'
+  make_official_channel: 'ایجاد کانال رسمی'
+  make_official_group: 'ایجاد گروه رسمی'
+  make_official_blog: 'ایجاد وبلاگ رسمی'
   similar: 'مشابه'
   import_from_scholar: 'دریافت از Google Scholar'
   import: 'دریافت'

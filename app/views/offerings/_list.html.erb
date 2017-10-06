@@ -1,0 +1,51 @@
+<div id='offeringlist'>
+  <div class="tabbable tabs-right">
+    <ul id="myTab6" class="nav nav-tabs">
+      <% course.offerings.each do |offering| %>
+      <% if course.offerings.first.id == offering.id %>
+      <li class="active">
+        <% else %>
+        <li >
+          <%end%>
+          <a href="#off<%= offering.id %>" data-toggle="tab" aria-expanded="true">
+            <%= offering.period %> <%= offering.year %>
+          </a>
+        </li>
+        <%end%>
+      </ul>
+      <div class="tab-content">
+        <% course.offerings.each do |offering| %>
+        <% if course.offerings.first.id == offering.id %>
+          <div class="tab-pane fade active in" id="off<%= offering.id %>" style="min-height: 400px;">
+        <%else%>
+          <div class="tab-pane fade" id="off<%= offering.id %>" style="min-height: 400px;">
+        <%end%>
+            <div class="pull-left">
+              <%= render partial: '/followships/follow', locals:{item: offering}%>
+            </div>
+              <h5 class="over-title"><%=t :offsessions%>
+                <% if course.user.id == current_user.id%>
+
+                <span class="pull-left margin-left-10">
+
+                  <%= link_to  offering, method: :delete, :remote => true, data: { confirm: 'Are you sure?' }  do%>
+                    <i class="fa fa-trash"></i>
+                  <%end%>
+                  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse-offering-<%= offering.id %>" aria-expanded="true">
+                    <i class="fa fa-plus"></i>
+                  </a>
+                </span>
+                <%end%>
+              </h5>
+
+              <hr class="margin-top-0" />
+              <%= render partial: 'offsessions/list', locals: {offering: offering}%>
+            <% if course.user.id == current_user.id%>
+            <% @offsession = Offsession.new%>
+            <%= render partial: 'offsessions/form', locals: {offsession: @offsession, offering: offering}%>
+            <%end%>
+          </div>
+          <%end%>
+        </div>
+      </div>
+    </div>

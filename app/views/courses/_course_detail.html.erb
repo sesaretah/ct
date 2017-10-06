@@ -8,18 +8,8 @@
           </a>
         </li>
         <li class="" >
-          <a data-toggle="tab" href="#timeline">
-            <%= t(:related_attachments)%>
-          </a>
-        </li>
-        <li class="">
-          <a data-toggle="tab" href="#tasks">
-            <%= t(:social_relations)%>
-          </a>
-        </li>
-        <li class="">
-          <a data-toggle="tab" href="#partners">
-            <%= t(:followers)%>
+          <a data-toggle="tab" href="#offerings">
+            <%= t(:offerings)%>
           </a>
         </li>
       </ul>
@@ -51,7 +41,7 @@
                     </div>
                     <%end%>
                     <div class="row" style='margin-top:1px;'>
-                      <%= render partial: '/followships/follow', locals:{item: course}%>
+                      <% render partial: '/followships/follow', locals:{item: course}%>
                     </div>
                   </div>
                   <hr>
@@ -120,14 +110,12 @@
             </div>
           </div>
         </div>
-        <div id="timeline" class="tab-pane fade">
-
-        </div>
-        <div id="tasks" class="tab-pane fade">
-
-        </div>
-        <div id="partners" class="tab-pane fade">
-
+        <div id="offerings" class="tab-pane fade">
+            <%= render(:partial => 'offerings/list', locals: {course: course }) %>
+            <% if course.user.id == current_user.id%>
+            <% @offering = Offering.new%>
+            <%= render partial: 'offerings/form', locals: {offering: @offering, course: course}%>
+            <%end%>
         </div>
       </div>
     </div>

@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :couplings
+
+  resources :offsessionmaterials
+
+  resources :offsessions
+
+  resources :offerings
+
   resources :announcements
 
   resources :memberships
@@ -209,6 +217,9 @@ Rails.application.routes.draw do
 
   match "/polls/completion/:id" => "polls#completion", :via => :get
   match "/polls/view_content/:id" => "polls#view_content", :via => :get
+
+  match "/offsessionmaterials/render_partial/:id" => "offsessionmaterials#render_partial", :via => :get
+
 
   post 'upload' => 'upload#create'
   # The priority is based upon order of creation: first created -> highest priority.

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170909094035) do
+ActiveRecord::Schema.define(version: 20171006172250) do
 
   create_table "announcements", force: :cascade do |t|
     t.integer  "lab_id",     limit: 4
@@ -109,6 +109,15 @@ ActiveRecord::Schema.define(version: 20170909094035) do
     t.datetime "updated_at",              null: false
   end
 
+  create_table "couplings", force: :cascade do |t|
+    t.integer  "coupler_id",   limit: 4
+    t.string   "coupler_type", limit: 191
+    t.integer  "couplee_id",   limit: 4
+    t.string   "couplee_type", limit: 191
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string   "name",                limit: 255
     t.string   "course_type",         limit: 255
@@ -130,6 +139,9 @@ ActiveRecord::Schema.define(version: 20170909094035) do
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
     t.integer  "user_id",             limit: 4
+    t.integer  "chkbxch",             limit: 4
+    t.integer  "chkbxgr",             limit: 4
+    t.integer  "chkbxbl",             limit: 4
   end
 
   create_table "csessions", force: :cascade do |t|
@@ -293,6 +305,35 @@ ActiveRecord::Schema.define(version: 20170909094035) do
     t.datetime "updated_at",               null: false
     t.string   "title",      limit: 255
     t.integer  "blog_id",    limit: 4
+  end
+
+  create_table "offerings", force: :cascade do |t|
+    t.integer  "course_id",  limit: 4
+    t.integer  "user_id",    limit: 4
+    t.string   "period",     limit: 191
+    t.integer  "year",       limit: 4
+    t.string   "location",   limit: 191
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "offsessionmaterials", force: :cascade do |t|
+    t.string   "title",                 limit: 191
+    t.integer  "offsession_id",         limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "document_file_name",    limit: 191
+    t.string   "document_content_type", limit: 191
+    t.integer  "document_file_size",    limit: 4
+    t.datetime "document_updated_at"
+    t.string   "sfiletype",             limit: 191
+  end
+
+  create_table "offsessions", force: :cascade do |t|
+    t.integer  "offering_id", limit: 4
+    t.string   "name",        limit: 191
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "operacts", force: :cascade do |t|

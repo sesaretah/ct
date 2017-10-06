@@ -1,0 +1,75 @@
+<div id='offsessionmaterial-form-<%= offsession.id%>' style="margin-right: 30px">
+  <div id="collapse-offsession-<%= offsession.id %>" class="panel-collapse collapse" aria-expanded="true" onClick="event.stopPropagation();">
+    <div class="panel panel-white" >
+      <div class="panel-body">
+        <%= form_for @offsessionmaterial,:remote => :true, :html => { :multipart => true, :id => "fileupload-#{offsession.id}"  }  do |f|%>
+        <% if @offsessionmaterial.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@offsessionmaterial.errors.count, "error") %> prohibited this offsessionmaterial from being saved:</h2>
+          <ul>
+            <% @offsessionmaterial.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :title %>
+              <%= f.text_field :title %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= f.label :sfiletype %>
+              <%= f.select( :sfiletype, sfiletypes, {}, {:class => "form-control"})  %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8"></div>
+          <div class="col-md-4">
+            <button type="button" id='fedit-<%= offsession.id%>' class="btn btn-light-purple btn-squared btn-xs">
+              <i class="fa fa-file" style="color: white !important;vertical-align: middle;"></i>&nbsp <%= t(:attachment)%>&nbsp
+            </button>
+            <%= f.file_field :document, :style =>"display: none;", id: "document-#{offsession.id}" %>
+            <%= f.hidden_field :offsession_id, value: offsession.id %>
+            <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>"/>
+            <button type="button" id='submit-<%= offsession.id%>' class="btn btn-azure btn-squared btn-xs">
+              <i class="fa fa-paper-plane" style="color: white !important;vertical-align: middle;"></i>&nbsp <%= t(:submit)%>&nbsp
+            </button>
+          </div>
+        </div>
+        <% end %>
+        <script type="text/javascript">
+        $('#fedit-<%= offsession.id%>').click(function() {
+          $('#document-<%= offsession.id%>').click();
+        });
+        $(function () {
+          $('#fileupload-<%= offsession.id%>').fileupload({
+            dataType: 'json',
+            add:function (e, data) {
+              console.log(data);
+              $("#submit-<%= offsession.id%>").off('click').on('click',function () {
+                console.log('Submiting ..');
+                data.submit();
+              });
+            },
+            done: function (e, data) {
+              console.log(data.result.id);
+              var url = '/offsessionmaterials/render_partial/'+ data.result.id
+              $.get(url,
+                function(d) {
+                  console.log(d);
+                  $("#offsessionmaterial-list-<%= offsession.id%>").replaceWith(d.html);
+                }
+              );
+            }
+          });
+        });
+        </script>
+      </div>
+    </div>
+  </div>
+</div>

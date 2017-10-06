@@ -1,0 +1,33 @@
+<%= form_for(@coupling) do |f| %>
+  <% if @coupling.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@coupling.errors.count, "error") %> prohibited this coupling from being saved:</h2>
+
+      <ul>
+      <% @coupling.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :coupler_id %><br>
+    <%= f.number_field :coupler_id %>
+  </div>
+  <div class="field">
+    <%= f.label :coupler_type %><br>
+    <%= f.text_field :coupler_type %>
+  </div>
+  <div class="field">
+    <%= f.label :couplee_id %><br>
+    <%= f.number_field :couplee_id %>
+  </div>
+  <div class="field">
+    <%= f.label :couplee_type %><br>
+    <%= f.text_field :couplee_type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

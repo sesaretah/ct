@@ -37,7 +37,7 @@
             <div class="row">
               <div class="form-group col-xs-6">
                 * <%= f.label :name %><br>
-                <%= f.text_field :name , id: 'name', :class => "form-control" %>
+                <%= f.text_field :name , id: 'name', :class => "form-control" , required: '',  oninvalid: "this.setCustomValidity('#{t(:please_enter_data_in_this_field)}')"%>
               </div>
             </div>
             <div class="row">
@@ -81,92 +81,100 @@
                 <%= f.label :course_results %><br>
                 <%= f.text_area :course_results , :class => "form-control"%>
               </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-6">
-                  <%= f.label :course_covered %><br>
-                  <%= f.text_area :course_covered, :class => "form-control" %>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-6">
-                  <%= f.label :course_softwares %><br>
-                  <%= f.text_field :course_softwares, :class => "form-control" %>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-6">
-                  <%= f.label :problems_period %><br>
-                  <%= f.text_field :problems_period , :class => "form-control"%>
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-xs-6">
-                  <%= f.label :garding_mechanism %><br>
-                  <%= f.text_field :garding_mechanism, :class => "form-control" %>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="form-group col-xs-4">
-                  <%if !@course.avatar.blank?%>
-                  <%= image_tag @course.avatar(:medium), id: 'avatar',:class => "messages-item-avatar bordered border-primary"%>
-                  <%else%>
-                  <img id='avatar'></img>
-                  <%end%>
-                  <div class="fileUpload btn btn-o btn-light-purple">
-                    <%if @course.avatar.blank?%>
-                    <span><i class="fa fa-camera" style='vertical-align:middle;'></i> <%=t :choose_a_file_for_avatar%>...</span>
-                    <%else%>
-                    <span><i class="fa fa-camera" style='vertical-align:middle;'></i> <%=t :change_photo%>...</span>
-                    <%end%>
-                    <%= f.file_field :avatar, class: "upload", onchange: "readURL(this);" %>
-                  </div>
-                </div>
-              </div>
-
-              <script>
-              function readURL(input) {
-                if (input.files && input.files[0]) {
-                  var reader = new FileReader();
-
-                  reader.onload = function (e) {
-                    $('#avatar')
-                    .attr('src', e.target.result)
-                    .width(120);
-                  };
-
-                  reader.readAsDataURL(input.files[0]);
-                }
-              }
-              </script>
-
-
-              <div class="row top30">
-                <div class="form-group col-xs-1 pull-left">
-                  <%= content_tag :button, :type => :submit,id: 'subbtn', :class => "btn btn-o btn-primary" do %>
-                  <i class="icon-ok bigger-110"></i>
-                  <%=t :submit%>
-                  <% end %>
-                </div>
-              </div>
-              <% end %>
             </div>
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <%= f.label :course_covered %><br>
+                <%= f.text_area :course_covered, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <%= f.label :course_softwares %><br>
+                <%= f.text_field :course_softwares, :class => "form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <%= f.label :problems_period %><br>
+                <%= f.text_field :problems_period , :class => "form-control"%>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-6">
+                <%= f.label :garding_mechanism %><br>
+                <%= f.text_field :garding_mechanism, :class => "form-control" %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="checkbox clip-check check-primary checkbox-inline">
+                <input type="checkbox" id="chkbxch" name="course[chkbxch]" value="1" checked="">
+                <label for="chkbxch">
+                  <%=t :make_official_channel_for_offering%>
+                </label>
+              </div>
+              <div class="checkbox clip-check check-primary checkbox-inline">
+                <input type="checkbox" id="chkbxgr" name="course[chkbxgr]" value="1">
+                <label for="chkbxgr">
+                  <%=t :make_official_group_for_offering%>
+                </label>
+              </div>
+              <div class="checkbox clip-check check-primary checkbox-inline">
+                <input type="checkbox" id="chkbxbl" name="course[chkbxbl]" value="1">
+                <label for="chkbxbl">
+                  <%=t :make_official_blog_for_offering%>
+                </label>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%if !@course.avatar.blank?%>
+                <%= image_tag @course.avatar(:medium), id: 'avatar',:class => "messages-item-avatar bordered border-primary"%>
+                <%else%>
+                <img id='avatar'></img>
+                <%end%>
+                <div class="fileUpload btn btn-o btn-light-purple">
+                  <%if @course.avatar.blank?%>
+                  <span><i class="fa fa-camera" style='vertical-align:middle;'></i> <%=t :choose_a_file_for_avatar%>...</span>
+                  <%else%>
+                  <span><i class="fa fa-camera" style='vertical-align:middle;'></i> <%=t :change_photo%>...</span>
+                  <%end%>
+                  <%= f.file_field :avatar, class: "upload", onchange: "readURL(this);" %>
+                </div>
+              </div>
+            </div>
+
+            <script>
+            function readURL(input) {
+              if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                  $('#avatar')
+                  .attr('src', e.target.result)
+                  .width(120);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+              }
+            }
+            </script>
+
+
+            <div class="row top30">
+              <div class="form-group col-xs-1 pull-left">
+                <%= content_tag :button, :type => :submit,id: 'subbtn', :class => "btn btn-o btn-primary" do %>
+                <i class="icon-ok bigger-110"></i>
+                <%=t :submit%>
+                <% end %>
+              </div>
+            </div>
+            <% end %>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-
-  <script>
-  $(document).ready(function(){
-      $('#subbtn').attr('disabled',true);
-      $('#name').keyup(function(){
-          if($(this).val().length !=0)
-              $('#subbtn').attr('disabled', false);
-          else
-              $('#subbtn').attr('disabled',true);
-      })
-  });
-  </script>
+</div>

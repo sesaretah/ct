@@ -5,7 +5,7 @@ class BlogsController < ApplicationController
   def search
     if !params[:q].blank?
       @blogs = Blog.where("title LIKE ? OR description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
-      
+
     end
   end
 
@@ -64,7 +64,9 @@ class BlogsController < ApplicationController
   # POST /blogs.json
   def create
     @blog = Blog.new(blog_params)
-    @blog.user_id =current_user.id
+    if !current_user.id.blank?
+      @blog.user_id =current_user.id
+    end
     respond_to do |format|
       if @blog.save
         format.html { redirect_to '/blogs?blog_id='+@blog.id.to_s, notice: 'Blog was successfully created.' }

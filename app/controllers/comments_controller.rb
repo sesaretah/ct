@@ -11,8 +11,6 @@ class CommentsController < ApplicationController
       :locals => { :"#{@cl}" => @item, page: params[:page].to_i}
     })
   }
-
-
 end
 
   def xedit

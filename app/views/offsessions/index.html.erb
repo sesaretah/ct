@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Offsessions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Offering</th>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @offsessions.each do |offsession| %>
+      <tr>
+        <td><%= offsession.offering_id %></td>
+        <td><%= offsession.name %></td>
+        <td><%= link_to 'Show', offsession %></td>
+        <td><%= link_to 'Edit', edit_offsession_path(offsession) %></td>
+        <td><%= link_to 'Destroy', offsession, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Offsession', new_offsession_path %>

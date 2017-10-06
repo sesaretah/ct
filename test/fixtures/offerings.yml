@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course_id: 1
+  user_id: 
+  period: MyString
+  year: 1
+  location: MyString
+
+two:
+  course_id: 1
+  user_id: 
+  period: MyString
+  year: 1
+  location: MyString

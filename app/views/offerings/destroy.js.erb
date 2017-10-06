@@ -1,0 +1,2 @@
+$("#offeringlist").replaceWith("<%= escape_javascript(render(:partial => 'offerings/list', locals: {course: @course })) %>");
+$("#offering-form").replaceWith("<%= escape_javascript(render(:partial => 'offerings/form', locals: {offering: Offering.new, course: @course })) %>");

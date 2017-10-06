@@ -1,0 +1,2 @@
+$("#offsessionmaterial-list-<%= @offsession.id%>").replaceWith("<%= escape_javascript(render(:partial => 'offsessionmaterials/list', locals: {offsession: @offsession })) %>");
+$("#offsessionmaterial-form-<%= @offsession.id%>").replaceWith("<%= escape_javascript(render(:partial => 'offsessionmaterials/form', locals: {offsessionmaterial: Offsessionmaterial.new, offsession: @offsession})) %>");

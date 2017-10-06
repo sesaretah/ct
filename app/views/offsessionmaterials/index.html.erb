@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Offsessionmaterials</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Offsession</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @offsessionmaterials.each do |offsessionmaterial| %>
+      <tr>
+        <td><%= offsessionmaterial.title %></td>
+        <td><%= offsessionmaterial.offsession_id %></td>
+        <td><%= link_to 'Show', offsessionmaterial %></td>
+        <td><%= link_to 'Edit', edit_offsessionmaterial_path(offsessionmaterial) %></td>
+        <td><%= link_to 'Destroy', offsessionmaterial, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Offsessionmaterial', new_offsessionmaterial_path %>

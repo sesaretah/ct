@@ -75,7 +75,9 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
-    @group.user_id = current_user.id
+    if !current_user.id.blank?
+      @group.user_id = current_user.id
+    end
     respond_to do |format|
       if @group.save
         if params[:group][:avatar].blank?

@@ -1,0 +1,1 @@
+json.partial! "offsessionmaterials/offsessionmaterial", offsessionmaterial: @offsessionmaterial

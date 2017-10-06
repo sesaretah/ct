@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Coupler:</strong>
+  <%= @coupling.coupler_id %>
+</p>
+
+<p>
+  <strong>Coupler type:</strong>
+  <%= @coupling.coupler_type %>
+</p>
+
+<p>
+  <strong>Couplee:</strong>
+  <%= @coupling.couplee_id %>
+</p>
+
+<p>
+  <strong>Couplee type:</strong>
+  <%= @coupling.couplee_type %>
+</p>
+
+<%= link_to 'Edit', edit_coupling_path(@coupling) %> |
+<%= link_to 'Back', couplings_path %>

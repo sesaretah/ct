@@ -1,0 +1,20 @@
+<div id='offsessionlist-<%= offering.id%>' class='margin-right-20'>
+  <% for offsession in offering.offsessions%>
+    <%= offsession.name%>
+    <% if offsession.offering.course.user.id == current_user.id%>
+    <span class="pull-left">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse-offsession-<%= offsession.id %>" aria-expanded="true">
+        <i class="fa fa-plus"></i>
+      </a>
+    </span>
+    <%end%>
+    <hr class="margin-top-0" />
+    <%= render partial: 'offsessionmaterials/list', locals: { offsession: offsession}%>
+
+
+    <% if offsession.offering.course.user.id == current_user.id%>
+    <% @offsessionmaterial = Offsessionmaterial.new%>
+    <%= render partial: 'offsessionmaterials/form', locals: {offsessionmaterial: @offsessionmaterial, offsession: offsession}%>
+    <%end%>
+  <%end%>
+</div>

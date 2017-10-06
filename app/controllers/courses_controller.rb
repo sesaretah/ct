@@ -41,6 +41,7 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     @course.user_id = current_user.id
+
     respond_to do |format|
       if @course.save
         if params[:course][:avatar].blank?
@@ -80,6 +81,7 @@ class CoursesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
@@ -91,6 +93,6 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :course_type, :course_field, :course_grade, :course_points, :lecturer_id, :course_targets, :course_results, :course_covered, :course_softwares, :problems_period, :garding_mechanism, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller)
+      params.require(:course).permit(:name, :course_type, :course_field, :course_grade, :course_points, :lecturer_id, :course_targets, :course_results, :course_covered, :course_softwares, :problems_period, :garding_mechanism, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller, :chkbxch, :chkbxgr, :chkbxbl)
     end
 end

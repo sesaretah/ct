@@ -5,11 +5,53 @@ class FollowshipsController < ApplicationController
     @followship = Followship.where(followable_id: params[:followable_id], followable_type: params[:followable_type], user_id: current_user.id).first
     @followship.destroy
     @item =  @followship.followable_type.classify.constantize.find(@followship.followable_id)
+    @couplings = Coupling.where(coupler_id: @item.id, coupler_type: @item.class.name)
+    for coupling in @couplings
+      @c = coupling.couplee_type.classify.constantize.find(coupling.couplee_id)
+      case coupling.couplee_type
+      when 'Channel'
+        @involvement = Involvement.where(user_id: current_user.id, channel_id: coupling.couplee_id).first
+        if !@involvement.blank?
+          @involvement.destroy
+        end
+      when 'Blog'
+        @seeking = Seeking.where(user_id: current_user.id, blog_id: coupling.couplee_id).first
+        if !@seeking.blank?
+          @seeking.destroy
+        end
+      when 'Group'
+        @grouping = Grouping.where(user_id: current_user.id, group_id: coupling.couplee_id).first
+        if !@grouping.blank?
+          @grouping.destroy
+        end
+      end
+    end
   end
 
   def follow
     @followship = Followship.create(followable_id: params[:followable_id], followable_type: params[:followable_type], user_id: current_user.id)
     @item =  @followship.followable_type.classify.constantize.find(@followship.followable_id)
+    @couplings = Coupling.where(coupler_id: @item.id, coupler_type: @item.class.name)
+    for coupling in @couplings
+      @c = coupling.couplee_type.classify.constantize.find(coupling.couplee_id)
+      case coupling.couplee_type
+      when 'Channel'
+        @involvement = Involvement.where(user_id: current_user.id, channel_id: coupling.couplee_id).first
+        if @involvement.blank?
+          @involvement = Involvement.create(user_id: current_user.id, channel_id: coupling.couplee_id, role: 3)
+        end
+      when 'Blog'
+        @seeking = Seeking.where(user_id: current_user.id, blog_id: coupling.couplee_id).first
+        if @seeking.blank?
+          @seeking = Seeking.create(user_id: current_user.id, blog_id: coupling.couplee_id, role: 3)
+        end
+      when 'Group'
+        @grouping = Grouping.where(user_id: current_user.id, group_id: coupling.couplee_id).first
+        if @grouping.blank?
+          @grouping = Grouping.create(user_id: current_user.id, group_id: coupling.couplee_id, role: 3)
+        end
+      end
+    end
   end
   # GET /followships
   # GET /followships.json

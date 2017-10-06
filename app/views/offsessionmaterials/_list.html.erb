@@ -1,0 +1,28 @@
+<div id='offsessionmaterial-list-<%= offsession.id%>' style="margin-right: 30px">
+<table class='table'>
+  <thead>
+    <tr>
+      <th><%= t(:title)%></th>
+      <th><%= t(:sfiletype)%></th>
+      <th><%= t(:link)%></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% offsession.offsessionmaterials.each do |offsessionmaterial| %>
+      <tr>
+        <td><%= offsessionmaterial.title %></td>
+        <td><%= offsessionmaterial.sfiletype %></td>
+        <td>
+          <%= link_to offsessionmaterial.document.url do%>
+            <i class="fa fa-download"></i>
+          <%end%>
+        </td>
+        <td><%= link_to t(:destroy), offsessionmaterial, method: :delete, :remote => true, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

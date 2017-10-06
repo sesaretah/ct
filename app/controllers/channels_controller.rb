@@ -84,7 +84,9 @@ class ChannelsController < ApplicationController
   # POST /channels.json
   def create
     @channel = Channel.new(channel_params)
-    @channel.user_id = current_user.id
+    if !current_user.id.blank?
+      @channel.user_id = current_user.id
+    end
     respond_to do |format|
       if @channel.save
         if params[:channel][:avatar].blank?
