@@ -357,6 +357,10 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  links: 'پیوندها'
+  channel_coupled_to_lab: 'کانال مربوط به آزمایشگاه'
+  group_coupled_to_lab: 'گروه مربوط به آزمایشگاه'
+  blog_coupled_to_lab: 'وبلاگ مربوط به آزمایشگاه'
   blog_coupled_to_course: 'وبلاگ مربوط به درس'
   group_coupled_to_course: 'گروه مربوط به درس'
   channel_coupled_to_course: 'کانال مربوط به درس'

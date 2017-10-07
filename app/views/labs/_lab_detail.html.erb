@@ -22,6 +22,12 @@
             <%= t(:pepole)%>
           </a>
         </li>
+        <li class="">
+          <a data-toggle="tab" href="#links">
+            <%= t(:links)%>
+          </a>
+        </li>
+
       </ul>
       <div class="tab-content">
         <div id="lab" class="tab-pane fade in active">
@@ -111,6 +117,34 @@
         </div>
         <div id="pepole" class="tab-pane fade">
           <%= render partial: 'labs/add_user', locals: {lab: lab}%>
+        </div>
+        <div id="links" class="tab-pane fade">
+          <% for coupling in Coupling.where(coupler_type: 'Lab', coupler_id: lab.id)%>
+          <% @item = coupling.couplee_type.classify.constantize.find(coupling.couplee_id)%>
+            <% case coupling.couplee_type%>
+            <% when 'Channel'%>
+            <%= link_to '/channels?channel_id=' + @item.id.to_s do%>
+            <button type="button" class="btn btn-light-azure btn-squared btn-xs">
+              <i class=" ti-announcement" style="color: white !important;vertical-align: middle;"></i>
+               <%= t(:channel)%>
+            </button>
+            <%end%>
+            <% when 'Blog'%>
+            <%= link_to '/blogs?blog_id=' + @item.id.to_s do%>
+            <button type="button" class="btn btn-light-azure btn-squared btn-xs">
+              <i class=" ti-announcement" style="color: white !important;vertical-align: middle;"></i>
+               <%= t(:blog)%>
+            </button>
+            <%end%>
+            <% when 'Group'%>
+            <%= link_to '/groups?group_id=' + @item.id.to_s do%>
+            <button type="button" class="btn btn-light-azure btn-squared btn-xs">
+              <i class=" ti-announcement" style="color: white !important;vertical-align: middle;"></i>
+               <%= t(:group)%>
+            </button>
+              <%end%>
+            <%end%>
+          <%end%>
         </div>
       </div>
     </div>

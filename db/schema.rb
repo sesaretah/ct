@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171006172250) do
+ActiveRecord::Schema.define(version: 20171007051218) do
 
   create_table "announcements", force: :cascade do |t|
     t.integer  "lab_id",     limit: 4
@@ -278,6 +278,9 @@ ActiveRecord::Schema.define(version: 20171006172250) do
     t.string   "avatar_content_type", limit: 255
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
+    t.integer  "chkbxch",             limit: 4
+    t.integer  "chkbxgr",             limit: 4
+    t.integer  "chkbxbl",             limit: 4
   end
 
   create_table "memberships", force: :cascade do |t|

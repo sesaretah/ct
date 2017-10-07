@@ -38,7 +38,7 @@
             <div class="row">
               <div class="form-group col-xs-6">
                 * <%= f.label :name %><br>
-                <%= f.text_field :name , id: 'name', :class => "form-control" %>
+                <%= f.text_field :name , id: 'name', :class => "form-control", required: '',  oninvalid: "this.setCustomValidity('#{t(:please_enter_data_in_this_field)}')"%>
               </div>
             </div>
             <div class="row">
@@ -63,6 +63,27 @@
               <div class="form-group col-xs-6">
                 <%= f.label :address %><br>
                 <%= f.text_area :address, :class => "form-control" %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="checkbox clip-check check-primary checkbox-inline">
+                <input type="checkbox" id="chkbxch" name="lab[chkbxch]" value="1" checked="">
+                <label for="chkbxch">
+                  <%=t :make_official_channel%>
+                </label>
+              </div>
+              <div class="checkbox clip-check check-primary checkbox-inline">
+                <input type="checkbox" id="chkbxgr" name="lab[chkbxgr]" value="1">
+                <label for="chkbxgr">
+                  <%=t :make_official_group%>
+                </label>
+              </div>
+              <div class="checkbox clip-check check-primary checkbox-inline">
+                <input type="checkbox" id="chkbxbl" name="lab[chkbxbl]" value="1">
+                <label for="chkbxbl">
+                  <%=t :make_official_blog%>
+                </label>
               </div>
             </div>
 
@@ -117,15 +138,3 @@
     </div>
   </div>
 </div>
-
-<script>
-$(document).ready(function(){
-    $('#subbtn').attr('disabled',true);
-    $('#name').keyup(function(){
-        if($(this).val().length !=0)
-            $('#subbtn').attr('disabled', false);
-        else
-            $('#subbtn').attr('disabled',true);
-    })
-});
-</script>

@@ -38,9 +38,10 @@
       <%else%>
       <% involvement = Involvement.where(channel_id: c.id, user_id: current_user.id).first%>
       <% if admin?(involvement) %>
-      <%= form_for Comment.new,:remote => :true, :html => { :multipart => true, :id => "fileupload"  }  do |f|%>
+      <%= form_for Comment.new,:remote => :true, :html => { :multipart => true, :id => "fileupload-#{c.class.name}-#{c.id}"  }  do |f|%>
       <div class="col-md-10 padding-left-0 ">
         <%= f.text_area :content, :class => "form-control", :placeholder => "#{t(:post_your_comment)}", maxlength: "140"%>
+       <%= t(:attached_file)%>: <span id='selected_upload'><%= t(:has_not_any)%></span>
         <script type="text/javascript">
           $(document).ready(function() {
             $("#comment_content").emojioneArea();
@@ -49,17 +50,17 @@
       </div>
       <div class="col-md-2 padding-left-5" style="padding-top:5px;">
         <div class="row margin-right-0">
-          <i id='fedit' class="fa fa-file"></i>
-          <i id='cedit' class="fa fa-camera"></i>
-          <%= f.file_field :document, :style =>"display: none;" %>
-          <%= f.file_field :avatar, :style =>"display: none;" %>
+          <i id='fedit-<%= c.class.name%>-<%= c.id%>' class="fa fa-file "></i>
+          <i id='cedit-<%= c.class.name%>-<%= c.id%>' class="fa fa-camera"></i>
+          <%= f.file_field :document, :style =>"display: none;", id: "document-#{c.class.name}-#{c.id}" %>
+          <%= f.file_field :avatar, :style =>"display: none;", id: "avatar-#{c.class.name}-#{c.id}" %>
         </div>
           <div class="row margin-right-0">
             <%= content_tag :button, :type => :submit,id: 'subbtn', :class => "btn btn-azure btn-squared btn-xs" do %>
             <i class="fa fa-paper-plane" style="color: white !important;vertical-align: middle;"></i>&nbsp <%= t(:submit)%>&nbsp
             <% end %>
 
-            <button type="button" id='submit' class="btn btn-azure btn-squared btn-xs">
+            <button type="button" id='submit-<%= c.class.name%>-<%= c.id%>' class="btn btn-azure btn-squared btn-xs">
               <i class="fa fa-paper-plane" style="color: white !important;vertical-align: middle;"></i>&nbsp <%= t(:submit)%>&nbsp
             </button>
         </div>

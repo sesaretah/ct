@@ -44,6 +44,32 @@ class LabsController < ApplicationController
     @lab.user_id = current_user.id
     respond_to do |format|
       if @lab.save
+
+        if @lab.chkbxch == 1
+          @coupling =  Coupling.where(coupler_id: @lab.id, coupler_type: 'Lab', couplee_type: 'Channel' ).first
+          if @coupling.blank?
+            @name = t(:channel_coupled_to_lab) + ' ' + @lab.name
+            @channel = Channel.create(name: @name, g_type: 2, i_type: 1, p_type: 1, user_id: current_user.id)
+            @copuling = Coupling.create(coupler_id: @lab.id, coupler_type: 'Lab', couplee_id:@channel.id , couplee_type: 'Channel')
+          end
+        end
+        if @lab.chkbxgr == 1
+          @coupling =  Coupling.where(coupler_id: @lab.id, coupler_type: 'Lab', couplee_type: 'Group' ).first
+          if @coupling.blank?
+            @name = t(:group_coupled_to_lab) + ' ' + @lab.name
+            @group = Group.create(name: @name, g_type: 2, i_type: 1, p_type: 1, user_id: current_user.id)
+            @copuling = Coupling.create(coupler_id: @lab.id, coupler_type: 'Lab', couplee_id:@group.id , couplee_type: 'Group')
+          end
+        end
+        if @lab.chkbxbl == 1
+          @coupling =  Coupling.where(coupler_id: @lab.id, coupler_type: 'Lab', couplee_type: 'Blog' ).first
+          if @coupling.blank?
+            @name = t(:blog_coupled_to_lab) + ' ' + @lab.name
+            @blog = Blog.create(title: @name, g_type: 2, i_type: 1, p_type: 1, user_id: current_user.id)
+            @copuling = Coupling.create(coupler_id: @lab.id, coupler_type: 'Lab', couplee_id:@blog.id , couplee_type: 'Blog')
+          end
+        end
+
         if params[:lab][:avatar].blank?
           format.html { redirect_to '/labs?lab_id='+@lab.id.to_s, notice: :lab_was_successfully_created }
         else
@@ -62,6 +88,32 @@ class LabsController < ApplicationController
   def update
     respond_to do |format|
       if @lab.update(lab_params)
+
+        if @lab.chkbxch == 1
+          @coupling =  Coupling.where(coupler_id: @lab.id, coupler_type: 'Lab', couplee_type: 'Channel' ).first
+          if @coupling.blank?
+            @name = t(:channel_coupled_to_lab) + ' ' + @lab.name
+            @channel = Channel.create(name: @name, g_type: 2, i_type: 1, p_type: 1, user_id: current_user.id)
+            @copuling = Coupling.create(coupler_id: @lab.id, coupler_type: 'Lab', couplee_id:@channel.id , couplee_type: 'Channel')
+          end
+        end
+        if @lab.chkbxgr == 1
+          @coupling =  Coupling.where(coupler_id: @lab.id, coupler_type: 'Lab', couplee_type: 'Group' ).first
+          if @coupling.blank?
+            @name = t(:group_coupled_to_lab) + ' ' + @lab.name
+            @group = Group.create(name: @name, g_type: 2, i_type: 1, p_type: 1, user_id: current_user.id)
+            @copuling = Coupling.create(coupler_id: @lab.id, coupler_type: 'Lab', couplee_id:@group.id , couplee_type: 'Group')
+          end
+        end
+        if @lab.chkbxbl == 1
+          @coupling =  Coupling.where(coupler_id: @lab.id, coupler_type: 'Lab', couplee_type: 'Blog' ).first
+          if @coupling.blank?
+            @name = t(:blog_coupled_to_lab) + ' ' + @lab.name
+            @blog = Blog.create(title: @name, g_type: 2, i_type: 1, p_type: 1, user_id: current_user.id)
+            @copuling = Coupling.create(coupler_id: @lab.id, coupler_type: 'Lab', couplee_id:@blog.id , couplee_type: 'Blog')
+          end
+        end
+
         if params[:lab][:avatar].blank?
           format.html { redirect_to '/labs?lab_id='+@lab.id.to_s, notice: :lab_was_successfully_updated }
         else
@@ -92,6 +144,6 @@ class LabsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lab_params
-      params.require(:lab).permit(:name, :about, :missions, :tel, :address, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller)
+      params.require(:lab).permit(:name, :about, :missions, :tel, :address, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller, :chkbxch, :chkbxgr, :chkbxbl)
     end
 end
