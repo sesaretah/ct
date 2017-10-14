@@ -1,0 +1,9 @@
+<div id='grants-detail'>
+  <p><%= t(:name)%>: <%= profile.name%></p>
+  <p><%= t(:surename)%>: <%= profile.surename%></p>
+  <%= render partial: 'grantings/list', locals: {user: profile.user}%>
+  <hr />
+  <h5><%=t :grant_new_role%></h5>
+  <%= render partial: 'grantings/form', locals: {profile: profile, granting: Granting.new}%>
+  <hr />
+</div>

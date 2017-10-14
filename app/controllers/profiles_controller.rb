@@ -12,10 +12,21 @@ class ProfilesController < ApplicationController
   render :json => resp.to_json, :callback => params['callback']
   end
 
+  def grant_search
+    if !params[:q].blank?
+      @profiles = Profile.where("name LIKE ? OR surename LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
+  end
+
   def search
     if !params[:q].blank?
       @profiles = Profile.where("name LIKE ? OR surename LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
+  end
+
+  def view_grants
+    @profile = Profile.find(params[:id])
+    @rnd = params[:rnd]
   end
 
   def view_content

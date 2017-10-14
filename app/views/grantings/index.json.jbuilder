@@ -1,0 +1,1 @@
+json.array! @grantings, partial: 'grantings/granting', as: :granting

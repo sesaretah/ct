@@ -59,6 +59,8 @@ class User < ActiveRecord::Base
   has_many :memberships, dependent: :destroy
   has_many :labs, :through => :memberships
 
+  has_many :grantings
+
   before_create :set_email
   def set_email
       self.email = self.username + '@ut.ac.ir'

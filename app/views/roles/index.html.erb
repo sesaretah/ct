@@ -1,0 +1,58 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:roles)%></h1>
+        <span class="mainDescription"><%= t(:list_of_roles)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <table class="table">
+        <thead>
+          <tr>
+            <th><%=t :role_name%></th>
+            <th><%=t :description%></th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @roles.each do |role| %>
+          <tr>
+            <td><%= role.name %></td>
+            <td><%= role.description %></td>
+            <% @accesscontrol =  Accesscontrol.where(role_id: role.id).first%>
+            <% if @accesscontrol.blank?%>
+            <td><%= link_to t(:accesscontrol), '/accesscontrols/new?role_id=' + role.id.to_s %></td>
+            <% else%>
+            <% @link = '/accesscontrols/' + @accesscontrol.id.to_s + '/edit?role_id=' + role.id.to_s%>
+            <td><%= link_to t(:accesscontrol), @link %></td>
+            <%end%>
+            <td><%= link_to t(:edit), edit_role_path(role) %></td>
+            <td><%= link_to t(:destroy), role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="pull-left">
+        <%= link_to new_role_path,  :class => "btn btn-wide btn-o btn-success" do %>
+        <i class="icon-ok bigger-110"></i>
+        <%=t :new%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

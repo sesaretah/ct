@@ -1,0 +1,366 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:new_accesscontrol)%></h1>
+        <span class="mainDescription"><% t(:please_enter_new_data)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"></span></h5>
+        <div class="panel panel-white">
+          <div class="panel-body">
+            <%= form_for(@accesscontrol) do |f| %>
+            <% if @accesscontrol.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@accesscontrol.errors.count, "error") %> prohibited this accesscontrol from being saved:</h2>
+
+              <ul>
+                <% @accesscontrol.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+            <% end %>
+
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :role_id %><br>
+                <h5><%= Role.find(params[:role_id]).name%></h5>
+                <%= f.hidden_field :role_id, value: Role.find(params[:role_id]).id %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :create_blog %><br>
+                <%= f.select( :create_blog, controls, {}, {:class => "form-control"})  %>
+                <% f.number_field :create_blog, :class => "form-control"  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :view_blogs %><br>
+                <%= f.select( :view_blogs, controls, {}, {:class => "form-control"})  %>
+                <% f.number_field :view_blogs, :class => "form-control"  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :comment_on_blogs %><br>
+                <%= f.select( :comment_on_blogs, controls, {}, {:class => "form-control"})  %>
+                <% f.number_field :comment_on_blogs, :class => "form-control"  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :search_blogs %><br>
+                <%= f.select( :search_blogs, controls, {}, {:class => "form-control"})  %>
+                <% f.number_field :search_blogs, :class => "form-control"  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+              <%= f.label :create_channel %><br>
+              <%= f.select( :create_channel, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :create_channel, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :view_channels %><br>
+              <%= f.select( :view_channels, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :view_channels, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :join_channels %><br>
+              <%= f.select( :join_channels, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :join_channels, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :search_channels %><br>
+              <%= f.select( :search_channels, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :search_channels, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :create_group %><br>
+              <%= f.select( :create_group, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :create_group, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :view_groups %><br>
+              <%= f.select( :view_groups, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :view_groups, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :join_groups %><br>
+              <%= f.select( :join_groups, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :join_groups, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :comment_on_groups %><br>
+              <%= f.select( :comment_on_groups, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :comment_on_groups, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :search_groups %><br>
+              <%= f.select( :search_groups, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :search_groups, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :create_event %><br>
+              <%= f.select( :create_event, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :create_event, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :view_events %><br>
+              <%= f.select( :view_events, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :view_events, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :join_events %><br>
+              <%= f.select( :join_events, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :join_events, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :comment_on_events %><br>
+              <%= f.select( :comment_on_events, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :comment_on_events, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :search_events %><br>
+              <%= f.select( :search_events, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :search_events, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :view_questions %><br>
+              <%= f.select( :view_questions, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :view_questions, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :comment_on_questions %><br>
+              <%= f.select( :comment_on_questions, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :comment_on_questions, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :ask_questions %><br>
+              <%= f.select( :ask_questions, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :ask_questions, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :answer_questions %><br>
+              <%= f.select( :answer_questions, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :answer_questions, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :comment_on_answers %><br>
+              <%= f.select( :comment_on_answers, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :comment_on_answers, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :create_project %><br>
+              <%= f.select( :create_project, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :create_project, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :view_projects %><br>
+              <%= f.select( :view_projects, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :view_projects, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :search_projects %><br>
+              <%= f.select( :search_projects, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :search_projects, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :create_course %><br>
+              <%= f.select( :create_course, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :create_course, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :view_courses %><br>
+              <%= f.select( :view_courses, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :view_courses, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :search_courses %><br>
+              <%= f.select( :search_courses, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :search_courses, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :create_lab %><br>
+              <%= f.select( :create_lab, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :create_lab, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :view_labs %><br>
+              <%= f.select( :view_labs, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :view_labs, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :search_labs %><br>
+              <%= f.select( :search_labs, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :search_labs, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :create_good %><br>
+              <%= f.select( :create_good, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :create_good, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :view_goods %><br>
+              <%= f.select( :view_goods, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :view_goods, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :search_goods %><br>
+              <%= f.select( :search_goods, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :search_goods, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :create_research %><br>
+              <%= f.select( :create_research, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :create_research, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :view_researches %><br>
+              <%= f.select( :view_researches, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :view_researches, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :search_researches %><br>
+              <%= f.select( :search_researches, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :search_researches, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :comment_on_researches %><br>
+              <%= f.select( :comment_on_researches, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :comment_on_researches, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :rate_researches %><br>
+              <%= f.select( :rate_researches, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :rate_researches, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :create_poll %><br>
+              <%= f.select( :create_poll, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :create_poll, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :take_poll %><br>
+              <%= f.select( :take_poll, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :take_poll, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :view_profiles %><br>
+              <%= f.select( :view_profiles, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :view_profiles, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-4">
+              <%= f.label :search_profiles %><br>
+              <%= f.select( :search_profiles, controls, {}, {:class => "form-control"})  %>
+              <% f.number_field :search_profiles, :class => "form-control"  %>
+            </div>
+          </div>
+          <div class="row">
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary pull-left">
+              <%= t(:submit)%> <i class="fa fa-arrow-circle-left"></i>
+            </button>
+          </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

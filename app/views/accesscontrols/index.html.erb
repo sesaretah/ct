@@ -1,0 +1,115 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Accesscontrols</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Create blog</th>
+      <th>View blogs</th>
+      <th>Comment on blogs</th>
+      <th>Search blogs</th>
+      <th>Create channel</th>
+      <th>View channels</th>
+      <th>Join channels</th>
+      <th>Search channels</th>
+      <th>Create group</th>
+      <th>View groups</th>
+      <th>Join groups</th>
+      <th>Comment on groups</th>
+      <th>Search groups</th>
+      <th>Create event</th>
+      <th>View events</th>
+      <th>Join events</th>
+      <th>Comment on events</th>
+      <th>Search events</th>
+      <th>View questions</th>
+      <th>Comment on questions</th>
+      <th>Ask questions</th>
+      <th>Answer questions</th>
+      <th>Comment on answers</th>
+      <th>Create project</th>
+      <th>View projects</th>
+      <th>Search projects</th>
+      <th>Create course</th>
+      <th>View courses</th>
+      <th>Search courses</th>
+      <th>Create lab</th>
+      <th>View labs</th>
+      <th>Search labs</th>
+      <th>Create good</th>
+      <th>View goods</th>
+      <th>Search goods</th>
+      <th>Create research</th>
+      <th>View researches</th>
+      <th>Search researches</th>
+      <th>Comment on researches</th>
+      <th>Rate researches</th>
+      <th>Create poll</th>
+      <th>Take poll</th>
+      <th>View profiles</th>
+      <th>Search profiles</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @accesscontrols.each do |accesscontrol| %>
+      <tr>
+        <td><%= accesscontrol.role_id %></td>
+        <td><%= accesscontrol.create_blog %></td>
+        <td><%= accesscontrol.view_blogs %></td>
+        <td><%= accesscontrol.comment_on_blogs %></td>
+        <td><%= accesscontrol.search_blogs %></td>
+        <td><%= accesscontrol.create_channel %></td>
+        <td><%= accesscontrol.view_channels %></td>
+        <td><%= accesscontrol.join_channels %></td>
+        <td><%= accesscontrol.search_channels %></td>
+        <td><%= accesscontrol.create_group %></td>
+        <td><%= accesscontrol.view_groups %></td>
+        <td><%= accesscontrol.join_groups %></td>
+        <td><%= accesscontrol.comment_on_groups %></td>
+        <td><%= accesscontrol.search_groups %></td>
+        <td><%= accesscontrol.create_event %></td>
+        <td><%= accesscontrol.view_events %></td>
+        <td><%= accesscontrol.join_events %></td>
+        <td><%= accesscontrol.comment_on_events %></td>
+        <td><%= accesscontrol.search_events %></td>
+        <td><%= accesscontrol.view_questions %></td>
+        <td><%= accesscontrol.comment_on_questions %></td>
+        <td><%= accesscontrol.ask_questions %></td>
+        <td><%= accesscontrol.answer_questions %></td>
+        <td><%= accesscontrol.comment_on_answers %></td>
+        <td><%= accesscontrol.create_project %></td>
+        <td><%= accesscontrol.view_projects %></td>
+        <td><%= accesscontrol.search_projects %></td>
+        <td><%= accesscontrol.create_course %></td>
+        <td><%= accesscontrol.view_courses %></td>
+        <td><%= accesscontrol.search_courses %></td>
+        <td><%= accesscontrol.create_lab %></td>
+        <td><%= accesscontrol.view_labs %></td>
+        <td><%= accesscontrol.search_labs %></td>
+        <td><%= accesscontrol.create_good %></td>
+        <td><%= accesscontrol.view_goods %></td>
+        <td><%= accesscontrol.search_goods %></td>
+        <td><%= accesscontrol.create_research %></td>
+        <td><%= accesscontrol.view_researches %></td>
+        <td><%= accesscontrol.search_researches %></td>
+        <td><%= accesscontrol.comment_on_researches %></td>
+        <td><%= accesscontrol.rate_researches %></td>
+        <td><%= accesscontrol.create_poll %></td>
+        <td><%= accesscontrol.take_poll %></td>
+        <td><%= accesscontrol.view_profiles %></td>
+        <td><%= accesscontrol.search_profiles %></td>
+        <td><%= link_to 'Show', accesscontrol %></td>
+        <td><%= link_to 'Edit', edit_accesscontrol_path(accesscontrol) %></td>
+        <td><%= link_to 'Destroy', accesscontrol, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Accesscontrol', new_accesscontrol_path %>

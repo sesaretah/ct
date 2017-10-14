@@ -1,0 +1,1 @@
+json.array! @accesscontrols, partial: 'accesscontrols/accesscontrol', as: :accesscontrol

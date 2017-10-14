@@ -1,0 +1,2 @@
+module GrantingsHelper
+end

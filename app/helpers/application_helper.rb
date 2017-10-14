@@ -1,6 +1,22 @@
 module ApplicationHelper
   require 'securerandom'
 
+  def grant_access(ward, user)
+    if user.grantings.blank?
+      return true
+    end
+    @flag = 1
+    for granting in user.grantings
+      @accesscontrol = Accesscontrol.where(role_id: granting.role_id).first
+      @flag = @flag * @accesscontrol["#{ward}"].to_i
+    end
+    if @flag == 0
+      return false
+    else
+      return true
+    end
+  end
+
   def policytypes
     @options = [
       [t(:everyone), 1],
@@ -14,6 +30,14 @@ module ApplicationHelper
     @options = [
       [t(:male), t(:male)],
       [t(:female) , t(:female)]
+    ]
+    return @options
+  end
+
+  def controls
+    @options = [
+      [t(:allow), 1],
+      [t(:deny) , 0]
     ]
     return @options
   end

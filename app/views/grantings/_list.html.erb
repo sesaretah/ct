@@ -1,0 +1,26 @@
+<div id='grantlist'>
+<table class='table'>
+  <thead>
+    <tr>
+      <th><%= t(:role)%></th>
+      <th><%= t(:start)%></th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% user.grantings.each do |granting| %>
+      <tr>
+        <td><%= granting.role.name %></td>
+
+        <td>
+          <span>	<% @jalali = JalaliDate.to_jalali(granting.created_at )%>
+            <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%></span>
+        </td>
+        <td><%= link_to t(:destroy), granting, method: :delete, :remote => true, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

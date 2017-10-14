@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :accesscontrols
+
+  resources :grantings
+
+  resources :roles
+
   resources :couplings
 
   resources :offsessionmaterials
@@ -158,8 +164,10 @@ Rails.application.routes.draw do
   match "/notes/view_content/:id" => "notes#view_content", :via => :get
 
   match "/profiles/view_content/:id" => "profiles#view_content", :via => :get
+  match "/profiles/view_grants/:id" => "profiles#view_grants", :via => :get
   match "/profiles/profile_search/:id" => "profiles#search", :via => :get
   match "/profiles/cropper/:id" => "profiles#cropper", :via => :get
+  match "/profiles/grant_search/:id" => "profiles#grant_search", :via => :get
 
   match "/messages/view_content/:id" => "messages#view_content", :via => :get
   match "/messages/compose/:id" => "messages#compose", :via => :get

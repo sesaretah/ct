@@ -1,0 +1,65 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:new_role)%></h1>
+        <span class="mainDescription"><%= t(:please_enter_new_role)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"></span></h5>
+        <div class="panel panel-white">
+          <div class="panel-body">
+          <%= form_for(@role) do |f| %>
+          <% if @role.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@role.errors.count, "error") %> prohibited this role from being saved:</h2>
+
+            <ul>
+              <% @role.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+          <% end %>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <%= f.label :name %><br>
+                <%= f.text_field :name %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group">
+                <%= f.label :description %><br>
+                <%= f.text_area :description %>
+              </div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary pull-left">
+              <%= t(:submit)%> <i class="fa fa-arrow-circle-left"></i>
+            </button>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div>

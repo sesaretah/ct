@@ -1,0 +1,31 @@
+<% @granting = granting%>
+<%= form_for @granting, remote: true do |f| %>
+  <% if @granting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@granting.errors.count, "error") %> prohibited this granting from being saved:</h2>
+
+      <ul>
+      <% @granting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="form-group col-xs-4">
+    <%= f.label :role_id %>
+    <%= f.select :role_id, Role.all.collect {|p| [p.name, p.id]}, {} ,{:class => "form-control"}%>
+    <%= f.hidden_field :user_id,  value: profile.user.id%>
+    <%= f.hidden_field :granter_id , value: current_user.id%>
+  </div>
+  </div>
+  <div class="row">
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary pull-left">
+      <%= t(:submit)%> <i class="fa fa-arrow-circle-left"></i>
+    </button>
+  </div>
+  </div>
+
+<% end %>

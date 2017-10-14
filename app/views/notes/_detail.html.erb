@@ -1,5 +1,7 @@
 <% page = 1%>
 <div id='note-detail'>
 <%= render partial: 'notes/note_comments', locals: { note: note, page: page}%>
+<% if grant_access('comment_on_blogs', current_user)%>
 <%= render partial: 'comments/remote_form', locals: {c: note, page: page } %>
+<%end%>
 </div>

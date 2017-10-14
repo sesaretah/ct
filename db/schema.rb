@@ -11,7 +11,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171007051218) do
+ActiveRecord::Schema.define(version: 20171013145342) do
+
+  create_table "accesscontrols", force: :cascade do |t|
+    t.integer  "role_id",               limit: 4
+    t.integer  "create_blog",           limit: 4
+    t.integer  "view_blogs",            limit: 4
+    t.integer  "comment_on_blogs",      limit: 4
+    t.integer  "search_blogs",          limit: 4
+    t.integer  "create_channel",        limit: 4
+    t.integer  "view_channels",         limit: 4
+    t.integer  "join_channels",         limit: 4
+    t.integer  "search_channels",       limit: 4
+    t.integer  "create_group",          limit: 4
+    t.integer  "view_groups",           limit: 4
+    t.integer  "join_groups",           limit: 4
+    t.integer  "comment_on_groups",     limit: 4
+    t.integer  "search_groups",         limit: 4
+    t.integer  "create_event",          limit: 4
+    t.integer  "view_events",           limit: 4
+    t.integer  "join_events",           limit: 4
+    t.integer  "comment_on_events",     limit: 4
+    t.integer  "search_events",         limit: 4
+    t.integer  "view_questions",        limit: 4
+    t.integer  "comment_on_questions",  limit: 4
+    t.integer  "ask_questions",         limit: 4
+    t.integer  "answer_questions",      limit: 4
+    t.integer  "comment_on_answers",    limit: 4
+    t.integer  "create_project",        limit: 4
+    t.integer  "view_projects",         limit: 4
+    t.integer  "search_projects",       limit: 4
+    t.integer  "create_course",         limit: 4
+    t.integer  "view_courses",          limit: 4
+    t.integer  "search_courses",        limit: 4
+    t.integer  "create_lab",            limit: 4
+    t.integer  "view_labs",             limit: 4
+    t.integer  "search_labs",           limit: 4
+    t.integer  "create_good",           limit: 4
+    t.integer  "view_goods",            limit: 4
+    t.integer  "search_goods",          limit: 4
+    t.integer  "create_research",       limit: 4
+    t.integer  "view_researches",       limit: 4
+    t.integer  "search_researches",     limit: 4
+    t.integer  "comment_on_researches", limit: 4
+    t.integer  "rate_researches",       limit: 4
+    t.integer  "create_poll",           limit: 4
+    t.integer  "take_poll",             limit: 4
+    t.integer  "view_profiles",         limit: 4
+    t.integer  "search_profiles",       limit: 4
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
 
   create_table "announcements", force: :cascade do |t|
     t.integer  "lab_id",     limit: 4
@@ -220,6 +270,14 @@ ActiveRecord::Schema.define(version: 20171007051218) do
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
     t.boolean  "delta",               limit: 1,     default: true, null: false
+  end
+
+  create_table "grantings", force: :cascade do |t|
+    t.integer  "role_id",    limit: 4
+    t.integer  "user_id",    limit: 4
+    t.integer  "granter_id", limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "groupings", force: :cascade do |t|
@@ -496,6 +554,13 @@ ActiveRecord::Schema.define(version: 20171007051218) do
     t.integer  "value",                 limit: 4
     t.string   "pp",                    limit: 255
     t.string   "utid",                  limit: 255
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",        limit: 191
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "seekings", force: :cascade do |t|
