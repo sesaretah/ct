@@ -43,7 +43,9 @@
         </div>
       </div>
       <hr class="margin-bottom-5 margin-top-10"/>
+      <% if grant_access('comment_on_questions', current_user)%>
       <%= render partial: 'comments/comments_block', locals:{c:question, page: 1}%>
+      <%end%>
     </div>
   </div>
   <div class="row">
@@ -67,6 +69,8 @@
   <%= render partial: 'answers/answer_block', locals:{answer:a, page: 1}%>
   <%end%>
   <div id='answer' >
+    <% if grant_access('answer_questions', current_user)%>
     <%= render partial: 'answers/remote_form', locals:{question:question, page: 1}%>
+    <%end%>
   </div>
 </div>

@@ -32,6 +32,7 @@
         </ul>
         <div class="tab-content">
           <div class="tab-pane fade active in" id="followed_projects">
+            <% if grant_access('create_project', current_user)%>
             <ul class="list-group">
               <%= link_to new_project_path do%>
               <li class="list-group-item">
@@ -39,6 +40,7 @@
               </li>
               <%end%>
             </ul>
+            <%end%>
             <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :projects_you_created%></span>
             <hr style="margin-top:0px; margin-bottom:0px;">
             <ul class="messages-list relative top-0 margin-bottom-5">
@@ -80,6 +82,7 @@
 
           </div>
           <div class="tab-pane fade " id="search_projects">
+            <% if grant_access('search_projects', current_user)%>
             <div>
               <%= form_tag '/projects/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
               <div class="form-group">
@@ -93,6 +96,7 @@
               <%end%>
             </div>
             <div id='search-results'></div>
+            <%end%>
           </div>
         </div>
       </div>

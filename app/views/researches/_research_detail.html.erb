@@ -125,6 +125,7 @@
     <% if !@novelty.blank?%>
     <%@novelty_value = @novelty.value%>
     <%end%>
+    <% if grant_access('rate_researches', current_user)%>
     <div class="col-md-4 padding-right-20 padding-left-0">
       <div class=" text-extra-large">
         <span class='text-small'>  <%=t :soundness %></span>
@@ -145,8 +146,10 @@
         <input type="hidden" class="rating-tooltip" data-filled="fa fa-star margin-right-5 text-yellow" data-empty="fa fa-star-o margin-right-5" id='novelty' value='<%= @novelty_value%>'/>
       </div>
     </div>
+    <%end%>
   </div>
   <hr/>
+
 
   <script>
   $('#soundness').rating();

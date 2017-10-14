@@ -1,5 +1,7 @@
+<% if grant_access('view_questions', current_user)%>
 $("#question-detail").replaceWith("<%= escape_javascript(render(:partial => 'questions/detail', locals: {question: @question, page:@page })) %>");
 $("li").removeClass("bg-light-grey");
 $("#<%= @rnd%>").addClass( "bg-light-grey" );
 $("#<%= @rnd%>-label").css('display','none');
 MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+<%end%>

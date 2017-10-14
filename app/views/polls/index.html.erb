@@ -29,6 +29,7 @@
         </ul>
         <div class="tab-content">
           <div class="tab-pane fade active in" id="followed_polls">
+            <% if grant_access('create_poll', current_user)%>
             <ul class="list-group">
               <%= link_to new_poll_path do%>
               <li class="list-group-item">
@@ -36,6 +37,7 @@
               </li>
               <%end%>
             </ul>
+            <%end%>
             <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :polls_you_created%></span>
             <hr style="margin-top:0px; margin-bottom:0px;">
             <ul class="messages-list relative top-0 margin-bottom-5">

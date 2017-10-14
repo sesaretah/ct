@@ -18,7 +18,9 @@
     </div>
     </div>
     <hr class="margin-bottom-5"/>
+    <% if grant_access('comment_on_answers', current_user)%>
     <%= render partial: 'comments/comments_block', locals:{c:answer, page: 1}%>
+    <%end%>
   </div>
 </div>
 <hr />

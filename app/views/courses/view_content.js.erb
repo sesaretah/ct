@@ -1,3 +1,5 @@
+<% if grant_access('view_courses', current_user)%>
 $("#course-detail").replaceWith("<%= escape_javascript(render(:partial => 'courses/course_detail', locals: {course: @course })) %>");
 $("li").removeClass("bg-light-grey");
 $("#<%= @rnd%>").addClass( "bg-light-grey" );
+<%end%>

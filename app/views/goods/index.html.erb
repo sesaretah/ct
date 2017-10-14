@@ -24,6 +24,7 @@
         </ul>
         <div class="tab-content">
           <div class="tab-pane fade active in" id="myTab1_example1">
+            <% if grant_access('create_good', current_user)%>
             <ul class="list-group">
               <%= link_to new_good_path do%>
               <li class="list-group-item">
@@ -31,6 +32,7 @@
               </li>
               <%end%>
             </ul>
+            <%end%>
             <ul class="list-group">
               <% for c in Category.all%>
               <%= render partial: 'categories/item', locals: {category: c}%>
@@ -42,6 +44,7 @@
 
           </div>
           <div class="tab-pane fade " id="myTab1_example4">
+            <% if grant_access('search_goods', current_user)%>
             <div>
               <%= form_tag '/goods/search/1',:method => :get,:remote => :true do%>
               <div class="input-group">
@@ -65,6 +68,7 @@
 
             </div>
             <div id='search-results'></div>
+            <%end%>
           </div>
         </div>
       </div>
