@@ -1,7 +1,7 @@
 <div class="panel panel-white no-radius" id="visits">
   <div class="panel-heading border-light">
     <h4 class="panel-title"><%=t :research_stats%>
-      <select id='group_period'>
+      <select id='research_period'>
         <option value="monthly"><%=t :monthly%></option>
         <option value="weekly"><%=t :weekly%></option>
       </select>
@@ -67,7 +67,7 @@
         </script>
 
       </div>
-      <div id='reserch_month' >
+      <div id='research_month' >
         <% @research_import_month_count = []%>
         <% @research_vists_month_count = []%>
         <% @research_import_month_day = []%>
