@@ -1,0 +1,46 @@
+<div class="wrap-content container" id="container">
+  <section id="page-title" class="padding-top-15 padding-bottom-15">
+    <div class="row">
+      <div class="col-sm-7">
+        <h1 class="mainTitle"><%=t :admin_panel%></h1>
+        <span class="mainDescription"><%=t :overview_and_stats%></span>
+      </div>
+      <div class="col-sm-5">
+      </div>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw padding-bottom-10">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="row">
+          <div class="col-md-6 col-lg-6">
+            <%= render partial:'blogs/stats'%>
+          </div>
+          <div class="col-md-6 col-lg-6">
+            <%= render partial:'channels/stats'%>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-lg-6">
+            <%= render partial:'groups/stats'%>
+          </div>
+          <div class="col-md-6 col-lg-6">
+            <%= render partial:'events/stats'%>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-lg-6">
+            <%= render partial:'questions/stats'%>
+          </div>
+          <div class="col-md-6 col-lg-6">
+            <%= render partial:'projects/stats'%>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

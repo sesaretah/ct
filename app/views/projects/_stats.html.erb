@@ -1,0 +1,102 @@
+<div class="panel panel-white no-radius" id="visits">
+  <div class="panel-heading border-light">
+    <h4 class="panel-title"><%=t :project_stats%>
+      <select id='project_period'>
+        <option value="monthly"><%=t :monthly%></option>
+        <option value="weekly"><%=t :weekly%></option>
+      </select>
+    </h4>
+    <script>
+    $('#project_period').on('change', function() {
+      if(this.value == 'monthly'){
+        $('#project_month').show();
+        $('#project_week').hide();
+      } else {
+        $('#project_month').hide();
+        $('#project_week').show();
+      }
+    });
+    </script>
+  </div>
+  <div collapse="visits" class="panel-wrapper">
+    <div class="panel-body">
+      <div class="height-300">
+        <div id='project_week' style='display:none'>
+          <% @project_posts_week_count = []%>
+          <% @project_posts_vists_week_count = []%>
+          <% @project_posts_week_day = []%>
+          <% for i in 0..6%>
+          <% @day = Date.today() - i%>
+          <% @project_posts_week_count << Project.where(:created_at => (@day.beginning_of_day..@day.end_of_day)).count%>
+          <% @project_posts_vists_week_count << Visit.where(:created_at => (@day.beginning_of_day..@day.end_of_day), :visitable_type => 'Project').count%>
+          <% @project_posts_week_day <<  "#{JalaliDate.to_jalali(@day).year}/#{JalaliDate.to_jalali(@day).month}/#{JalaliDate.to_jalali(@day).day}"%>
+          <%end%>
+          <canvas id="project_posts_week" class="full-width" width="582" height="350" style="display: block; width: 582px; height: 350px;"></canvas>
+          <script>new Chart(document.getElementById("project_posts_week"),
+          {"type":"bar",
+          "data":
+          {
+            "labels":
+            <%= raw @project_posts_week_day.reverse.to_json %>,
+            "datasets":
+            [
+              {"label":"<%=t :project_posts_stat%>",
+              "data":<%= raw @project_posts_week_count.reverse.to_json %>,
+              "fill":false,
+              "borderColor":"rgb(75, 192, 192)",
+              "backgroundColor":"rgb(75, 192, 192)",
+              "lineTension":0.1},
+              {"label":"<%=t :project_posts_vistis%>",
+              "data":<%= raw @project_posts_vists_week_count.reverse.to_json %>,
+              "fill":false,
+              "borderColor":"rgb(244, 66, 146)",
+              "backgroundColor":"rgb(244, 66, 146)",
+              "lineTension":0.1}
+            ]
+          },
+          "options":{}
+        });
+        </script>
+
+      </div>
+      <div id='project_month' >
+        <% @project_posts_month_count = []%>
+        <% @project_posts_vists_month_count = []%>
+        <% @project_posts_month_day = []%>
+        <% for i in 0..30%>
+        <% @day = Date.today() - i%>
+        <% @project_posts_month_count << Project.where(:created_at => (@day.beginning_of_day..@day.end_of_day)).count%>
+        <% @project_posts_vists_month_count << Visit.where(:created_at => (@day.beginning_of_day..@day.end_of_day), :visitable_type => 'Project').count%>
+        <% @project_posts_month_day <<  "#{JalaliDate.to_jalali(@day).year}/#{JalaliDate.to_jalali(@day).month}/#{JalaliDate.to_jalali(@day).day}"%>
+        <%end%>
+        <canvas id="project_posts_month" class="full-width" width="582" height="350" style="display: block; width: 582px; height: 350px;"></canvas>
+        <script>new Chart(document.getElementById("project_posts_month"),
+        {"type":"bar",
+        "data":
+        {
+          "labels":
+          <%= raw @project_posts_month_day.reverse.to_json %>,
+          "datasets":
+          [
+            {"label":"<%=t :project_posts_stat%>",
+            "data":<%= raw @project_posts_month_count.reverse.to_json %>,
+            "fill":false,
+            "borderColor":"rgb(75, 192, 192)",
+            "backgroundColor":"rgb(75, 192, 192)",
+            "lineTension":0.1},
+            {"label":"<%=t :project_posts_vistis%>",
+            "data":<%= raw @project_posts_vists_month_count.reverse.to_json %>,
+            "fill":false,
+            "borderColor":"rgb(244, 66, 146)",
+            "backgroundColor":"rgb(244, 66, 146)",
+            "lineTension":0.1}
+          ]
+        },
+        "options":{}
+      });
+      </script>
+    </div>
+  </div>
+</div>
+</div>
+</div>

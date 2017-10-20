@@ -8,4 +8,6 @@ class Blog < ActiveRecord::Base
     @seeking = {user_id: self.user_id, blog_id: self.id, role: 1}
     Seeking.create(@seeking)
   end
+
+
 end
