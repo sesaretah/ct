@@ -14,6 +14,11 @@ class CoursesController < ApplicationController
   def view_content
     @course = Course.find(params[:id])
     @rnd = params[:rnd]
+    @visit = Visit.where(user_id: current_user.id, visitable_id: @course.id, visitable_type: 'Course').first
+    if !@visit.blank?
+      @visit.destroy
+    end
+    Visit.create(user_id: current_user.id, visitable_id: @course.id, visitable_type: 'Course')
   end
   # GET /courses
   # GET /courses.json
