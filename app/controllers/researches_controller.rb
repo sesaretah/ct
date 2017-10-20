@@ -16,6 +16,11 @@ class ResearchesController < ApplicationController
       @page = params[:page].to_i
     end
     @rnd = params[:rnd]
+    @visit = Visit.where(user_id: current_user.id, visitable_id: @research.id, visitable_type: 'Research').first
+    if !@visit.blank?
+      @visit.destroy
+    end
+    Visit.create(user_id: current_user.id, visitable_id: @research.id, visitable_type: 'Research')
   end
   # GET /researches
   # GET /researches.json

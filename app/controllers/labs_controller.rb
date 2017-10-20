@@ -10,6 +10,11 @@ class LabsController < ApplicationController
   def view_content
     @lab = Lab.find(params[:id])
     @rnd = params[:rnd]
+    @visit = Visit.where(user_id: current_user.id, visitable_id: @lab.id, visitable_type: 'Lab').first
+    if !@visit.blank?
+      @visit.destroy
+    end
+    Visit.create(user_id: current_user.id, visitable_id: @lab.id, visitable_type: 'Course')
   end
 
   def cropper

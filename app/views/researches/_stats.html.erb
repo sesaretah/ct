@@ -1,0 +1,118 @@
+<div class="panel panel-white no-radius" id="visits">
+  <div class="panel-heading border-light">
+    <h4 class="panel-title"><%=t :research_stats%>
+      <select id='group_period'>
+        <option value="monthly"><%=t :monthly%></option>
+        <option value="weekly"><%=t :weekly%></option>
+      </select>
+    </h4>
+    <script>
+    $('#research_period').on('change', function() {
+      if(this.value == 'monthly'){
+        $('#research_month').show();
+        $('#research_week').hide();
+      } else {
+        $('#research_month').hide();
+        $('#research_week').show();
+      }
+    });
+    </script>
+  </div>
+  <div collapse="visits" class="panel-wrapper">
+    <div class="panel-body">
+      <div class="height-300">
+        <div id='research_week' style='display:none'>
+          <% @research_import_week_count = []%>
+          <% @research_vists_week_count = []%>
+          <% @research_import_week_day = []%>
+          <% @research_comments_week_count = []%>
+          <% for i in 0..6%>
+          <% @day = Date.today() - i%>
+          <% @research_import_week_count << Research.where(:created_at => (@day.beginning_of_day..@day.end_of_day)).count%>
+          <% @research_vists_week_count << Visit.where(:created_at => (@day.beginning_of_day..@day.end_of_day), :visitable_type => 'Research').count%>
+          <% @research_comments_week_count << Comment.where(:created_at => (@day.beginning_of_day..@day.end_of_day), :commentable_type => 'Research').count%>
+          <% @research_import_week_day <<  "#{JalaliDate.to_jalali(@day).year}/#{JalaliDate.to_jalali(@day).month}/#{JalaliDate.to_jalali(@day).day}"%>
+          <%end%>
+          <canvas id="research_import_week" class="full-width" width="582" height="350" style="display: block; width: 582px; height: 350px;"></canvas>
+          <script>new Chart(document.getElementById("research_import_week"),
+          {"type":"line",
+          "data":
+          {
+            "labels":
+            <%= raw @research_import_week_day.reverse.to_json %>,
+            "datasets":
+            [
+              {"label":"<%=t :research_import_stat%>",
+              "data":<%= raw @research_import_week_count.reverse.to_json %>,
+              "fill":false,
+              "borderColor":"rgb(75, 192, 192)",
+              "backgroundColor":"rgb(75, 192, 192)",
+              "lineTension":0.1},
+              {"label":"<%=t :research_vistis%>",
+              "data":<%= raw @research_vists_week_count.reverse.to_json %>,
+              "fill":false,
+              "borderColor":"rgb(244, 66, 146)",
+              "backgroundColor":"rgb(244, 66, 146)",
+              "lineTension":0.1},
+              {"label":"<%=t :research_comments_stat%>",
+              "data":<%= raw @research_comments_week_count.reverse.to_json %>,
+              "fill":false,
+              "borderColor":"rgb(26, 33, 239)",
+              "backgroundColor":"rgb(26, 33, 239)",
+              "lineTension":0.1}
+            ]
+          },
+          "options":{}
+        });
+        </script>
+
+      </div>
+      <div id='reserch_month' >
+        <% @research_import_month_count = []%>
+        <% @research_vists_month_count = []%>
+        <% @research_import_month_day = []%>
+        <% @research_comments_month_count = []%>
+        <% for i in 0..30%>
+        <% @day = Date.today() - i%>
+        <% @research_import_month_count << Research.where(:created_at => (@day.beginning_of_day..@day.end_of_day)).count%>
+        <% @research_vists_month_count << Visit.where(:created_at => (@day.beginning_of_day..@day.end_of_day), :visitable_type => 'Research').count%>
+        <% @research_comments_month_count << Comment.where(:created_at => (@day.beginning_of_day..@day.end_of_day), :commentable_type => 'Research').count%>
+        <% @research_import_month_day <<  "#{JalaliDate.to_jalali(@day).year}/#{JalaliDate.to_jalali(@day).month}/#{JalaliDate.to_jalali(@day).day}"%>
+        <%end%>
+        <canvas id="research_import_month" class="full-width" width="582" height="350" style="display: block; width: 582px; height: 350px;"></canvas>
+        <script>new Chart(document.getElementById("research_import_month"),
+        {"type":"line",
+        "data":
+        {
+          "labels":
+          <%= raw @research_import_month_day.reverse.to_json %>,
+          "datasets":
+          [
+            {"label":"<%=t :research_import_stat%>",
+            "data":<%= raw @research_import_month_count.reverse.to_json %>,
+            "fill":false,
+            "borderColor":"rgb(75, 192, 192)",
+            "backgroundColor":"rgb(75, 192, 192)",
+            "lineTension":0.1},
+            {"label":"<%=t :research_vistis%>",
+            "data":<%= raw @research_vists_month_count.reverse.to_json %>,
+            "fill":false,
+            "borderColor":"rgb(244, 66, 146)",
+            "backgroundColor":"rgb(244, 66, 146)",
+            "lineTension":0.1},
+            {"label":"<%=t :research_comments_stat%>",
+            "data":<%= raw @research_comments_month_count.reverse.to_json %>,
+            "fill":false,
+            "borderColor":"rgb(26, 33, 239)",
+            "backgroundColor":"rgb(26, 33, 239)",
+            "lineTension":0.1}
+          ]
+        },
+        "options":{}
+      });
+      </script>
+    </div>
+  </div>
+</div>
+</div>
+</div>
