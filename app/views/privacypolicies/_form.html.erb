@@ -35,91 +35,120 @@
             </div>
             <% end %>
 
-
-            <div class="row">
-              <div class="form-group col-xs-4">
-                <%= f.label :profile_fathername %><br>
-                <% f.number_field :profile_fathername %>
-                <%= f.select( :profile_fathername, policytypes, {}, {:class => "form-control"})  %>
+            <fieldset>
+              <legend>
+                <%= t(:profile)%>
+              </legend>
+              <div class="row">
+                <div class="form-group col-xs-4">
+                  <%= f.label :profile_fathername %><br>
+                  <% f.number_field :profile_fathername %>
+                  <%= f.select( :profile_fathername, policytypes, {}, {:class => "form-control"})  %>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-4">
-                <%= f.label :profile_sex %><br>
-                <% f.number_field :profile_sex %>
-                <%= f.select( :profile_sex, policytypes, {}, {:class => "form-control"})  %>
+              <div class="row">
+                <div class="form-group col-xs-4">
+                  <%= f.label :profile_sex %><br>
+                  <% f.number_field :profile_sex %>
+                  <%= f.select( :profile_sex, policytypes, {}, {:class => "form-control"})  %>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-4">
-                <%= f.label :profile_birthdate %><br>
-                <% f.number_field :profile_birthdate %>
-                <%= f.select( :profile_birthdate, policytypes, {}, {:class => "form-control"})  %>
+              <div class="row">
+                <div class="form-group col-xs-4">
+                  <%= f.label :profile_birthdate %><br>
+                  <% f.number_field :profile_birthdate %>
+                  <%= f.select( :profile_birthdate, policytypes, {}, {:class => "form-control"})  %>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-4">
-                <%= f.label :profile_ssn %><br>
-                <% f.number_field :profile_ssn %>
-                <%= f.select( :profile_ssn, policytypes, {}, {:class => "form-control"})  %>
+              <div class="row">
+                <div class="form-group col-xs-4">
+                  <%= f.label :profile_ssn %><br>
+                  <% f.number_field :profile_ssn %>
+                  <%= f.select( :profile_ssn, policytypes, {}, {:class => "form-control"})  %>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-4">
-                <%= f.label :profile_phonenumber %><br>
-                <% f.number_field :profile_phonenumber %>
-                <%= f.select( :profile_phonenumber, policytypes, {}, {:class => "form-control"})  %>
+              <div class="row">
+                <div class="form-group col-xs-4">
+                  <%= f.label :profile_phonenumber %><br>
+                  <% f.number_field :profile_phonenumber %>
+                  <%= f.select( :profile_phonenumber, policytypes, {}, {:class => "form-control"})  %>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-4">
-                <%= f.label :profile_mobilenumber %><br>
-                <% f.number_field :profile_mobilenumber %>
-                <%= f.select( :profile_mobilenumber, policytypes, {}, {:class => "form-control"})  %>
+              <div class="row">
+                <div class="form-group col-xs-4">
+                  <%= f.label :profile_mobilenumber %><br>
+                  <% f.number_field :profile_mobilenumber %>
+                  <%= f.select( :profile_mobilenumber, policytypes, {}, {:class => "form-control"})  %>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-4">
-                <%= f.label :education_all %><br>
-                <% f.text_field :education_all %>
-                <%= f.select( :education_all, policytypes, {}, {:class => "form-control"})  %>
+            </fieldset>
+            <fieldset>
+              <legend>
+                <%= t(:education)%>
+              </legend>
+              <div class="row">
+                <div class="form-group col-xs-4">
+                  <%= f.label :education_all %><br>
+                  <% f.text_field :education_all %>
+                  <%= f.select( :education_all, policytypes, {}, {:class => "form-control"})  %>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-4">
-                <%= f.label :research_all %><br>
-                <% f.number_field :research_all %>
-                <%= f.select( :research_all, policytypes, {}, {:class => "form-control"})  %>
+            </fieldset>
+            <fieldset>
+              <legend>
+                <%= t(:research)%>
+              </legend>
+              <div class="row">
+                <div class="form-group col-xs-4">
+                  <%= f.label :research_all %><br>
+                  <% f.number_field :research_all %>
+                  <%= f.select( :research_all, policytypes, {}, {:class => "form-control"})  %>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-4">
-                <%= f.label :honor_all %><br>
-                <% f.number_field :honor_all %>
-                <%= f.select( :honor_all, policytypes, {}, {:class => "form-control"})  %>
+            </fieldset>
+            <fieldset>
+              <legend>
+                <%= t(:honor)%>
+              </legend>
+              <div class="row">
+                <div class="form-group col-xs-4">
+                  <%= f.label :honor_all %><br>
+                  <% f.number_field :honor_all %>
+                  <%= f.select( :honor_all, policytypes, {}, {:class => "form-control"})  %>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-4">
-                <%= f.label :tag_all %><br>
-                <% f.number_field :tag_all %>
-                <%= f.select( :tag_all, policytypes, {}, {:class => "form-control"})  %>
+            </fieldset>
+            <fieldset>
+              <legend>
+                <%= t(:tag)%>
+              </legend>
+              <div class="row">
+                <div class="form-group col-xs-4">
+                  <%= f.label :tag_all %><br>
+                  <% f.number_field :tag_all %>
+                  <%= f.select( :tag_all, policytypes, {}, {:class => "form-control"})  %>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-4">
-                <%= f.label :followers_all %><br>
-                <% f.number_field :followers_all %>
-                <%= f.select( :followers_all, policytypes, {}, {:class => "form-control"})  %>
+            </fieldset>
+            <fieldset>
+              <legend>
+                <%= t(:social_relations)%>
+              </legend>
+              <div class="row">
+                <div class="form-group col-xs-4">
+                  <%= f.label :followers_all %><br>
+                  <% f.number_field :followers_all %>
+                  <%= f.select( :followers_all, policytypes, {}, {:class => "form-control"})  %>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-xs-4">
-                <%= f.label :followess_all %><br>
-                <% f.number_field :followess_all %>
-                <%= f.select( :followess_all, policytypes, {}, {:class => "form-control"})  %>
+              <div class="row">
+                <div class="form-group col-xs-4">
+                  <%= f.label :followess_all %><br>
+                  <% f.number_field :followess_all %>
+                  <%= f.select( :followess_all, policytypes, {}, {:class => "form-control"})  %>
+                </div>
               </div>
-            </div>
+            </fieldset>
             <div class="row">
               <div class="form-actions">
                 <button type="submit" class="btn btn-primary pull-left">
