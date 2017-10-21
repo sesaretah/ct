@@ -421,6 +421,7 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  granting_stats: 'آمار نقش های کاربران'
   privacypolicy: 'حریم خصوصی'
   logs: 'سیاهه عملکرد'
   new_privacypolicy: 'حریم خصوصی'

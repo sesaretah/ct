@@ -1,0 +1,35 @@
+<div class="panel panel-white no-radius" id="visits">
+  <div class="panel-heading border-light">
+    <h4 class="panel-title"><%=t :granting_stats%>
+    </h4>
+  </div>
+  <div collapse="visits" class="panel-wrapper">
+    <div class="panel-body">
+      <div class="height-300">
+          <% @granting = Granting.all.group(:role_id).count%>
+          <% @labels = []%>
+          <% for key in @granting.keys %>
+          <% @labels << Role.find(key).name%>
+          <%end%>
+          <canvas id="granting" class="full-width" width="582" height="350" style="display: block; width: 582px; height: 350px;"></canvas>
+          <script>new Chart(document.getElementById("granting"),
+          {"type":"doughnut",
+          "data":
+          {
+            "labels":
+            <%= raw @labels.to_json %>,
+            "datasets":
+            [
+              {
+              "data":<%= raw @granting.values.to_json %>,
+              "backgroundColor":["rgb(255, 99, 132)","rgb(54, 162, 235)","rgb(255, 205, 86)", "rgb(238, 244, 66)", "rgb(238, 244, 66)", "rgb(238, 244, 66)", "rgb(214, 149, 214)", "rgb(226, 52, 78)"]
+            }
+            ]
+          },
+          "options":{}
+        });
+        </script>
+  </div>
+</div>
+</div>
+</div>
