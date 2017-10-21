@@ -1,0 +1,2 @@
+json.extract! privacypolicy, :id, :profile_fathername, :profile_sex, :profile_birthdate, :profile_ssn, :profile_phonenumber, :profile_mobilenumber, :education_all, :research_all, :honor_all, :tag_all, :followers_all, :followess_all, :created_at, :updated_at
+json.url privacypolicy_url(privacypolicy, format: :json)

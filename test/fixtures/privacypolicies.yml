@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  profile_fathername: 1
+  profile_sex: 1
+  profile_birthdate: 1
+  profile_ssn: 1
+  profile_phonenumber: 1
+  profile_mobilenumber: 1
+  education_all: 
+  research_all: 1
+  honor_all: 1
+  tag_all: 1
+  followers_all: 1
+  followess_all: 1
+
+two:
+  profile_fathername: 1
+  profile_sex: 1
+  profile_birthdate: 1
+  profile_ssn: 1
+  profile_phonenumber: 1
+  profile_mobilenumber: 1
+  education_all: 
+  research_all: 1
+  honor_all: 1
+  tag_all: 1
+  followers_all: 1
+  followess_all: 1

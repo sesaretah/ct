@@ -1,0 +1,1 @@
+json.partial! "privacypolicies/privacypolicy", privacypolicy: @privacypolicy

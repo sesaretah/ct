@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :privacypolicies
+
   resources :accesscontrols
 
   resources :grantings

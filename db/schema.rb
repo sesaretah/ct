@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171013145342) do
+ActiveRecord::Schema.define(version: 20171020192737) do
 
   create_table "accesscontrols", force: :cascade do |t|
     t.integer  "role_id",               limit: 4
@@ -432,6 +432,7 @@ ActiveRecord::Schema.define(version: 20171013145342) do
     t.integer  "policy_type",     limit: 4
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "policy_item",     limit: 191
   end
 
   create_table "pollitems", force: :cascade do |t|
@@ -467,6 +468,24 @@ ActiveRecord::Schema.define(version: 20171013145342) do
     t.string   "document_content_type", limit: 255
     t.integer  "document_file_size",    limit: 4
     t.datetime "document_updated_at"
+  end
+
+  create_table "privacypolicies", force: :cascade do |t|
+    t.integer  "profile_fathername",   limit: 4
+    t.integer  "profile_sex",          limit: 4
+    t.integer  "profile_birthdate",    limit: 4
+    t.integer  "profile_ssn",          limit: 4
+    t.integer  "profile_phonenumber",  limit: 4
+    t.integer  "profile_mobilenumber", limit: 4
+    t.integer  "education_all",        limit: 4
+    t.integer  "research_all",         limit: 4
+    t.integer  "honor_all",            limit: 4
+    t.integer  "tag_all",              limit: 4
+    t.integer  "followers_all",        limit: 4
+    t.integer  "followess_all",        limit: 4
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "user_id",              limit: 4
   end
 
   create_table "profiles", force: :cascade do |t|

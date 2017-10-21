@@ -73,31 +73,43 @@
                       <td><%= t(:full_name)%></td>
                       <td><%= @profile.name%> <%= @profile.surename%></td>
                     </tr>
+                    <% if policy_rule('profile_fathername', current_user, @profile.user)%>
                     <tr>
                       <td><%= t(:fathername)%></td>
                       <td><%= @profile.fathername%></td>
                     </tr>
+                    <%end%>
+                      <% if policy_rule('profile_sex', current_user, @profile.user)%>
                     <tr>
                       <td><%= t(:sex)%></td>
                       <td><%= @profile.sex%></td>
                     </tr>
+                    <%end%>
+                    <% if policy_rule('profile_birthdate', current_user, @profile.user)%>
                     <tr>
                       <td><%= t(:birthdate)%></td>
                       <td><span>	<% @jalali = JalaliDate.to_jalali(@profile.birthdate)%>
                         <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%></span></td>
                       </tr>
+                      <%end%>
+                      <% if policy_rule('profile_ssn', current_user, @profile.user)%>
                       <tr>
                         <td><%= t(:ssn)%></td>
                         <td><%= @profile.ssn%></td>
                       </tr>
+                      <%end%>
+                      <% if policy_rule('profile_phonenumber', current_user, @profile.user)%>
                       <tr>
                         <td><%= t(:phonenumber)%></td>
                         <td><%= @profile.phonenumber%></td>
                       </tr>
+                      <%end%>
+                      <% if policy_rule('profile_mobilenumber', current_user, @profile.user)%>
                       <tr>
                         <td><%= t(:mobilenumber)%></td>
                         <td><%= @profile.mobilenumber%></td>
                       </tr>
+                      <%end%>
 
                     </tbody>
                   </table>

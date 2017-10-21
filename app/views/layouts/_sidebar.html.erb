@@ -314,6 +314,16 @@
     </a>
     <ul class="sub-menu" style="display: none;">
       <li>
+        <% @pp = Privacypolicy.where(user_id: current_user.id).first%>
+        <% if @pp.blank?%>
+          <a href="/privacypolicies/new">
+          <%else%>
+          <a href="/privacypolicies/<%= @pp.id%>/edit">
+          <%end%>
+          <span><%= t(:privacypolicy)%></span>
+        </a>
+      </li>
+      <li>
         <a href="/categories">
           <span><%= t(:categories_of_bazar)%></span>
         </a>
@@ -326,6 +336,11 @@
       <li>
         <a href="/grantings">
           <span><%= t(:grantings)%></span>
+        </a>
+      </li>
+      <li>
+        <a href="/home/logs">
+          <span><%= t(:logs)%></span>
         </a>
       </li>
     </li>

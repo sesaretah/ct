@@ -60,6 +60,7 @@ class User < ActiveRecord::Base
   has_many :labs, :through => :memberships
 
   has_many :grantings
+  has_one :privacypolicy
 
   before_create :set_email
   def set_email

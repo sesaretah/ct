@@ -17,6 +17,30 @@ module ApplicationHelper
     end
   end
 
+  def policy_rule(ward, requester,user)
+    if requester.id == user.id
+      return true
+    end
+    @privacypolicy = Privacypolicy.where(user_id: user.id).first
+    if !@privacypolicy.blank?
+      case @privacypolicy["#{ward}"]
+      when 1
+        return true
+      when 2
+        for friendship in user.inverse_friendships
+          if friendship.user.id == requester.id
+            return true
+          end
+        end
+        return false
+      when 3
+        return false
+      end
+    else
+      return true
+    end
+  end
+
   def policytypes
     @options = [
       [t(:everyone), 1],

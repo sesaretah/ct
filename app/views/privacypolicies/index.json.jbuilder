@@ -1,0 +1,1 @@
+json.array! @privacypolicies, partial: 'privacypolicies/privacypolicy', as: :privacypolicy

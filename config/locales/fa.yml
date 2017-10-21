@@ -404,10 +404,26 @@ fa:
         setting:
             user_privacy_status: 'نوع پروفایل'
             user_serachable_status: 'قابلیت جستجوی پروفایل'
+        privacypolicy:
+          profile_fathername: 'نام پدر'
+          profile_sex: 'جنسیت'
+          profile_birthdate: 'تاریخ تولد'
+          profile_ssn: 'کد ملی'
+          profile_phonenumber: 'شماره تلفن'
+          profile_mobilenumber: 'شماره موبایل'
+          education_all: 'سوابق تحصیلی'
+          research_all: 'سوابق آموزشی'
+          honor_all: 'افتخارات'
+          tag_all: 'زمینه های فعالیت'
+          followers_all: 'دنبال کنندگان'
+          followess_all: 'دنبال شوندگان'
   will_paginate:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  privacypolicy: 'حریم خصوصی'
+  logs: 'سیاهه عملکرد'
+  new_privacypolicy: 'حریم خصوصی'
   monthly: 'ماهانه'
   weekly: 'هفتگی'
   research_stats: 'آمار  منتشرشده ها'
