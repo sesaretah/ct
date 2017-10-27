@@ -143,6 +143,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Question Finished');
       callback(null, 'Question Finished');
     }
     var i = 0
@@ -150,6 +151,7 @@ async.waterfall([
       g.setNode("question-" + row.id, {type: 'question', name: row.name });
       i = i + 1;
       if (arg1.length == i){
+        console.log('Question Finished');
         callback(null, 'Question Finished');
       }
       cb();
@@ -165,6 +167,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Project Finished');
       callback(null, 'Project Finished');
     }
     var i = 0
@@ -172,6 +175,7 @@ async.waterfall([
       g.setNode("project-" + row.id, {type: 'project', name: row.name });
       i = i + 1;
       if (arg1.length == i){
+        console.log('Project Finished');
         callback(null, 'Project Finished');
       }
       cb();
@@ -187,6 +191,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Offering Finished');
       callback(null, 'Offering Finished');
     }
     var i = 0
@@ -194,6 +199,7 @@ async.waterfall([
       g.setNode("offering-" + row.id, {type: 'offering', name: row.period + row.year });
       i = i + 1;
       if (arg1.length == i){
+        console.log('Offering Finished');
         callback(null, 'Offering Finished');
       }
       cb();
@@ -209,6 +215,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Research Finished');
       callback(null, 'Research Finished');
     }
     var i = 0
@@ -216,6 +223,7 @@ async.waterfall([
       g.setNode("research-" + row.id, {type: 'research', name: row.name });
       i = i + 1;
       if (arg1.length == i){
+        console.log('Research Finished');
         callback(null, 'Research Finished');
       }
       cb();
@@ -231,6 +239,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Lab Finished');
       callback(null, 'Lab Finished');
     }
     var i = 0
@@ -238,6 +247,7 @@ async.waterfall([
       g.setNode("lab-" + row.id, {type: 'lab', name: row.name });
       i = i + 1;
       if (arg1.length == i){
+        console.log('Lab Finished');
         callback(null, 'Lab Finished');
       }
       cb();
@@ -253,6 +263,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Involvement Finished');
       callback(null, 'Involvement Finished');
     }
     var i = 0
@@ -262,6 +273,7 @@ async.waterfall([
       g.setEdge("user-" + userid, "channel-"+ channelid, { type: 'involvement' });
       i = i + 1;
       if (arg1.length == i){
+        console.log('Involvement Finished');
         callback(null, 'Involvement Finished');
       }
       cb();
