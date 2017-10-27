@@ -16,6 +16,7 @@ async.waterfall([
   function(callback) {
     var sql = "SELECT username, id FROM users"
     connection.query(sql, function (error, rows) {
+      console.log(rows);
       callback(null, rows);
     });
   },
