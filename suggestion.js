@@ -289,6 +289,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Grouping Finished');
       callback(null, 'Grouping Finished');
     }
     var i = 0
@@ -299,6 +300,7 @@ async.waterfall([
       g.setEdge("group-"+ groupid, "user-" + userid, { type: 'grouping' });
       i = i + 1;
       if (arg1.length == i){
+        console.log('Grouping Finished');
         callback(null, 'Grouping Finished');
       }
       cb();
@@ -314,6 +316,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Participation Finished');
       callback(null, 'Participation Finished');
     }
     var i = 0
@@ -323,6 +326,7 @@ async.waterfall([
       g.setEdge("user-" + userid, "event-"+ eventid, { type: 'participation' });
       i = i + 1;
       if (arg1.length == i){
+        console.log('Participation Finished');
         callback(null, 'Participation Finished');
       }
       cb();
@@ -338,6 +342,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Followship Finished');
       callback(null, 'Followship Finished');
     }
     var i = 0
@@ -347,6 +352,7 @@ async.waterfall([
         g.setEdge("user-" + row.user_id, "question-"+ row.followable_id, { type: 'followship' });
         i = i + 1;
         if (arg1.length == i){
+          console.log('Followship Finished');
           callback(null, 'Followship Finished');
         }
         cb();
@@ -355,6 +361,7 @@ async.waterfall([
         g.setEdge("user-" + row.user_id, "offering-"+ row.followable_id, { type: 'followship' });
         i = i + 1;
         if (arg1.length == i){
+          console.log('Followship Finished');
           callback(null, 'Followship Finished');
         }
         cb();
@@ -363,6 +370,7 @@ async.waterfall([
         g.setEdge("user-" + row.user_id, "lab-"+ row.followable_id, { type: 'followship' });
         i = i + 1;
         if (arg1.length == i){
+          console.log('Followship Finished');
           callback(null, 'Followship Finished');
         }
         cb();
@@ -371,6 +379,7 @@ async.waterfall([
         g.setEdge("user-" + row.user_id, "project-"+ row.followable_id, { type: 'followship' });
         i = i + 1;
         if (arg1.length == i){
+          console.log('Followship Finished');
           callback(null, 'Followship Finished');
         }
         cb();
@@ -379,6 +388,16 @@ async.waterfall([
         g.setEdge("user-" + row.user_id, "research-"+ row.followable_id, { type: 'followship' });
         i = i + 1;
         if (arg1.length == i){
+          console.log('Followship Finished');
+          callback(null, 'Followship Finished');
+        }
+        cb();
+        break;
+        case 'Poll':
+        g.setEdge("user-" + row.user_id, "research-"+ row.followable_id, { type: 'followship' });
+        i = i + 1;
+        if (arg1.length == i){
+          console.log('Followship Finished');
           callback(null, 'Followship Finished');
         }
         cb();
@@ -396,6 +415,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Friendship Finished');
       callback(null, 'Friendship Finished');
     }
     var i = 0
@@ -406,6 +426,7 @@ async.waterfall([
       //  g.setEdge("user-" + followeeid, "user-"+ followerid, { type: 'friendship' });
       i = i + 1;
       if (arg1.length == i){
+        console.log('Friendship Finished');
         callback(null, 'Friendship Finished');
       }
       cb();
