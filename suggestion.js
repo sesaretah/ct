@@ -393,6 +393,7 @@ async.waterfall([
 
 
 ], function (err, result) {
+  console.log(g.nodes());
   function weight(e) { return g.edge(e); }
   async.each(people, function(p, cb) {
     var i = 0
