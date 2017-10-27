@@ -4,7 +4,7 @@ var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : '',
+  password : 'salam64511',
   database : 'shoa2'
 });
 var Graph = require("graphlib").Graph;
