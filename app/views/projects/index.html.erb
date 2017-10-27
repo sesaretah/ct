@@ -79,7 +79,16 @@
             </ul>
           </div>
           <div class="tab-pane fade " id="related_projects">
-
+            <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i><%=t :related_projects%></p>
+            <hr style="margin-top:0px; margin-bottom:0px;">
+            <ul class="messages-list relative top-0">
+              <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Project')%>
+              <% @p =  sug.suggested_type.classify.constantize.find(sug.suggested_id)%>
+              <% if !@p.blank?%>
+              <%= render partial: 'projects/item', locals: {project: @p}%>
+              <%end%>
+              <%end%>
+            </ul>
           </div>
           <div class="tab-pane fade " id="search_projects">
             <% if grant_access('search_projects', current_user)%>

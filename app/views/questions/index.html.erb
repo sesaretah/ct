@@ -4,29 +4,29 @@
       <div class="tabbable padding-right-0 padding-left-0 ">
         <ul id="myTab1" class="nav nav-tabs">
           <li class="">
-            <a href="#myTab1_example1" data-toggle="tab" aria-expanded="false">
+            <a href="#my_questions" data-toggle="tab" aria-expanded="false">
               <i class="fa fa-chain"></i>
             </a>
           </li>
           <li class="active">
-            <a href="#myTab1_example2" data-toggle="tab" aria-expanded="false">
+            <a href="#top_questions" data-toggle="tab" aria-expanded="false">
               <i class="fa fa-trophy"></i>
             </a>
           </li>
           <li class="">
-            <a href="#myTab1_example3" data-toggle="tab" aria-expanded="true">
+            <a href="#related_questions" data-toggle="tab" aria-expanded="true">
               <i class="fa fa-plug"></i>
             </a>
           </li>
           <li class="">
-            <a href="#myTab1_example4" data-toggle="tab" aria-expanded="true">
+            <a href="#search_questions" data-toggle="tab" aria-expanded="true">
               <i class="fa fa-search"></i>
               </a>
             </li>
           </ul>
 
           <div class="tab-content">
-            <div class="tab-pane fade" id="myTab1_example1">
+            <div class="tab-pane fade" id="my_questions">
               <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :questions_you_asked%></p>
               <hr />
               <% if grant_access('ask_questions', current_user)%>
@@ -41,22 +41,33 @@
               <%= render partial: 'questions/my_questions'%>
             </div>
 
-            <div class="tab-pane fade active in" id="myTab1_example2">
-                <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :popular_questions%></p>
-              <hr />
-
+            <div class="tab-pane fade active in" id="top_questions">
+              <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :top_questions%></span>
               <ul class="messages-list relative top-0">
-                <% for q in Question.all%>
-                <%= render partial: 'questions/item', locals: {question: q}%>
+                <% @j = 0%>
+                <% for i in Followship.where('followable_type = ?', 'Question').group('followable_id').order('count_id desc').count('id') %>
+                  <% if @j < 10%>
+                  <%= render partial: 'questions/item', locals: {question: Question.find(i[0])}%>
+                  <%end%>
+                  <% @j = @j+1%>
                 <%end%>
               </ul>
             </div>
 
-            <div class="tab-pane fade" id="myTab1_example3">
-                <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :questions_related_to%></p>
-              <hr />
+            <div class="tab-pane fade" id="related_questions">
+              <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i><%=t :related_questions%></p>
+              <hr style="margin-top:0px; margin-bottom:0px;">
+              <ul class="messages-list relative top-0">
+                <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Question')%>
+                <% @q =  sug.suggested_type.classify.constantize.find(sug.suggested_id)%>
+                <% if !@q.blank?%>
+                <%= render partial: 'questions/item', locals: {question: @q}%>
+                <%end%>
+                <%end%>
+              </ul>
             </div>
-            <div class="tab-pane fade " id="myTab1_example4">
+
+            <div class="tab-pane fade " id="search_questions">
               <div>
                 <%= form_tag '/questions/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
                 <div class="form-group">

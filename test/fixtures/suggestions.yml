@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  suggested_type: MyString
+  suggested_id: 1
+  why_type: MyString
+  why_id: 1
+
+two:
+  user_id: 1
+  suggested_type: MyString
+  suggested_id: 1
+  why_type: MyString
+  why_id: 1

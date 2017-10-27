@@ -421,6 +421,15 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  related_researches: 'منتشرشده های مرتبط'
+  related_labs: 'آزمایشگاه های مرتبط'
+  related_courses: 'دروس مرتبط'
+  top_questions: 'پرسش های برتر'
+  related_questions: 'پرسش های مرتبط'
+  related_projects: 'پروژه های مرتبط'
+  related_events: 'رخداد مرتبط'
+  related_groups: 'گروههای مرتبط'
+  related_channels:  'کانال های مرتبط'
   granting_stats: 'آمار نقش های کاربران'
   privacypolicy: 'حریم خصوصی'
   logs: 'سیاهه عملکرد'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020192737) do
+ActiveRecord::Schema.define(version: 20171027114710) do
 
   create_table "accesscontrols", force: :cascade do |t|
     t.integer  "role_id",               limit: 4
@@ -595,6 +595,16 @@ ActiveRecord::Schema.define(version: 20171020192737) do
     t.integer  "category_id", limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "suggestions", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.string   "suggested_type", limit: 191
+    t.integer  "suggested_id",   limit: 4
+    t.string   "why_type",       limit: 191
+    t.integer  "why_id",         limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "surveys", force: :cascade do |t|

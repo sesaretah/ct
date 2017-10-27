@@ -1,2 +1,2 @@
-$("#tag-list").replaceWith("<%= escape_javascript(render(:partial => 'tags/list', locals: {tags: current_user.tags })) %>");
+$("#tag-list").replaceWith("<%= escape_javascript(render(:partial => 'tags/list', locals: {user: current_user, tags: current_user.tags })) %>");
 $("#tag-form").replaceWith("<%= escape_javascript(render(:partial => 'tags/form', locals: {tag: Tag.new,profile: @profile })) %>");

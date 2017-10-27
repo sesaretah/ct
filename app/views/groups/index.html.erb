@@ -74,9 +74,18 @@
             </div>
 
             <div class="tab-pane fade" id="related_groups">
-              <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i><%=t :groups_you_manage%></p>
-              <hr />
+              <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i><%=t :related_groups%></p>
+              <hr style="margin-top:0px; margin-bottom:0px;">
+              <ul class="messages-list relative top-0">
+                <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Group')%>
+                <% @gr =  sug.suggested_type.classify.constantize.find(sug.suggested_id)%>
+                <% if !@gr.blank?%>
+                <%= render partial: 'groups/item', locals: {group: @gr}%>
+                <%end%>
+                <%end%>
+              </ul>
             </div>
+
             <div class="tab-pane fade " id="search_groups">
               <% if grant_access('search_groups', current_user)%>
               <div>

@@ -5,7 +5,7 @@
         <ul id="myTab1" class="nav nav-tabs">
           <li class="active">
             <a href="#my_events" data-toggle="tab" aria-expanded="false">
-              <i class="fa fa-clock-o"></i>
+              <i class="fa fa-chain"></i>
               <%t :events_you_joined%>
             </a>
           </li>
@@ -75,7 +75,16 @@
             </ul>
           </div>
           <div class="tab-pane fade " id="related_events">
-
+            <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i><%=t :related_events%></p>
+            <hr style="margin-top:0px; margin-bottom:0px;">
+            <ul class="messages-list relative top-0">
+              <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Event')%>
+              <% @ev =  sug.suggested_type.classify.constantize.find(sug.suggested_id)%>
+              <% if !@ev.blank?%>
+              <%= render partial: 'events/item', locals: {event: @ev}%>
+              <%end%>
+              <%end%>
+            </ul>
           </div>
           <div class="tab-pane fade " id="search_events">
             <% if grant_access('search_events', current_user)%>

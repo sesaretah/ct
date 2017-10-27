@@ -1,125 +1,133 @@
 <div class="wrap-content container padding-right-0" id="container">
-<div class="col-md-12 padding-right-0 padding-left-0" >
-  <div class=" col-md-4 padding-right-0 padding-left-0 " >
-    <div class="tabbable padding-right-0 padding-left-0 ">
-      <ul id="myTab1" class="nav nav-tabs">
-        <li class="">
-          <a href="#my_channels" data-toggle="tab" aria-expanded="false">
-            <i class="fa fa-chain"></i>
+  <div class="col-md-12 padding-right-0 padding-left-0" >
+    <div class=" col-md-4 padding-right-0 padding-left-0 " >
+      <div class="tabbable padding-right-0 padding-left-0 ">
+        <ul id="myTab1" class="nav nav-tabs">
+          <li class="">
+            <a href="#my_channels" data-toggle="tab" aria-expanded="false">
+              <i class="fa fa-chain"></i>
 
-          </a>
-        </li>
-        <li class="active">
-          <a href="#top_channels" data-toggle="tab" aria-expanded="false">
-            <i class="fa fa-trophy"></i>
+            </a>
+          </li>
+          <li class="active">
+            <a href="#top_channels" data-toggle="tab" aria-expanded="false">
+              <i class="fa fa-trophy"></i>
 
-          </a>
-        </li>
-        <li class="">
-          <a href="#related_channels" data-toggle="tab" aria-expanded="true">
-            <i class="fa fa-plug"></i>
+            </a>
+          </li>
+          <li class="">
+            <a href="#related_channels" data-toggle="tab" aria-expanded="true">
+              <i class="fa fa-plug"></i>
 
-          </a>
-        </li>
+            </a>
+          </li>
 
-        <li class="">
-          <a href="#search_channels" data-toggle="tab" aria-expanded="true">
-            <i class="fa fa-search"></i>
-          </a>
-        </li>
-      </ul>
-      <div class="tab-content">
-        <div class="tab-pane fade" id="my_channels">
-          <% if grant_access('create_channel', current_user)%>
-          <ul class="list-group">
-            <%= link_to new_channel_path do%>
-            <li class="list-group-item">
-              <i class="fa fa-plus"></i> <%=t :new_channel%>
-            </li>
+          <li class="">
+            <a href="#search_channels" data-toggle="tab" aria-expanded="true">
+              <i class="fa fa-search"></i>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade" id="my_channels">
+            <% if grant_access('create_channel', current_user)%>
+            <ul class="list-group">
+              <%= link_to new_channel_path do%>
+              <li class="list-group-item">
+                <i class="fa fa-plus"></i> <%=t :new_channel%>
+              </li>
+              <%end%>
+            </ul>
             <%end%>
-          </ul>
-          <%end%>
-          <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :channels_you_joined%></span>
-          <hr style="margin-top:0px; margin-bottom:0px;">
-          <ul class="messages-list relative top-0 margin-bottom-5">
-            <% for inv in Involvement.where(user_id: current_user.id, role: 3)%>
-            <%= render partial: 'channels/item', locals: {channel: inv.channel}%>
-            <%end%>
-          </ul>
-          <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :channels_you_manage%></span>
-          <hr style="margin-top:0px; margin-bottom:0px;">
-          <ul class="messages-list relative top-0 margin-bottom-5">
-            <% for inv in Involvement.where(user_id: current_user.id, role: 1)%>
-            <%= render partial: 'channels/item', locals: {channel: inv.channel}%>
-            <%end%>
-          </ul>
-        </div>
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :channels_you_joined%></span>
+            <hr style="margin-top:0px; margin-bottom:0px;">
+            <ul class="messages-list relative top-0 margin-bottom-5">
+              <% for inv in Involvement.where(user_id: current_user.id, role: 3)%>
+              <%= render partial: 'channels/item', locals: {channel: inv.channel}%>
+              <%end%>
+            </ul>
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :channels_you_manage%></span>
+            <hr style="margin-top:0px; margin-bottom:0px;">
+            <ul class="messages-list relative top-0 margin-bottom-5">
+              <% for inv in Involvement.where(user_id: current_user.id, role: 1)%>
+              <%= render partial: 'channels/item', locals: {channel: inv.channel}%>
+              <%end%>
+            </ul>
+          </div>
 
-        <div class="tab-pane fade active in" id="top_channels">
-          <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :popular_channels%></span>
-          <ul class="messages-list relative top-0">
-            <% @j = 0%>
-            <% for i in Involvement.group('channel_id').order('count_id desc').count('id')%>
-            <% if @j < 5%>
-            <%= render partial: 'channels/item', locals: {channel: Channel.find(i[0])}%>
-            <%end%>
-            <% @j = @j+1%>
-            <%end%>
-          </ul>
+          <div class="tab-pane fade active in" id="top_channels">
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :popular_channels%></span>
+            <ul class="messages-list relative top-0">
+              <% @j = 0%>
+              <% for i in Involvement.group('channel_id').order('count_id desc').count('id')%>
+              <% if @j < 5%>
+              <%= render partial: 'channels/item', locals: {channel: Channel.find(i[0])}%>
+              <%end%>
+              <% @j = @j+1%>
+              <%end%>
+            </ul>
 
-          <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :newest_channels%></span>
-          <hr style="margin-top:0px; margin-bottom:0px;">
-          <ul class="messages-list relative top-0">
-            <% for channel in Channel.all.order("id desc").limit(5).reverse%>
+            <span><i class="fa fa-hand-o-left" style='vertical-align:middle'></i>  <%=t :newest_channels%></span>
+            <hr style="margin-top:0px; margin-bottom:0px;">
+            <ul class="messages-list relative top-0">
+              <% for channel in Channel.all.order("id desc").limit(5).reverse%>
               <%= render partial: 'channels/item', locals: {channel: channel}%>
-            <%end%>
-          </ul>
-        </div>
+              <%end%>
+            </ul>
+          </div>
 
-        <div class="tab-pane fade" id="related_channels">
-          <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i></p>
-          <hr />
-        </div>
+          <div class="tab-pane fade" id="related_channels">
+            <p class="margin-top-10"><i class="fa fa-hand-o-left" style='vertical-align:middle'></i> <%=t :related_channels%></p>
+            <hr style="margin-top:0px; margin-bottom:0px;">
+            <ul class="messages-list relative top-0">
+              <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Channel')%>
+              <% @ch =  sug.suggested_type.classify.constantize.find(sug.suggested_id)%>
+              <% if !@ch.blank?%>
+              <%= render partial: 'channels/item', locals: {channel: @ch}%>
+              <%end%>
+              <%end%>
+            </ul>
+          </div>
 
-        <div class="tab-pane fade " id="search_channels">
-          <% if grant_access('search_channels', current_user)%>
-          <div>
-            <%= form_tag '/channels/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
-            <div class="form-group">
-              <%= text_field_tag :q, '' , {:class=>"form-control", :id => "nav-search-input", :placeholder => "#{t(:search)}"}%>
+          <div class="tab-pane fade " id="search_channels">
+            <% if grant_access('search_channels', current_user)%>
+            <div>
+              <%= form_tag '/channels/search/1',:method => :get,:remote => :true, :class => "navbar-form" do%>
+              <div class="form-group">
+                <%= text_field_tag :q, '' , {:class=>"form-control", :id => "nav-search-input", :placeholder => "#{t(:search)}"}%>
 
-              <button class="btn search-button" type="submit">
-                <i class="ti-search"></i>
-              </button>
+                <button class="btn search-button" type="submit">
+                  <i class="ti-search"></i>
+                </button>
 
+              </div>
+              <%end%>
             </div>
+            <div id='search-results'></div>
             <%end%>
           </div>
-          <div id='search-results'></div>
-          <%end%>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="col-md-7 padding-right-0 padding-left-0" >
-    <div class="panel panel-white no-radius" id="visits">
-      <div class="panel-heading border-light">
-        <h4 class="panel-title"></h4>
-        <ul class="panel-heading-tabs border-light">
-          <li class="panel-tools">
-            <a data-original-title="Refresh" data-toggle="tooltip" data-placement="top" class="btn btn-transparent btn-sm panel-refresh" href="#"><i class="ti-reload"></i></a>
-          </li>
-        </ul>
-      </div>
-      <div class="panel-body">
+    <div class="col-md-7 padding-right-0 padding-left-0" >
+      <div class="panel panel-white no-radius" id="visits">
+        <div class="panel-heading border-light">
+          <h4 class="panel-title"></h4>
+          <ul class="panel-heading-tabs border-light">
+            <li class="panel-tools">
+              <a data-original-title="Refresh" data-toggle="tooltip" data-placement="top" class="btn btn-transparent btn-sm panel-refresh" href="#"><i class="ti-reload"></i></a>
+            </li>
+          </ul>
+        </div>
+        <div class="panel-body">
 
-            <div id='channel-detail'>
-              <% if !@channel.blank?%>
-              <% @page = 1%>
-              <%= render(:partial => 'channels/detail', locals: {channel: @channel, page:@page, now: @channel }) %>
-              <%end%>
-            </div>
+          <div id='channel-detail'>
+            <% if !@channel.blank?%>
+            <% @page = 1%>
+            <%= render(:partial => 'channels/detail', locals: {channel: @channel, page:@page, now: @channel }) %>
+            <%end%>
+          </div>
 
         </div>
         <div  id='cm' class=" border-light">
