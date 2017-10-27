@@ -5,7 +5,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'salam64511',
-  database : 'shoa2'
+  database : 'shoa3'
 });
 var Graph = require("graphlib").Graph;
 var Alg = require("graphlib").alg;
