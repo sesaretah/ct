@@ -30,7 +30,9 @@ async.waterfall([
         g.setNode("user-" + row.id, {type: 'user', name: name });
         i = i + 1;
         if (arg1.length == i){
+          console.log('Profiles Finished');
           callback(null, 'Profiles Finished');
+
         }
         cb();
       });
@@ -45,6 +47,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Channel Finished');
       callback(null, 'Channel Finished');
     }
     var i = 0
@@ -52,6 +55,7 @@ async.waterfall([
       g.setNode("channel-" + row.id, {type: 'channel', name: row.name });
       i = i + 1;
       if (arg1.length == i){
+        console.log('Channel Finished');
         callback(null, 'Channel Finished');
       }
       cb();
@@ -67,6 +71,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Blog Finished');
       callback(null, 'Blog Finished');
     }
     var i = 0
@@ -74,6 +79,7 @@ async.waterfall([
       g.setNode("blog-" + row.id, {type: 'blog', name: row.name });
       i = i + 1;
       if (arg1.length == i){
+        console.log('Blog Finished');
         callback(null, 'Blog Finished');
       }
       cb();
@@ -89,6 +95,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Group Finished');
       callback(null, 'Group Finished');
     }
     var i = 0
@@ -96,6 +103,7 @@ async.waterfall([
       g.setNode("group-" + row.id, {type: 'group', name: row.name });
       i = i + 1;
       if (arg1.length == i){
+        console.log('Group Finished');
         callback(null, 'Group Finished');
       }
       cb();
@@ -111,6 +119,7 @@ async.waterfall([
 
   function(arg1, callback) {
     if (arg1.length == 0){
+      console.log('Event Finished');
       callback(null, 'Event Finished');
     }
     var i = 0
@@ -118,6 +127,7 @@ async.waterfall([
       g.setNode("event-" + row.id, {type: 'event', name: row.name });
       i = i + 1;
       if (arg1.length == i){
+        console.log('Event Finished');
         callback(null, 'Event Finished');
       }
       cb();
