@@ -1,0 +1,111 @@
+<style>
+
+.link {
+  stroke: #ccc;
+}
+
+.node text {
+  pointer-events: none;
+  font: 10px sans-serif;
+}
+
+</style>
+<svg width="960" height="600"></svg>
+<script src='http://d3js.org/d3.v3.min.js'></script>
+<script>
+
+// Define the dimensions of the visualization. We're using
+// a size that's convenient for displaying the graphic on
+// http://jsDataV.is
+
+var width = 500,
+height = 400;
+
+// Here's were the code begins. We start off by creating an SVG
+// container to hold the visualization. We only need to specify
+// the dimensions for this container.
+
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+
+// Before we do anything else, let's define the data for the visualization.
+
+var graph = {
+"nodes": [  <%= raw Graph.last.nodes%>
+        ],
+"links": [  <%= raw Graph.last.edges%>
+        ]
+};
+
+graph.links = graph.links.map(function(l) {
+    var sourceNode = graph.nodes.filter(function(n) {
+        return n.name === l.source;
+    })[0],
+        targetNode = graph.nodes.filter(function(n) {
+            return n.name === l.target;
+        })[0];
+
+    return {
+        source: sourceNode,
+        target: targetNode,
+        value: l.value
+    };
+});
+
+// Extract the nodes and links from the data.
+var nodes = graph.nodes,
+links = graph.links;
+
+// Now we create a force layout object and define its properties.
+// Those include the dimensions of the visualization and the arrays
+// of nodes and links.
+
+var force = d3.layout.force()
+    .gravity(0.05)
+    .distance(100)
+    .charge(-100)
+    .size([width, height]);
+
+
+
+
+force
+    .nodes(nodes)
+    .links(links)
+    .start();
+
+var link = svg.selectAll(".link")
+    .data(links)
+  .enter().append("line")
+    .attr("class", "link");
+
+var node = svg.selectAll(".node")
+    .data(nodes)
+  .enter().append("g")
+    .attr("class", "node")
+    .call(force.drag);
+
+
+node.append("image")
+    .attr("xlink:href", "https://github.com/favicon.ico")
+    .attr("x", -8)
+    .attr("y", -8)
+    .attr("width", 16)
+    .attr("height", 16);
+
+node.append("text")
+    .attr("dx", 12)
+    .attr("dy", ".35em")
+    .text(function(d) { return d.name });
+
+force.on("tick", function() {
+  link.attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+
+  node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+});
+
+</script>

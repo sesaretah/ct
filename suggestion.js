@@ -1,11 +1,12 @@
 var url = require('url');
 var async = require('async');
 var mysql      = require('mysql');
+var pluralize = require('pluralize');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'salam64511',
-  database : 'shoa3'
+  password : '',
+  database : 'shoa2'
 });
 var Graph = require("graphlib").Graph;
 var Alg = require("graphlib").alg;
@@ -436,7 +437,6 @@ async.waterfall([
 
 
 ], function (err, result) {
-  console.log(g.nodes());
   function weight(e) { return g.edge(e); }
   async.each(people, function(p, cb) {
     var i = 0
@@ -465,6 +465,34 @@ async.waterfall([
       }
     });
   });
+  var n = ""
+  var e = ""
+  var nodes =   g.nodes()
+  for (node in nodes){
+    var edges = g.nodeEdges(nodes[node]);
+    for (edge in edges) {
+      if ( node == nodes.length - 1 && edge == edges.length - 1) {
+       e = e + "{'target': '" +edges[edge].v+ "' , 'source' : '"+ edges[edge]. w+"'}"
+      } else {
+       e = e + "{'target': '" +edges[edge].v+ "' , 'source' : '"+ edges[edge]. w+"'},"
+    }
+    }
+    if (nodes[node].split("-")[0] == 'research') {
+      var p = 'researches'
+    } else {
+      var p = pluralize(nodes[node].split("-")[0])
+    }
+    if ( node == nodes.length - 1) {
+      n = n + " { 'name': '" +  nodes[node] + "'" +", 'href':" + "'/" + p + '/' + nodes[node].split("-")[1] + "'}"
+      connection.query('INSERT INTO graphs SET ?', { nodes: n, edges: e }, function (error, results, fields) {
+        if (error) throw error;
+      });
+    } else {
+    //  console.log(n);
+     n = n + " { 'name':'" +  nodes[node] + "'" +", 'href':" + "'/" + p + '/' + nodes[node].split("-")[1] + "'},"
+   }
+  }
+
 });
 
 function capitalizeFirstLetter(string) {

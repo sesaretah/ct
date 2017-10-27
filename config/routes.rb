@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :graphs
+
   resources :suggestions
 
   resources :privacypolicies
@@ -233,6 +235,7 @@ Rails.application.routes.draw do
   match "/offsessionmaterials/render_partial/:id" => "offsessionmaterials#render_partial", :via => :get
 
   match "home/logs" => "home#logs", :via => :get
+  match "home/graph" => "home#graph", :via => :get
 
   post 'upload' => 'upload#create'
   # The priority is based upon order of creation: first created -> highest priority.

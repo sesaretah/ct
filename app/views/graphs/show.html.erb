@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nodes:</strong>
+  <%= @graph.nodes %>
+</p>
+
+<p>
+  <strong>Edges:</strong>
+  <%= @graph.edges %>
+</p>
+
+<%= link_to 'Edit', edit_graph_path(@graph) %> |
+<%= link_to 'Back', graphs_path %>

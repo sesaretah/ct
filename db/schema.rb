@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027114710) do
+ActiveRecord::Schema.define(version: 20171027181841) do
 
   create_table "accesscontrols", force: :cascade do |t|
     t.integer  "role_id",               limit: 4
@@ -278,6 +278,13 @@ ActiveRecord::Schema.define(version: 20171027114710) do
     t.integer  "granter_id", limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "graphs", force: :cascade do |t|
+    t.text     "nodes",      limit: 65535
+    t.text     "edges",      limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "groupings", force: :cascade do |t|

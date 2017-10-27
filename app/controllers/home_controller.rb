@@ -1,4 +1,8 @@
 class HomeController < ApplicationController
+  def graph
+    render layout: false
+  end
+
   def logs
 
   end
