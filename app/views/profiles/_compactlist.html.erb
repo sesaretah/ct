@@ -47,6 +47,13 @@
                 <%end%>
             <%end%>
           <%end%>
+
+          <% if item.class.name == 'Activity'%>
+
+              <%= link_to "/activities/list/1?user_id=#{profile.user.id}", :method => :get, :remote => true do %>
+                <i class='fa fa-search'></i>
+                <%end%>
+          <%end%>
         </span>
       </div>
       <span class="messages-item-subject"></span>

@@ -9,6 +9,8 @@ class CoursesController < ApplicationController
     if !params[:q].blank?
       @courses = Course.where("name LIKE ? OR course_targets LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Course')
+
   end
 
   def view_content
@@ -19,6 +21,8 @@ class CoursesController < ApplicationController
       @visit.destroy
     end
     Visit.create(user_id: current_user.id, visitable_id: @course.id, visitable_type: 'Course')
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Course', target_id: @course.id)
+
   end
   # GET /courses
   # GET /courses.json
@@ -49,6 +53,8 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Course', target_id: @course.id)
+
         if params[:course][:avatar].blank?
           format.html { redirect_to '/courses?course_id='+@course.id.to_s, notice: :course_was_successfully_created }
         else
@@ -67,6 +73,8 @@ class CoursesController < ApplicationController
   def update
     respond_to do |format|
       if @course.update(course_params)
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Course', target_id: @course.id)
+
         if params[:course][:avatar].blank?
           format.html { redirect_to '/courses?course_id='+@course.id.to_s, notice: :course_was_successfully_created }
         else
@@ -82,6 +90,8 @@ class CoursesController < ApplicationController
   # DELETE /courses/1
   # DELETE /courses/1.json
   def destroy
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Destroy', target_type: 'Course', target_id: @course.id)
+
     @course.destroy
     respond_to do |format|
       format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }

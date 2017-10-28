@@ -18,6 +18,7 @@ end
     if @comment.user_id == current_user.id
       @comment.content = params[:value]
       @comment.save
+      @activity =  Activity.create(user_id: @comment.user_id, activity_type: 'Edit', target_type: @comment.commentable_type, target_id: @comment.commentable_id, middle_type: 'Comment', middle_id: @comment.id)
     end
   end
   # GET /comments
@@ -50,6 +51,7 @@ end
     @item =  @comment.commentable_type.classify.constantize.find(@comment.commentable_id)
     respond_to do |format|
       if @comment.save
+        @activity =  Activity.create(user_id: @comment.user_id, activity_type: 'Create', target_type: @comment.commentable_type, target_id: @comment.commentable_id, middle_type: 'Comment', middle_id: @comment.id)
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
         format.js
@@ -79,6 +81,7 @@ end
   def destroy
     @commntable = @comment.commentable_type.classify.constantize.find(@comment.commentable_id)
     @page = params[:page].to_i
+    @activity =  Activity.create(user_id: @comment.user_id, activity_type: 'Edit', target_type: @comment.commentable_type, target_id: @comment.commentable_id, middle_type: 'Comment', middle_id: @comment.id)
     @comment.destroy
     respond_to do |format|
       format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }

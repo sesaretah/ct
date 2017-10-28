@@ -5,6 +5,8 @@ class QuestionsController < ApplicationController
     if !params[:q].blank?
       @questions = Question.where("title LIKE ? OR content LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Question')
+
   end
 
   def view_content
@@ -20,6 +22,8 @@ class QuestionsController < ApplicationController
       @visit.destroy
     end
     Visit.create(user_id: current_user.id, visitable_id: @question.id, visitable_type: 'Question')
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Question', target_id: @question.id)
+
   end
 
   # GET /questions
@@ -33,9 +37,11 @@ class QuestionsController < ApplicationController
         @visit.destroy
       end
       Visit.create(user_id: current_user.id, visitable_id: @question.id, visitable_type: 'Question')
+      @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Question', target_id: @question.id)
+
     end
   end
-  
+
   # GET /questions/1
   # GET /questions/1.json
   def show
@@ -61,6 +67,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Question', target_id: @question.id)
         for tag in @tags
           if !tag.blank?
             @tag = Tag.where(title: tag).first
@@ -89,6 +96,7 @@ class QuestionsController < ApplicationController
     end
     respond_to do |format|
       if @question.update(question_params)
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Question', target_id: @question.id)
         for tag in @tags
           if !tag.blank?
             @tag = Tag.where(title: tag).first
@@ -113,6 +121,7 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1
   # DELETE /questions/1.json
   def destroy
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Destroy', target_type: 'Question', target_id: @question.id)
     @question.destroy
     respond_to do |format|
       format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }

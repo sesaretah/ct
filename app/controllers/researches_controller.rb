@@ -5,7 +5,8 @@ class ResearchesController < ApplicationController
     if !params[:q].blank?
       @researches = Research.where("name LIKE ? OR pub_name LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
-    #search params[:q], :star => true
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Research')
+
   end
 
   def view_content
@@ -21,6 +22,8 @@ class ResearchesController < ApplicationController
       @visit.destroy
     end
     Visit.create(user_id: current_user.id, visitable_id: @research.id, visitable_type: 'Research')
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Research', target_id: @research.id)
+
   end
   # GET /researches
   # GET /researches.json
@@ -60,6 +63,8 @@ class ResearchesController < ApplicationController
       @research = Research.new(research_params(params["research"]))
       @research.user_id = current_user.id
       @research.save
+      @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Research', target_id: @research.id)
+
     end
     @contribution = Contribution.where(user_id: current_user.id, research_id: @research.id )
     if @contribution.blank?
@@ -82,6 +87,8 @@ class ResearchesController < ApplicationController
   def update
     respond_to do |format|
       if @research.update(research_params(params["research"]))
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Research', target_id: @research.id)
+
         if params[:caller] == 'reg'
           format.html { redirect_to '/registeration_steps?step=4'}
         else
@@ -99,6 +106,8 @@ class ResearchesController < ApplicationController
   # DELETE /researches/1
   # DELETE /researches/1.json
   def destroy
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Destroy', target_type: 'Research', target_id: @research.id)
+
     @research.destroy
     respond_to do |format|
       format.html { redirect_to researches_url, notice: 'Research was successfully destroyed.' }

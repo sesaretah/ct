@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  activity_type: MyString
+  target_type: MyString
+  target_id: 1
+  middle_type: MyString
+  middle_id: 1
+  detail: 1
+
+two:
+  user_id: 1
+  activity_type: MyString
+  target_type: MyString
+  target_id: 1
+  middle_type: MyString
+  middle_id: 1
+  detail: 1

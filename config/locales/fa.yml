@@ -404,6 +404,13 @@ fa:
         setting:
             user_privacy_status: 'نوع پروفایل'
             user_serachable_status: 'قابلیت جستجوی پروفایل'
+        activity:
+            user: 'کاربر'
+            activity_type: 'نوع فعالیت'
+            target_type: 'کلاس هدف'
+            target_id: 'شناسه هدف'
+            middle_type: 'کلاس واسط'
+            middle_id: 'شناسه واسط'
         privacypolicy:
           profile_fathername: 'نام پدر'
           profile_sex: 'جنسیت'
@@ -421,6 +428,14 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  user: 'کاربر'
+  activity_type: 'نوع فعالیت'
+  target_type: 'کلاس هدف'
+  target_id: 'شناسه هدف'
+  middle_type: 'کلاس واسط'
+  middle_id: 'شناسه واسط'
+  created_at: 'زمان'
+  activities: 'فعالیت ها'
   related_researches: 'منتشرشده های مرتبط'
   related_labs: 'آزمایشگاه های مرتبط'
   related_courses: 'دروس مرتبط'

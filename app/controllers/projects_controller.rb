@@ -5,7 +5,8 @@ class ProjectsController < ApplicationController
     if !params[:q].blank?
       @projects = Project.where("name LIKE ? OR aims LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
-    #search params[:q], :star => true
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Project')
+
   end
 
   def cropper
@@ -21,6 +22,8 @@ class ProjectsController < ApplicationController
         @visit.destroy
       end
       Visit.create(user_id: current_user.id, visitable_id: @project.id, visitable_type: 'Project')
+      @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Project', target_id: @project.id)
+
     end
   # GET /projects
   # GET /projects.json
@@ -33,6 +36,8 @@ class ProjectsController < ApplicationController
       @visit.destroy
     end
     Visit.create(user_id: current_user.id, visitable_id: @project.id, visitable_type: 'Project')
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Project', target_id: @project.id)
+
   end
   end
 
@@ -57,6 +62,7 @@ class ProjectsController < ApplicationController
     @project.user_id = current_user.id
     respond_to do |format|
       if @project.save
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Project', target_id: @project.id)
         if params[:project][:avatar].blank?
           format.html { redirect_to '/projects?project_id='+@project.id.to_s, notice: :project_was_successfully_created }
         else
@@ -75,6 +81,7 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(project_params)
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Project', target_id: @project.id)
         if params[:project][:avatar].blank?
           format.html { redirect_to '/projects?project_id='+@project.id.to_s, notice: :project_was_successfully_updated }
         else
@@ -90,6 +97,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Destroy', target_type: 'Project', target_id: @project.id)
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }

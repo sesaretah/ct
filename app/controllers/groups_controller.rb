@@ -4,7 +4,8 @@ class GroupsController < ApplicationController
     if !params[:q].blank?
       @groups = Group.where("name LIKE ? OR description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
-    #search params[:q], :star => true
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Group')
+
   end
 
   def view_content
@@ -20,6 +21,8 @@ class GroupsController < ApplicationController
       @visit.destroy
     end
     Visit.create(user_id: current_user.id, visitable_id: @group.id, visitable_type: 'Group')
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Group', target_id: @group.id)
+
   end
 
   def upload_avatar
@@ -54,6 +57,7 @@ class GroupsController < ApplicationController
         @visit.destroy
       end
       Visit.create(user_id: current_user.id, visitable_id: @group.id, visitable_type: 'Group')
+      @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Group', target_id: @group.id)
     end
   end
 
@@ -80,6 +84,7 @@ class GroupsController < ApplicationController
     end
     respond_to do |format|
       if @group.save
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Group', target_id: @group.id)
         if params[:group][:avatar].blank?
           format.html { redirect_to '/groups?group_id='+@group.id.to_s, notice: :group_was_successfully_created }
         else
@@ -98,6 +103,7 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(group_params)
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Group', target_id: @group.id)
         if params[:group][:avatar].blank?
           format.html { redirect_to '/groups?group_id='+@group.id.to_s, notice: :Group_was_successfully_updated }
         else
@@ -113,6 +119,7 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   # DELETE /groups/1.json
   def destroy
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Destroy', target_type: 'Group', target_id: @group.id)
     @group.destroy
     respond_to do |format|
       format.html { redirect_to groups_url, notice: 'Group was successfully destroyed.' }

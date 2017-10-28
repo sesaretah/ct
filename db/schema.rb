@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027181841) do
+ActiveRecord::Schema.define(version: 20171028040516) do
 
   create_table "accesscontrols", force: :cascade do |t|
     t.integer  "role_id",               limit: 4
@@ -61,6 +61,18 @@ ActiveRecord::Schema.define(version: 20171027181841) do
     t.integer  "search_profiles",       limit: 4
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+  end
+
+  create_table "activities", force: :cascade do |t|
+    t.integer  "user_id",       limit: 4
+    t.string   "activity_type", limit: 191
+    t.string   "target_type",   limit: 191
+    t.integer  "target_id",     limit: 4
+    t.string   "middle_type",   limit: 191
+    t.integer  "middle_id",     limit: 4
+    t.integer  "detail",        limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "announcements", force: :cascade do |t|
@@ -281,10 +293,10 @@ ActiveRecord::Schema.define(version: 20171027181841) do
   end
 
   create_table "graphs", force: :cascade do |t|
-    t.text     "nodes",      limit: 65535
-    t.text     "edges",      limit: 65535
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.text     "nodes",      limit: 4294967295
+    t.text     "edges",      limit: 4294967295
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "groupings", force: :cascade do |t|

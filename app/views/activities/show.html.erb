@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @activity.user_id %>
+</p>
+
+<p>
+  <strong>Activity type:</strong>
+  <%= @activity.activity_type %>
+</p>
+
+<p>
+  <strong>Target type:</strong>
+  <%= @activity.target_type %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @activity.target_id %>
+</p>
+
+<p>
+  <strong>Middle type:</strong>
+  <%= @activity.middle_type %>
+</p>
+
+<p>
+  <strong>Middle:</strong>
+  <%= @activity.middle_id %>
+</p>
+
+<p>
+  <strong>Detail:</strong>
+  <%= @activity.detail %>
+</p>
+
+<%= link_to 'Edit', edit_activity_path(@activity) %> |
+<%= link_to 'Back', activities_path %>

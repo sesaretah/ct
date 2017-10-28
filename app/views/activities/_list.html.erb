@@ -1,0 +1,30 @@
+<div id='list'>
+<table class='table'>
+  <thead>
+    <tr>
+      <th><%=t :user%></th>
+      <th><%=t :activity_type%></th>
+      <th><%=t :target_type%></th>
+      <th><%=t :target_id%></th>
+      <th><%=t :middle_type%></th>
+      <th><%=t :middle_id%></th>
+      <th><%=t :created_at%></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% activities.each do |activity| %>
+    <tr>
+      <% @profile = Profile.where(user_id: activity.user_id).first%>
+      <td><%= @profile.name%> <%= @profile.surename%></td>
+      <td><%=t(activity.activity_type) %></td>
+      <td><%= activity.target_type %></td>
+      <td><%= activity.target_id %></td>
+      <td><%= activity.middle_type %></td>
+      <td><%= activity.middle_id %></td>
+      <td><%= activity.created_at %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

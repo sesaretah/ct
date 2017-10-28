@@ -5,6 +5,8 @@ class LabsController < ApplicationController
     if !params[:q].blank?
       @labs = Lab.where("name LIKE ? OR about LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Lab')
+
   end
 
   def view_content
@@ -14,7 +16,9 @@ class LabsController < ApplicationController
     if !@visit.blank?
       @visit.destroy
     end
-    Visit.create(user_id: current_user.id, visitable_id: @lab.id, visitable_type: 'Course')
+    Visit.create(user_id: current_user.id, visitable_id: @lab.id, visitable_type: 'Lab')
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Lab', target_id: @lab.id)
+
   end
 
   def cropper
@@ -49,6 +53,7 @@ class LabsController < ApplicationController
     @lab.user_id = current_user.id
     respond_to do |format|
       if @lab.save
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Lab', target_id: @lab.id)
 
         if @lab.chkbxch == 1
           @coupling =  Coupling.where(coupler_id: @lab.id, coupler_type: 'Lab', couplee_type: 'Channel' ).first
@@ -95,6 +100,8 @@ class LabsController < ApplicationController
       if @lab.update(lab_params)
 
         if @lab.chkbxch == 1
+          @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Lab', target_id: @lab.id)
+
           @coupling =  Coupling.where(coupler_id: @lab.id, coupler_type: 'Lab', couplee_type: 'Channel' ).first
           if @coupling.blank?
             @name = t(:channel_coupled_to_lab) + ' ' + @lab.name
@@ -134,6 +141,8 @@ class LabsController < ApplicationController
   # DELETE /labs/1
   # DELETE /labs/1.json
   def destroy
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Destory', target_type: 'Lab', target_id: @lab.id)
+
     @lab.destroy
     respond_to do |format|
       format.html { redirect_to labs_url, notice: 'Lab was successfully destroyed.' }

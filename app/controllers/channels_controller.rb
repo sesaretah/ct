@@ -5,7 +5,7 @@ class ChannelsController < ApplicationController
     if !params[:q].blank?
       @channels = Channel.where("name LIKE ? OR description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
-    #search params[:q], :star => true
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Channel')
   end
 
 
@@ -15,6 +15,8 @@ class ChannelsController < ApplicationController
     if params[:page].blank?
       @page = 1
     end
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Join', target_type: 'Channel', target_id: @channel.id , middle_type: 'Involvement', middle_id: @involvement.id)
+
   end
 
   def view_content
@@ -30,6 +32,7 @@ class ChannelsController < ApplicationController
       @visit.destroy
     end
     Visit.create(user_id: current_user.id, visitable_id: @channel.id, visitable_type: 'Channel')
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Channel', target_id: @channel.id)
   end
 
   def upload_avatar
@@ -63,6 +66,7 @@ class ChannelsController < ApplicationController
         @visit.destroy
       end
       Visit.create(user_id: current_user.id, visitable_id: @channel.id, visitable_type: 'Channel')
+      @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Channel', target_id: @channel.id)
     end
   end
 
@@ -89,6 +93,7 @@ class ChannelsController < ApplicationController
     end
     respond_to do |format|
       if @channel.save
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Channel', target_id: @channel.id)
         if params[:channel][:avatar].blank?
           format.html { redirect_to '/channels?channel_id='+@channel.id.to_s, notice: :channel_was_successfully_created }
         else
@@ -107,6 +112,7 @@ class ChannelsController < ApplicationController
   def update
     respond_to do |format|
       if @channel.update(channel_params)
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Channel', target_id: @channel.id)
         if params[:channel][:avatar].blank?
           format.html { redirect_to '/channels?channel_id='+@channel.id.to_s, notice: :Channel_was_successfully_updated }
         else
@@ -122,6 +128,7 @@ class ChannelsController < ApplicationController
   # DELETE /channels/1
   # DELETE /channels/1.json
   def destroy
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Destroy', target_type: 'Channel', target_id: @channel.id)
     @channel.destroy
     respond_to do |format|
       format.html { redirect_to channels_url, notice: 'Channel was successfully destroyed.' }

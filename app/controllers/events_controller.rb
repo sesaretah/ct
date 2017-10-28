@@ -5,6 +5,7 @@ class EventsController < ApplicationController
     if !params[:q].blank?
       @events = Event.where("name LIKE ? OR description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Event')
 
     respond_to do |format|
     format.html
@@ -29,6 +30,8 @@ class EventsController < ApplicationController
       @visit.destroy
     end
     Visit.create(user_id: current_user.id, visitable_id: @event.id, visitable_type: 'Event')
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Event', target_id: @event.id)
+
   end
 
 
@@ -64,6 +67,8 @@ class EventsController < ApplicationController
         @visit.destroy
       end
       Visit.create(user_id: current_user.id, visitable_id: @event.id, visitable_type: 'Event')
+      @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Event', target_id: @event.id)
+
     end
   end
 
@@ -90,6 +95,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Event', target_id: @event.id)
         if params[:event][:avatar].blank?
           format.html { redirect_to '/events?event_id='+@event.id.to_s, notice: :Event_was_successfully_created }
         else
@@ -111,6 +117,8 @@ class EventsController < ApplicationController
         @event.event_date = JalaliDate.to_gregorian(params[:event_date_yyyy],params[:event_date_mm],params[:event_date_dd])
       end
       if @event.update(event_params)
+        @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Event', target_id: @event.id)
+
         if params[:event][:avatar].blank?
           format.html { redirect_to '/events?event_id='+@event.id.to_s, notice: :Event_was_successfully_updated }
         else
@@ -126,6 +134,8 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
+    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Destroy', target_type: 'Event', target_id: @event.id)
+
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }

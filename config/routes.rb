@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :activities
+
   resources :graphs
 
   resources :suggestions
@@ -231,6 +233,7 @@ Rails.application.routes.draw do
 
   match "/polls/completion/:id" => "polls#completion", :via => :get
   match "/polls/view_content/:id" => "polls#view_content", :via => :get
+  match "/activities/list/:id" => "activities#list", :via => :get
 
   match "/offsessionmaterials/render_partial/:id" => "offsessionmaterials#render_partial", :via => :get
 
