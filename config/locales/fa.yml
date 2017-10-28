@@ -428,6 +428,7 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  graph: 'گراف'
   user: 'کاربر'
   activity_type: 'نوع فعالیت'
   target_type: 'کلاس هدف'
@@ -435,7 +436,7 @@ fa:
   middle_type: 'کلاس واسط'
   middle_id: 'شناسه واسط'
   created_at: 'زمان'
-  activities: 'فعالیت ها'
+  activity_list: 'لیست عملکرد ها'
   related_researches: 'منتشرشده های مرتبط'
   related_labs: 'آزمایشگاه های مرتبط'
   related_courses: 'دروس مرتبط'
@@ -447,7 +448,7 @@ fa:
   related_channels:  'کانال های مرتبط'
   granting_stats: 'آمار نقش های کاربران'
   privacypolicy: 'حریم خصوصی'
-  logs: 'سیاهه عملکرد'
+  logs: 'نمودار عملکرد'
   new_privacypolicy: 'حریم خصوصی'
   monthly: 'ماهانه'
   weekly: 'هفتگی'

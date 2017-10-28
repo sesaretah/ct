@@ -3,7 +3,7 @@
   <section id="page-title">
     <div class="row">
       <div class="col-sm-8">
-        <h1 class="mainTitle"><%= t(:activities)%></h1>
+        <h1 class="mainTitle"><%= t(:activity_list)%></h1>
         <span class="mainDescription"><% t(:please_enter_new_channel_data)%></span>
       </div>
       <ol class="breadcrumb">
@@ -47,9 +47,11 @@
               <%= render partial: 'profiles/compactlist', locals: {profiles: @profiles, item: Activity.first}%>
             </fieldset>
           </div>
-        <div id='activitylist'>
+          <div id='activitylist'>
 
+          </div>
         </div>
       </div>
     </div>
   </div>
+</div>
