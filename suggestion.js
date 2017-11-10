@@ -25,7 +25,7 @@ async.waterfall([
     async.each(arg1, function(row, cb) {
       var q = "SELECT * FROM profiles WHERE user_id =" + row.id
       connection.query(q, function (error, profile) {
-        if (typeof profile !== 'undefined'){
+        if (typeof profile[0] !== 'undefined'){
         var name =  profile[0].name + " " + profile[0].surename
       } else {
         var name = "user-" + row.id
