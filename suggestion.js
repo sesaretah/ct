@@ -25,9 +25,9 @@ async.waterfall([
     async.each(arg1, function(row, cb) {
       var q = "SELECT * FROM profiles WHERE user_id =" + row.id
       connection.query(q, function (error, profile) {
-        var name =  profile.name + profile.surename
+        var name =  profile[0].name + " " + profile[0].surename
         people.push("user-" + row.id)
-        g.setNode("user-" + row.id, {type: 'user', name: name });
+        g.setNode("user-" + row.id, {type: 'user', name: name, id: row.id});
         i = i + 1;
         if (arg1.length == i){
           console.log('Profiles Finished');
@@ -52,7 +52,7 @@ async.waterfall([
     }
     var i = 0
     async.each(arg1, function(row, cb) {
-      g.setNode("channel-" + row.id, {type: 'channel', name: row.name });
+      g.setNode("channel-" + row.id, {type: 'channel', name: row.name, id: row.id });
       i = i + 1;
       if (arg1.length == i){
         console.log('Channel Finished');
@@ -76,7 +76,7 @@ async.waterfall([
     }
     var i = 0
     async.each(arg1, function(row, cb) {
-      g.setNode("blog-" + row.id, {type: 'blog', name: row.name });
+      g.setNode("blog-" + row.id, {type: 'blog', name: row.title, id: row.id });
       i = i + 1;
       if (arg1.length == i){
         console.log('Blog Finished');
@@ -100,7 +100,7 @@ async.waterfall([
     }
     var i = 0
     async.each(arg1, function(row, cb) {
-      g.setNode("group-" + row.id, {type: 'group', name: row.name });
+      g.setNode("group-" + row.id, {type: 'group', name: row.name, id: row.id });
       i = i + 1;
       if (arg1.length == i){
         console.log('Group Finished');
@@ -124,7 +124,7 @@ async.waterfall([
     }
     var i = 0
     async.each(arg1, function(row, cb) {
-      g.setNode("event-" + row.id, {type: 'event', name: row.name });
+      g.setNode("event-" + row.id, {type: 'event', name: row.name, id: row.id });
       i = i + 1;
       if (arg1.length == i){
         console.log('Event Finished');
@@ -148,7 +148,7 @@ async.waterfall([
     }
     var i = 0
     async.each(arg1, function(row, cb) {
-      g.setNode("question-" + row.id, {type: 'question', name: row.name });
+      g.setNode("question-" + row.id, {type: 'question', name: row.title, id: row.id });
       i = i + 1;
       if (arg1.length == i){
         console.log('Question Finished');
@@ -172,7 +172,7 @@ async.waterfall([
     }
     var i = 0
     async.each(arg1, function(row, cb) {
-      g.setNode("project-" + row.id, {type: 'project', name: row.name });
+      g.setNode("project-" + row.id, {type: 'project', name: row.name, id: row.id });
       i = i + 1;
       if (arg1.length == i){
         console.log('Project Finished');
@@ -185,6 +185,7 @@ async.waterfall([
   function(arg1, callback) {
     var sql = "SELECT * FROM offerings"
     connection.query(sql, function (error, rows) {
+      console.log(rows);
       callback(null, rows);
     });
   },
@@ -196,7 +197,8 @@ async.waterfall([
     }
     var i = 0
     async.each(arg1, function(row, cb) {
-      g.setNode("offering-" + row.id, {type: 'offering', name: row.period + row.year });
+      console.log(row.period + row.year);
+      g.setNode("offering-" + row.id, {type: 'offering', name: row.period + row.year, id: row.id });
       i = i + 1;
       if (arg1.length == i){
         console.log('Offering Finished');
@@ -220,7 +222,7 @@ async.waterfall([
     }
     var i = 0
     async.each(arg1, function(row, cb) {
-      g.setNode("research-" + row.id, {type: 'research', name: row.name });
+      g.setNode("research-" + row.id, {type: 'research', name: row.name, id: row.id });
       i = i + 1;
       if (arg1.length == i){
         console.log('Research Finished');
@@ -244,7 +246,7 @@ async.waterfall([
     }
     var i = 0
     async.each(arg1, function(row, cb) {
-      g.setNode("lab-" + row.id, {type: 'lab', name: row.name });
+      g.setNode("lab-" + row.id, {type: 'lab', name: row.name, id: row.id });
       i = i + 1;
       if (arg1.length == i){
         console.log('Lab Finished');
@@ -431,6 +433,32 @@ async.waterfall([
       }
       cb();
     });
+  },
+
+  function(arg1, callback) {
+    var sql = "SELECT * FROM contributions"
+    connection.query(sql, function (error, rows) {
+      callback(null, rows);
+    });
+  },
+
+  function(arg1, callback) {
+    if (arg1.length == 0){
+      console.log('Contribution Finished');
+      callback(null, 'Contribution Finished');
+    }
+    var i = 0
+    async.each(arg1, function(row, cb) {
+
+      g.setEdge("user-" + row.user_id, "research-"+ row.research_id, { type: 'contribution' });
+      //  g.setEdge("user-" + followeeid, "user-"+ followerid, { type: 'friendship' });
+      i = i + 1;
+      if (arg1.length == i){
+        console.log('Contribution Finished');
+        callback(null, 'Contribution Finished');
+      }
+      cb();
+    });
   }
 
 
@@ -468,6 +496,7 @@ async.waterfall([
   var e = ""
   var nodes =   g.nodes()
   for (node in nodes){
+//    if (typeof g.node(nodes[node]) !== 'undefined'){
     var edges = g.nodeEdges(nodes[node]);
     for (edge in edges) {
       if ( node == nodes.length - 1 && edge == edges.length - 1) {
@@ -482,15 +511,16 @@ async.waterfall([
       var p = pluralize(nodes[node].split("-")[0])
     }
     if ( node == nodes.length - 1) {
-      n = n + " { 'name': '" +  nodes[node] + "'" +", 'href':" + "'/" + p + '/' + nodes[node].split("-")[1] + "'}"
+      n = n + " { 'name': '" +  nodes[node] + "'," + "'id':'"+ g.node(nodes[node]).id + "','type':'"+ g.node(nodes[node]).type + "','title':'" + g.node(nodes[node]).name.replace("'"," ")  + "', 'href':" + "'/" + p + '/' + nodes[node].split("-")[1] + "'}"
       connection.query('INSERT INTO graphs SET ?', { nodes: n, edges: e }, function (error, results, fields) {
         if (error) throw error;
       });
     } else {
-    //  console.log(n);
-     n = n + " { 'name':'" +  nodes[node] + "'" +", 'href':" + "'/" + p + '/' + nodes[node].split("-")[1] + "'},"
+    //  console.log(nodes[node], g.node(nodes[node]));
+     n = n + " { 'name':'" +  nodes[node] + "'," + "'id':'"+ g.node(nodes[node]).id +"','type':'"+ g.node(nodes[node]).type +"','title':'" + g.node(nodes[node]).name.replace("'"," ")  +"', 'href':" + "'/" + p + '/' + nodes[node].split("-")[1] + "'},"
    }
-  }
+// }
+}
 
 });
 

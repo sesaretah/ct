@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def graph
-    render layout: false
+    #render layout: false
   end
 
   def logs

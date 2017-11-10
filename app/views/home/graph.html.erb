@@ -4,13 +4,177 @@
   stroke: #ccc;
 }
 
+.node circle {
+  fill: steelblue;
+}
 .node text {
-  pointer-events: none;
-  font: 10px sans-serif;
+  fill: darkred;
+}
+.link {
+  fill: none;
+  stroke: #b9c1ce;
+  stroke-opacity: .2;
 }
 
 </style>
+<div class="wrap-content container" id="container">
+  <div class="row">
+											<div class="panel panel-white">
+												<div class="panel-heading">
+													<h4 class="panel-title"><%=t :relations_graph%></h4>
+												</div>
+												<div class="panel-body">
+													<p class="text-small">
+                              <%=t :following_checked_boxes_are_shown%>
+                          </p>
+                          <%= form_tag '/home/graph', method: :get do%>
+													<div class="checkbox clip-check check-primary checkbox-inline">
+														<input type="checkbox" name='channel' id="channel" value="true" <%if params['channel'] == 'true'%> checked="" <%end%>>
+														<label for="channel">
+															<%=t :channels%>
+														</label>
+													</div>
+                          <div class="checkbox clip-check check-primary checkbox-inline">
+                            <input type="checkbox" name='group' id="group" value="true" <%if params['group'] == 'true'%> checked="" <%end%>>
+                            <label for="group">
+                              <%=t :groups%>
+                            </label>
+                          </div>
+                          <div class="checkbox clip-check check-primary checkbox-inline">
+                            <input type="checkbox" name= 'blog' id="blog" value="true" <%if params['blog'] == 'true'%> checked="" <%end%>>
+                            <label for="blog">
+                              <%=t :blogs%>
+                            </label>
+                          </div>
+
+                          <div class="checkbox clip-check check-primary checkbox-inline">
+                            <input type="checkbox" name='event' id="event" value="true" <%if params['event'] == 'true'%> checked="" <%end%>>
+                            <label for="event">
+                              <%=t :events%>
+                            </label>
+                          </div>
+
+                          <div class="checkbox clip-check check-primary checkbox-inline">
+                            <input type="checkbox" name='question' id="question" value="true" <%if params['question'] == 'true'%> checked="" <%end%>>
+                            <label for="question">
+                              <%=t :questions%>
+                            </label>
+                          </div>
+
+                          <div class="checkbox clip-check check-primary checkbox-inline">
+                            <input type="checkbox" name='project' id="project" value="true" <%if params['project'] == 'true'%> checked="" <%end%>>
+                            <label for="project">
+                              <%=t :projects%>
+                            </label>
+                          </div>
+
+                          <div class="checkbox clip-check check-primary checkbox-inline">
+                            <input type="checkbox" name= 'offering' id="offering" value="true" <%if params['offering'] == 'true'%> checked="" <%end%>>
+                            <label for="offering">
+                              <%=t :offerings%>
+                            </label>
+                          </div>
+
+                          <div class="checkbox clip-check check-primary checkbox-inline">
+                            <input type="checkbox" name='lab' id="lab" value="true" <%if params['lab'] == 'true'%> checked="" <%end%>>
+                            <label for="lab">
+                              <%=t :labs%>
+                            </label>
+                          </div>
+
+                          <div class="checkbox clip-check check-primary checkbox-inline">
+                            <input type="checkbox" name='research' id="research" value="true" <%if params['research'] == 'true'%> checked="" <%end%>>
+                            <label for="research">
+                              <%=t :researches%>
+                            </label>
+                          </div>
+
+                          <button id='all' type="submit" class="btn btn-light-azure btn-squared btn-xs">
+                            <i class="fa fa-check" style="color: white !important;vertical-align: middle;"></i> <%= t(:act)%>&nbsp
+                          </button>
+                          <%end%>
+												</div>
+											</div>
+										</div>
+                    <div class="row">
 <svg width="960" height="600"></svg>
+</div>
+<div class="col-sm-4">
+</div>
+<% @nodes = JSON.parse '[' + Graph.last.nodes.gsub(/'/, "\"") + ']'%>
+
+<% @nodes.each do |node| %>
+<% if node['type'] == 'user'%>
+<% @friendship = Friendship.where(user_id: current_user.id, friend_id: node['id']).first%>
+<% if @friendship.blank? %>
+<% node['active'] = false%>
+<%else%>
+<% node['active'] = true%>
+<%end%>
+<%else%>
+<% node['active'] = true%>
+<%end%>
+<% if current_user.id == node['id'].to_i%>
+<% node['active'] = true%>
+<%end%>
+<% case node['type'] %>
+<% when 'channel'%>
+<% if params['channel'] == 'true'%>
+<% node['active'] = true%>
+<% else%>
+<% node['active'] = false%>
+<%end%>
+<% when 'blog'%>
+<% if params['blog'] == 'true'%>
+<% node['active'] = true%>
+<% else%>
+<% node['active'] = false%>
+<%end%>
+<% when 'research'%>
+<% if params['research'] == 'true'%>
+<% node['active'] = true%>
+<% else%>
+<% node['active'] = false%>
+<%end%>
+<% when 'group'%>
+<% if params['group'] == 'true'%>
+<% node['active'] = true%>
+<% else%>
+<% node['active'] = false%>
+<%end%>
+<% when 'event'%>
+<% if params['event'] == 'true'%>
+<% node['active'] = true%>
+<% else%>
+<% node['active'] = false%>
+<%end%>
+<% when 'question'%>
+<% if params['question'] == 'true'%>
+<% node['active'] = true%>
+<% else%>
+<% node['active'] = false%>
+<%end%>
+<% when 'lab'%>
+<% if params['lab'] == 'true'%>
+<% node['active'] = true%>
+<% else%>
+<% node['active'] = false%>
+<%end%>
+<% when 'project'%>
+<% if params['project'] == 'true'%>
+<% node['active'] = true%>
+<% else%>
+<% node['active'] = false%>
+<%end%>
+<% when 'offering'%>
+<% if params['offering'] == 'true'%>
+<% node['active'] = true%>
+<% else%>
+<% node['active'] = false%>
+<%end%>
+<%end%>
+<%end%>
+
 <script src='http://d3js.org/d3.v3.min.js'></script>
 <script>
 
@@ -26,31 +190,30 @@ height = 400;
 // the dimensions for this container.
 
 var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+width = +svg.attr("width"),
+height = +svg.attr("height");
 
 // Before we do anything else, let's define the data for the visualization.
 
 var graph = {
-"nodes": [  <%= raw Graph.last.nodes%>
-        ],
-"links": [  <%= raw Graph.last.edges%>
-        ]
+  "nodes":  <%= raw @nodes.to_json%>,
+  "links": [  <%= raw Graph.last.edges%>
+  ]
 };
 
 graph.links = graph.links.map(function(l) {
-    var sourceNode = graph.nodes.filter(function(n) {
-        return n.name === l.source;
-    })[0],
-        targetNode = graph.nodes.filter(function(n) {
-            return n.name === l.target;
-        })[0];
+  var sourceNode = graph.nodes.filter(function(n) {
+    return n.name === l.source;
+  })[0],
+  targetNode = graph.nodes.filter(function(n) {
+    return n.name === l.target;
+  })[0];
 
-    return {
-        source: sourceNode,
-        target: targetNode,
-        value: l.value
-    };
+  return {
+    source: sourceNode,
+    target: targetNode,
+    value: l.value
+  };
 });
 
 // Extract the nodes and links from the data.
@@ -61,49 +224,75 @@ links = graph.links;
 // Those include the dimensions of the visualization and the arrays
 // of nodes and links.
 
+
 var force = d3.layout.force()
-    .gravity(0.05)
-    .distance(100)
-    .charge(-100)
-    .size([width, height]);
+.gravity(0.05)
+.distance(100)
+.charge(-80)
+.size([width, height]);
 
 
 
 
 force
-    .nodes(nodes)
-    .links(links)
-    .start();
+.nodes(nodes)
+.links(links)
+.start();
 
 var link = svg.selectAll(".link")
-    .data(links)
-  .enter().append("line")
-    .attr("class", "link");
+.data(links.filter(function(d) {
+          var show =  d.source.active && d.target.active;
+          if (show)
+              console.log("kept", d);
+          else
+              console.log("excluded", d);
+          return show;
+      }) )
+.enter().append("line")
+.attr("class", "link");
 
 var node = svg.selectAll(".node")
-    .data(nodes)
-  .enter().append("g")
-    .attr("class", "node")
-    .call(force.drag);
+.data(nodes.filter(function(d) { return d.active; }))
+.enter().append("g")
+.attr("class", "node")
+.call(force.drag);
 
 
 node.append("image")
-    .attr("xlink:href", "https://github.com/favicon.ico")
-    .attr("x", -8)
-    .attr("y", -8)
-    .attr("width", 16)
-    .attr("height", 16);
+//.attr("xlink:href", "/assets/events.png")
+.attr("xlink:href", function(d) { return "/assets/" + d.type + ".png"})
+.attr("name", function(d) { return d.name} )
+.attr("x", -8)
+.attr("y", -8)
+.attr("width", 16)
+.attr("height", 16);
 
+node.append("title")
+    .text(function(d) { return d.title; });
+
+/*
+node.append("circle")
+.attr("class", "node")
+.attr("r", 5);
+*/
+node.append("svg:a")
+.attr("xlink:href", function(d){return d.href;})
+.append("text")
+.attr("dx", 12)
+.attr("dy", ".35em")
+//.text(function(d) { return d.name})
+
+/*
 node.append("text")
-    .attr("dx", 12)
-    .attr("dy", ".35em")
-    .text(function(d) { return d.name });
+.attr("dx", 12)
+.attr("dy", ".35em")
+.text(function(d) { return d.name });*/
 
 force.on("tick", function() {
   link.attr("x1", function(d) { return d.source.x; })
-      .attr("y1", function(d) { return d.source.y; })
-      .attr("x2", function(d) { return d.target.x; })
-      .attr("y2", function(d) { return d.target.y; });
+  .attr("y1", function(d) { return d.source.y; })
+  .attr("x2", function(d) { return d.target.x; })
+  .attr("y2", function(d) { return d.target.y; });
 
   node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 });

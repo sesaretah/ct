@@ -428,6 +428,10 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  act: 'اعمال'
+  questions: 'سوالات'
+  relations_graph: 'گراف ارتباطات'
+  following_checked_boxes_are_shown: 'موارد تیک خورده زیر به نمایش گذاشته شده اند'
   graph: 'گراف'
   user: 'کاربر'
   activity_type: 'نوع فعالیت'
