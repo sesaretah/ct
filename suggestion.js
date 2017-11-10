@@ -516,14 +516,14 @@ async.waterfall([
     }
     if ( node == nodes.length - 1) {
 
-      n = n + " { 'name': '" +  nodes[node] + "'," + "'id':'"+ g.node(nodes[node]).id + "','type':'"+ g.node(nodes[node]).type + "','title':'" + g.node(nodes[node]).name.replace("'"," ").replace("""," ")  + "', 'href':" + "'/" + p + '/' + nodes[node].split("-")[1] + "'}"
+      n = n + " { 'name': '" +  nodes[node] + "'," + "'id':'"+ g.node(nodes[node]).id + "','type':'"+ g.node(nodes[node]).type + "','title':'" + g.node(nodes[node]).name.replace("'"," ").replace(/['"]+/g, '')  + "', 'href':" + "'/" + p + '/' + nodes[node].split("-")[1] + "'}"
       connection.query('INSERT INTO graphs SET ?', { nodes: n, edges: e }, function (error, results, fields) {
         if (error) throw error;
       });
     } else {
       console.log(nodes[node].split("-")[1]);
     //  console.log(nodes[node], g.node(nodes[node]));
-     n = n + " { 'name':'" +  nodes[node] + "'," + "'id':'"+ g.node(nodes[node]).id +"','type':'"+ g.node(nodes[node]).type +"','title':'" + g.node(nodes[node]).name.replace("'"," ").replace("""," ")  +"', 'href':" + "'/" + p + '/' + nodes[node].split("-")[1] + "'},"
+     n = n + " { 'name':'" +  nodes[node] + "'," + "'id':'"+ g.node(nodes[node]).id +"','type':'"+ g.node(nodes[node]).type +"','title':'" + g.node(nodes[node]).name.replace("'"," ").replace(/['"]+/g, '')  +"', 'href':" + "'/" + p + '/' + nodes[node].split("-")[1] + "'},"
    }
 // }
 }
