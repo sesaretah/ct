@@ -516,7 +516,7 @@ async.waterfall([
         if (error) throw error;
       });
     } else {
-    //  console.log(nodes[node], g.node(nodes[node]));
+      console.log(nodes[node], g.node(nodes[node]));
      n = n + " { 'name':'" +  nodes[node] + "'," + "'id':'"+ g.node(nodes[node]).id +"','type':'"+ g.node(nodes[node]).type +"','title':'" + g.node(nodes[node]).name.replace("'"," ")  +"', 'href':" + "'/" + p + '/' + nodes[node].split("-")[1] + "'},"
    }
 // }
