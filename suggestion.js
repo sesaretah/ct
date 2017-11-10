@@ -189,7 +189,7 @@ async.waterfall([
   function(arg1, callback) {
     var sql = "SELECT * FROM offerings"
     connection.query(sql, function (error, rows) {
-      console.log(rows);
+      //console.log(rows);
       callback(null, rows);
     });
   },
@@ -201,7 +201,7 @@ async.waterfall([
     }
     var i = 0
     async.each(arg1, function(row, cb) {
-      console.log(row.period + row.year);
+      //console.log(row.period + row.year);
       g.setNode("offering-" + row.id, {type: 'offering', name: row.period + row.year, id: row.id });
       i = i + 1;
       if (arg1.length == i){
