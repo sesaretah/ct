@@ -25,7 +25,11 @@ async.waterfall([
     async.each(arg1, function(row, cb) {
       var q = "SELECT * FROM profiles WHERE user_id =" + row.id
       connection.query(q, function (error, profile) {
+        if (typeof profile !== 'undefined'){
         var name =  profile[0].name + " " + profile[0].surename
+      } else {
+        var name = "user-" + row.id
+      }
         people.push("user-" + row.id)
         g.setNode("user-" + row.id, {type: 'user', name: name, id: row.id});
         i = i + 1;
