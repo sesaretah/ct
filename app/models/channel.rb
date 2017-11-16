@@ -7,7 +7,7 @@ class Channel < ActiveRecord::Base
   has_many :involvements, dependent: :destroy
   has_many :users, :through => :involvements
   has_many :comments, :as => :commentable, :dependent => :destroy
-
+  has_many :taggings, :as => :taggable, :dependent => :destroy
 
   before_create :set_uuid
   after_create :set_admin

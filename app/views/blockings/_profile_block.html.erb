@@ -1,0 +1,18 @@
+<% if current_user.id != profile.user_id%>
+<div id='blocking' class="col-sm-12 margin-top-5">
+  <% @b = Blocking.where(user_id: current_user.id, target_id: profile.user_id).first%>
+  <% if @b.blank?%>
+  <%= link_to "/blockings/add_block/1?target_id=#{profile.user_id}&blocked_type=Profile&blocked_id=#{current_user.profile.id}", remote: true do%>
+  <button type="button" class="btn btn-red btn-squared btn-xs">
+    <i class="fa fa-stop" style="color: white !important;vertical-align: middle;"></i>&nbsp &nbsp<%= t(:block)%>&nbsp &nbsp
+  </button>
+  <%end%>
+  <%else%>
+  <%= link_to "/blockings/remove_block/1?target_id=#{profile.user_id}&blocked_type=Profile&blocked_id=#{current_user.profile.id}", remote: true do%>
+  <button type="button" class="btn btn-dark-green btn-squared btn-xs">
+    <i class="fa fa-play" style="color: white !important;vertical-align: middle;"></i><%= t(:unblock)%>&nbsp
+  </button>
+  <%end%>
+  <%end%>
+</div>
+<%end%>

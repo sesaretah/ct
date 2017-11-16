@@ -59,10 +59,17 @@
             <div class="row" style='margin-bottom:5px;'>
               <%= link_to research, :method => :delete, data: {confirm: "Are you sure?"}   do%>
               <button type="button" class="btn btn-dark-grey btn-squared btn-xs">
-                <i class="fa fa-file-pdf-o" style="color: white !important;vertical-align: middle;"></i> <%= t(:delete)%>
+                <i class="fa fa-file-pdf-o" style="color: white !important;vertical-align: middle;"></i> <%= t(:destroy)%>
               </button>
               <%end%>
             </div>
+            <div class="row" style='margin-bottom:5px;'>
+            <%= link_to edit_research_path(research.id) do %>
+            <button type="button" class="btn btn-light-azure btn-squared btn-xs">
+              <i class="fa fa-edit" style="color: white !important;vertical-align: middle;"></i> &nbsp <%= t(:edit)%>&nbsp
+            </button>
+          </div>
+            <%end%>
             <%end%>
 
 
@@ -100,13 +107,23 @@
     </div>
   </div>
 
-<hr/>
+  <hr/>
   <div class="row">
     <div class="col-md-12">
-    <% for contribution in research.contributions %>
-    <%= image_tag contribution.user.profile.avatar(:tiny)%> <%= contribution.user.profile.name%> <%= contribution.user.profile.surename%>
-    <%end%>
+      <% for tagging in research.taggings%>
+      <span class="label label-success">
+        <%= Tag.find(tagging.tag_id).title%>
+      </span>
+      <%end%>
+    </div>
   </div>
+  <hr/>
+  <div class="row">
+    <div class="col-md-12">
+      <% for contribution in research.contributions %>
+      <%= image_tag contribution.user.profile.avatar(:tiny)%> <%= contribution.user.profile.name%> <%= contribution.user.profile.surename%>
+      <%end%>
+    </div>
   </div>
 
 

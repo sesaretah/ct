@@ -1,0 +1,33 @@
+<%= form_for(@blocking) do |f| %>
+  <% if @blocking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@blocking.errors.count, "error") %> prohibited this blocking from being saved:</h2>
+
+      <ul>
+      <% @blocking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :target_id %><br>
+    <%= f.number_field :target_id %>
+  </div>
+  <div class="field">
+    <%= f.label :blocked_type %><br>
+    <%= f.text_field :blocked_type %>
+  </div>
+  <div class="field">
+    <%= f.label :blocked_id %><br>
+    <%= f.number_field :blocked_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

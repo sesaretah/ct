@@ -81,6 +81,23 @@
           <div class='row'>
             <fieldset>
               <legend>
+                <%= t(:tags)%>
+              </legend>
+              <div class="col-md-12">
+
+                  <% for tagging in @event.taggings%>
+                  <span class="label label-success">
+                    <%= Tag.find(tagging.tag_id).title%>
+                  </span>
+                  <%end%>
+
+              </div>
+            </fieldset>
+          </div>
+
+          <div class='row'>
+            <fieldset>
+              <legend>
                 <%= t(:actions)%>
               </legend>
               <div class="col-md-12">

@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
   has_many :participations, dependent: :destroy
   has_many :users, :through => :participations
   has_many :comments, :as => :commentable, :dependent => :destroy
+  has_many :taggings, :as => :taggable, :dependent => :destroy
 
   after_create :set_admin
 

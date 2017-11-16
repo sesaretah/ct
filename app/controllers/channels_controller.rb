@@ -88,12 +88,23 @@ class ChannelsController < ApplicationController
   # POST /channels.json
   def create
     @channel = Channel.new(channel_params)
+    @tags = params[:tags].split(',')
+    @tagged = []
     if !current_user.id.blank?
       @channel.user_id = current_user.id
     end
     respond_to do |format|
       if @channel.save
         @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Channel', target_id: @channel.id)
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.create(taggable_id: @channel.id, taggable_type: 'Channel', tag_id: @tag.id)
+          end
+        end
         if params[:channel][:avatar].blank?
           format.html { redirect_to '/channels?channel_id='+@channel.id.to_s, notice: :channel_was_successfully_created }
         else
@@ -110,9 +121,26 @@ class ChannelsController < ApplicationController
   # PATCH/PUT /channels/1
   # PATCH/PUT /channels/1.json
   def update
+    @tags = params[:tags].split(',')
+    @tagged = []
+    for prev in Tagging.where(taggable_id: @channel.id, taggable_type: 'Channel')
+      prev.destroy
+    end
     respond_to do |format|
       if @channel.update(channel_params)
         @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Channel', target_id: @channel.id)
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.where(taggable_id: @channel.id, taggable_type: 'Channel', tag_id: @tag.id).first
+            if @tagging.blank?
+              @tagging = Tagging.create(taggable_id: @channel.id, taggable_type: 'Channel', tag_id: @tag.id)
+            end
+          end
+        end
         if params[:channel][:avatar].blank?
           format.html { redirect_to '/channels?channel_id='+@channel.id.to_s, notice: :Channel_was_successfully_updated }
         else

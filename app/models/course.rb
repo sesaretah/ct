@@ -6,6 +6,7 @@ class Course < ActiveRecord::Base
   after_update :reprocess_avatar, :if => :cropping?
   belongs_to :user
   has_many :offerings
+  has_many :taggings, :as => :taggable, :dependent => :destroy
 
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?

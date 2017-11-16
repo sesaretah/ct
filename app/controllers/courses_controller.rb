@@ -50,11 +50,21 @@ class CoursesController < ApplicationController
   def create
     @course = Course.new(course_params)
     @course.user_id = current_user.id
+    @tags = params[:tags].split(',')
+    @tagged = []
 
     respond_to do |format|
       if @course.save
         @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Course', target_id: @course.id)
-
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.create(taggable_id: @course.id, taggable_type: 'Course', tag_id: @tag.id)
+          end
+        end
         if params[:course][:avatar].blank?
           format.html { redirect_to '/courses?course_id='+@course.id.to_s, notice: :course_was_successfully_created }
         else
@@ -71,10 +81,26 @@ class CoursesController < ApplicationController
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
+    @tags = params[:tags].split(',')
+    @tagged = []
+    for prev in Tagging.where(taggable_id: @course.id, taggable_type: 'Course')
+      prev.destroy
+    end
     respond_to do |format|
       if @course.update(course_params)
         @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Course', target_id: @course.id)
-
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.where(taggable_id: @course.id, taggable_type: 'Course', tag_id: @tag.id).first
+            if @tagging.blank?
+              @tagging = Tagging.create(taggable_id: @course.id, taggable_type: 'Course', tag_id: @tag.id)
+            end
+          end
+        end
         if params[:course][:avatar].blank?
           format.html { redirect_to '/courses?course_id='+@course.id.to_s, notice: :course_was_successfully_created }
         else

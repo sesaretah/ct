@@ -59,10 +59,21 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    @tags = params[:tags].split(',')
+    @tagged = []
     @project.user_id = current_user.id
     respond_to do |format|
       if @project.save
         @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Project', target_id: @project.id)
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.create(taggable_id: @project.id, taggable_type: 'Project', tag_id: @tag.id)
+          end
+        end
         if params[:project][:avatar].blank?
           format.html { redirect_to '/projects?project_id='+@project.id.to_s, notice: :project_was_successfully_created }
         else
@@ -79,9 +90,26 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    @tags = params[:tags].split(',')
+    @tagged = []
+    for prev in Tagging.where(taggable_id: @project.id, taggable_type: 'Project')
+      prev.destroy
+    end
     respond_to do |format|
       if @project.update(project_params)
         @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Project', target_id: @project.id)
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.where(taggable_id: @project.id, taggable_type: 'Project', tag_id: @tag.id).first
+            if @tagging.blank?
+              @tagging = Tagging.create(taggable_id: @project.id, taggable_type: 'Project', tag_id: @tag.id)
+            end
+          end
+        end
         if params[:project][:avatar].blank?
           format.html { redirect_to '/projects?project_id='+@project.id.to_s, notice: :project_was_successfully_updated }
         else

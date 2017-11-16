@@ -79,12 +79,23 @@ class GroupsController < ApplicationController
   # POST /groups.json
   def create
     @group = Group.new(group_params)
+    @tags = params[:tags].split(',')
+    @tagged = []
     if !current_user.id.blank?
       @group.user_id = current_user.id
     end
     respond_to do |format|
       if @group.save
         @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Group', target_id: @group.id)
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.create(taggable_id: @group.id, taggable_type: 'Group', tag_id: @tag.id)
+          end
+        end
         if params[:group][:avatar].blank?
           format.html { redirect_to '/groups?group_id='+@group.id.to_s, notice: :group_was_successfully_created }
         else
@@ -101,9 +112,26 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update
+    @tags = params[:tags].split(',')
+    @tagged = []
+    for prev in Tagging.where(taggable_id: @group.id, taggable_type: 'Group')
+      prev.destroy
+    end
     respond_to do |format|
       if @group.update(group_params)
         @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Group', target_id: @group.id)
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.where(taggable_id: @group.id, taggable_type: 'Group', tag_id: @tag.id).first
+            if @tagging.blank?
+              @tagging = Tagging.create(taggable_id: @group.id, taggable_type: 'Group', tag_id: @tag.id)
+            end
+          end
+        end
         if params[:group][:avatar].blank?
           format.html { redirect_to '/groups?group_id='+@group.id.to_s, notice: :Group_was_successfully_updated }
         else

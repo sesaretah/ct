@@ -92,10 +92,21 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.event_date = JalaliDate.to_gregorian(params[:event_date_yyyy],params[:event_date_mm],params[:event_date_dd])
     @event.user_id = current_user.id
+    @tags = params[:tags].split(',')
+    @tagged = []
 
     respond_to do |format|
       if @event.save
         @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Event', target_id: @event.id)
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.create(taggable_id: @event.id, taggable_type: 'Event', tag_id: @tag.id)
+          end
+        end
         if params[:event][:avatar].blank?
           format.html { redirect_to '/events?event_id='+@event.id.to_s, notice: :Event_was_successfully_created }
         else
@@ -112,13 +123,29 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
+    @tags = params[:tags].split(',')
+    @tagged = []
+    for prev in Tagging.where(taggable_id: @event.id, taggable_type: 'Event')
+      prev.destroy
+    end
     respond_to do |format|
       if !params[:event_date_yyyy].blank?
         @event.event_date = JalaliDate.to_gregorian(params[:event_date_yyyy],params[:event_date_mm],params[:event_date_dd])
       end
       if @event.update(event_params)
         @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Event', target_id: @event.id)
-
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.where(taggable_id: @event.id, taggable_type: 'Event', tag_id: @tag.id).first
+            if @tagging.blank?
+              @tagging = Tagging.create(taggable_id: @event.id, taggable_type: 'Event', tag_id: @tag.id)
+            end
+          end
+        end
         if params[:event][:avatar].blank?
           format.html { redirect_to '/events?event_id='+@event.id.to_s, notice: :Event_was_successfully_updated }
         else

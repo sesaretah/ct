@@ -103,7 +103,21 @@
                 <%= f.select( :i_type, itypes, {}, {:class => "form-control"})  %>
               </div>
             </div>
+            <style>
+            .ui-helper-hidden-accessible { position: absolute; left:-999em; }
+            </style>
 
+            <%=t :tags%><br />
+            <% @tags = []%>
+            <% for tagging in @event.taggings%>
+              <% @tags << Tag.find(tagging.tag_id).title%>
+            <%end%>
+            <div class="col-xs-6 padding-right-0 margin-top-5 rtl">
+                <input type="text"  id="tokenfield" value="<%= @tags.join(',')%>" placeholder="" tabindex="-1" >
+            </div>
+            <div class="row">
+            <input type="hidden" id='tags' name="tags" value="">
+          </div>
 
 
             <div class="row">
@@ -155,3 +169,69 @@
     </div>
   </div>
 </div>
+
+<script>
+
+$('#tokenfield')
+
+.on('tokenfield:createtoken', function (e) {
+    var data = e.attrs.value.split('|')
+    $("#tags").val(function() {
+    return this.value + ',' +data;
+    });
+  })
+
+
+  .on('tokenfield:edittoken', function (e) {
+    var data = e.attrs.value.split('|')
+    var prev = $("#tags").val().split(',')
+    $("#tags").val('');
+    for (var i in prev) {
+      if (prev[i].toString() !== data.toString()){
+        console.log(prev[i]);
+        $("#tags").val(function() {
+        return this.value + ',' +prev[i];
+        });
+      }
+      }
+  })
+
+  .on('tokenfield:removedtoken', function (e) {
+    var data = e.attrs.value.split('|')
+    var prev = $("#tags").val().split(',')
+    $("#tags").val('');
+    for (var i in prev) {
+      if (prev[i].toString() !== data.toString()){
+        console.log(prev[i]);
+        $("#tags").val(function() {
+        return this.value + ',' +prev[i];
+        });
+      }
+      }
+  })
+
+
+
+
+
+.tokenfield({
+
+  autocomplete: {
+    source: function( request, response ) {
+        $.ajax({
+          url: "/tags/remoteq/1",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+          success: function( data ) {
+            response( data );
+          }
+        });
+      },
+      minLength: 1,
+      delay: 30
+  },
+  showAutocompleteOnFocus: true
+})
+</script>

@@ -8,5 +8,6 @@ class Research < ActiveRecord::Base
 
   has_many :contributions, dependent: :destroy
   has_many :users, :through => :contributions
+  has_many :taggings, :as => :taggable, :dependent => :destroy
 
 end

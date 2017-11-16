@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :blockings
+
   resources :activities
 
   resources :graphs
@@ -239,6 +241,9 @@ Rails.application.routes.draw do
 
   match "home/logs" => "home#logs", :via => :get
   match "home/graph" => "home#graph", :via => :get
+
+  match "/blockings/add_block/:id" => "blockings#add_block", :via => :get
+  match "/blockings/remove_block/:id" => "blockings#remove_block", :via => :get
 
   post 'upload' => 'upload#create'
   # The priority is based upon order of creation: first created -> highest priority.

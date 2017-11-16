@@ -29,6 +29,10 @@
           </div>
           <div class="row">
             <hr style='margin-top:0px; margin-bottom:0px;'/>
+
+          </div>
+          <div class="row">
+            <hr style='margin-top:0px; margin-bottom:0px;'/>
             <%= form_tag '/surveys', :method => :post, remote: true do %>
             <div class="panel-body">
               <% for pollsection in poll.pollsections%>

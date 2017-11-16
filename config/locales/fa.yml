@@ -343,6 +343,7 @@ fa:
         granting:
           role_id: 'نقش'
         accesscontrol:
+          show_graph: 'نمایش گراف'
           role_id: 'نقش'
           create_blog: 'ایجاد وبلاگ'
           view_blogs: 'نمایش وبلاگ ها'
@@ -428,6 +429,8 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  block: 'انسداد'
+  unblock: 'رفع انسداد'
   act: 'اعمال'
   questions: 'سوالات'
   relations_graph: 'گراف ارتباطات'

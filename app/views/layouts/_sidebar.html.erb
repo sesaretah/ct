@@ -348,11 +348,13 @@
           <span><%= t(:activity_list)%></span>
         </a>
       </li>
+      <% if grant_access('show_graph', current_user)%>
       <li>
-        <a href="/home/graph">
+        <a href="/home/graph?channel=true&group=true&event=true&question=true&project=true&offering=true&lab=true">
           <span><%= t(:graph)%></span>
         </a>
       </li>
+      <%end%>
     </li>
   </ul>
 </nav>

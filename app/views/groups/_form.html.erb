@@ -69,40 +69,56 @@
               </div>
             </div>
 
+            <style>
+            .ui-helper-hidden-accessible { position: absolute; left:-999em; }
+            </style>
 
-              <div class="row">
-                <div class="form-group col-xs-4">
-                  <%if !@group.avatar.blank?%>
-                  <%= image_tag @group.avatar(:medium), id: 'avatar',:class => "messages-item-avatar bordered border-primary"%>
+            <%=t :tags%><br />
+            <% @tags = []%>
+            <% for tagging in @group.taggings%>
+            <% @tags << Tag.find(tagging.tag_id).title%>
+            <%end%>
+            <div class="col-xs-6 padding-right-0 margin-top-5 rtl">
+              <input type="text"  id="tokenfield" value="<%= @tags.join(',')%>" placeholder="" tabindex="-1" >
+            </div>
+            <div class="row">
+              <input type="hidden" id='tags' name="tags" value="">
+            </div>
+
+
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%if !@group.avatar.blank?%>
+                <%= image_tag @group.avatar(:medium), id: 'avatar',:class => "messages-item-avatar bordered border-primary"%>
+                <%else%>
+                <img id='avatar'></img>
+                <%end%>
+                <div class="fileUpload btn btn-o btn-light-purple">
+                  <%if @group.avatar.blank?%>
+                  <span><i class="fa fa-camera" style='vertical-align:middle;'></i> <%=t :choose_a_file_for_avatar%>...</span>
                   <%else%>
-                  <img id='avatar'></img>
+                  <span><i class="fa fa-camera" style='vertical-align:middle;'></i> <%=t :change_photo%>...</span>
                   <%end%>
-                  <div class="fileUpload btn btn-o btn-light-purple">
-                    <%if @group.avatar.blank?%>
-                    <span><i class="fa fa-camera" style='vertical-align:middle;'></i> <%=t :choose_a_file_for_avatar%>...</span>
-                    <%else%>
-                    <span><i class="fa fa-camera" style='vertical-align:middle;'></i> <%=t :change_photo%>...</span>
-                    <%end%>
-                    <%= f.file_field :avatar, class: "upload", onchange: "readURL(this);" %>
-                  </div>
+                  <%= f.file_field :avatar, class: "upload", onchange: "readURL(this);" %>
                 </div>
               </div>
+            </div>
 
-              <script>
-              function readURL(input) {
-                if (input.files && input.files[0]) {
-                  var reader = new FileReader();
+            <script>
+            function readURL(input) {
+              if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-                  reader.onload = function (e) {
-                    $('#avatar')
-                    .attr('src', e.target.result)
-                    .width(120);
-                  };
+                reader.onload = function (e) {
+                  $('#avatar')
+                  .attr('src', e.target.result)
+                  .width(120);
+                };
 
-                  reader.readAsDataURL(input.files[0]);
-                }
+                reader.readAsDataURL(input.files[0]);
               }
-              </script>
+            }
+            </script>
 
             <div class="row top30">
               <div class="form-group col-xs-1 pull-left">
@@ -123,18 +139,67 @@
 
 
 <script>
-$(document).ready(function(){
-  if ($('#name').val()){
-    $('#subbtn').attr('disabled',false);
-  } else {
-    $('#subbtn').attr('disabled',true);
-  }
 
-    $('#name').keyup(function(){
-        if($(this).val().length !=0)
-            $('#subbtn').attr('disabled', false);
-        else
-            $('#subbtn').attr('disabled',true);
-    })
-});
+$('#tokenfield')
+
+.on('tokenfield:createtoken', function (e) {
+  var data = e.attrs.value.split('|')
+  $("#tags").val(function() {
+    return this.value + ',' +data;
+  });
+})
+
+
+.on('tokenfield:edittoken', function (e) {
+  var data = e.attrs.value.split('|')
+  var prev = $("#tags").val().split(',')
+  $("#tags").val('');
+  for (var i in prev) {
+    if (prev[i].toString() !== data.toString()){
+      console.log(prev[i]);
+      $("#tags").val(function() {
+        return this.value + ',' +prev[i];
+      });
+    }
+  }
+})
+
+.on('tokenfield:removedtoken', function (e) {
+  var data = e.attrs.value.split('|')
+  var prev = $("#tags").val().split(',')
+  $("#tags").val('');
+  for (var i in prev) {
+    if (prev[i].toString() !== data.toString()){
+      console.log(prev[i]);
+      $("#tags").val(function() {
+        return this.value + ',' +prev[i];
+      });
+    }
+  }
+})
+
+
+
+
+
+.tokenfield({
+
+  autocomplete: {
+    source: function( request, response ) {
+      $.ajax({
+        url: "/tags/remoteq/1",
+        dataType: "jsonp",
+        data: {
+          q: request.term
+        },
+        success: function( data ) {
+          response( data );
+        }
+      });
+    },
+    minLength: 1,
+    delay: 30
+  },
+  showAutocompleteOnFocus: true
+})
 </script>

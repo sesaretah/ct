@@ -75,7 +75,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <h5><%=t :aims%>:</h5><p style='text-align: justify;'><%= project.aims%></p>
+
               </div>
             </div>
             <div class="col-sm-7 col-md-8">
@@ -87,10 +87,23 @@
                 <div collapse="activities" ng-init="activities=false" class="panel-wrapper">
                   <div class="panel-body">
 
+                    <h5 class="over-title margin-bottom-15"><%=t :aims%></span></h5>
+                    <%= project.definition%>
+                    <hr/>
+
                     <h5 class="over-title margin-bottom-15"><%=t :projects_gantt_chart%></span></h5>
                     <div class="row">
                       <div class="col-md-12" id="chart" style='direction:ltr; height:250px;' ></div>
                     </div>
+                    <hr/>
+
+                    <h5 class="over-title margin-bottom-15"><%=t :tags%></span></h5>
+                    <% for tagging in project.taggings%>
+                    <span class="label label-success">
+                      <%= Tag.find(tagging.tag_id).title%>
+                    </span>
+                    <%end%>
+                    <hr/>
 
                     <h5 class="over-title margin-bottom-15"><%=t :definition%></span></h5>
                     <%= project.definition%>

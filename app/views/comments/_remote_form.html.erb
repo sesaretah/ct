@@ -74,38 +74,38 @@
       <%end%>
     </div>
   </div>
-</div>
-
-<script type="text/javascript">
-$('#submit-<%= c.class.name%>-<%= c.id%>').hide();
-$('#fedit-<%= c.class.name%>-<%= c.id%>').click(function() {
-  $('#document-<%= c.class.name%>-<%= c.id%>').click();
-});
-$('#cedit-<%= c.class.name%>-<%= c.id%>').click(function() {
-  $('#avatar-<%= c.class.name%>-<%= c.id%>').click();
-});
-$(function () {
-  $('#fileupload-<%= c.class.name%>-<%= c.id%>').fileupload({
-    dataType: 'json',
-    add:function (e, data) {
-      console.log(data);
-      $('#selected_upload').text(data.files[0].name);
-      $('#subbtn').hide();
-      $('#submit-<%= c.class.name%>-<%= c.id%>').show();
-      $("#submit-<%= c.class.name%>-<%= c.id%>").off('click').on('click',function () {
-        console.log('Submiting ..');
-        data.submit();
-      });
-    },
-    done: function (e, data) {
-      var url = '/comments/render_partial/'+ data.result.id+'?page='+<%= page%>
-      $.get(url,
-        function(d) {
-          console.log(d);
-          $("#<%= c.class.name.downcase%>-detail").replaceWith(d.html);
-        }
-      );
-    }
+  <script type="text/javascript">
+  $('#submit-<%= c.class.name%>-<%= c.id%>').hide();
+  $('#fedit-<%= c.class.name%>-<%= c.id%>').click(function() {
+    $('#document-<%= c.class.name%>-<%= c.id%>').click();
   });
-});
-</script>
+  $('#cedit-<%= c.class.name%>-<%= c.id%>').click(function() {
+    $('#avatar-<%= c.class.name%>-<%= c.id%>').click();
+  });
+  $(function () {
+    $('#fileupload-<%= c.class.name%>-<%= c.id%>').fileupload({
+      dataType: 'json',
+      add:function (e, data) {
+        console.log(data);
+        $('#selected_upload').text(data.files[0].name);
+        $('#subbtn').hide();
+        $('#submit-<%= c.class.name%>-<%= c.id%>').show();
+        $("#submit-<%= c.class.name%>-<%= c.id%>").off('click').on('click',function () {
+          console.log('Submiting ..');
+          data.submit();
+        });
+      },
+      done: function (e, data) {
+        var url = '/comments/render_partial/'+ data.result.id+'?page='+<%= page%>
+        $.get(url,
+          function(d) {
+            console.log(d);
+            $("#<%= c.class.name.downcase%>-detail").replaceWith(d.html);
+          }
+        );
+      }
+    });
+  });
+  </script>
+
+</div>

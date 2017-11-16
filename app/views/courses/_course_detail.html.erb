@@ -84,6 +84,14 @@
                 <div collapse="activities" ng-init="activities=false" class="panel-wrapper">
                   <div class="panel-body">
 
+                    <h5 class="over-title margin-bottom-15"><%=t :tags%></span></h5>
+                    <% for tagging in course.taggings%>
+                    <span class="label label-success">
+                      <%= Tag.find(tagging.tag_id).title%>
+                    </span>
+                    <%end%>
+                    <hr/>
+
                     <h5 class="over-title margin-bottom-15"><%=t :course_targets%></span></h5>
                     <%= course.course_targets%>
                     <hr/>

@@ -21,7 +21,7 @@
 	<% stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	<script src="/assets/jdate.min.js"></script>
 	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script src="/assets/axios.min.js"></script>
 	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
 	<!-- end: GOOGLE FONTS -->
 	<!-- start: MAIN CSS -->
@@ -54,16 +54,8 @@
 	<link rel="stylesheet" href="/assets/notifIt.css"/>
 	<link rel="stylesheet" href="/assets/bootstrap-rating.css"/>
 	<link rel="stylesheet" href="/assets/emojionearea.css"/>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/lib/js/emojione.min.js"></script>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/css/emojione.min.css" />
+	<link rel="stylesheet" href="/assets/emojione.min.css"/>
 
-
-	<script type="text/x-mathjax-config">
-	  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
-	</script>
-	<script type="text/javascript" async
-	  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML">
-	</script>
 
 	<%= csrf_meta_tags %>
 </head>
@@ -112,6 +104,8 @@
 	<script src="/assets/bootstrap-rating.min.js"></script>
 	<script src="/assets/axios.min.js"></script>
 	<script src="/assets/Chart.min.js"></script>
+	<script src="/assets/emojionearea.js"></script>
+	<script src="/assets/emojione.min.js"></script>
 
 
 

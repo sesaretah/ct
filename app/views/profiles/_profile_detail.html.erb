@@ -1,4 +1,6 @@
 <div id='profile-detail'>
+  <% @b = Blocking.where(target_id: current_user.id, blocked_type: 'Profile', blocked_id: @profile.id).first%>
+  <% if @b.blank?%>
   <div class="col-md-9 padding-right-0 padding-left-0">
     <div class="tabbable">
       <ul class="nav nav-tabs tab-padding tab-space-3 tab-blue" id="myTab4">
@@ -49,6 +51,7 @@
                   <%= render :partial => 'crop'%>
 
                   <%= render partial: 'friendships/profile_block', locals: {profile: @profile}%>
+                  <%= render partial: 'blockings/profile_block', locals: {profile: @profile}%>
 
                   <div class="col-sm-12" style="margin-top:10px;">
                     <% if @profile.user.id == current_user.id%>
@@ -194,4 +197,7 @@
         </div>
       </div>
     </div>
+    <%else%>
+
+    <%end%>
   </div>

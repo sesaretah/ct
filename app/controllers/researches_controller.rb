@@ -29,6 +29,7 @@ class ResearchesController < ApplicationController
   # GET /researches.json
   def index
     @researches = Research.all
+    @research = Research.find_by_id(params[:research_id])
   end
 
   # GET /researches/1
@@ -85,14 +86,30 @@ class ResearchesController < ApplicationController
   # PATCH/PUT /researches/1
   # PATCH/PUT /researches/1.json
   def update
+    @tags = params[:tags].split(',')
+    @tagged = []
+    for prev in Tagging.where(taggable_id: @research.id, taggable_type: 'Research')
+      prev.destroy
+    end
     respond_to do |format|
       if @research.update(research_params(params["research"]))
         @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Research', target_id: @research.id)
-
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.where(taggable_id: @research.id, taggable_type: 'Research', tag_id: @tag.id).first
+            if @tagging.blank?
+              @tagging = Tagging.create(taggable_id: @research.id, taggable_type: 'Research', tag_id: @tag.id)
+            end
+          end
+        end
         if params[:caller] == 'reg'
           format.html { redirect_to '/registeration_steps?step=4'}
         else
-          format.html { redirect_to @research, notice: 'Research was successfully updated.' }
+          format.html { redirect_to '/researches?research_id='+@research.id.to_s , notice: 'Research was successfully updated.' }
         end
         format.json { render :show, status: :ok, location: @research }
         format.js

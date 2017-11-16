@@ -8,6 +8,7 @@ class Project < ActiveRecord::Base
   has_many :users, :through => :partnerships
   has_many :tasks, :dependent => :destroy
   has_many :followships, :as => :followable, :dependent => :destroy
+  has_many :taggings, :as => :taggable, :dependent => :destroy
 
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?

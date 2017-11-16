@@ -7,6 +7,7 @@ class Group < ActiveRecord::Base
   has_many :groupings, dependent: :destroy
   has_many :users, :through => :groupings, dependent: :destroy
   has_many :comments, :as => :commentable, :dependent => :destroy
+  has_many :taggings, :as => :taggable, :dependent => :destroy
   after_create :set_admin
 
   def set_admin

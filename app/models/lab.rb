@@ -8,6 +8,7 @@ class Lab < ActiveRecord::Base
 
   has_many :memberships, dependent: :destroy
   has_many :users, :through => :memberships
+  has_many :taggings, :as => :taggable, :dependent => :destroy
 
   has_many :announcements
 

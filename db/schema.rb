@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171028040516) do
+ActiveRecord::Schema.define(version: 20171112170833) do
 
   create_table "accesscontrols", force: :cascade do |t|
     t.integer  "role_id",               limit: 4
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20171028040516) do
     t.integer  "search_profiles",       limit: 4
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.integer  "show_graph",            limit: 4
   end
 
   create_table "activities", force: :cascade do |t|
@@ -98,6 +99,15 @@ ActiveRecord::Schema.define(version: 20171028040516) do
     t.integer  "task_id",    limit: 4
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "blockings", force: :cascade do |t|
+    t.integer  "user_id",      limit: 4
+    t.integer  "target_id",    limit: 4
+    t.string   "blocked_type", limit: 191
+    t.integer  "blocked_id",   limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "blogs", force: :cascade do |t|

@@ -51,10 +51,21 @@ class LabsController < ApplicationController
   def create
     @lab = Lab.new(lab_params)
     @lab.user_id = current_user.id
+    @tags = params[:tags].split(',')
+    @tagged = []
+
     respond_to do |format|
       if @lab.save
         @activity =  Activity.create(user_id: current_user.id, activity_type: 'Create', target_type: 'Lab', target_id: @lab.id)
-
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.create(taggable_id: @lab.id, taggable_type: 'Lab', tag_id: @tag.id)
+          end
+        end
         if @lab.chkbxch == 1
           @coupling =  Coupling.where(coupler_id: @lab.id, coupler_type: 'Lab', couplee_type: 'Channel' ).first
           if @coupling.blank?
@@ -96,8 +107,26 @@ class LabsController < ApplicationController
   # PATCH/PUT /labs/1
   # PATCH/PUT /labs/1.json
   def update
+    @tags = params[:tags].split(',')
+    @tagged = []
+    for prev in Tagging.where(taggable_id: @lab.id, taggable_type: 'Lab')
+      prev.destroy
+    end
     respond_to do |format|
       if @lab.update(lab_params)
+
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.where(taggable_id: @lab.id, taggable_type: 'Lab', tag_id: @tag.id).first
+            if @tagging.blank?
+              @tagging = Tagging.create(taggable_id: @lab.id, taggable_type: 'Lab', tag_id: @tag.id)
+            end
+          end
+        end
 
         if @lab.chkbxch == 1
           @activity =  Activity.create(user_id: current_user.id, activity_type: 'Update', target_type: 'Lab', target_id: @lab.id)
