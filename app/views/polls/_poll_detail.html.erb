@@ -28,11 +28,16 @@
           </div>
           </div>
           <div class="row">
-            <hr style='margin-top:0px; margin-bottom:0px;'/>
+            <hr/>
+            <% for tagging in poll.taggings%>
+            <span class="label label-success">
+              <%= Tag.find(tagging.tag_id).title%>
+            </span>
+            <%end%>
 
           </div>
           <div class="row">
-            <hr style='margin-top:0px; margin-bottom:0px;'/>
+            <hr/>
             <%= form_tag '/surveys', :method => :post, remote: true do %>
             <div class="panel-body">
               <% for pollsection in poll.pollsections%>

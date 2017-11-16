@@ -43,9 +43,20 @@ class PollsController < ApplicationController
   def create
     @poll = Poll.new(poll_params)
     @poll.user_id = current_user.id
+    @tags = params[:tags].split(',')
+    @tagged = []
 
     respond_to do |format|
       if @poll.save
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.create(taggable_id: @poll.id, taggable_type: 'Poll', tag_id: @tag.id)
+          end
+        end
         format.html { redirect_to '/polls/completion/'+ @poll.id.to_s, notice: 'Poll was successfully created.' }
         format.json { render :show, status: :created, location: @poll }
       else
@@ -58,8 +69,25 @@ class PollsController < ApplicationController
   # PATCH/PUT /polls/1
   # PATCH/PUT /polls/1.json
   def update
+    @tags = params[:tags].split(',')
+    @tagged = []
+    for prev in Tagging.where(taggable_id: @poll.id, taggable_type: 'Poll')
+      prev.destroy
+    end
     respond_to do |format|
       if @poll.update(poll_params)
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.where(taggable_id: @poll.id, taggable_type: 'Poll', tag_id: @tag.id).first
+            if @tagging.blank?
+              @tagging = Tagging.create(taggable_id: @poll.id, taggable_type: 'Poll', tag_id: @tag.id)
+            end
+          end
+        end
         format.html {redirect_to '/polls/completion/'+ @poll.id.to_s, notice: 'Poll was successfully updated.' }
         format.json { render :show, status: :ok, location: @poll }
       else

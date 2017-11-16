@@ -261,6 +261,30 @@ async.waterfall([
   },
 
   function(arg1, callback) {
+    var sql = "SELECT * FROM tags"
+    connection.query(sql, function (error, rows) {
+      callback(null, rows);
+    });
+  },
+
+  function(arg1, callback) {
+    if (arg1.length == 0){
+      console.log('Tag Finished');
+      callback(null, 'Tag Finished');
+    }
+    var i = 0
+    async.each(arg1, function(row, cb) {
+      g.setNode("tag-" + row.id, {type: 'tag', name: row.name, id: row.id });
+      i = i + 1;
+      if (arg1.length == i){
+        console.log('Tag Finished');
+        callback(null, 'Tag Finished');
+      }
+      cb();
+    });
+  },
+
+  function(arg1, callback) {
     var sql = "SELECT * FROM involvements"
     connection.query(sql, function (error, rows) {
       callback(null, rows);
@@ -463,7 +487,35 @@ async.waterfall([
       }
       cb();
     });
+  },
+
+  function(arg1, callback) {
+    var sql = "SELECT * FROM taggings"
+    connection.query(sql, function (error, rows) {
+      callback(null, rows);
+    });
+  },
+
+  function(arg1, callback) {
+    if (arg1.length == 0){
+      console.log('Tagging Finished');
+      callback(null, 'Tagging Finished');
+    }
+    var i = 0
+    async.each(arg1, function(row, cb) {
+
+//      g.setEdge("user-" + row.user_id, "research-"+ row.research_id, { type: 'contribution' });
+
+      i = i + 1;
+      if (arg1.length == i){
+        console.log('Tagging Finished');
+        callback(null, 'Tagging Finished');
+      }
+      cb();
+    });
   }
+
+
 
 
 
