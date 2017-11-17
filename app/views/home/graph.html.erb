@@ -114,83 +114,107 @@
   <% @friendship = Friendship.where(user_id: current_user.id, friend_id: node['id']).first%>
   <% if @friendship.blank? %>
   <% node['active'] = false%>
+  <% @n[node['name']]['active'] = false %>
   <%else%>
   <% node['active'] = true%>
+  <% @n[node['name']]['active'] = true %>
   <%end%>
   <%else%>
   <% node['active'] = true%>
+<% @n[node['name']]['active'] = true %>
   <%end%>
   <% if current_user.id == node['id'].to_i%>
   <% node['active'] = true%>
+  <% @n[node['name']]['active'] = true %>
   <%end%>
   <% case node['type'] %>
   <% when 'channel'%>
   <% if params['channel'] == 'true'%>
   <% node['active'] = true%>
+  <% @n[node['name']]['active'] = true %>
   <% else%>
   <% node['active'] = false%>
+  <% @n[node['name']]['active'] = false %>
   <%end%>
   <% when 'blog'%>
   <% if params['blog'] == 'true'%>
   <% node['active'] = true%>
+  <% @n[node['name']]['active'] = true %>
   <% else%>
   <% node['active'] = false%>
+  <% @n[node['name']]['active'] = false %>
   <%end%>
   <% when 'research'%>
   <% if params['research'] == 'true'%>
   <% node['active'] = true%>
+  <% @n[node['name']]['active'] = true %>
   <% else%>
   <% node['active'] = false%>
+  <% @n[node['name']]['active'] = false %>
   <%end%>
   <% when 'group'%>
   <% if params['group'] == 'true'%>
   <% node['active'] = true%>
+  <% @n[node['name']]['active'] = true %>
   <% else%>
   <% node['active'] = false%>
+  <% @n[node['name']]['active'] = false %>
   <%end%>
   <% when 'event'%>
   <% if params['event'] == 'true'%>
   <% node['active'] = true%>
+  <% @n[node['name']]['active'] = true %>
   <% else%>
   <% node['active'] = false%>
+  <% @n[node['name']]['active'] = false %>
   <%end%>
   <% when 'question'%>
   <% if params['question'] == 'true'%>
   <% node['active'] = true%>
+  <% @n[node['name']]['active'] = true %>
   <% else%>
   <% node['active'] = false%>
+  <% @n[node['name']]['active'] = false %>
   <%end%>
   <% when 'lab'%>
   <% if params['lab'] == 'true'%>
   <% node['active'] = true%>
+  <% @n[node['name']]['active'] = true %>
   <% else%>
   <% node['active'] = false%>
+  <% @n[node['name']]['active'] = false %>
   <%end%>
   <% when 'project'%>
   <% if params['project'] == 'true'%>
   <% node['active'] = true%>
+  <% @n[node['name']]['active'] = true %>
   <% else%>
   <% node['active'] = false%>
+  <% @n[node['name']]['active'] = false %>
   <%end%>
   <% when 'offering'%>
   <% if params['offering'] == 'true'%>
   <% node['active'] = true%>
+  <% @n[node['name']]['active'] = true %>
   <% else%>
   <% node['active'] = false%>
+  <% @n[node['name']]['active'] = false %>
   <%end%>
   <%end%>
   <% if node['active'] == true%>
   <% @f = 1%>
   <% for edge in @edges%>
-  <% if edge['target'] == node['name'] || edge['source'] == node['name']%>
+  <% if (edge['target'] == node['name'] &&  @n[node['name']]['active'] == true ) || (edge['source'] == node['name'] && @n[node['name']]['active'] == true)%>
     <% @f = @f * 0%>
   <%end%>
   <%end%>
-  <% if @f == 0%>
-<% node['active'] = false%>
+  <% if @f == 1%>
+  <% node['active'] = false%>
+  <% @n[node['name']]['active'] = false %>
   <%end%>
   <%end%>
   <%end%>
+
 
   <script src='/assets/d3.v3.min.js'></script>
   <script>
