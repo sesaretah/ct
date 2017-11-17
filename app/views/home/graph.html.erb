@@ -104,7 +104,11 @@
   <div class="col-sm-4">
   </div>
   <% @nodes = JSON.parse '[' + Graph.last.nodes.gsub(/'/, "\"") + ']'%>
+  <% if Graph.last.edges.gsub(/'/, "\"")[-1] == ','%>
   <% @edges = JSON.parse '[' + Graph.last.edges.gsub(/'/, "\"").chop + ']'%>
+  <% else %>
+  <% @edges = JSON.parse '[' + Graph.last.edges.gsub(/'/, "\"") + ']'%>
+  <%end%>
   <% @nodes.each do |node| %>
   <% if node['type'] == 'user'%>
   <% @friendship = Friendship.where(user_id: current_user.id, friend_id: node['id']).first%>
