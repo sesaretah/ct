@@ -204,7 +204,7 @@
   <% if node['active'] == true%>
   <% @f = 1%>
   <% for edge in @edges%>
-  <% if (edge['target'] == node['name'] &&  @n[node['name']]['active'] == true ) || (edge['source'] == node['name'] && @n[node['name']]['active'] == true)%>
+  <% if (edge['target'] == node['name'] &&  @n[edge['source']]['active'] == true ) || (edge['source'] == node['name'] && @n[edge['target']]['active'] == true)%>
     <% @f = @f * 0%>
   <%end%>
   <%end%>
