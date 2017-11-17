@@ -274,7 +274,7 @@ async.waterfall([
     }
     var i = 0
     async.each(arg1, function(row, cb) {
-      g.setNode("tag-" + row.id, {type: 'tag', name: row.name, id: row.id });
+      g.setNode("tag-" + row.id, {type: 'tag', name: row.title, id: row.id });
       i = i + 1;
       if (arg1.length == i){
         console.log('Tag Finished');
@@ -503,9 +503,38 @@ async.waterfall([
     }
     var i = 0
     async.each(arg1, function(row, cb) {
-
-//      g.setEdge("user-" + row.user_id, "research-"+ row.research_id, { type: 'contribution' });
-
+      switch (row.taggable_type) {
+        case 'User':
+          g.setEdge("user-" + row.taggable_id, "tag-"+ row.tag_id, { type: 'tagging' });
+          break;
+        case 'Question':
+          g.setEdge("question-" + row.taggable_id, "tag-"+ row.tag_id, { type: 'tagging' });
+          break;
+        case 'Channel':
+          g.setEdge("channel-" + row.taggable_id, "tag-"+ row.tag_id, { type: 'tagging' });
+          break;
+        case 'Group':
+          g.setEdge("group-" + row.taggable_id, "tag-"+ row.tag_id, { type: 'tagging' });
+          break;
+        case 'Event':
+          g.setEdge("event-" + row.taggable_id, "tag-"+ row.tag_id, { type: 'tagging' });
+          break;
+        case 'Project':
+          g.setEdge("project-" + row.taggable_id, "tag-"+ row.tag_id, { type: 'tagging' });
+          break;
+        case 'Course':
+          g.setEdge("course-" + row.taggable_id, "tag-"+ row.tag_id, { type: 'tagging' });
+          break;
+        case 'Lab':
+          g.setEdge("lab-" + row.taggable_id, "tag-"+ row.tag_id, { type: 'tagging' });
+          break;
+        case 'Research':
+          g.setEdge("research-" + row.taggable_id, "tag-"+ row.tag_id, { type: 'tagging' });
+          break;
+        case 'Poll':
+          g.setEdge("poll-" + row.taggable_id, "tag-"+ row.tag_id, { type: 'tagging' });
+          break;
+      }
       i = i + 1;
       if (arg1.length == i){
         console.log('Tagging Finished');
@@ -555,6 +584,7 @@ async.waterfall([
 //    if (typeof g.node(nodes[node]) !== 'undefined'){
     var edges = g.nodeEdges(nodes[node]);
     for (edge in edges) {
+      //console.log(edge, edges.length - 1, node, nodes.length - 1, nodes[node], edges[edge]);
       if ( node == nodes.length - 1 && edge == edges.length - 1) {
        e = e + "{'target': '" +edges[edge].v+ "' , 'source' : '"+ edges[edge]. w+"'}"
       } else {
@@ -573,7 +603,6 @@ async.waterfall([
         if (error) throw error;
       });
     } else {
-      console.log(nodes[node].split("-")[1]);
     //  console.log(nodes[node], g.node(nodes[node]));
      n = n + " { 'name':'" +  nodes[node] + "'," + "'id':'"+ g.node(nodes[node]).id +"','type':'"+ g.node(nodes[node]).type +"','title':'" + g.node(nodes[node]).name.replace("'"," ").replace(/['"]+/g, '')  +"', 'href':" + "'/" + p + '/' + nodes[node].split("-")[1] + "'},"
    }

@@ -88,9 +88,19 @@ class ProfilesController < ApplicationController
     @profile.user_id = current_user.id
     @profile.birthdate = JalaliDate.to_gregorian(params[:ja_birth_yyyy],params[:ja_birth_mm],params[:ja_birth_dd])
     @email = @profile.official_email.split("@").first
-
+    @tags = params[:tags].split(',')
+    @tagged = []
     respond_to do |format|
       if @profile.save
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.create(taggable_id: @profile.user.id, taggable_type: 'User', tag_id: @tag.id)
+          end
+        end
         if params[:caller] == 'reg'
           format.html { redirect_to '/registeration_steps?step=2&name=' + @email}
         else
@@ -107,6 +117,11 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
+    @tags = params[:tags].split(',')
+    @tagged = []
+    for prev in Tagging.where(taggable_id: @profile.user.id, taggable_type: 'User')
+      prev.destroy
+    end
     @caller = params[:profile][:caller]
     @profile = current_user.profile
     if !params[:ja_birth_yyyy].blank?
@@ -114,14 +129,26 @@ class ProfilesController < ApplicationController
     end
     respond_to do |format|
       if @profile.update(profile_params)
+        for tag in @tags
+          if !tag.blank?
+            @tag = Tag.where(title: tag).first
+            if @tag.blank?
+              @tag = Tag.create(title: tag, user_id: current_user.id)
+            end
+            @tagging = Tagging.where(taggable_id: @profile.user.id, taggable_type: 'User', tag_id: @tag.id).first
+            if @tagging.blank?
+              @tagging = Tagging.create(taggable_id: @profile.user.id, taggable_type: 'User', tag_id: @tag.id)
+            end
+          end
+        end
         if params[:caller] == 'reg'
           format.html { redirect_to '/registeration_steps?step=2&name='}
         else
-        if @profile.cropping?
-          format.html { redirect_to '/', notice: :Profile_was_successfully_updated }
-        else
-          format.html { redirect_to '/profiles/cropper/'+@profile.id.to_s}
-        end
+          if params[:profile][:avatar].blank?
+            format.html { redirect_to '/profiles?profile_id='+@profile.id.to_s, notice: :Profile_was_successfully_updated }
+          else
+            format.html { redirect_to '/profiles/cropper/'+@profile.id.to_s}
+          end
         end
         format.json { render action: 'crop' }
         if @profile.cropping?

@@ -177,10 +177,10 @@
           </div>
           <div id="tag" class="tab-pane fade">
             <% if policy_rule('tag_all', current_user, @profile.user)%>
-            <% @tag = Tag.new%>
-            <%= render partial: 'tags/list', locals: {user: @profile.user}%>
-            <% if @profile.user.id == current_user.id%>
-            <%= render partial: 'tags/form', locals: {tag: @tag}%>
+            <% for tagging in @profile.user.taggings%>
+            <span class="label label-success">
+              <%= Tag.find(tagging.tag_id).title%>
+            </span>
             <%end%>
             <%end%>
           </div>

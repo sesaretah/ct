@@ -9,6 +9,7 @@ class Tagging < ActiveRecord::Base
   belongs_to :lab, :class_name => "Lab", :foreign_key => "taggable_id"
   belongs_to :research, :class_name => "Research", :foreign_key => "taggable_id"
   belongs_to :poll, :class_name => "Poll", :foreign_key => "taggable_id"
+  belongs_to :user, :class_name => "User", :foreign_key => "taggable_id"
 
 
 end

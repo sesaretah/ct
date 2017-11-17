@@ -8,6 +8,8 @@ class Profile < ActiveRecord::Base
   belongs_to :user
   has_many :positions
   has_many :attendances
+
+
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
   end

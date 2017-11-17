@@ -104,7 +104,7 @@
   <div class="col-sm-4">
   </div>
   <% @nodes = JSON.parse '[' + Graph.last.nodes.gsub(/'/, "\"") + ']'%>
-
+  <% @edges = JSON.parse '[' + Graph.last.edges.gsub(/'/, "\"").chop + ']'%>
   <% @nodes.each do |node| %>
   <% if node['type'] == 'user'%>
   <% @friendship = Friendship.where(user_id: current_user.id, friend_id: node['id']).first%>
@@ -175,9 +175,20 @@
   <% node['active'] = false%>
   <%end%>
   <%end%>
+  <% if node['active'] == true%>
+  <% @f = 1%>
+  <% for edge in @edges%>
+  <% if edge['target'] == node['name'] || edge['source'] == node['name']%>
+    <% @f = @f * 0%>
+  <%end%>
+  <%end%>
+  <% if @f == 1%>
+<% node['active'] = false%>
+  <%end%>
+  <%end%>
   <%end%>
 
-  <script src='http://d3js.org/d3.v3.min.js'></script>
+  <script src='/assets/d3.v3.min.js'></script>
   <script>
 
   // Define the dimensions of the visualization. We're using
@@ -192,6 +203,8 @@
   // the dimensions for this container.
 
   var svg = d3.select("svg"),
+  //.attr("viewBox", "0 0 " + width + " " + height )
+//.attr("preserveAspectRatio", "xMidYMid meet");
   width = +svg.attr("width"),
   height = +svg.attr("height");
 

@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   has_many :educations, dependent: :destroy
   has_many :honors, dependent: :destroy
   #has_many :researches, dependent: :destroy
-  has_many :tags, dependent: :destroy
+  #has_many :tags, dependent: :destroy
+  has_many :taggings, :as => :taggable, :dependent => :destroy
   has_one :profile, dependent: :destroy
 
   has_many :send_messages, :class_name=>"Message", :foreign_key=>"sender_id", dependent: :destroy
