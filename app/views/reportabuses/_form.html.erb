@@ -1,0 +1,98 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:report_abuse)%></h1>
+        <span class="mainDescription"></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <h5><%=t :report_item%>:</h5>
+
+          <% case params['abused_type']%>
+          <%when 'Comment'%>
+            <% @comment  = Comment.find_by_id(params['abused_id'])%>
+            <% if !@comment.blank?%>
+            <p class="convert-emoji">
+            <%= @comment.content%>
+            </p>
+            <h5><%=t :created_by%>:</h5>
+            <p><%= link_to '/profiles?profile_id='+ @comment.user.profile.id.to_s do%>
+              <%= image_tag @comment.user.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+              <%= @comment.user.profile.name%> <%= @comment.user.profile.surename%>
+              <%end%>
+            </p>
+            <%end%>
+          <%end%>
+
+        <script type="text/javascript">
+        $(document).ready(function() {
+          $(".convert-emoji").each(function() {
+            var original = $(this).html();
+            var converted = emojione.unicodeToImage(original);
+            $(this).html(converted);
+          });
+        });
+        </script>
+
+    </div>
+    <div class="row">
+      <%= form_for(@reportabus) do |f| %>
+        <% if @reportabus.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@reportabus.errors.count, "error") %> prohibited this reportabus from being saved:</h2>
+
+            <ul>
+            <% @reportabus.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+          <%= f.label :abuse_id %><br>
+          <%= f.select :abuse_id, Abuse.all.collect {|p| [p.title, p.id]},{},{:class => "  form-control"}%>
+        </div>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+          <%= f.label :detail %><br>
+          <%= f.text_area :detail, :class => "  form-control"  %>
+        </div>
+        </div>
+        </div>
+
+          <%= f.hidden_field :abused_type, value: params['abused_type'] %>
+          <%= f.hidden_field :abused_id, value: params['abused_id'] %>
+          <%= f.hidden_field :abuser_id, value: params['abuser_id'] %>
+
+        <div class="row top30">
+          <div class="form-group col-xs-1 pull-left">
+            <%= content_tag :button, :type => :submit, :class => "btn btn-o btn-primary" do %>
+            <i class="icon-ok bigger-110"></i>
+            <%=t :submit%>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1 @@
+json.partial! "reportabuses/reportabus", reportabus: @reportabus

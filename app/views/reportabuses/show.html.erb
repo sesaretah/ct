@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Abuse:</strong>
+  <%= @reportabus.abuse_id %>
+</p>
+
+<p>
+  <strong>Detail:</strong>
+  <%= @reportabus.detail %>
+</p>
+
+<p>
+  <strong>Abused type:</strong>
+  <%= @reportabus.abused_type %>
+</p>
+
+<p>
+  <strong>Abused:</strong>
+  <%= @reportabus.abused_id %>
+</p>
+
+<p>
+  <strong>Abuser:</strong>
+  <%= @reportabus.abuser_id %>
+</p>
+
+<p>
+  <strong>Reporter:</strong>
+  <%= @reportabus.reporter_id %>
+</p>
+
+<%= link_to 'Edit', edit_reportabus_path(@reportabus) %> |
+<%= link_to 'Back', reportabuses_path %>

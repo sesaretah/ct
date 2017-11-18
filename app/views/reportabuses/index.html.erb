@@ -1,0 +1,56 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:roles)%></h1>
+        <span class="mainDescription"><%= t(:list_of_roles)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+
+<table>
+  <thead>
+    <tr>
+      <th>Abuse</th>
+      <th>Detail</th>
+      <th>Abused type</th>
+      <th>Abused</th>
+      <th>Abuser</th>
+      <th>Reporter</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reportabuses.each do |reportabus| %>
+      <tr>
+        <td><%= reportabus.abuse_id %></td>
+        <td><%= reportabus.detail %></td>
+        <td><%= reportabus.abused_type %></td>
+        <td><%= reportabus.abused_id %></td>
+        <td><%= reportabus.abuser_id %></td>
+        <td><%= reportabus.reporter_id %></td>
+        <td><%= link_to 'Show', reportabus %></td>
+        <td><%= link_to 'Edit', edit_reportabus_path(reportabus) %></td>
+        <td><%= link_to 'Destroy', reportabus, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>
+</div>
+</div>

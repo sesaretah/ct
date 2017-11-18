@@ -103,6 +103,8 @@
   </div>
   <div class="col-sm-4">
   </div>
+</div>
+
   <% @nodes = JSON.parse '[' + Graph.last.nodes.gsub(/'/, "\"") + ']'%>
   <% if Graph.last.edges.gsub(/'/, "\"")[-1] == ','%>
   <% @edges = JSON.parse '[' + Graph.last.edges.gsub(/'/, "\"").chop + ']'%>
@@ -130,6 +132,7 @@
   <% case node['type'] %>
   <% when 'channel'%>
   <% if params['channel'] == 'true'%>
+  <% node['href'] = '/channels?channel_id=' + node['id']%>
   <% node['active'] = true%>
   <% @n[node['name']]['active'] = true %>
   <% else%>
@@ -138,6 +141,7 @@
   <%end%>
   <% when 'blog'%>
   <% if params['blog'] == 'true'%>
+  <% node['href'] = '/blogs?blog_id=' + node['id']%>
   <% node['active'] = true%>
   <% @n[node['name']]['active'] = true %>
   <% else%>
@@ -146,6 +150,7 @@
   <%end%>
   <% when 'research'%>
   <% if params['research'] == 'true'%>
+  <% node['href'] = '/researches?research_id=' + node['id']%>
   <% node['active'] = true%>
   <% @n[node['name']]['active'] = true %>
   <% else%>
@@ -154,6 +159,7 @@
   <%end%>
   <% when 'group'%>
   <% if params['group'] == 'true'%>
+  <% node['href'] = '/groups?group_id=' + node['id']%>
   <% node['active'] = true%>
   <% @n[node['name']]['active'] = true %>
   <% else%>
@@ -162,6 +168,7 @@
   <%end%>
   <% when 'event'%>
   <% if params['event'] == 'true'%>
+  <% node['href'] = '/events?event_id=' + node['id']%>
   <% node['active'] = true%>
   <% @n[node['name']]['active'] = true %>
   <% else%>
@@ -170,6 +177,7 @@
   <%end%>
   <% when 'question'%>
   <% if params['question'] == 'true'%>
+  <% node['href'] = '/question?question_id=' + node['id']%>
   <% node['active'] = true%>
   <% @n[node['name']]['active'] = true %>
   <% else%>
@@ -178,6 +186,7 @@
   <%end%>
   <% when 'lab'%>
   <% if params['lab'] == 'true'%>
+  <% node['href'] = '/labs?lab_id=' + node['id']%>
   <% node['active'] = true%>
   <% @n[node['name']]['active'] = true %>
   <% else%>
@@ -186,6 +195,7 @@
   <%end%>
   <% when 'project'%>
   <% if params['project'] == 'true'%>
+  <% node['href'] = '/projects?project_id=' + node['id']%>
   <% node['active'] = true%>
   <% @n[node['name']]['active'] = true %>
   <% else%>
@@ -194,6 +204,7 @@
   <%end%>
   <% when 'offering'%>
   <% if params['offering'] == 'true'%>
+  <% node['href'] = '/offering?offering_id=' + node['id']%>
   <% node['active'] = true%>
   <% @n[node['name']]['active'] = true %>
   <% else%>

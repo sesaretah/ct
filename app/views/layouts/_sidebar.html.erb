@@ -348,6 +348,11 @@
           <span><%= t(:activity_list)%></span>
         </a>
       </li>
+      <li>
+        <a href="/abuses">
+          <span><%= t(:abuse_types)%></span>
+        </a>
+      </li>
       <% if grant_access('show_graph', current_user)%>
       <li>
         <a href="/home/graph?channel=true&group=true&event=true&question=true&project=true&offering=true&lab=true">

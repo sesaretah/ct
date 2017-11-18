@@ -1,0 +1,1 @@
+json.array! @abuses, partial: 'abuses/abus', as: :abus

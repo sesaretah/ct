@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :reportabuses
+
+  resources :abuses
+
   resources :blockings
 
   resources :activities

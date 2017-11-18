@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  abuse_id: 1
+  detail: MyText
+  abused_type: MyString
+  abused_id: 1
+  abuser_id: 1
+  reporter_id: 1
+
+two:
+  abuse_id: 1
+  detail: MyText
+  abused_type: MyString
+  abused_id: 1
+  abuser_id: 1
+  reporter_id: 1

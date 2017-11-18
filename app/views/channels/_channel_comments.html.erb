@@ -29,18 +29,18 @@
           <% if comment.avatar_file_name %>
             <%= image_tag comment.avatar(:medium), :class => "messages-item-avatar bordered border-primary"%>
           <%end%>
-          <a class='xedit-text' href="#" id="cm<%=comment.id%>" data-type="text" data-pk="1" data-url="/comments/xedit/<%= comment.id%>" data-title="Enter username">
-            <%= comment.content%>
-          </a>
-          <script>
-          $.fn.editable.defaults.mode = 'inline';
-          $.fn.editable.defaults.ajaxOptions = {type: "GET"};
+          <p class="convert-emoji"><%= comment.content%></p>
+
+          <script type="text/javascript">
           $(document).ready(function() {
-            $("#cm<%=comment.id%>").editable({
-                emptytext: ''
+            $(".convert-emoji").each(function() {
+              var original = $(this).html();
+              var converted = emojione.unicodeToImage(original);
+              $(this).html(converted);
             });
           });
           </script>
+
           <%else%>
           <% if comment.document_file_name %>
             <%= link_to comment.document.url do %>
@@ -53,13 +53,18 @@
           <p><%= comment.content%></p>
           <%end%>
 
-          <% if admin?(involvement) %>
+
           <div class='trash'>
+            <% if admin?(involvement) %>
             <%= link_to 'comments/'+ comment.id.to_s + '?page='+@page.to_s, :method => :delete, :remote => true, data: {confirm: "Are you sure?"}  do %>
             <i class="fa fa-trash-o"></i>
             <%end%>
+            <%end%>
+            <%= link_to 'reportabuses/new?abuser_id='  +comment.user_id.to_s + '&abused_type=Comment&abused_id=' + comment.id.to_s do %>
+            <i class="fa fa-exclamation-triangle"></i>
+            <%end%>
           </div>
-          <%end%>
+
 
         </div>
       </div>

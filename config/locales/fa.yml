@@ -412,6 +412,11 @@ fa:
             target_id: 'شناسه هدف'
             middle_type: 'کلاس واسط'
             middle_id: 'شناسه واسط'
+        abuse:
+          title: 'عنوان'
+        reportabuse:
+          abuse_id: 'نوع تخلف'
+          detail: 'شرح'
         privacypolicy:
           profile_fathername: 'نام پدر'
           profile_sex: 'جنسیت'
@@ -429,6 +434,11 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  new_abuse: 'نوع تخلف جدید'
+  abuse_types: 'نوع تخلفات'
+  created_by: 'ایجاد شده توسط'
+  report_item: 'مورد گزارش'
+  report_abuse: 'گزارش تخلف'
   block: 'انسداد'
   unblock: 'رفع انسداد'
   act: 'اعمال'

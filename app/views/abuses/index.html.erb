@@ -1,0 +1,50 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:abuse_types)%></h1>
+        <span class="mainDescription"></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+
+
+      <table class='table'>
+        <thead>
+          <tr>
+            <th><%=t :title%></th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @abuses.each do |abus| %>
+          <tr>
+            <td><%= abus.title %></td>
+            <td><%= link_to t(:edit), edit_abus_path(abus) %></td>
+            <td><%= link_to t(:destroy), abus, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <br>
+
+      <%= link_to t(:new_abuse), new_abus_path %>
+
+    </div>
+  </div>
+</div>
