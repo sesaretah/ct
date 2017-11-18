@@ -434,6 +434,12 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  abuse_reports: 'گزارشات تخلف'
+  reporter: 'گزارش کننده'
+  abuser: 'متخلف'
+  abused_id: 'شناسه'
+  abused_type: 'کلاس '
+  abuse_type: 'نوع تخلف'
   new_abuse: 'نوع تخلف جدید'
   abuse_types: 'نوع تخلفات'
   created_by: 'ایجاد شده توسط'

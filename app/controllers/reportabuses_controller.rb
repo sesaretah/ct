@@ -25,10 +25,10 @@ class ReportabusesController < ApplicationController
   # POST /reportabuses.json
   def create
     @reportabus = Reportabuse.new(reportabus_params)
-
+    @reportabus.reporter_id = current_user.id
     respond_to do |format|
       if @reportabus.save
-        format.html { redirect_to @reportabus, notice: 'Reportabuse was successfully created.' }
+        format.html { redirect_to '/reportabuses/', notice: 'Reportabuse was successfully created.' }
         format.json { render :show, status: :created, location: @reportabus }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class ReportabusesController < ApplicationController
   def update
     respond_to do |format|
       if @reportabus.update(reportabus_params)
-        format.html { redirect_to @reportabus, notice: 'Reportabuse was successfully updated.' }
+        format.html { redirect_to '/reportabuses/', notice: 'Reportabuse was successfully updated.' }
         format.json { render :show, status: :ok, location: @reportabus }
       else
         format.html { render :edit }
@@ -69,6 +69,6 @@ class ReportabusesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def reportabus_params
-      params.require(:reportabus).permit(:abuse_id, :detail, :abused_type, :abused_id, :abuser_id, :reporter_id)
+      params.require(:reportabuse).permit(:abuse_id, :detail, :abused_type, :abused_id, :abuser_id, :reporter_id)
     end
 end

@@ -3,8 +3,8 @@
   <section id="page-title">
     <div class="row">
       <div class="col-sm-8">
-        <h1 class="mainTitle"><%= t(:roles)%></h1>
-        <span class="mainDescription"><%= t(:list_of_roles)%></span>
+        <h1 class="mainTitle"><%= t(:report_abuse)%></h1>
+        <span class="mainDescription"></span>
       </div>
       <ol class="breadcrumb">
         <li>
@@ -21,15 +21,15 @@
   <div class="container-fluid container-fullw bg-white">
     <div class="row">
 
-<table>
+<table class='table'>
   <thead>
     <tr>
-      <th>Abuse</th>
-      <th>Detail</th>
-      <th>Abused type</th>
-      <th>Abused</th>
-      <th>Abuser</th>
-      <th>Reporter</th>
+      <th><%=t :abuse_type%></th>
+      <th><%=t :detail%></th>
+      <th><%=t :abused_type%></th>
+      <th><%=t :abused_id%></th>
+      <th><%=t :abuser%></th>
+      <th><%=t :reporter%></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -37,15 +37,23 @@
   <tbody>
     <% @reportabuses.each do |reportabus| %>
       <tr>
-        <td><%= reportabus.abuse_id %></td>
+        <td><%= Abuse.find_by_id(reportabus.abuse_id).title %></td>
         <td><%= reportabus.detail %></td>
         <td><%= reportabus.abused_type %></td>
         <td><%= reportabus.abused_id %></td>
-        <td><%= reportabus.abuser_id %></td>
-        <td><%= reportabus.reporter_id %></td>
-        <td><%= link_to 'Show', reportabus %></td>
-        <td><%= link_to 'Edit', edit_reportabus_path(reportabus) %></td>
-        <td><%= link_to 'Destroy', reportabus, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%@abuser =  User.find(reportabus.abuser_id) %>
+          <%= link_to '/profiles?profile_id='+ @abuser.profile.id.to_s do%>
+            <%= image_tag @abuser.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+            <%= @abuser.profile.name%> <%= @abuser.profile.surename%>
+            <%end%>
+          </td>
+        <td>
+          <%@reporter =  User.find(reportabus.reporter_id) %>
+            <%= link_to '/profiles?profile_id='+ @reporter.profile.id.to_s do%>
+              <%= image_tag @reporter.profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+              <%= @reporter.profile.name%> <%= @reporter.profile.surename%>
+              <%end%></td>
+        <td><%= link_to t(:destroy), reportabus, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
