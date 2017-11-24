@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  before_action :authenticate_user!, :except => [:index,:show, :view_remote]
   before_action :set_group, only: [:show, :edit, :update, :destroy]
   def search
     if !params[:q].blank?
@@ -6,6 +7,31 @@ class GroupsController < ApplicationController
     end
     @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Group')
 
+  end
+
+  def view_remote
+    @groups = []
+    case params['section']
+    when 'trophy'
+      @j = 0
+      for i in Grouping.group('group_id').order('count_id desc').count('id')
+        if @j < 10
+          @groups << Group.find(i[0])
+        end
+        @j = @j+1
+      end
+    when 'mine'
+      for pr in Grouping.where(user_id: params[:user_id])
+        @groups << pr.group
+      end
+    when 'related'
+      for sug in Suggestion.where(user_id: params[:user_id], suggested_type: 'Group')
+        @ev =  sug.suggested_type.classify.constantize.find(sug.suggested_id)
+        if !@ev.blank?
+          @groups << @ev
+        end
+      end
+    end
   end
 
   def view_content

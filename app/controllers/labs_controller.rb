@@ -1,4 +1,5 @@
 class LabsController < ApplicationController
+  before_action :authenticate_user!, :except => [:view_remote]
   before_action :set_lab, only: [:show, :edit, :update, :destroy]
 
   def search
@@ -19,6 +20,31 @@ class LabsController < ApplicationController
     Visit.create(user_id: current_user.id, visitable_id: @lab.id, visitable_type: 'Lab')
     @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Lab', target_id: @lab.id)
 
+  end
+
+  def view_remote
+    @labs = []
+    case params['section']
+    when 'trophy'
+      @j = 0
+      for i in Followship.where('followable_type = ?', 'Lab').group('followable_id').order('count_id desc').count('id')
+        if @j < 10
+          @labs << Lab.find(i[0])
+        end
+        @j = @j+1
+      end
+    when 'mine'
+      for q in Lab.where(user_id: params[:user_id])
+        @labs << q
+      end
+    when 'related'
+      for sug in Suggestion.where(user_id: params[:user_id], suggested_type: 'Lab')
+        @ev =  sug.suggested_type.classify.constantize.find(sug.suggested_id)
+        if !@ev.blank?
+          @labs << @ev
+        end
+      end
+    end
   end
 
   def cropper

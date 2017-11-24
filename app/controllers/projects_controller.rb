@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  before_action :authenticate_user!, :except => [:index,:show, :view_remote]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def search
@@ -24,6 +25,32 @@ class ProjectsController < ApplicationController
       Visit.create(user_id: current_user.id, visitable_id: @project.id, visitable_type: 'Project')
       @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Project', target_id: @project.id)
 
+    end
+
+
+    def view_remote
+      @projects = []
+      case params['section']
+      when 'trophy'
+        @j = 0
+        for i in Followship.where('followable_type = ?', 'Project').group('followable_id').order('count_id desc').count('id')
+          if @j < 10
+            @projects << Project.find(i[0])
+          end
+          @j = @j+1
+        end
+      when 'mine'
+        for q in Project.where(user_id: params[:user_id])
+          @projects << q
+        end
+      when 'related'
+        for sug in Suggestion.where(user_id: params[:user_id], suggested_type: 'Project')
+          @ev =  sug.suggested_type.classify.constantize.find(sug.suggested_id)
+          if !@ev.blank?
+            @projects << @ev
+          end
+        end
+      end
     end
   # GET /projects
   # GET /projects.json

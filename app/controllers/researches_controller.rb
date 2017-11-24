@@ -1,4 +1,5 @@
 class ResearchesController < ApplicationController
+  before_action :authenticate_user!, :except => [:view_remote]
   before_action :set_research, only: [:show, :edit, :update, :destroy]
 
   def search
@@ -24,6 +25,31 @@ class ResearchesController < ApplicationController
     Visit.create(user_id: current_user.id, visitable_id: @research.id, visitable_type: 'Research')
     @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Research', target_id: @research.id)
 
+  end
+
+  def view_remote
+    @researches = []
+    case params['section']
+    when 'trophy'
+      @j = 0
+      for i in Followship.where('followable_type = ?', 'Research').group('followable_id').order('count_id desc').count('id')
+        if @j < 10
+          @researches << Research.find(i[0])
+        end
+        @j = @j+1
+      end
+    when 'mine'
+      for q in Research.where(user_id: params[:user_id])
+        @researches << q
+      end
+    when 'related'
+      for sug in Suggestion.where(user_id: params[:user_id], suggested_type: 'Research')
+        @ev =  sug.suggested_type.classify.constantize.find(sug.suggested_id)
+        if !@ev.blank?
+          @researches << @ev
+        end
+      end
+    end
   end
   # GET /researches
   # GET /researches.json

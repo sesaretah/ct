@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  before_action :authenticate_user!, :except => [:view_remote]
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
   def cropper
@@ -23,6 +24,32 @@ class CoursesController < ApplicationController
     Visit.create(user_id: current_user.id, visitable_id: @course.id, visitable_type: 'Course')
     @activity =  Activity.create(user_id: current_user.id, activity_type: 'View', target_type: 'Course', target_id: @course.id)
 
+  end
+
+
+  def view_remote
+    @courses = []
+    case params['section']
+    when 'trophy'
+      @j = 0
+      for i in Followship.where('followable_type = ?', 'Course').group('followable_id').order('count_id desc').count('id')
+        if @j < 10
+          @courses << Course.find(i[0])
+        end
+        @j = @j+1
+      end
+    when 'mine'
+      for q in Course.where(user_id: params[:user_id])
+        @courses << q
+      end
+    when 'related'
+      for sug in Suggestion.where(user_id: params[:user_id], suggested_type: 'Course')
+        @ev =  sug.suggested_type.classify.constantize.find(sug.suggested_id)
+        if !@ev.blank?
+          @courses << @ev
+        end
+      end
+    end
   end
   # GET /courses
   # GET /courses.json

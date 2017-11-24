@@ -1,4 +1,5 @@
 class ChannelsController < ApplicationController
+  before_action :authenticate_user!, :except => [:index,:show, :view_remote]
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
 
   def search
@@ -17,6 +18,31 @@ class ChannelsController < ApplicationController
     end
     @activity =  Activity.create(user_id: current_user.id, activity_type: 'Join', target_type: 'Channel', target_id: @channel.id , middle_type: 'Involvement', middle_id: @involvement.id)
 
+  end
+
+  def view_remote
+    @channels = []
+    case params['section']
+    when 'trophy'
+      @j = 0
+      for i in Involvement.group('channel_id').order('count_id desc').count('id')
+        if @j < 10
+          @channels << Channel.find(i[0])
+        end
+        @j = @j+1
+      end
+    when 'mine'
+      for pr in Involvement.where(user_id: params[:user_id])
+        @channels << pr.channel
+      end
+    when 'related'
+      for sug in Suggestion.where(user_id: params[:user_id], suggested_type: 'Channel')
+        @ev =  sug.suggested_type.classify.constantize.find(sug.suggested_id)
+        if !@ev.blank?
+          @channels << @ev
+        end
+      end
+    end
   end
 
   def view_content

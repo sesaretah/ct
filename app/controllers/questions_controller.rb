@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+    before_action :authenticate_user!, :except => [:index,:show, :view_remote]
   before_action :set_question, only: [:show, :edit, :update, :destroy]
 
   def search
@@ -26,6 +27,30 @@ class QuestionsController < ApplicationController
 
   end
 
+  def view_remote
+    @questions = []
+    case params['section']
+    when 'trophy'
+      @j = 0
+      for i in Followship.where('followable_type = ?', 'Question').group('followable_id').order('count_id desc').count('id')
+        if @j < 10
+          @questions << Question.find(i[0])
+        end
+        @j = @j+1
+      end
+    when 'mine'
+      for q in Question.where(user_id: params[:user_id])
+        @questions << q
+      end
+    when 'related'
+      for sug in Suggestion.where(user_id: params[:user_id], suggested_type: 'Question')
+        @ev =  sug.suggested_type.classify.constantize.find(sug.suggested_id)
+        if !@ev.blank?
+          @questions << @ev
+        end
+      end
+    end
+  end
   # GET /questions
   # GET /questions.json
   def index

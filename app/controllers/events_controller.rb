@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, :except => [:index,:show]
+  before_action :authenticate_user!, :except => [:index,:show, :view_remote]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   def search
     if !params[:q].blank?
@@ -8,10 +8,10 @@ class EventsController < ApplicationController
     @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Event')
 
     respond_to do |format|
-    format.html
-    format.js
-    format.json { render json: @events }
-  end
+      format.html
+      format.js
+      format.json { render json: @events }
+    end
 
 
     #search params[:q], :star => true
@@ -34,6 +34,30 @@ class EventsController < ApplicationController
 
   end
 
+  def view_remote
+    @events = []
+    case params['section']
+    when 'trophy'
+      @j = 0
+      for i in Participation.group('event_id').order('count_id desc').count('id')
+        if @j < 10
+          @events << Event.find(i[0])
+        end
+        @j = @j+1
+      end
+    when 'mine'
+      for pr in Participation.where(user_id: params[:user_id])
+        @events << pr.event
+      end
+    when 'related'
+      for sug in Suggestion.where(user_id: params[:user_id], suggested_type: 'Event')
+        @ev =  sug.suggested_type.classify.constantize.find(sug.suggested_id)
+        if !@ev.blank?
+          @events << @ev
+        end
+      end
+    end
+  end
 
   def upload_avatar
     @event = Event.find(params[:id])

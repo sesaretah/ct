@@ -249,6 +249,19 @@ Rails.application.routes.draw do
   match "/blockings/add_block/:id" => "blockings#add_block", :via => :get
   match "/blockings/remove_block/:id" => "blockings#remove_block", :via => :get
 
+  match "events/view_remote/:id" => "events#view_remote", :via => :get
+  match "groups/view_remote/:id" => "groups#view_remote", :via => :get
+  match "channels/view_remote/:id" => "channels#view_remote", :via => :get
+  match "questions/view_remote/:id" => "questions#view_remote", :via => :get
+  match "projects/view_remote/:id" => "projects#view_remote", :via => :get
+  match "courses/view_remote/:id" => "courses#view_remote", :via => :get
+  match "labs/view_remote/:id" => "labs#view_remote", :via => :get
+  match "goods/view_remote/:id" => "goods#view_remote", :via => :get
+  match "researches/view_remote/:id" => "researches#view_remote", :via => :get
+  match "polls/view_remote/:id" => "polls#view_remote", :via => :get
+  match "profiles/view_remote/:id" => "profiles#view_remote", :via => :get
+  match "messages/view_remote/:id" => "messages#view_remote", :via => :get
+
   post 'upload' => 'upload#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

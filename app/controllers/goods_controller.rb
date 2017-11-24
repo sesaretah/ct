@@ -26,6 +26,8 @@ class GoodsController < ApplicationController
     end
   end
 
+  
+
   # GET /goods
   # GET /goods.json
   def index
