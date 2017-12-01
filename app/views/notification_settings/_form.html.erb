@@ -1,0 +1,193 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:new_nottfication_settings)%></h1>
+        <span class="mainDescription"><% t(:please_enter_new_data)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"></span></h5>
+        <div class="panel panel-white">
+          <div class="panel-body">
+            <%= form_for(@notification_setting) do |f| %>
+            <% if @notification_setting.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@notification_setting.errors.count, "error") %> prohibited this notification_setting from being saved:</h2>
+
+              <ul>
+                <% @notification_setting.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+            <% end %>
+
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :channel_updates %><br>
+                <% f.number_field :channel_updates %>
+                <%= f.select( :channel_updates, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :involvement %><br>
+                <% f.number_field :involvement %>
+                <%= f.select( :involvement, notificationtypes, {}, {:class => "form-control"})  %>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :blog_updates %><br>
+                <% f.number_field :blog_updates %>
+                <%= f.select( :blog_updates, notificationtypes, {}, {:class => "form-control"})  %>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :group_updates %><br>
+                <% f.number_field :group_updates %>
+                <%= f.select( :group_updates, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :grouping %><br>
+                <% f.number_field :grouping %>
+                <%= f.select( :grouping, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :event_updates %><br>
+                <% f.number_field :event_updates %>
+                <%= f.select( :event_updates, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :participation %><br>
+                <% f.number_field :participation %>
+                <%= f.select( :participation, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :question_updates %><br>
+                <% f.number_field :question_updates %>
+                <%= f.select( :question_updates, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :question_comments %><br>
+                <% f.number_field :question_comments %>
+                <%= f.select( :question_comments, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :answers_comments %><br>
+                <% f.number_field :answers_comments %>
+                <%= f.select( :answers_comments, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :project_task %><br>
+                <% f.number_field :project_task %>
+                <%= f.select( :project_task, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :partnership %><br>
+                <% f.number_field :partnership %>
+                <%= f.select( :partnership, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :offsession %><br>
+                <% f.number_field :offsession %>
+                <%= f.select( :offsession, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :membership %><br>
+                <% f.number_field :membership %>
+                <%= f.select( :membership, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :announcement %><br>
+                <% f.number_field :announcement %>
+                <%= f.select( :announcement, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :contribution %><br>
+                <% f.number_field :contribution %>
+                <%= f.select( :contribution, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :research_ranking %><br>
+                <% f.number_field :research_ranking %>
+                <%= f.select( :research_ranking, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :research_comments %><br>
+                <% f.number_field :research_comments %>
+                <%= f.select( :research_comments, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :poll %><br>
+                <% f.number_field :poll %>
+                <%= f.select( :poll, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
+                <%= f.label :messages %><br>
+                <% f.number_field :messages %>
+                <%= f.select( :messages, notificationtypes, {}, {:class => "form-control"})  %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary pull-left">
+                  <%= t(:submit)%> <i class="fa fa-arrow-circle-left"></i>
+                </button>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+json.extract! notification_setting, :id, :user_id, :channel_updates, :involvement, :blog_updates, :group_updates, :grouping, :event_updates, :participation, :question_updates, :question_comments, :answers_comments, :project_task, :partnership, :offsession, :membership, :announcement, :contribution, :research_ranking, :research_comments, :poll, :messages, :created_at, :updated_at
+json.url notification_setting_url(notification_setting, format: :json)

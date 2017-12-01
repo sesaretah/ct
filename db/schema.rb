@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171117141303) do
+ActiveRecord::Schema.define(version: 20171201190225) do
 
   create_table "abuses", force: :cascade do |t|
     t.string   "title",      limit: 191
@@ -402,6 +402,32 @@ ActiveRecord::Schema.define(version: 20171117141303) do
     t.datetime "updated_at",               null: false
     t.string   "title",      limit: 255
     t.integer  "blog_id",    limit: 4
+  end
+
+  create_table "notification_settings", force: :cascade do |t|
+    t.integer  "user_id",           limit: 4
+    t.integer  "channel_updates",   limit: 4
+    t.integer  "involvement",       limit: 4
+    t.integer  "blog_updates",      limit: 4
+    t.integer  "group_updates",     limit: 4
+    t.integer  "grouping",          limit: 4
+    t.integer  "event_updates",     limit: 4
+    t.integer  "participation",     limit: 4
+    t.integer  "question_updates",  limit: 4
+    t.integer  "question_comments", limit: 4
+    t.integer  "answers_comments",  limit: 4
+    t.integer  "project_task",      limit: 4
+    t.integer  "partnership",       limit: 4
+    t.integer  "offsession",        limit: 4
+    t.integer  "membership",        limit: 4
+    t.integer  "announcement",      limit: 4
+    t.integer  "contribution",      limit: 4
+    t.integer  "research_ranking",  limit: 4
+    t.integer  "research_comments", limit: 4
+    t.integer  "poll",              limit: 4
+    t.integer  "messages",          limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "offerings", force: :cascade do |t|

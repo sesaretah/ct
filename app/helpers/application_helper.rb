@@ -50,6 +50,14 @@ module ApplicationHelper
     return @options
   end
 
+  def notificationtypes
+    @options = [
+      [t(:send_via_email), 1],
+      [t(:dont_send_email) , 0]
+    ]
+    return @options
+  end
+
   def sexs
     @options = [
       [t(:male), t(:male)],

@@ -417,6 +417,27 @@ fa:
         reportabuse:
           abuse_id: 'نوع تخلف'
           detail: 'شرح'
+        notification_setting:
+          channel_updates: 'اطلاع رسانی پست های  کانال ها'
+          involvement: 'عضویت کانال'
+          blog_updates: 'بروزرسانی وبلاگ'
+          group_updates: 'اطلاع رسانی پست ها در گروهها'
+          grouping: 'عضویت در گروه'
+          event_updates: 'بروزرسانی رخدادها'
+          participation: 'عضویت در رخدادها'
+          question_updates: 'پاسخ ها بر روی پرسش ها'
+          question_comments: 'نظرات بر روی پرسش ها'
+          answers_comments: 'نظرات بر روی پاسخ ها'
+          project_task: 'تخصیص وظایف در پروژه ها'
+          partnership: 'عضویت در پروژه ها'
+          offsession: 'جلسات جدید دروس'
+          membership: 'عضویت در آزمایشگاه'
+          announcement: 'اخبار آزمایشگاه ها'
+          contribution: 'تغییرات در مشارکت کنندگان منتشر شده ها'
+          research_ranking: 'آرای منتشرشده ها'
+          research_comments: 'نظرات بر روی متشر شده ها'
+          poll: 'نظرسنجی ها'
+          messages: 'پیام ها'
         privacypolicy:
           profile_fathername: 'نام پدر'
           profile_sex: 'جنسیت'
@@ -434,6 +455,10 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  notification_settings: 'تنظیمات آگاهسازی'
+  send_via_email: 'آگاهسازی با ایمیل'
+  dont_send_email: 'عدم آگاهسازی با ایمیل'
+  new_nottfication_settings: 'تنظیمات آگاهسازی'
   abuse_reports: 'گزارشات تخلف'
   reporter: 'گزارش کننده'
   abuser: 'متخلف'

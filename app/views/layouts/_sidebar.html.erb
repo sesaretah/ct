@@ -314,6 +314,16 @@
     </a>
     <ul class="sub-menu" style="display: none;">
       <li>
+        <% @ns = NotificationSetting.where(user_id: current_user.id).first%>
+        <% if @ns.blank?%>
+          <a href="/notification_settings/new">
+          <%else%>
+          <a href="/notification_settings/<%= @ns.id%>/edit">
+          <%end%>
+          <span><%= t(:notification_settings)%></span>
+        </a>
+      </li>
+      <li>
         <% @pp = Privacypolicy.where(user_id: current_user.id).first%>
         <% if @pp.blank?%>
           <a href="/privacypolicies/new">

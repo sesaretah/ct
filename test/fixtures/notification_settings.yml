@@ -1,0 +1,47 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  channel_updates: 1
+  involvement: 1
+  blog_updates: 1
+  group_updates: 1
+  grouping: 1
+  event_updates: 1
+  participation: 1
+  question_updates: 1
+  question_comments: 1
+  answers_comments: 1
+  project_task: 1
+  partnership: 1
+  offsession: 1
+  membership: 1
+  announcement: 1
+  contribution: 1
+  research_ranking: 1
+  research_comments: 1
+  poll: 1
+  messages: 1
+
+two:
+  user_id: 1
+  channel_updates: 1
+  involvement: 1
+  blog_updates: 1
+  group_updates: 1
+  grouping: 1
+  event_updates: 1
+  participation: 1
+  question_updates: 1
+  question_comments: 1
+  answers_comments: 1
+  project_task: 1
+  partnership: 1
+  offsession: 1
+  membership: 1
+  announcement: 1
+  contribution: 1
+  research_ranking: 1
+  research_comments: 1
+  poll: 1
+  messages: 1
