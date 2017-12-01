@@ -1,5 +1,5 @@
 class ResearchesController < ApplicationController
-  before_action :authenticate_user!, :except => [:view_remote]
+  before_action :authenticate_user!, :except => [:show, :view_remote]
   before_action :set_research, only: [:show, :edit, :update, :destroy]
 
   def search

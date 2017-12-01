@@ -1,5 +1,5 @@
 class LabsController < ApplicationController
-  before_action :authenticate_user!, :except => [:view_remote]
+  before_action :authenticate_user!, :except => [:show, :view_remote]
   before_action :set_lab, only: [:show, :edit, :update, :destroy]
 
   def search
