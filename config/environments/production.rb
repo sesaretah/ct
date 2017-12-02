@@ -78,7 +78,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: 'sn.ut.ac.ir', port: 80 }
-
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'utservm.ut.ac.ir',
