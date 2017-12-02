@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :notifications
+
   resources :notification_settings
 
   resources :reportabuses

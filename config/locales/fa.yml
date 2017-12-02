@@ -455,6 +455,7 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  digest_email: 'ایمیل آگاهسازی'
   notification_settings: 'تنظیمات آگاهسازی'
   send_via_email: 'آگاهسازی با ایمیل'
   dont_send_email: 'عدم آگاهسازی با ایمیل'

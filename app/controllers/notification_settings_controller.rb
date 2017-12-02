@@ -28,6 +28,9 @@ class NotificationSettingsController < ApplicationController
     @notification_setting.user_id = current_user.id
     respond_to do |format|
       if @notification_setting.save
+        @profile = @notification_setting.user.profile
+        @profile.digest_email = params[:digest_email]
+        @profile.save
         format.html { redirect_to '/profiles?profile_id=' + @notification_setting.user.profile.id.to_s , notice: 'Notification setting was successfully created.' }
         format.json { render :show, status: :created, location: @notification_setting }
       else
@@ -42,6 +45,9 @@ class NotificationSettingsController < ApplicationController
   def update
     respond_to do |format|
       if @notification_setting.update(notification_setting_params)
+        @profile = @notification_setting.user.profile
+        @profile.digest_email = params[:digest_email]
+        @profile.save
         format.html { redirect_to '/profiles?profile_id=' + @notification_setting.user.profile.id.to_s , notice: 'Notification setting was successfully updated.' }
         format.json { render :show, status: :ok, location: @notification_setting }
       else

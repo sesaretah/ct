@@ -37,6 +37,12 @@
 
             <div class="row">
               <div class="form-group col-xs-4">
+                <%=t :digest_email%><br>
+                <%= text_field_tag :digest_email, current_user.email, {:class => "form-control"}%>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-xs-4">
                 <%= f.label :channel_updates %><br>
                 <% f.number_field :channel_updates %>
                 <%= f.select( :channel_updates, notificationtypes, {}, {:class => "form-control"})  %>

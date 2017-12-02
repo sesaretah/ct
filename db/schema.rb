@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171201190225) do
+ActiveRecord::Schema.define(version: 20171202052613) do
 
   create_table "abuses", force: :cascade do |t|
     t.string   "title",      limit: 191
@@ -430,6 +430,17 @@ ActiveRecord::Schema.define(version: 20171201190225) do
     t.datetime "updated_at",                  null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id",         limit: 4
+    t.string   "notifiable_type", limit: 191
+    t.integer  "notifiable_id",   limit: 4
+    t.string   "notifiee_type",   limit: 191
+    t.integer  "notfiee_id",      limit: 4
+    t.text     "content",         limit: 65535
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
   create_table "offerings", force: :cascade do |t|
     t.integer  "course_id",  limit: 4
     t.integer  "user_id",    limit: 4
@@ -570,6 +581,7 @@ ActiveRecord::Schema.define(version: 20171201190225) do
     t.string   "official_email",      limit: 255
     t.string   "faculty",             limit: 255
     t.string   "rank",                limit: 255
+    t.string   "digest_email",        limit: 191
   end
 
   create_table "projects", force: :cascade do |t|

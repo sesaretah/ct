@@ -1,0 +1,13 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p><%= @grouping.user.profile.name%> <%= @grouping.user.profile.surename%>
+      is added to group <%= @grouping.group.name%>.
+      <%= link_to @grouping.group do%> see the details <%end%>
+    </p>
+  </body>
+</html>
