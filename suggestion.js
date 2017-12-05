@@ -5,8 +5,8 @@ var pluralize = require('pluralize');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : '',
-  database : 'shoa2'
+  password : 'salam64511',
+  database : 'shoa3'
 });
 var Graph = require("graphlib").Graph;
 var Alg = require("graphlib").alg;
