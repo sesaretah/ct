@@ -44,7 +44,7 @@ class ResearchesController < ApplicationController
       end
     when 'related'
       for sug in Suggestion.where(user_id: params[:user_id], suggested_type: 'Research')
-        @ev =  sug.suggested_type.classify.constantize.find(sug.suggested_id)
+        @ev =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)
         if !@ev.blank?
           @researches << @ev
         end

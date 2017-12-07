@@ -79,7 +79,7 @@
             <hr style="margin-top:0px; margin-bottom:0px;">
             <ul class="messages-list relative top-0">
               <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Offering')%>
-              <% @of =  sug.suggested_type.classify.constantize.find(sug.suggested_id)%>
+              <% @of =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
               <% if !@of.blank?%>
               <%= render partial: 'courses/item', locals: {course: @of.course}%>
               <%end%>

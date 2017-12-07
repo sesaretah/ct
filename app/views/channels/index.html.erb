@@ -81,7 +81,7 @@
             <hr style="margin-top:0px; margin-bottom:0px;">
             <ul class="messages-list relative top-0">
               <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Channel')%>
-              <% @ch =  sug.suggested_type.classify.constantize.find(sug.suggested_id)%>
+              <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
               <% if !@ch.blank?%>
               <%= render partial: 'channels/item', locals: {channel: @ch}%>
               <%end%>
