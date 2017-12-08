@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
 
   def create_remote
     @comment = Comment.create(commentable_type: params[:commentable_type], commentable_id: params[:commentable_id], content: params[:content], user_id: params[:user_id])
+    @item =  @comment.commentable_type.classify.constantize.find(@comment.commentable_id)
     render 'comments/render_remote.json.jbuilder'
   end
 
