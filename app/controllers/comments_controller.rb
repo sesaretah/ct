@@ -1,5 +1,11 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!, :except => [:create_remote]
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
+
+  def create_remote
+    @comment = Comment.create(commentable_type: params[:commentable_type], commentable_id: params[:commentable_id], content: params[:content], user_id: params[:user_id])
+    render 'comments/render_remote.json.jbuilder'
+  end
 
   def render_partial
   @comment = Comment.find(params[:id])

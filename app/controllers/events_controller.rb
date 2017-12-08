@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, :except => [:index,:show, :view_remote]
+  before_action :authenticate_user!, :except => [:index,:show, :create,:view_remote]
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   def search
     if !params[:q].blank?

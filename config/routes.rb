@@ -266,6 +266,7 @@ Rails.application.routes.draw do
   match "profiles/view_remote/:id" => "profiles#view_remote", :via => :get
   match "messages/view_remote/:id" => "messages#view_remote", :via => :get
 
+  match "comments/create_remote" => "comments#create_remote", :via => :post
   post 'upload' => 'upload#create'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
