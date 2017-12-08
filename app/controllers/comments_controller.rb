@@ -1,10 +1,16 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, :except => [:create_remote]
+  before_action :authenticate_user!, :except => [:create_remote,:load5]
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
+  def load5
+    @comments = Comment.where(commentable_type: params[:commentable_type].singularize.classify, commentable_id: params[:commentable_id]).where('id < ?', params[:firstid].to_i).last(5)
+  #  @item =  @comments.first.commentable_type.classify.constantize.find(@comments.first.commentable_id)
+    render 'comments/render_remote.json.jbuilder'
+  end
   def create_remote
     @comment = Comment.create(commentable_type: params[:commentable_type], commentable_id: params[:commentable_id], content: params[:content], user_id: params[:user_id])
     @item =  @comment.commentable_type.classify.constantize.find(@comment.commentable_id)
+    @comments = @item.comments.last(5)
     render 'comments/render_remote.json.jbuilder'
   end
 
