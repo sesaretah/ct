@@ -16,7 +16,7 @@
                     <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Channel').limit(3)%>
                     <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
                     <% if !@ch.blank?%>
-                    <%= render partial: 'channels/item', locals: {channel: @ch}%>
+                    <%= render partial: 'channels/item_n_remote', locals: {channel: @ch}%>
                     <%end%>
                     <%end%>
                   </ul>
@@ -27,7 +27,7 @@
                     <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Group').limit(3)%>
                     <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
                     <% if !@ch.blank?%>
-                    <%= render partial: 'groups/item', locals: {group: @ch}%>
+                    <%= render partial: 'groups/item_n_remote', locals: {group: @ch}%>
                     <%end%>
                     <%end%>
                     <br />
@@ -37,7 +37,7 @@
                       <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Event').limit(3)%>
                       <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
                       <% if !@ch.blank?%>
-                      <%= render partial: 'events/item', locals: {event: @ch}%>
+                      <%= render partial: 'events/item_n_remote', locals: {event: @ch}%>
                       <%end%>
                       <%end%>
                     </ul>
@@ -48,7 +48,7 @@
                       <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Question').limit(3)%>
                       <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
                       <% if !@ch.blank?%>
-                      <%= render partial: 'questions/item', locals: {question: @ch}%>
+                      <%= render partial: 'questions/item_n_remote', locals: {question: @ch}%>
                       <%end%>
                       <%end%>
                     </ul>
@@ -59,7 +59,7 @@
                       <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Research').limit(3)%>
                       <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
                       <% if !@ch.blank?%>
-                      <%= render partial: 'researches/item', locals: {research: @ch}%>
+                      <%= render partial: 'researches/item_n_remote', locals: {research: @ch}%>
                       <%end%>
                       <%end%>
                     </ul>
@@ -70,7 +70,7 @@
                       <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Project').limit(3)%>
                       <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
                       <% if !@ch.blank?%>
-                      <%= render partial: 'projects/item', locals: {project: @ch}%>
+                      <%= render partial: 'projects/item_n_remote', locals: {project: @ch}%>
                       <%end%>
                       <%end%>
                     </ul>
@@ -81,7 +81,7 @@
                       <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Course').limit(3)%>
                       <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
                       <% if !@ch.blank?%>
-                      <%= render partial: 'courses/item', locals: {course: @ch}%>
+                      <%= render partial: 'courses/item_n_remote', locals: {course: @ch}%>
                       <%end%>
                       <%end%>
                     </ul>
@@ -92,7 +92,7 @@
                       <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Lab').limit(3)%>
                       <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
                       <% if !@ch.blank?%>
-                      <%= render partial: 'labs/item', locals: {lab: @ch}%>
+                      <%= render partial: 'labs/item_n_remote', locals: {lab: @ch}%>
                       <%end%>
                       <%end%>
                     </ul>

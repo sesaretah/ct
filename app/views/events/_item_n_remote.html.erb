@@ -1,0 +1,22 @@
+<% @random_string = SecureRandom.hex%>
+<li class="messages-item padding-5 <%= @bg%>" id='<%=@random_string %>'>
+  <%= link_to '/events/1?event_id='+ event.id.to_s  do%>
+  <%= image_tag event.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+  <span class="messages-item-from"><%= event.name%></span>
+  <% @e = DateTime.new(event.event_date.year, event.event_date.month, event.event_date.day, event.start_time.hour, event.start_time.min, 0, "+04:30")  %>
+
+  <div class="messages-item-time">
+    <span class="text">
+    </span>
+  </div>
+  <span class="messages-item-subject"></span>
+  <span class="messages-item-content"><%= truncate(event.description, :length => 20)%></span>
+  <div class="messages-item-time" style="margin-top:10px">
+    <% if @e < Time.now%>
+    <button type="button" class="btn btn-light-red btn-squared btn-xs">
+       &nbsp <%= t(:ended)%>&nbsp
+    </button>
+    <%end%>
+  </div>
+  <%end%>
+</li>

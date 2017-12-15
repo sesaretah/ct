@@ -1,0 +1,21 @@
+<% @random_string = SecureRandom.hex%>
+<li class="messages-item padding-5 <%= @bg%>" id='<%=@random_string %>'>
+  <%= link_to 'courses/1?course_id='+ course.id.to_s do%>
+  <%= image_tag course.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+  <span class="messages-item-from"><%= course.name%></span>
+  <div class="messages-item-time">
+    <span class="text">
+      <% link_to edit_course_path(course) do%>
+        <%=t :edit%>
+      <%end%>
+    </span>
+  </div>
+  <span class="messages-item-subject"></span>
+  <span class="messages-item-content"><%= truncate(course.course_type, :length => 20)%></span>
+  <%end%>
+  <% if course.user_id == current_user.id%>
+  <div class="messages-item-time" style="margin-top:10px">
+
+  </div>
+  <%end%>
+</li>
