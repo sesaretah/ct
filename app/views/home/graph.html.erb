@@ -105,6 +105,11 @@
   </div>
 </div>
 
+  <% if params[:user_id].blank?%>
+    <% @user = current_user%>
+  <%else%>
+    <% @user = User.find(params[:user_id])%>
+  <%end%>
   <% @nodes = JSON.parse '[' + Graph.last.nodes.gsub(/'/, "\"") + ']'%>
   <% if Graph.last.edges.gsub(/'/, "\"")[-1] == ','%>
   <% @edges = JSON.parse '[' + Graph.last.edges.gsub(/'/, "\"").chop + ']'%>
@@ -113,7 +118,7 @@
   <%end%>
   <% @nodes.each do |node| %>
   <% if node['type'] == 'user'%>
-  <% @friendship = Friendship.where(user_id: current_user.id, friend_id: node['id']).first%>
+  <% @friendship = Friendship.where(user_id: @user.id, friend_id: node['id']).first%>
   <% if @friendship.blank? %>
   <% node['active'] = false%>
   <% @n[node['name']]['active'] = false %>
@@ -125,7 +130,7 @@
   <% node['active'] = true%>
 <% @n[node['name']]['active'] = true %>
   <%end%>
-  <% if current_user.id == node['id'].to_i%>
+  <% if @user.id == node['id'].to_i%>
   <% node['active'] = true%>
   <% @n[node['name']]['active'] = true %>
   <%end%>
@@ -281,7 +286,7 @@
 
   var force = d3.layout.force()
   .gravity(0.05)
-  .distance(150)
+  .distance(100)
   .charge(-100)
   .size([width, height]);
 

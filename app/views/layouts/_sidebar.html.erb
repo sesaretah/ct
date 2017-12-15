@@ -35,34 +35,7 @@
 </div>
 
 <ul class="main-navigation-menu">
-  <li  <% if params[:controller] == 'blogs'%> <%= "class = active "%> <%end%>>
-    <a href="/blogs">
-      <div class="item-content">
-        <div class="item-media">
-          <i class=" ti-pencil-alt"></i>
-        </div>
-        <div class="item-inner">
-            <% @blogflag = false%>
-            <% @seekings = Seeking.where(user_id: current_user.id)%>
-            <% for seeking in @seekings%>
-              <% @v = Visit.where(user_id: current_user.id, visitable_id: seeking.blog_id , visitable_type: 'Blog').last%>
-              <% if !seeking.blog.notes.blank? && !@v.blank?%>
-              <% if seeking.blog.notes.last.created_at > @v.created_at%>
-                <% @blogflag = true%>
-              <%end%>
-              <%end%>
-              <% if @v.blank?%>
-                <% @blogflag = true%>
-              <%end%>
-            <%end%>
-          <span class="title"><%= t(:blogs)%></span>
-          <% if @blogflag%>
-            <span class='custom-dot'></span>
-          <%end%>
-        </div>
-      </div>
-    </a>
-  </li>
+
 
   <li  <% if params[:controller] == 'channels'%> <%= "class = active "%> <%end%>>
     <a href="/channels">
@@ -232,6 +205,35 @@
         </div>
         <div class="item-inner">
           <span class="title"><%= t(:labs)%></span>
+        </div>
+      </div>
+    </a>
+  </li>
+
+  <li  <% if params[:controller] == 'blogs'%> <%= "class = active "%> <%end%>>
+    <a href="/blogs">
+      <div class="item-content">
+        <div class="item-media">
+          <i class=" ti-pencil-alt"></i>
+        </div>
+        <div class="item-inner">
+            <% @blogflag = false%>
+            <% @seekings = Seeking.where(user_id: current_user.id)%>
+            <% for seeking in @seekings%>
+              <% @v = Visit.where(user_id: current_user.id, visitable_id: seeking.blog_id , visitable_type: 'Blog').last%>
+              <% if !seeking.blog.notes.blank? && !@v.blank?%>
+              <% if seeking.blog.notes.last.created_at > @v.created_at%>
+                <% @blogflag = true%>
+              <%end%>
+              <%end%>
+              <% if @v.blank?%>
+                <% @blogflag = true%>
+              <%end%>
+            <%end%>
+          <span class="title"><%= t(:blogs)%></span>
+          <% if @blogflag%>
+            <span class='custom-dot'></span>
+          <%end%>
         </div>
       </div>
     </a>

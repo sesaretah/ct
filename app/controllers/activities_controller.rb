@@ -1,6 +1,12 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:show, :edit, :update, :destroy]
+
+  def export
+    @activities = Activity.where(user_id: params[:user_id])
+  end
+
   def list
+    @user = User.find(params[:user_id])
     @activities = Activity.where(user_id: params[:user_id])
   end
   # GET /activities

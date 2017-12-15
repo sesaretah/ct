@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+xmlns:html="http://www.w3.org/TR/REC-html40">
+<Worksheet ss:Name="Sheet1">
+  <Table>
+    <% @activities.each do |activity| %>
+    <Row>
+    <% @profile = Profile.where(user_id: activity.user_id).first%>
+    <Cell><Data ss:Type="String"><%= @profile.name%> <%= @profile.surename%></Data></Cell>
+    <Cell><Data ss:Type="String"><%=t(activity.activity_type) %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= activity.target_type %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= activity.target_id %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= activity.middle_type %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= activity.middle_id %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= activity.created_at %></Data></Cell>
+  </Row>
+    <% end %>
+  </Table>
+</Worksheet>
+</Workbook>

@@ -1,4 +1,5 @@
 <div id='list'>
+
 <table class='table'>
   <thead>
     <tr>
@@ -27,4 +28,9 @@
     <% end %>
   </tbody>
 </table>
+<%= link_to "/activities/export/1.xls?user_id="+@user.id.to_s do %>
+<button type="button" class="btn btn-success btn-squared btn-xs">
+  <i class="fa fa-file-excel-o" style="color: white !important;vertical-align: middle;"></i> <%= t(:export_excel)%>&nbsp
+</button>
+<%end%>
 </div>
