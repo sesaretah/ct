@@ -1,0 +1,77 @@
+
+<div class="panel panel-white no-radius">
+  <div class="panel-heading border-light">
+    <h4 class="panel-title"><%=t :personal_stat%></h4>
+  </div>
+  <div class="panel-body">
+
+    <div class="statContainer">
+      <a class="nounderline" href="javascript:alert('Portfolio Link here!');" title="Web Development Services">
+        <div class="statBubbleContainer">
+          <div class="statBubble blog">
+            <div class="statNum">
+              <%= Note.where(user_id: current_user.id).count%>
+            </div>
+          </div>
+          <h3><%=t :blogs%></h3>
+        </div>
+      </a>
+
+      <a class="nounderline" href="javascript:alert('Meet the team Link here!');" title="Meet our developers">
+        <div class="statBubbleContainer">
+          <div class="statBubble channel">
+            <div class="statNum">
+              <%= Comment.where(user_id: current_user.id, commentable_type: 'Channel').count%>
+            </div>
+          </div>
+          <h3><%=t :channels%></h3>
+        </div>
+      </a>
+
+      <a class="nounderline" href="javascript:alert('Services Page Here');" title="Learn about our services">
+        <div class="statBubbleContainer">
+          <div class="statBubble group">
+            <div class="statNum">
+              <%= Comment.where(user_id: current_user.id, commentable_type: 'Group').count%>
+            </div>
+          </div>
+          <h3><%=t :group%></h3>
+        </div>
+      </a>
+
+      <a class="nounderline" target="_blank" href="https://www.facebook.com/BoiseDigital/" title="Get Connected with us!">
+        <div class="statBubbleContainer">
+          <div class="statBubble event">
+            <div class="statNum">
+              <%= Comment.where(user_id: current_user.id, commentable_type: 'Event').count%>
+            </div>
+          </div>
+          <h3><%=t :events%></h3>
+        </div>
+      </a>
+
+      <a class="nounderline" target="_blank" href="https://www.facebook.com/BoiseDigital/" title="Get Connected with us!">
+        <div class="statBubbleContainer">
+          <div class="statBubble question">
+            <div class="statNum">
+              <%= Answer.where(user_id: current_user.id).count%>
+            </div>
+          </div>
+          <h3><%=t :questions%></h3>
+        </div>
+      </a>
+
+      <a class="nounderline" target="_blank" href="https://www.facebook.com/BoiseDigital/" title="Get Connected with us!">
+        <div class="statBubbleContainer">
+          <div class="statBubble research">
+            <div class="statNum">
+              <%= Contribution.where(user_id: current_user.id).count%>
+            </div>
+          </div>
+          <h3><%=t :researches%></h3>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</div>

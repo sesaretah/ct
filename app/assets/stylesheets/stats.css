@@ -1,0 +1,189 @@
+.statContainer {
+  margin:auto;
+  width:auto;
+
+}
+
+.statRedirect {
+  color:#06f;
+  font-family:'segoe ui light',arial;
+  font-size:14px;
+  display: inline-block;
+  overflow: hidden;
+
+  vertical-align: top;
+
+  -webkit-perspective: 600px;
+  -moz-perspective: 600px;
+  -ms-perspective: 600px;
+  perspective: 600px;
+
+  -webkit-perspective-origin: 50% 50%;
+  -moz-perspective-origin: 50% 50%;
+  -ms-perspective-origin: 50% 50%;
+  perspective-origin: 50% 50%;
+}
+
+.statRedirect span {
+  display: block;
+  position: relative;
+  padding: 2px 8px;
+
+  -webkit-transition: all 400ms ease;
+  -moz-transition: all 400ms ease;
+  -ms-transition: all 400ms ease;
+  transition: all 400ms ease;
+
+  -webkit-transform-origin: 50% 0%;
+  -moz-transform-origin: 50% 0%;
+  -ms-transform-origin: 50% 0%;
+  transform-origin: 50% 0%;
+
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.statBubbleContainer:hover > .statRedirect span {
+  background: #00929c;
+
+  -webkit-transform: translate3d( 0px, 0px, -30px ) rotateX( 90deg );
+  -moz-transform: translate3d( 0px, 0px, -30px ) rotateX( 90deg );
+  -ms-transform: translate3d( 0px, 0px, -30px ) rotateX( 90deg );
+  transform: translate3d( 0px, 0px, -30px ) rotateX( 90deg );
+}
+
+.statRedirect span:after {
+  content: attr(data-title);
+
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 2px 8px;
+
+  color: #fff;
+  background: #0e76bc;
+
+  -webkit-transform-origin: 50% 0%;
+  -moz-transform-origin: 50% 0%;
+  -ms-transform-origin: 50% 0%;
+  transform-origin: 50% 0%;
+
+  -webkit-transform: translate3d( 0px, 105%, 0px ) rotateX( -90deg );
+  -moz-transform: translate3d( 0px, 105%, 0px ) rotateX( -90deg );
+  -ms-transform: translate3d( 0px, 105%, 0px ) rotateX( -90deg );
+  transform: translate3d( 0px, 105%, 0px ) rotateX( -90deg );
+}
+
+.statBubbleContainer:hover > .statRedirect {
+  text-decoration:none;
+}
+
+.underline {
+  text-decoration:underline;
+}
+
+.statBubbleContainer {
+
+    position:relative;
+    cursor:pointer;
+    text-align:center;
+    margin:3px;
+
+    display:inline-block;
+
+}
+
+.nounderline {
+  text-decoration:none;
+}
+
+.statBubbleContainer h3 {
+  font-family: 'koodak';
+  font-size:14px;
+  margin-top: 5px;
+  color:#828282;
+  -webkit-transition:all 0.3s ease-in-out;
+  -ms-transition:all 0.3s ease-in-out;
+  -moz-transition:all 0.3s ease-in-out;
+  -o-transition:all 0.3s ease-in-out;
+  -apple-transition:all 0.3s ease-in-out;
+  transition:all 0.3s ease-in-out;
+}
+
+.statBubbleContainer:hover > h3 {
+  color:#0e76bc;
+}
+
+.statBubbleContainer:hover > .statBubble {
+  border:6px solid #0e76bc;
+  background-position:center 2px;
+}
+
+.statBubbleContainer:hover .statNum {
+  color:#2b2b2b;
+}
+
+.blog {
+  background-image:url('/assets/blog.png');
+}
+
+.channel {
+  background-image:url('/assets/channel.png');
+}
+
+.group {
+  background-image:url('/assets/group.png');
+}
+
+.event {
+  background-image:url('/assets/event.png');
+}
+
+.question {
+  background-image:url('/assets/question.png');
+}
+
+.research {
+  background-image:url('/assets/research.png');
+}
+
+
+
+.statBubble {
+  margin:auto;
+  width:90px;
+  height:90px;
+  border-radius:100%;
+  border:6px solid #ddd;
+  background-repeat:no-repeat;
+  background-position:center 25px;
+  position:relative;
+  text-align:center;
+  -webkit-transition:all 0.3s ease-in-out;
+  -ms-transition:all 0.3s ease-in-out;
+  -moz-transition:all 0.3s ease-in-out;
+  -o-transition:all 0.3s ease-in-out;
+  -apple-transition:all 0.3s ease-in-out;
+  transition:all 0.3s ease-in-out;
+}
+
+.statNum {
+  position:absolute;
+  font-family: 'koodak';
+  left:0;
+  right:0;
+  margin:auto;
+  line-height:150px;
+  vertical-align:middle;
+  font-size:15px;
+  color:#828282;
+   -webkit-transition:all 0.3s ease-in-out;
+  -ms-transition:all 0.3s ease-in-out;
+  -moz-transition:all 0.3s ease-in-out;
+  -o-transition:all 0.3s ease-in-out;
+  -apple-transition:all 0.3s ease-in-out;
+  transition:all 0.3s ease-in-out;
+}

@@ -455,6 +455,8 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  tags_cloud: 'ابر برچسب ها'
+  personal_stat: 'آمار فردی'
   digest_email: 'ایمیل آگاهسازی'
   notification_settings: 'تنظیمات آگاهسازی'
   send_via_email: 'آگاهسازی با ایمیل'
