@@ -6,23 +6,109 @@
           <div class="col-md-7 col-lg-8">
             <div class="panel panel-white no-radius" id="visits">
               <div class="panel-heading border-light">
-                <h4 class="panel-title"> Visits </h4>
+                <h4 class="panel-title"> <%=t :suggested_for_you%> </h4>
               </div>
               <div collapse="visits" class="panel-wrapper">
                 <div class="panel-body">
+                  <i class=" ti-announcement"></i> <%=t :channels%>
+                  <hr class='margin-top-0'/>
+                  <ul class="messages-list relative top-0">
+                    <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Channel').limit(3)%>
+                    <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
+                    <% if !@ch.blank?%>
+                    <%= render partial: 'channels/item', locals: {channel: @ch}%>
+                    <%end%>
+                    <%end%>
+                  </ul>
+                  <br />
+                  <i class=" ti-face-smile"></i> <%=t :groups%>
+                  <hr class='margin-top-0'/>
+                  <ul class="messages-list relative top-0">
+                    <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Group').limit(3)%>
+                    <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
+                    <% if !@ch.blank?%>
+                    <%= render partial: 'groups/item', locals: {group: @ch}%>
+                    <%end%>
+                    <%end%>
+                    <br />
+                    <i class=" ti-alarm-clock"></i> <%=t :events%>
+                    <hr class='margin-top-0'/>
+                    <ul class="messages-list relative top-0">
+                      <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Event').limit(3)%>
+                      <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
+                      <% if !@ch.blank?%>
+                      <%= render partial: 'events/item', locals: {event: @ch}%>
+                      <%end%>
+                      <%end%>
+                    </ul>
+                    <br />
+                    <i class=" ti-help"></i> <%=t :questions%>
+                    <hr class='margin-top-0'/>
+                    <ul class="messages-list relative top-0">
+                      <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Question').limit(3)%>
+                      <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
+                      <% if !@ch.blank?%>
+                      <%= render partial: 'questions/item', locals: {question: @ch}%>
+                      <%end%>
+                      <%end%>
+                    </ul>
+                    <br />
+                    <i class="fa fa-mortar-board"></i> <%=t :researches%>
+                    <hr class='margin-top-0'/>
+                    <ul class="messages-list relative top-0">
+                      <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Research').limit(3)%>
+                      <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
+                      <% if !@ch.blank?%>
+                      <%= render partial: 'researches/item', locals: {research: @ch}%>
+                      <%end%>
+                      <%end%>
+                    </ul>
+                    <br />
+                    <i class="ti-marker"></i> <%=t :projects%>
+                    <hr class='margin-top-0'/>
+                    <ul class="messages-list relative top-0">
+                      <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Project').limit(3)%>
+                      <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
+                      <% if !@ch.blank?%>
+                      <%= render partial: 'projects/item', locals: {project: @ch}%>
+                      <%end%>
+                      <%end%>
+                    </ul>
+                    <br />
+                    <i class="ti-blackboard"></i> <%=t :courses%>
+                    <hr class='margin-top-0'/>
+                    <ul class="messages-list relative top-0">
+                      <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Course').limit(3)%>
+                      <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
+                      <% if !@ch.blank?%>
+                      <%= render partial: 'courses/item', locals: {course: @ch}%>
+                      <%end%>
+                      <%end%>
+                    </ul>
+                    <br />
+                    <i class="fa fa-mortar-board"></i> <%=t :labs%>
+                    <hr class='margin-top-0'/>
+                    <ul class="messages-list relative top-0">
+                      <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'Lab').limit(3)%>
+                      <% @ch =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
+                      <% if !@ch.blank?%>
+                      <%= render partial: 'labs/item', locals: {lab: @ch}%>
+                      <%end%>
+                      <%end%>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-5 col-lg-4">
-            <div class="row">
-            <%= render 'tags/bubble'%>
+            <div class="col-md-5 col-lg-4">
+              <div class="row">
+                <%= render 'tags/bubble'%>
 
-            <%= render 'home/personal_stat'%>
-          </div>
+                <%= render 'home/personal_stat'%>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
