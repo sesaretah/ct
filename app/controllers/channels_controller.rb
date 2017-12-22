@@ -1,12 +1,19 @@
 class ChannelsController < ApplicationController
-  before_action :authenticate_user!, :except => [:index,:show, :view_remote]
+  before_action :authenticate_user!, :except => [:index,:show, :view_remote, :search]
   before_action :set_channel, only: [:show, :edit, :update, :destroy]
 
   def search
     if !params[:q].blank?
       @channels = Channel.where("name LIKE ? OR description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
-    @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Channel')
+    if params[:user_id].blank?
+      @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Channel')
+    end
+    respond_to do |format|
+      format.html
+      format.js
+      format.json
+    end
   end
 
 

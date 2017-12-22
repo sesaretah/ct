@@ -1,13 +1,19 @@
 class LabsController < ApplicationController
-  before_action :authenticate_user!, :except => [:show, :view_remote]
+  before_action :authenticate_user!, :except => [:show, :view_remote, :search]
   before_action :set_lab, only: [:show, :edit, :update, :destroy]
 
   def search
     if !params[:q].blank?
       @labs = Lab.where("name LIKE ? OR about LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
+      if params[:user_id].blank?
     @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Lab')
-
+  end
+    respond_to do |format|
+      format.html
+      format.js
+      format.json
+    end
   end
 
   def view_content
