@@ -27,7 +27,9 @@ module ApplicationHelper
     @flag = 1
     for granting in user.grantings
       @accesscontrol = Accesscontrol.where(role_id: granting.role_id).first
-      @flag = @flag * @accesscontrol["#{ward}"].to_i
+      if !@accesscontrol.blank?
+        @flag = @flag * @accesscontrol["#{ward}"].to_i
+      end
     end
     if @flag == 0
       return false
