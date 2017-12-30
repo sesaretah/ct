@@ -1,6 +1,25 @@
 module ApplicationHelper
   require 'securerandom'
 
+  def global_admin(user)
+    if user.grantings.blank?
+      return false
+    end
+    @flag = 1
+    for granting in user.grantings
+      if granting.role.is_admin == 1
+        @flag = @flag * 1
+      else
+        @flag = @flag * 0
+      end
+    end
+    if @flag == 0
+      return false
+    else
+      return true
+    end
+  end
+
   def grant_access(ward, user)
     if user.grantings.blank?
       return true

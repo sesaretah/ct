@@ -100,6 +100,27 @@
               </div>
             </div>
 
+
+              <div class="form-group ">
+                <div class="row">
+                  <%= f.label :digest_email ,class: "col-sm-12"%>
+                <div class="col-md-4 col-sm-4">
+                <%= f.text_field :digest_email, :class => "form-control" %>
+                </div>
+                <% @confirmation = Confirmation.where(confirmable_type: 'Profile', confirmable_id: @profile.id, confrimable_field: 'digest_email', confrimation_stat: 1).first%>
+                <span class="help-inline col-md-4 col-sm-6">
+                <% if @confirmation.blank?%>
+                <span id='send-confirmation'>
+                <i class="fa fa-exclamation-circle text-danger"></i>
+                <span class='text-danger'><%=t :not_confirmed%></span>
+                 (<%= link_to t(:send_confirmation), '/confirmations/send_confirmation/1?confirmable_type=Profile&confirmable_id=' + @profile.id.to_s + '&confrimable_field=digest_email', remote: true %>)
+               </span>
+                <%end%>
+
+                </span>
+              </div>
+            </div>
+
             <style>
             .ui-helper-hidden-accessible { position: absolute; left:-999em; }
             </style>

@@ -38,7 +38,12 @@
             <div class="row">
               <div class="form-group col-xs-4">
                 <%=t :digest_email%><br>
-                <%= text_field_tag :digest_email, current_user.email, {:class => "form-control"}%>
+                <% if !current_user.profile.digest_email.blank?%>
+                <%= current_user.profile.digest_email%>
+                <%else%>
+                <%=t :empty%>
+                <%end%>
+                <%= link_to t(:edit),  edit_profile_path(current_user.profile) %>
               </div>
             </div>
             <div class="row">

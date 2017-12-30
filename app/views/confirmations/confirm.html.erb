@@ -1,0 +1,13 @@
+<div class="wrap-content container" id="container">
+  <div class="row">
+    <div class="panel panel-white">
+      <div class="panel-heading">
+        <% if @confirmed%>
+          <span class='text-success'> <%=t :confirmation_done %></span>
+        <%else%>
+          <span class='text-danger'> <%=t :confirmation_not_done %></span>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>

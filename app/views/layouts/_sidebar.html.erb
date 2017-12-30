@@ -335,6 +335,7 @@
           <span><%= t(:privacypolicy)%></span>
         </a>
       </li>
+      <% if global_admin(current_user)%>
       <li>
         <a href="/categories">
           <span><%= t(:categories_of_bazar)%></span>
@@ -370,6 +371,7 @@
           <span><%= t(:abuse_reports)%></span>
         </a>
       </li>
+      <%end%>
       <% if grant_access('show_graph', current_user)%>
       <li>
         <a href="/home/graph?channel=true&group=true&event=true&question=true&project=true&offering=true&lab=true">

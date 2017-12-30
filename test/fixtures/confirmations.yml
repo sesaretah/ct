@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  confirmable_id: 1
+  confirmable_type: MyString
+  confrimable_field: MyString
+  confrimation_stat: 1
+  confrimation_carrier: MyString
+
+two:
+  confirmable_id: 1
+  confirmable_type: MyString
+  confrimable_field: MyString
+  confrimation_stat: 1
+  confrimation_carrier: MyString

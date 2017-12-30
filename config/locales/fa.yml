@@ -214,6 +214,7 @@ fa:
             official_email: 'ایمیل دانشگاهی'
             faculty: 'دانشکده'
             rank: 'مرتبه علمی'
+            digest_email: 'ایمیل آگاهسازی'
         education:
             name: 'نام موسسه'
             grade: 'مقطع'
@@ -455,6 +456,14 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  confirmation_not_done: 'تاییدیه انجام نشد'
+  confirmation_done: 'تاییدیه با موفقیت انجام شد'
+  confirmation_request: 'درخواست تایید'
+  confirmation_sent: 'درخواست تاییدیه ارسال شد'
+  send_confirmation: 'ارسال تاییدیه'
+  not_confirmed: 'تایید نشده'
+  empty: 'خالی'
+  is_admin: 'مدیر است'
   suggested_for_you: 'پیشنهاد شده به شما'
   tags_cloud: 'ابر برچسب ها'
   personal_stat: 'آمار فردی'

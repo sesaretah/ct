@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171202052613) do
+ActiveRecord::Schema.define(version: 20171229161010) do
 
   create_table "abuses", force: :cascade do |t|
     t.string   "title",      limit: 191
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20171202052613) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.integer  "show_graph",            limit: 4
+    t.integer  "is_admin",              limit: 4
   end
 
   create_table "activities", force: :cascade do |t|
@@ -178,6 +179,17 @@ ActiveRecord::Schema.define(version: 20171202052613) do
     t.string   "avatar_content_type",   limit: 255
     t.integer  "avatar_file_size",      limit: 4
     t.datetime "avatar_updated_at"
+  end
+
+  create_table "confirmations", force: :cascade do |t|
+    t.integer  "confirmable_id",       limit: 4
+    t.string   "confirmable_type",     limit: 191
+    t.string   "confrimable_field",    limit: 191
+    t.integer  "confrimation_stat",    limit: 4
+    t.string   "confrimation_carrier", limit: 191
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.text     "confirmation_code",    limit: 65535
   end
 
   create_table "contributions", force: :cascade do |t|
@@ -665,6 +677,7 @@ ActiveRecord::Schema.define(version: 20171202052613) do
     t.text     "description", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "is_admin",    limit: 4
   end
 
   create_table "seekings", force: :cascade do |t|

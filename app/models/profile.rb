@@ -9,7 +9,8 @@ class Profile < ActiveRecord::Base
   has_many :positions
   has_many :attendances
 
-
+  has_many :confirmations, :as => :confirmable, :dependent => :destroy
+  
   def cropping?
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
   end

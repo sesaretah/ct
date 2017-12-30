@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Confirmable:</strong>
+  <%= @confirmation.confirmable_id %>
+</p>
+
+<p>
+  <strong>Confirmable type:</strong>
+  <%= @confirmation.confirmable_type %>
+</p>
+
+<p>
+  <strong>Confrimable field:</strong>
+  <%= @confirmation.confrimable_field %>
+</p>
+
+<p>
+  <strong>Confrimation stat:</strong>
+  <%= @confirmation.confrimation_stat %>
+</p>
+
+<p>
+  <strong>Confrimation carrier:</strong>
+  <%= @confirmation.confrimation_carrier %>
+</p>
+
+<%= link_to 'Edit', edit_confirmation_path(@confirmation) %> |
+<%= link_to 'Back', confirmations_path %>

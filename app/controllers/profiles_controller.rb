@@ -180,6 +180,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:name, :surename, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller,:sex, :fathername, :ssn, :birthdate, :phonenumber, :mobilenumber, :official_email, :faculty, :rank)
+      params.require(:profile).permit(:name, :surename, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :caller,:sex, :fathername, :ssn, :birthdate, :phonenumber, :mobilenumber, :official_email, :faculty, :rank, :digest_email)
     end
 end

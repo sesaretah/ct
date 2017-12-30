@@ -39,15 +39,27 @@
             <div class="col-md-4">
               <div class="form-group">
                 <%= f.label :name %><br>
-                <%= f.text_field :name %>
+                <%= f.text_field :name, :class => "form-control"  %>
               </div>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-md-4">
+                <div class="checkbox clip-check check-primary checkbox-inline">
+                  <input type="checkbox" id="checkbox" name="role[is_admin]" value="1" >
+                  <label for="checkbox">
+                    <%=t :is_admin %>
+                  </label>
+                </div>
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-md-5">
               <div class="form-group">
                 <%= f.label :description %><br>
-                <%= f.text_area :description %>
+                <%= f.text_area :description, :class => "form-control"  %>
               </div>
             </div>
           </div>

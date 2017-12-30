@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Confirmations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Confirmable</th>
+      <th>Confirmable type</th>
+      <th>Confrimable field</th>
+      <th>Confrimation stat</th>
+      <th>Confrimation carrier</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @confirmations.each do |confirmation| %>
+      <tr>
+        <td><%= confirmation.confirmable_id %></td>
+        <td><%= confirmation.confirmable_type %></td>
+        <td><%= confirmation.confrimable_field %></td>
+        <td><%= confirmation.confrimation_stat %></td>
+        <td><%= confirmation.confrimation_carrier %></td>
+        <td><%= link_to 'Show', confirmation %></td>
+        <td><%= link_to 'Edit', edit_confirmation_path(confirmation) %></td>
+        <td><%= link_to 'Destroy', confirmation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Confirmation', new_confirmation_path %>
