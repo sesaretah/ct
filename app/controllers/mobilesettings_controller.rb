@@ -1,5 +1,6 @@
 class MobilesettingsController < ApplicationController
   before_action :set_mobilesetting, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, :except => [:remote_token]
 
   def remote_token
     @token = params[:token]
