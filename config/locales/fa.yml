@@ -418,6 +418,8 @@ fa:
         reportabuse:
           abuse_id: 'نوع تخلف'
           detail: 'شرح'
+        mobilesetting:
+          access_via_mobile: 'دسترسی از طریق نلفن همراه'
         notification_setting:
           channel_updates: 'اطلاع رسانی پست های  کانال ها'
           involvement: 'عضویت کانال'
@@ -456,6 +458,9 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  point_your_mobile_toward_qr: 'دوربین تلفن همراه خود را به سمت کد زیر بگیرید'
+  new_mobile_settings: 'تنظیمات تلفن همراه'
+  mobile_settings: 'تنظیمات تلفن همراه'
   confirmation_not_done: 'تاییدیه انجام نشد'
   confirmation_done: 'تاییدیه با موفقیت انجام شد'
   confirmation_request: 'درخواست تایید'

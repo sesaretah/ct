@@ -1,0 +1,39 @@
+<div class="wrap-content container" id="container">
+  <!-- start: PAGE TITLE -->
+  <section id="page-title">
+    <div class="row">
+      <div class="col-sm-8">
+        <h1 class="mainTitle"><%= t(:new_mobile_settings)%></h1>
+        <span class="mainDescription"><% t(:please_enter_new_data)%></span>
+      </div>
+      <ol class="breadcrumb">
+        <li>
+          <span></span>
+        </li>
+        <li class="active">
+          <span></span>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <div class="container-fluid container-fullw bg-white">
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="over-title"> <span class="text-bold"></span></h5>
+        <div class="panel panel-white">
+          <div class="panel-body">
+            <div role="alert" class="alert alert-success">
+              <%=t :point_your_mobile_toward_qr %>
+            </div>
+          <div style='text-align:center'>  <%= raw @qrcode.as_svg(offset: 0, color: '000',
+            shape_rendering: 'crispEdges',
+            module_size: 11)%></div>
+          <div class='pull-left'>
+              <%= link_to t(:edit), edit_mobilesetting_path(@mobilesetting) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

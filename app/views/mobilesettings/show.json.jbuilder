@@ -1,0 +1,1 @@
+json.partial! "mobilesettings/mobilesetting", mobilesetting: @mobilesetting

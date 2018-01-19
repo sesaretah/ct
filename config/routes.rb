@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :mobilesettings
+
   resources :confirmations
 
   resources :notifications
@@ -272,6 +274,7 @@ Rails.application.routes.draw do
   match "confirmations/confirm/:id" => "confirmations#confirm", :via => :get
 
   match "activities/export/:id" => "activities#export", :via => :get
+  match "home/mobile" => "home#mobile", :via => :get
 
   match "comments/create_remote" => "comments#create_remote", :via => :post
   match "comments/load5/:id" => "comments#load5", :via => :get

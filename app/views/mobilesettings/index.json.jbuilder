@@ -1,0 +1,1 @@
+json.array! @mobilesettings, partial: 'mobilesettings/mobilesetting', as: :mobilesetting

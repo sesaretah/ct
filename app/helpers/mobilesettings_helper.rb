@@ -1,0 +1,2 @@
+module MobilesettingsHelper
+end

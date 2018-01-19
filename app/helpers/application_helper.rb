@@ -62,6 +62,14 @@ module ApplicationHelper
     end
   end
 
+  def mobileaccess
+    @options = [
+      [t(:allow), 1],
+      [t(:deny) , 2]
+    ]
+    return @options
+  end
+
   def policytypes
     @options = [
       [t(:everyone), 1],

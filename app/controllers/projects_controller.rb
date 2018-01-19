@@ -36,6 +36,7 @@ class ProjectsController < ApplicationController
 
     def view_remote
       @projects = []
+      @user_id = decrypt(params[:user_id], 'JMMPi51A', params[:iv]).to_i
       case params['section']
       when 'trophy'
         @j = 0
@@ -46,7 +47,7 @@ class ProjectsController < ApplicationController
           @j = @j+1
         end
       when 'mine'
-        for q in Project.where(user_id: params[:user_id])
+        for q in Project.where(user_id: @user_id)
           @projects << q
         end
       when 'related'

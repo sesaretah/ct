@@ -63,6 +63,7 @@ class User < ActiveRecord::Base
   has_many :grantings
   has_one :privacypolicy
   has_one :notification_setting
+  has_one :mobilesetting
 
   before_create :set_email
   def set_email
