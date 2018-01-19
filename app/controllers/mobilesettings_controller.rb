@@ -1,9 +1,12 @@
 class MobilesettingsController < ApplicationController
   before_action :set_mobilesetting, only: [:show, :edit, :update, :destroy]
 
-  def remote
+  def remote_token
     @token = params[:token]
     @user_id = decrypt(params[:user_id], 'JMMPi51A', params[:iv]).to_i
+    @mobilesetting = Mobilesetting.where(user_id: @user_id).first
+    @mobilesetting.token = @token
+    @mobilesetting.save
   end
   # GET /mobilesettings
   # GET /mobilesettings.json
