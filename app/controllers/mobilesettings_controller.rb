@@ -8,6 +8,7 @@ class MobilesettingsController < ApplicationController
     @mobilesetting = Mobilesetting.where(user_id: @user_id).first
     @mobilesetting.token = @token
     @mobilesetting.save
+    render layout: false
   end
   # GET /mobilesettings
   # GET /mobilesettings.json
