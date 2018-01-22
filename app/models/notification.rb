@@ -1,8 +1,18 @@
 class Notification < ActiveRecord::Base
+  include Fcm
   after_save :mail_notification
   def mail_notification
 
     case self.notifiable_type
+    when 'Comment'
+      case self.notifiee_type
+      when 'Group'
+        @comment = Comment.find(notifiable_id)
+        @commenter = "#{@comment.user.profile.name} " + "#{@comment.user.profile.surename}"
+        @user_ids = Grouping.where(group_id: self.notfiee_id, role:[1,3]).pluck(:user_id)
+        send_fcm(@user_ids, @commenter , @comment.content.truncate(30), @comment.commentable_type, @comment.commentable_id)
+      end
+
     when 'Involvement'
       @admins = Involvement.where(role: 1, channel_id: self.notfiee_id)
       @involvement = Involvement.find(self.notifiable_id)
