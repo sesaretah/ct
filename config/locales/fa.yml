@@ -458,6 +458,18 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  Channel: 'کانال'
+  Event: 'رخداد'
+  Question: 'پرسش'
+  Project: 'پروژه'
+  Course: 'درس'
+  Lab: 'آزمایشگاه'
+  Blog: 'وبلاگ'
+  Publication: 'منتشرشده'
+  Poll: 'نظرسنجی'
+  Group: 'گروه'
+  has_created: 'را ایجاد نمود.'
+  what_happened: 'چه خبر؟!'
   point_your_mobile_toward_qr: 'دوربین تلفن همراه خود را به سمت کد زیر بگیرید'
   new_mobile_settings: 'تنظیمات تلفن همراه'
   mobile_settings: 'تنظیمات تلفن همراه'

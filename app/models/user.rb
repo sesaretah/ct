@@ -48,6 +48,7 @@ class User < ActiveRecord::Base
   has_many :courses, dependent: :destroy
 
   has_many :visits, dependent: :destroy
+  has_many :activities, dependent: :destroy
 
   has_many :friendships, dependent: :destroy
   has_many :friends, :through => :friendships

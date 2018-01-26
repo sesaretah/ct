@@ -3,8 +3,38 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="row">
-          <div class="col-md-7 col-lg-8">
-            <div class="panel panel-white no-radius" id="visits">
+          <div class="col-md-4 col-lg-4 ">
+            <div class="panel panel-white no-radius" id="suggestions">
+              <div class="panel-heading border-light">
+                <h4 class="panel-title"> <%=t :what_happened%> </h4>
+              </div>
+              <div class="panel-body">
+                <ul class="timeline-xs margin-top-15 margin-bottom-15">
+                  <% for activity in Activity.where(user_id: current_user.friends.select(:id), activity_type: 'Create').order(created_at: :desc).limit(30)%>
+                  <% @item = activity.target_type.classify.constantize.find_by_id(activity.target_id)%>
+                  <% if !@item.blank?%>
+                  <li class="timeline-item success">
+                    <div class="margin-right-15">
+                      <div class="text-muted text-small">
+                        <%= JalaliDate.to_jalali(activity.created_at).day%>/ <%= JalaliDate.to_jalali(activity.created_at).month%>/ <%= JalaliDate.to_jalali(activity.created_at).year%>
+                      </div>
+                      <p>
+                        <% @profile = activity.user.profile %>
+                        <a class="text-info" href="profiles/profile_id=<%= @profile.id%>">
+                          <%= @profile.name%> <%= @profile.surename%>
+                        </a>
+                        <%=t activity.target_type%> <%= @item.name%> <%=t :has_created%>
+                      </p>
+                    </div>
+                  </li>
+                  <%end%>
+                  <%end%>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3 col-lg-4">
+            <div class="panel panel-white no-radius" id="suggestions">
               <div class="panel-heading border-light">
                 <h4 class="panel-title"> <%=t :suggested_for_you%> </h4>
               </div>
