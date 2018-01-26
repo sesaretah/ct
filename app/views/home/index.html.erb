@@ -23,7 +23,7 @@
                         <a class="text-info" href="profiles/profile_id=<%= @profile.id%>">
                           <%= @profile.name%> <%= @profile.surename%>
                         </a>
-                        <%=t activity.target_type%> <%= @item.name%> <%=t :has_created%>
+                        <%=t activity.target_type%> <%=t :named%> "<%= @item.name%>" <%=t :has_created%>
                       </p>
                     </div>
                   </li>

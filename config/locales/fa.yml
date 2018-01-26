@@ -468,6 +468,7 @@ fa:
   Publication: 'منتشرشده'
   Poll: 'نظرسنجی'
   Group: 'گروه'
+  named: 'به نام'
   has_created: 'را ایجاد نمود.'
   what_happened: 'چه خبر؟!'
   point_your_mobile_toward_qr: 'دوربین تلفن همراه خود را به سمت کد زیر بگیرید'
