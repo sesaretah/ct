@@ -241,7 +241,7 @@
 
   var width = 300,
   height = 300;
-  var radius = 3;
+  var radius = 20;
   // Here's were the code begins. We start off by creating an SVG
   // container to hold the visualization. We only need to specify
   // the dimensions for this container.
@@ -287,8 +287,8 @@
   var force = d3.layout.force()
   .gravity(0.05)
   .distance(80)
-  .charge(-10)
-  .size([290, 290]);
+  .charge(-50)
+  .size([600, 600]);
 
 
 
@@ -353,7 +353,7 @@
     .attr("x2", function(d) { return d.target.x; })
     .attr("y2", function(d) { return d.target.y; });
 
-    node.attr("transform", function(d) { return "translate(" +  Math.max(radius, Math.min(width - radius, d.x)) + "," + Math.max(radius, Math.min(height - radius, d.y)) + ")"; });
+    node.attr("transform", function(d) { return "translate(" +  Math.max(radius, Math.min(width - radius, (d.x))) + "," + Math.max(radius, Math.min(height - radius, d.y)) + ")"; });
   });
 
   </script>
