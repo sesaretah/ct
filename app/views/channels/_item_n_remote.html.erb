@@ -1,17 +1,33 @@
 <% @random_string = SecureRandom.hex%>
-<% @profile = user.profile%>
 <li class="messages-item padding-5 <%= @bg%>" id='<%=@random_string %>'>
-  <%= link_to 'profiles/1?profile_id='+ @profile.id.to_s do%>
-  <%= image_tag @profile.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
-  <span class="messages-item-from"><%= @profile.name%> <%= @profile.surename%></span>
+  <%= link_to 'channels/1?cahnnel_id='+ channel.id.to_s do%>
+  <%= image_tag channel.avatar(:thumb), :class => "messages-item-avatar bordered border-primary"%>
+  <span class="messages-item-from"><%= channel.name%></span>
   <div class="messages-item-time">
     <span class="text">
 
     </span>
   </div>
   <span class="messages-item-subject"></span>
-  <span class="messages-item-content"></span>
+  <span class="messages-item-content"><%= truncate(channel.description, :length => 20)%></span>
   <%end%>
   <div class="messages-item-time" style="margin-top:10px">
+    <% @inv = Involvement.where(user_id: current_user.id, channel_id: channel.id, role: [1,3] ).first%>
+    <% if !@inv.blank? %>
+    <div id='<%= @random_string%>-label'>
+      <% @v = Visit.where(user_id: current_user.id, visitable_id: channel.id, visitable_type: 'Channel').first%>
+      <% if !@v.blank?%>
+      <% @count = channel.comments.where("created_at > ?", @v.created_at ).count%>
+      <% if @count > 0%>
+      <span class="label label-info pull-left" style="color: white;"><%= @count%></span>
+      <% end%>
+      <%else%>
+      <% @count = channel.comments.count%>
+      <% if @count > 0%>
+      <span class="label label-info pull-left" style="color: white;"><%= @count%></span>
+      <% end%>
+      <%end%>
+    </div>
+    <%end%>
   </div>
 </li>
