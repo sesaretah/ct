@@ -35,7 +35,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-3 col-lg-4">
+          <div class="col-md-4 col-lg-4">
             <div class="panel panel-white no-radius" id="suggestions">
               <div class="panel-heading border-light">
                 <h4 class="panel-title"> <%=t :suggested_for_you%> </h4>
@@ -43,13 +43,13 @@
               <div collapse="visits" class="panel-wrapper">
                 <div class="panel-body">
 
-                  <i class=" ti-announcement"></i> <%=t :users%>
+                  <i class="fa fa-user"></i> <%=t :users%>
                   <hr class='margin-top-0'/>
                   <ul class="messages-list relative top-0">
                     <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'User').limit(3)%>
                     <% @user =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
                     <% if !@user.blank?%>
-                    <% render partial: 'profiles/item_n_remote', locals: {user: @user}%>
+                    <%= render partial: 'profiles/item_n_remote', locals: {user: @user}%>
                     <%end%>
                     <%end%>
                   </ul>
@@ -145,7 +145,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-5 col-lg-4">
+            <div class="col-md-4 col-lg-4">
               <div class="row">
                 <%= render 'tags/bubble'%>
 

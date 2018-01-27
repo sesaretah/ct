@@ -458,6 +458,7 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  users: 'کاربران'
   Channel: 'کانال'
   Event: 'رخداد'
   Question: 'پرسش'

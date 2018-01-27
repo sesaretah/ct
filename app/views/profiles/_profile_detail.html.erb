@@ -128,19 +128,26 @@
                   <div collapse="activities" ng-init="activities=false" class="panel-wrapper">
                     <div class="panel-body">
                       <ul class="timeline-xs margin-top-15 margin-bottom-15">
-                        <li class="timeline-item success">
+                        <% for activity in Activity.where(user_id: @profile.user.id, activity_type: 'Create').order(created_at: :desc).limit(30)%>
+                        <% @item = activity.target_type.classify.constantize.find_by_id(activity.target_id)%>
+                        <% if !@item.blank?%>
+                        <li class="timeline-item " style="border-right-color: <%= activity.user_id%>;">
                           <div class="margin-right-15">
                             <div class="text-muted text-small">
-
+                              <%= JalaliDate.to_jalali(activity.created_at).day%>/ <%= JalaliDate.to_jalali(activity.created_at).month%>/ <%= JalaliDate.to_jalali(activity.created_at).year%>
                             </div>
                             <p>
-                              <a class="text-info" href>
+                              <a class="text-info" href="profiles/profile_id=<%= @profile.id%>">
                                 <%= @profile.name%> <%= @profile.surename%>
                               </a>
-                              برای اولین بار وارد سیستم شد.
+                              <% if activity.target_type != 'Question'%>
+                              <%=t activity.target_type%> <%=t :named%> "<%= @item.name%>" <%=t :has_created%>
+                              <%end%>
                             </p>
                           </div>
                         </li>
+                        <%end%>
+                        <%end%>
                       </ul>
                     </div>
                   </div>
