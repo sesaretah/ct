@@ -23,7 +23,9 @@
                         <a class="text-info" href="profiles/profile_id=<%= @profile.id%>">
                           <%= @profile.name%> <%= @profile.surename%>
                         </a>
+                        <% if activity.target_type != 'Question'%>
                         <%=t activity.target_type%> <%=t :named%> "<%= @item.name%>" <%=t :has_created%>
+                        <%end%>
                       </p>
                     </div>
                   </li>
@@ -40,6 +42,19 @@
               </div>
               <div collapse="visits" class="panel-wrapper">
                 <div class="panel-body">
+
+                  <i class=" ti-announcement"></i> <%=t :users%>
+                  <hr class='margin-top-0'/>
+                  <ul class="messages-list relative top-0">
+                    <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'User').limit(3)%>
+                    <% @user =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
+                    <% if !@user.blank?%>
+                    <%= render partial: 'profiles/item_n_remote', locals: {user: @user}%>
+                    <%end%>
+                    <%end%>
+                  </ul>
+                  <br />
+
                   <i class=" ti-announcement"></i> <%=t :channels%>
                   <hr class='margin-top-0'/>
                   <ul class="messages-list relative top-0">
