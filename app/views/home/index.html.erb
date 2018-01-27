@@ -49,7 +49,7 @@
                     <% for sug in Suggestion.where(user_id: current_user.id, suggested_type: 'User').limit(3)%>
                     <% @user =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)%>
                     <% if !@user.blank?%>
-                    <%= render partial: 'profiles/item_n_remote', locals: {user: @user}%>
+                    <% render partial: 'profiles/item_n_remote', locals: {user: @user}%>
                     <%end%>
                     <%end%>
                   </ul>
