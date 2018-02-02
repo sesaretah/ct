@@ -19,9 +19,13 @@ class MobilesettingsController < ApplicationController
   # GET /mobilesettings/1
   # GET /mobilesettings/1.json
   def show
+      if @mobilesetting.uuid.blank?
+        @mobilesetting.uuid = SecureRandom.hex(16)
+        @mobilesetting.save
+      end
       @t = {}
       @t['secret'] = @mobilesetting.securephrase
-      @t['user_id'] = current_user.id
+      @t['uuid'] = @mobilesetting.uuid
       @qrcode = RQRCode::QRCode.new(@t.to_json)
   end
 
