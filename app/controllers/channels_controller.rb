@@ -29,6 +29,7 @@ class ChannelsController < ApplicationController
 
   def view_remote
     @channels = []
+    @user_id = decrypt(params[:user_id], 'JMMPi51A', params[:iv]).to_i
     case params['section']
     when 'trophy'
       @j = 0
@@ -39,11 +40,11 @@ class ChannelsController < ApplicationController
         @j = @j+1
       end
     when 'mine'
-      for pr in Involvement.where(user_id: params[:user_id])
+      for pr in Involvement.where(user_id: @user_id)
         @channels << pr.channel
       end
     when 'related'
-      for sug in Suggestion.where(user_id: params[:user_id], suggested_type: 'Channel')
+      for sug in Suggestion.where(user_id: @user_id, suggested_type: 'Channel')
         @ev =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)
         if !@ev.blank?
           @channels << @ev

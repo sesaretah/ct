@@ -35,6 +35,7 @@ class CoursesController < ApplicationController
 
   def view_remote
     @courses = []
+    @user_id = decrypt(params[:user_id], 'JMMPi51A', params[:iv]).to_i
     case params['section']
     when 'trophy'
       @j = 0
@@ -45,11 +46,11 @@ class CoursesController < ApplicationController
         @j = @j+1
       end
     when 'mine'
-      for q in Course.where(user_id: params[:user_id])
+      for q in Course.where(user_id: @user_id )
         @courses << q
       end
     when 'related'
-      for sug in Suggestion.where(user_id: params[:user_id], suggested_type: 'Course')
+      for sug in Suggestion.where(user_id: @user_id , suggested_type: 'Course')
         @ev =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)
         if !@ev.blank?
           @courses << @ev

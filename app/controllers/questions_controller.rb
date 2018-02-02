@@ -35,6 +35,7 @@ class QuestionsController < ApplicationController
 
   def view_remote
     @questions = []
+    @user_id = decrypt(params[:user_id], 'JMMPi51A', params[:iv]).to_i
     case params['section']
     when 'trophy'
       @j = 0
@@ -45,11 +46,11 @@ class QuestionsController < ApplicationController
         @j = @j+1
       end
     when 'mine'
-      for q in Question.where(user_id: params[:user_id])
+      for q in Question.where(user_id: @user_id)
         @questions << q
       end
     when 'related'
-      for sug in Suggestion.where(user_id: params[:user_id], suggested_type: 'Question')
+      for sug in Suggestion.where(user_id: @user_id, suggested_type: 'Question')
         @ev =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)
         if !@ev.blank?
           @questions << @ev
