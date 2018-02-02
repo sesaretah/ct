@@ -8,7 +8,9 @@ class CommentsController < ApplicationController
     render 'comments/render_remote.json.jbuilder'
   end
   def create_remote
-    @comment = Comment.create(commentable_type: params[:commentable_type], commentable_id: params[:commentable_id], content: params[:content], user_id: params[:user_id])
+    @uuid = decrypt(params[:uuid], 'JMMPi51A', params[:iv])
+    @user_id = Mobilesetting.where(uuid: @uuid).first.user_id
+    @comment = Comment.create(commentable_type: params[:commentable_type], commentable_id: params[:commentable_id], content: params[:content], user_id: @user_id)
     @item =  @comment.commentable_type.classify.constantize.find(@comment.commentable_id)
     @comments = @item.comments.last(5)
     render 'comments/render_remote.json.jbuilder'
