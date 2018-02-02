@@ -4,7 +4,8 @@ class MobilesettingsController < ApplicationController
 
   def remote_token
     @token = params[:token]
-    @user_id = decrypt(params[:user_id], 'JMMPi51A', params[:iv]).to_i
+    @uuid = decrypt(params[:uuid], 'JMMPi51A', params[:iv])
+    @user_id = Mobilesetting.where(uuid: @uuid).first.user_id
     @mobilesetting = Mobilesetting.where(user_id: @user_id).first
     @mobilesetting.token = @token
     @mobilesetting.save

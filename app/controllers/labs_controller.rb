@@ -30,7 +30,8 @@ class LabsController < ApplicationController
 
   def view_remote
     @labs = []
-    @user_id = decrypt(params[:user_id], 'JMMPi51A', params[:iv]).to_i
+    @uuid = decrypt(params[:uuid], 'JMMPi51A', params[:iv])
+    @user_id = Mobilesetting.where(uuid: @uuid).first.user_id
     case params['section']
     when 'trophy'
       @j = 0
