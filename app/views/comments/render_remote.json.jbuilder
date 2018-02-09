@@ -6,6 +6,8 @@ json.array!(@comments) do |comment|
     json.image root_url + url_for(comment.user.profile.avatar(:thumb))
     json.avatar comment.avatar(:medium)
     json.document comment.document.url
+    @name = comment.user.profile.name + ' ' + comment.user.profile.surename
+    json.owner @name.truncate(16)
     @ms = Mobilesetting.where(user_id: comment.user_id).first
     if !@ms.blank?
       json.uuid @ms.uuid
