@@ -2,6 +2,14 @@ json.extract! channel, :id, :name, :description, :created_at, :updated_at
 json.url channel_url(channel, format: :json)
 json.image root_url + url_for(channel.avatar(:thumb))
 
+json.admins do
+  json.array!(channel.involvments.where(role: 1)) do |inv|
+    @msinv = Mobilesetting.where(user_id: inv.user_id).first
+    if !@msinv.blank?
+      json.uuid @msinv.uuid
+    end
+  end
+end
 
 json.comments do
     json.array!(channel.comments.last(5)) do |comment|
