@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
     if !params[:q].blank?
       @questions = Question.where("title LIKE ? OR content LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
-    if params[:user_id].blank?
+    if params[:uuid].blank?
     @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Question')
   end
   respond_to do |format|

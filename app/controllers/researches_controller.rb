@@ -6,7 +6,7 @@ class ResearchesController < ApplicationController
     if !params[:q].blank?
       @researches = Research.where("name LIKE ? OR pub_name LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
-      if params[:user_id].blank?
+      if params[:uuid].blank?
     @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Research')
   end
   respond_to do |format|

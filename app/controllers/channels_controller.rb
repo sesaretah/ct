@@ -6,7 +6,7 @@ class ChannelsController < ApplicationController
     if !params[:q].blank?
       @channels = Channel.where("name LIKE ? OR description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
-    if params[:user_id].blank?
+    if params[:uuid].blank?
       @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Channel')
     end
     respond_to do |format|

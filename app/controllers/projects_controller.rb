@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
     if !params[:q].blank?
       @projects = Project.where("name LIKE ? OR aims LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
-    if params[:user_id].blank?
+    if params[:uuid].blank?
     @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Project')
   end
   respond_to do |format|

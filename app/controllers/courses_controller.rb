@@ -10,7 +10,7 @@ class CoursesController < ApplicationController
     if !params[:q].blank?
       @courses = Course.where("name LIKE ? OR course_targets LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
-      if params[:user_id].blank?
+      if params[:uuid].blank?
     @activity =  Activity.create(user_id: current_user.id, activity_type: 'Search', target_type: 'Course')
   end
   respond_to do |format|
