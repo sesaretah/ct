@@ -36,6 +36,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     akami (1.3.1)
       gyoku (>= 0.4.0)
       nokogiri
@@ -79,14 +81,29 @@ GEM
       rubycas-client (>= 2.2.1)
     erubis (2.7.0)
     execjs (2.7.0)
+    faraday (0.14.0)
+      multipart-post (>= 1.2, < 3)
+    firebase (0.2.8)
+      googleauth
+      httpclient (>= 2.5.3)
+      json
     font-awesome-rails (4.5.0.0)
       railties (>= 3.2, < 5.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    googleauth (0.6.2)
+      faraday (~> 0.12)
+      jwt (>= 1.4, < 3.0)
+      logging (~> 2.0)
+      memoist (~> 0.12)
+      multi_json (~> 1.11)
+      os (~> 0.9)
+      signet (~> 0.7)
     groupdate (2.4.0)
       activesupport (>= 3)
     gyoku (1.3.1)
       builder (>= 2.1.2)
+    httpclient (2.8.3)
     httpi (2.4.2)
       rack
       socksify
@@ -107,10 +124,16 @@ GEM
     jquery-ui-rails (4.2.0)
       railties (>= 3.2.16)
     json (1.8.3)
+    jwt (2.1.0)
+    little-plugger (1.1.4)
+    logging (2.2.2)
+      little-plugger (~> 1.1)
+      multi_json (~> 1.10)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    memoist (0.16.0)
     middleware (0.1.0)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
@@ -119,12 +142,14 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.9.0)
     multi_json (1.12.1)
+    multipart-post (2.0.0)
     mysql2 (0.3.20)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     nori (2.6.0)
     orm_adapter (0.5.0)
+    os (0.9.6)
     paperclip (5.0.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
@@ -132,6 +157,7 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
     pkg-config (1.1.7)
+    public_suffix (3.0.1)
     rack (1.6.4)
     rack-cors (1.0.1)
     rack-test (0.6.3)
@@ -163,6 +189,9 @@ GEM
     rake (11.2.2)
     rdoc (4.2.2)
       json (~> 1.4)
+    redis (3.3.5)
+    redis-namespace (1.6.0)
+      redis (>= 3.0.4)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
     riddle (1.5.11)
@@ -188,6 +217,11 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    signet (0.8.1)
+      addressable (~> 2.3)
+      faraday (~> 0.9)
+      jwt (>= 1.5, < 3.0)
+      multi_json (~> 1.10)
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
@@ -246,6 +280,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   devise_cas_authenticatable
+  firebase
   font-awesome-rails
   groupdate
   jbuilder (~> 2.0)
@@ -256,6 +291,8 @@ DEPENDENCIES
   paperclip (~> 5.0.0)
   rack-cors
   rails (= 4.2.0)
+  redis (~> 3.3.5)
+  redis-namespace
   rqrcode
   sass-rails (~> 5.0)
   savon (~> 2.11.0)

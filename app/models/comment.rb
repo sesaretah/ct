@@ -15,7 +15,7 @@ class Comment < ActiveRecord::Base
   belongs_to :answer, :class_name => "Answer", :foreign_key => "commentable_id"
   belongs_to :research, :class_name => "Research", :foreign_key => "commentable_id"
 
-   after_save :set_notification
+  after_save :set_notification
   def set_notification
       @notification = Notification.create(user_id: self.user.id, notifiable_type: 'Comment', notifiable_id: self.id, notifiee_type: self.commentable_type, notfiee_id: self.commentable_id)
   end
