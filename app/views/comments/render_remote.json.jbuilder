@@ -7,7 +7,7 @@ json.array!(@comments) do |comment|
     json.avatar comment.avatar(:medium)
     json.document comment.document.url
     @name = comment.user.profile.name + ' ' + comment.user.profile.surename
-    json.owner @name.truncate(16)
+    json.owner @name.truncate(13)
     @ms = Mobilesetting.where(user_id: comment.user_id).first
     if !@ms.blank?
       json.uuid @ms.uuid
