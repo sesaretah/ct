@@ -4,6 +4,8 @@ json.array!(@comments) do |comment|
     json.commentable_id comment.commentable_id
     json.content comment.content
     json.image root_url + url_for(comment.user.profile.avatar(:thumb))
+    json.avatar comment.avatar(:medium)
+    json.document comment.document.url
     @ms = Mobilesetting.where(user_id: comment.user_id).first
     if !@ms.blank?
       json.uuid @ms.uuid
