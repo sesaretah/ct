@@ -3,7 +3,7 @@ json.url channel_url(channel, format: :json)
 json.image root_url + url_for(channel.avatar(:thumb))
 
 json.admins do
-  json.array!(channel.involvments.where(role: 1)) do |inv|
+  json.array!(channel.involvements.where(role: 1)) do |inv|
     @msinv = Mobilesetting.where(user_id: inv.user_id).first
     if !@msinv.blank?
       json.uuid @msinv.uuid
