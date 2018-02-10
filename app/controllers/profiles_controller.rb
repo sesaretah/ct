@@ -1,5 +1,34 @@
 class ProfilesController < ApplicationController
+  before_action :authenticate_user!, :except => [:index,:show, :view_remote, :search]
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
+
+  def view_remote
+    @profiles = []
+    @uuid = decrypt(params[:uuid], 'JMMPi51A', params[:iv])
+    @user_id = Mobilesetting.where(uuid: @uuid).first.user_id
+    @user = User.find_by_id(@user_id)
+    case params['section']
+    when 'trophy'
+      @j = 0
+      for usr in Friendship.group('friend_id').order('count_id desc').count('id')
+        if @j < 10
+          @profiles << User.find(i[0]).profile
+        end
+        @j = @j+1
+      end
+    when 'mine'
+      for usr in @user.friends
+        @profiles << usr.profile
+      end
+    when 'related'
+      for sug in Suggestion.where(user_id: @user_id, suggested_type: 'Profile')
+        @pr =  sug.suggested_type.classify.constantize.find_by_id(sug.suggested_id)
+        if !@ev.blank?
+          @profiles << @pr
+        end
+      end
+    end
+  end
 
   def remoteq
     if !params[:q].blank?
