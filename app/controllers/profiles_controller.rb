@@ -10,7 +10,7 @@ class ProfilesController < ApplicationController
     case params['section']
     when 'trophy'
       @j = 0
-      for usr in Friendship.group('friend_id').order('count_id desc').count('id')
+      for i in Friendship.group('friend_id').order('count_id desc').count('id')
         if @j < 10
           @profiles << User.find(i[0]).profile
         end
