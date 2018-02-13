@@ -73,7 +73,7 @@
                     <%= Tag.find(tagging.tag_id).title%>
                   </span>
                   <%end%>
-                
+
               </div>
             </fieldset>
           </div>
@@ -105,7 +105,7 @@
               <legend>
                 <%= t(:add_user_to_channel)%>
               </legend>
-              <% if @channel.g_type == 1 || @admin%>
+              <% if (@channel.g_type == 1  && !@involvement.blank? && @involvement.role != 2)|| @admin%>
               <div class="panel-scroll height-350 ps-container ps-active-y">
                 <div class="col-md-12">
                   <div class="row">
