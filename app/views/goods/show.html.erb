@@ -64,7 +64,7 @@
                 <div class="row">
                 <div class="form-group col-xs-4">
                   <strong><%=t :contact%>:</strong>
-                  <%= link_to @good.user.profile do%>
+                  <%= link_to 'profiles?profile_id=' + @good.user.profile.id.to_s do%>
                     <%= @good.user.profile.name %> <%= @good.user.profile.surename %>
                   <%end%>
                 </div>
