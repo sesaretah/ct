@@ -21,8 +21,10 @@
 
       </div>
       <div class="col-md-1">
+        <% if i.user_id == current_user.id%>
         <%= link_to 'comments/'+ i.id.to_s + '?page='+@page.to_s, :method => :delete, :remote => true, data: {confirm: "Are you sure?"}  do %>
           <i class="fa fa-trash-o" style="color: #007AFF !important;"></i>
+        <%end%>
         <%end%>
       </div>
     </div>
