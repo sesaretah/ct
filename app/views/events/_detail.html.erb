@@ -60,9 +60,10 @@
     </div>
     <hr style='margin-top:10px; margin-bottom:5px;' />
   </div>
+  <% if public?(event) || (!participation.blank? && participation.role != 2)%>
   <% @comments = Comment.where(commentable_type: 'Event', commentable_id: event.id).last(page*3)%>
   <%= render partial: 'events/event_comments', locals: {comments: @comments, event: event, page: page}%>
-
+  <%end%>
 </div>
 <script type="text/javascript">
 var clock;

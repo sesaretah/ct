@@ -122,7 +122,7 @@
               <legend>
                 <%= t(:add_user_to_event)%>
               </legend>
-              <% if @event.g_type == 1 || @admin%>
+              <% if (@event.g_type == 1 && !@participation.blank? && @participation.role != 2)|| @admin%>
               <div class="panel-scroll height-350 ps-container ps-active-y">
                 <div class="col-md-12">
                   <div class="row">
