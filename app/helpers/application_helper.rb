@@ -222,7 +222,7 @@ module ApplicationHelper
 
   def public?(c)
     if !c.blank?
-      if  c.p_type == 1
+      if  c.p_type == 2
         return true
       else
         return false
@@ -234,7 +234,7 @@ module ApplicationHelper
 
   def global?(c)
     if !c.blank?
-      if  c.g_type == 2
+      if  c.g_type == 1
         return true
       else
         return false
