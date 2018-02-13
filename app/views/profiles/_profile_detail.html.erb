@@ -140,7 +140,7 @@
                               <a class="text-info" href="profiles/profile_id=<%= @profile.id%>">
                                 <%= @profile.name%> <%= @profile.surename%>
                               </a>
-                              <% if activity.target_type != 'Question'%>
+                              <% if activity.target_type != 'Question' && activity.target_type != 'Answer'%>
                               <%=t activity.target_type%> <%=t :named%> "<%= @item.name%>" <%=t :has_created%>
                               <%end%>
                             </p>
