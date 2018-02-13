@@ -458,6 +458,8 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
+  project_was_successfully_created: 'پروژه با موفقیت ایجاد شد'
+  project_was_successfully_updated: 'پروژه با موفقیت بروزرسانی شد'
   users: 'کاربران'
   Channel: 'کانال'
   Event: 'رخداد'
