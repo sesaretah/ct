@@ -12,8 +12,10 @@
       <span class="margin-right-5"><small><%= answer.content%></small></span>
     </div>
     <div class="col-md-1">
+      <% if answer.user_id == current_user.id || answer.question.user_id == current_user.id%>
       <%= link_to 'answers/'+ answer.id.to_s, :method => :delete, data: {confirm: "Are you sure?"}  do %>
         <i class="fa fa-trash-o" style="color: #007AFF !important;"></i>
+      <%end%>
       <%end%>
     </div>
     </div>
