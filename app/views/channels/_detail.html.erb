@@ -25,6 +25,8 @@
     </div>
     <hr style='margin-top:20px; margin-bottom:0px;' />
   </div>
+  <% if public?(channel) || (!involvement.blank? && involvement.role != 2)%>
   <% @comments = Comment.where(commentable_type: 'Channel', commentable_id: channel.id).last(page*3)%>
   <%= render partial: 'channels/channel_comments', locals: {comments: @comments, channel: channel, page: page}%>
+    <%end%>
 </div>
