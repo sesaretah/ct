@@ -234,7 +234,7 @@ module ApplicationHelper
 
   def global?(c)
     if !c.blank?
-      if  c.g_type == 1
+      if  c.g_type == 2
         return true
       else
         return false

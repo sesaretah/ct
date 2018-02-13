@@ -28,7 +28,6 @@
 </div>
 
   <% if public?(group) || (!grouping.blank? && grouping.role != 2)%>
-  <%= public?(group)%>
   <% @comments = Comment.where(commentable_type: 'Group', commentable_id: group.id).last(page*4)%>
   <%= render partial: 'groups/group_comments', locals: {comments: @comments, group: group, page: page}%>
   <%end%>
