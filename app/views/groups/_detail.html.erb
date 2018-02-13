@@ -27,7 +27,7 @@
   <hr style='margin-top:20px; margin-bottom:0px;' />
 </div>
 
-  <% if public?(group) || !grouping.blank? && grouping.role != 3%>
+  <% if public?(group) || (!grouping.blank? && grouping.role != 2)%>
   <% @comments = Comment.where(commentable_type: 'Group', commentable_id: group.id).last(page*4)%>
   <%= render partial: 'groups/group_comments', locals: {comments: @comments, group: group, page: page}%>
   <%end%>

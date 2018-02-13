@@ -1,8 +1,8 @@
 class Notification < ActiveRecord::Base
   include Fcm
   after_save :mail_notification
-  def mail_notification
 
+  def mail_notification
     case self.notifiable_type
     when 'Comment'
       case self.notifiee_type
@@ -19,13 +19,17 @@ class Notification < ActiveRecord::Base
       for admin in @admins
         @user = admin.user
         @nsadmin = NotificationSetting.where(user_id: @user.id).first
-        if @nsadmin.involvement == 1
-          NotificationMailer.involvement_admin_digest(@user, @involvement).deliver
+        if !@nsadmin.blank?
+          if @nsadmin.involvement == 1
+            NotificationMailer.involvement_admin_digest(@user, @involvement).deliver
+          end
         end
       end
       @ns = NotificationSetting.where(user_id: @involvement.user.id).first
-      if @ns.involvement == 1
-        NotificationMailer.involvement_added_user_digest(@involvement.user, @involvement).deliver
+      if !@ns.blank?
+        if @ns.involvement == 1
+          NotificationMailer.involvement_added_user_digest(@involvement.user, @involvement).deliver
+        end
       end
     when 'Grouping'
       @admins = Grouping.where(role: 1, group_id: self.notfiee_id)
@@ -33,13 +37,17 @@ class Notification < ActiveRecord::Base
       for admin in @admins
         @user = admin.user
         @gradmin = NotificationSetting.where(user_id: @user.id).first
-        if @gradmin.grouping == 1
-          NotificationMailer.grouping_admin_digest(@user, @grouping).deliver
+        if !@gradmin.blank?
+          if @gradmin.grouping == 1
+            NotificationMailer.grouping_admin_digest(@user, @grouping).deliver
+          end
         end
       end
       @gr = NotificationSetting.where(user_id: @grouping.user.id).first
-      if @gr.grouping == 1
-        NotificationMailer.grouping_added_user_digest(@grouping.user, @grouping).deliver
+      if !@gr.blank?
+        if @gr.grouping == 1
+          NotificationMailer.grouping_added_user_digest(@grouping.user, @grouping).deliver
+        end
       end
     end
   end
