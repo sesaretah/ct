@@ -1,2 +1,2 @@
-json.extract! education, :id, :name, :grade, :city, :country, :created_at, :updated_at
-json.url education_url(education, format: :json)
+json.extract! education, :id, :name, :grade, :field, :start_year, :end_year
+#json.url education_url(education, format: :json)
