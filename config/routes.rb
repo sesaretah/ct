@@ -270,6 +270,8 @@ Rails.application.routes.draw do
   match "profiles/view_remote/:id" => "profiles#view_remote", :via => :get
   match "messages/view_remote/:id" => "messages#view_remote", :via => :get
 
+  match "educations/view_remote/:id" => "educations#view_remote", :via => :get
+
   match "mobilesettings/remote_token/:id" => "mobilesettings#remote_token", :via => :get
 
   match "confirmations/send_confirmation/:id" => "confirmations#send_confirmation", :via => :get

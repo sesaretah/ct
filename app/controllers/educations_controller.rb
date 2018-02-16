@@ -1,6 +1,12 @@
 class EducationsController < ApplicationController
+  before_action :authenticate_user!, :except => [:view_remote]
   before_action :set_education, only: [:show, :edit, :update, :destroy]
 
+  def view_remote
+    @uuid = decrypt(params[:uuid], 'JMMPi51A', params[:iv])
+    @user_id = Mobilesetting.where(uuid: @uuid).first.user_id
+    @educations = Education.where(user_id: @user_id)
+  end
   # GET /educations
   # GET /educations.json
   def index
