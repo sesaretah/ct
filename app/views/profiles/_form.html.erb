@@ -128,9 +128,11 @@
 
             <%=t :tags%><br />
             <% @tags = []%>
+						<% if !@profile.user.nil?%>
             <% for tagging in @profile.user.taggings%>
               <% @tags << Tag.find(tagging.tag_id).title%>
             <%end%>
+						<%end%>
             <div class="col-xs-6 padding-right-0 margin-top-5 rtl">
                 <input type="text"  id="tokenfield" value="<%= @tags.join(',')%>" placeholder="" tabindex="-1" >
             </div>
