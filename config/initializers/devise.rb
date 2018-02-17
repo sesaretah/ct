@@ -260,7 +260,7 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
-  config.cas_base_url = "https://auth.ut.ac.ir:8443"
+  config.cas_base_url = "https://auth.ut.ac.ir:8443/cas"
   #  config.cas_create_user = false
   # Instead username we use email for login field
   config.cas_username_column = "username"
