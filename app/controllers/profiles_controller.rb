@@ -104,6 +104,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
+    render layout: 'layouts/devise'
   end
 
   # GET /profiles/1/edit
