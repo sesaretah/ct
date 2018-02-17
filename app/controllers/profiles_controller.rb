@@ -117,7 +117,7 @@ class ProfilesController < ApplicationController
     @profile = Profile.new(profile_params)
     @profile.user_id = current_user.id
     @profile.birthdate = JalaliDate.to_gregorian(params[:ja_birth_yyyy],params[:ja_birth_mm],params[:ja_birth_dd])
-    @email = @profile.official_email.split("@").first
+  #  @email = @profile.official_email.split("@").first
     @tags = params[:tags].split(',')
     @tagged = []
     respond_to do |format|
