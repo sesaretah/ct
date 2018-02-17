@@ -134,7 +134,7 @@ class ProfilesController < ApplicationController
         if params[:caller] == 'reg'
           format.html { redirect_to '/registeration_steps?step=2&name=' + @email}
         else
-          format.html { redirect_to '/' notice: 'Profile was successfully created.' }
+          format.html { redirect_to '/', notice: 'Profile was successfully created.' }
         end
         format.json { render :show, status: :created, location: @profile }
       else
