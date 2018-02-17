@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
    if !user.profile.blank?
      root_path
    else
-     '/registeration_steps?step=1'
+     '/profiles/new'
    end
  end
 
@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
    if !user.profile.blank?
      root_path
    else
-     '/registeration_steps?step=1'
+     '/profiles/new'
    end
  end
 
@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
    if !user.profile.blank?
      root_path
    else
-     '/registeration_steps?step=1'
+     '/profiles/new'
    end
  end
 

@@ -20,6 +20,10 @@ class HomeController < ApplicationController
     end
   end
 
+  def landing
+    render layout: false
+  end
+
   def mobile
     @qrcode = RQRCode::QRCode.new("http://github.com/")
   end
